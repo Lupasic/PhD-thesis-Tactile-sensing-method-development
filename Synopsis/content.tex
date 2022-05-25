@@ -1,23 +1,11 @@
 \pdfbookmark{Общая характеристика работы}{characteristic}             % Закладка pdf
 \section*{Общая характеристика работы}
 
-\newcommand{\actuality}{\pdfbookmark[1]{Актуальность}{actuality}\underline{\textbf{\actualityTXT}}}
-\newcommand{\progress}{\pdfbookmark[1]{Разработанность темы}{progress}\underline{\textbf{\progressTXT}}}
-\newcommand{\aim}{\pdfbookmark[1]{Цели}{aim}\underline{{\textbf\aimTXT}}}
-\newcommand{\tasks}{\pdfbookmark[1]{Задачи}{tasks}\underline{\textbf{\tasksTXT}}}
-\newcommand{\aimtasks}{\pdfbookmark[1]{Цели и задачи}{aimtasks}\aimtasksTXT}
-\newcommand{\novelty}{\pdfbookmark[1]{Научная новизна}{novelty}\underline{\textbf{\noveltyTXT}}}
-\newcommand{\influence}{\pdfbookmark[1]{Практическая значимость}{influence}\underline{\textbf{\influenceTXT}}}
-\newcommand{\methods}{\pdfbookmark[1]{Методология и методы исследования}{methods}\underline{\textbf{\methodsTXT}}}
-\newcommand{\defpositions}{\pdfbookmark[1]{Положения, выносимые на защиту}{defpositions}\underline{\textbf{\defpositionsTXT}}}
-\newcommand{\reliability}{\pdfbookmark[1]{Достоверность}{reliability}\underline{\textbf{\reliabilityTXT}}}
-\newcommand{\probation}{\pdfbookmark[1]{Апробация}{probation}\underline{\textbf{\probationTXT}}}
-\newcommand{\contribution}{\pdfbookmark[1]{Личный вклад}{contribution}\underline{\textbf{\contributionTXT}}}
-\newcommand{\publications}{\pdfbookmark[1]{Публикации}{publications}\underline{\textbf{\publicationsTXT}}}
+\input{Synopsis/newcommands.tex}
 
 \input{common/characteristic} % Характеристика работы по структуре во введении и в автореферате не отличается (ГОСТ Р 7.0.11, пункты 5.3.1 и 9.2.1), потому её загружаем из одного и того же внешнего файла, предварительно задав форму выделения некоторым параметрам
 
-%Диссертационная работа была выполнена при поддержке грантов \dots
+Диссертационная работа была выполнена при поддержке грантов \dots
 
 %\underline{\textbf{Объем и структура работы.}} Диссертация состоит из~введения,
 %четырех глав, заключения и~приложения. Полный объем диссертации
@@ -26,54 +14,16 @@
 
 \pdfbookmark{Содержание работы}{description}                          % Закладка pdf
 \section*{Содержание работы}
-Во \underline{\textbf{введении}} обосновывается актуальность
-исследований, проводимых в~рамках данной диссертационной работы,
-приводится обзор научной литературы по~изучаемой проблеме,
-формулируется цель, ставятся задачи работы, излагается научная новизна
-и практическая значимость представляемой работы. В~последующих главах
-сначала описывается общий принцип, позволяющий \dots, а~потом идёт
-апробация на частных примерах: \dots  и~\dots.
-
-
-\underline{\textbf{Первая глава}} посвящена \dots
-
-картинку можно добавить так:
-\begin{figure}[ht]
-    \centerfloat{
-        \hfill
-        \subcaptionbox{\LaTeX}{%
-            \includegraphics[scale=0.27]{latex}}
-        \hfill
-        \subcaptionbox{Knuth}{%
-            \includegraphics[width=0.25\linewidth]{knuth1}}
-        \hfill
-    }
-    \caption{Подпись к картинке.}\label{fig:latex}
-\end{figure}
-
-Формулы в строку без номера добавляются так:
-\[
-    \lambda_{T_s} = K_x\frac{d{x}}{d{T_s}}, \qquad
-    \lambda_{q_s} = K_x\frac{d{x}}{d{q_s}},
-\]
-
-\underline{\textbf{Вторая глава}} посвящена исследованию
-
-\underline{\textbf{Третья глава}} посвящена исследованию
-
-Можно сослаться на свои работы в автореферате. Для этого в файле
-\verb!Synopsis/setup.tex! необходимо присвоить положительное значение
-счётчику \verb!\setcounter{usefootcite}{1}!. В таком случае ссылки на
-работы других авторов будут подстрочными.
-Изложенные в третьей главе результаты опубликованы в~\cite{vakbib1, vakbib2}.
-Использование подстрочных ссылок внутри таблиц может вызывать проблемы.
-
-В \underline{\textbf{четвертой главе}} приведено описание
-
-\FloatBarrier
-\pdfbookmark{Заключение}{conclusion}                                  % Закладка pdf
-В \underline{\textbf{заключении}} приведены основные результаты работы, которые заключаются в следующем:
-\input{common/concl}
+\subsection*{\underline{Литературный обзор}}
+\input{Synopsis/chap1.tex}
+\subsubsection*{\underline{Разработка робота}}
+\input{Synopsis/chap2.tex}
+\section*{\underline{Разработка и исследование преобразователя силы на основе Velostat}}
+\input{Synopsis/chap3.tex}
+\section*{\underline{Разработка метода очувствления}}
+\input{Synopsis/chap4.tex}
+\section*{\underline{Заключение}}
+\input{common/concl.tex}
 
 \pdfbookmark{Литература}{bibliography}                                % Закладка pdf
 При использовании пакета \verb!biblatex! список публикаций автора по теме
