@@ -11,9 +11,8 @@
 %%   \begin{otherlanguage}{slovak}  ... \end{otherlanguage}
 %%
 %% These macros specify information about the presentation
-\title[AGLA2]{Диссер Дикого} %% that will be typeset on the
-\subtitle{Similar matrices \\ Singular value decomposition - SVD \\ Left and right inverses. Pseudoinverse
-         } %% title page.
+\title[Oleg's Bulichev PhD Thesis]{Tactile sensing method development for a mobile multilegged robot in a cave environment} %% that will be typeset on the
+\subtitle{Student: Oleg Bulichev \\ Supervisor: Alexander Maloletov \\ \ } %% title page.
 \author{Oleg Bulichev}
 %% These additional packages are used within the document:
 \usepackage{ragged2e}  % `\justifying` text
@@ -70,7 +69,7 @@
 \frame[c]{\setcounter{framenumber}{0}
     \usebeamerfont{title}%
     \usebeamercolor[fg]{title}%
-    \begin{minipage}[b][6.5\baselineskip][b]{\textwidth}%
+    \begin{minipage}[b][7.5\baselineskip][b]{\textwidth}%
         \textcolor{black}{\raggedright\inserttitle}
     \end{minipage}
     % \vskip-1.5\baselineskip
@@ -86,6 +85,38 @@
 %   \frame[c]{\maketitle}
 
 \fbckg{fibeamer/figs/common.png}
+
+\begin{frame}[t]{Motivation: why do we need to explore caves by robots}
+\framesubtitle{Cave obstacles}
+\begin{figure}[H]
+    \begin{subfigure}{0.24\textwidth}
+        \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{siphon.png}
+        \caption*{Syphon}
+    \end{subfigure}     
+    \hfill
+    \begin{subfigure}{0.24\textwidth}
+        \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{splash.png}
+        \caption*{Splash}
+    \end{subfigure}   
+    \hfill
+    \begin{subfigure}{0.24\textwidth}
+        \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{ice.png}
+        \caption*{Glacial caves}
+    \end{subfigure}   
+    \hfill
+    \begin{subfigure}{0.24\textwidth}
+        \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{clay.jpg}
+        \caption*{Clay}
+    \end{subfigure}   
+    \hfill
+\end{figure}
+\end{frame}
+
+\begin{frame}[t]{Motivation: unsolvable problem for cameras and lidars}
+\framesubtitle{Question: how to make a terrain map?}
+    
+\end{frame}
+
 
 
 \fbckg{fibeamer/figs/last_page.png}
