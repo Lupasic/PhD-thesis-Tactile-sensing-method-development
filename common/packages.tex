@@ -168,7 +168,7 @@
 \usepackage{caption}                % Подписи рисунков и таблиц
 \usepackage{subcaption}             % Подписи подрисунков и подтаблиц
 \usepackage{pdfpages}               % Добавление внешних pdf файлов
-
+\usepackage[]{algorithm2e}
 %%% Счётчики %%%
 \usepackage{aliascnt}
 \usepackage[figure,table]{totalcount}   % Счётчик рисунков и таблиц
@@ -178,6 +178,9 @@
 \usepackage{totpages}   % Счётчик страниц, совместимый с hyperref (ссылается
                         % на номер последней страницы). Желательно ставить
                         % последним пакетом в преамбуле
+
+\newcommand\pic[1]{(Рис. \cref{#1})} %Где нужно сослаться на рисунок
+\newcommand\tab[1]{(Табл. \cref{#1})} %Где нужно сослаться на таблицу
 
 %%% Продвинутое управление групповыми ссылками (пока только формулами) %%%
 \ifpresentation
