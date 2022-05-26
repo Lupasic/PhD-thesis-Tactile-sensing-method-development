@@ -11,7 +11,7 @@
 %%   \begin{otherlanguage}{slovak}  ... \end{otherlanguage}
 %%
 %% These macros specify information about the presentation
-\title[Oleg's Bulichev PhD Thesis]{Tactile sensing method development for a mobile multilegged robot in a cave environment} %% that will be typeset on the
+\title[PhD Thesis]{Tactile sensing method development for a mobile multilegged robot in a cave environment} %% that will be typeset on the
 \subtitle{Student: Oleg Bulichev \\ Supervisor: Alexander Maloletov \\ \ } %% title page.
 \author{Oleg Bulichev}
 %% These additional packages are used within the document:
@@ -87,37 +87,660 @@
 \fbckg{fibeamer/figs/common.png}
 
 \begin{frame}[t]{Motivation: why do we need to explore caves by robots}
-\framesubtitle{Cave obstacles}
-\begin{figure}[H]
-    \begin{subfigure}{0.24\textwidth}
-        \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{siphon.png}
-        \caption*{Syphon}
-    \end{subfigure}     
-    \hfill
-    \begin{subfigure}{0.24\textwidth}
-        \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{splash.png}
-        \caption*{Splash}
-    \end{subfigure}   
-    \hfill
-    \begin{subfigure}{0.24\textwidth}
-        \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{ice.png}
-        \caption*{Glacial caves}
-    \end{subfigure}   
-    \hfill
-    \begin{subfigure}{0.24\textwidth}
-        \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{clay.jpg}
-        \caption*{Clay}
-    \end{subfigure}   
-    \hfill
-\end{figure}
+    \framesubtitle{Cave obstacles}
+    \begin{figure}[H]
+        \begin{subfigure}{0.24\textwidth}
+            \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{siphon.png}
+            \caption*{Syphon}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.24\textwidth}
+            \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{splash.png}
+            \caption*{Splash}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.24\textwidth}
+            \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{ice.png}
+            \caption*{Glacial caves}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.24\textwidth}
+            \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{clay.jpg}
+            \caption*{Clay}
+        \end{subfigure}
+        \hfill
+    \end{figure}
 \end{frame}
 
 \begin{frame}[t]{Motivation: unsolvable problem for cameras and lidars}
-\framesubtitle{Question: how to make a terrain map?}
-    
+    \framesubtitle{Question: how to make a terrain map when you have a spash above?}
+    \begin{figure}[H]
+        \begin{subfigure}{0.32\textwidth}
+            \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{terrain_wo_water.png}
+            \caption*{Terrain without water}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.32\textwidth}
+            \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{terrain_w_water1.png}
+            \caption*{Terrain with water, lidar data}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.32\textwidth}
+            \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{terrain_w_water_camera.png}
+            \caption*{Camera view}
+        \end{subfigure}
+        \hfill
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Problem statement}
+    \framesubtitle{}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.45\textwidth}
+            \begin{block}{Problem 1}
+                How to obtain a useful information about terrain, \textbf{when we have a SLAM based on lidars, cameras}?
+                \vspace{5pt}
+
+                \uncover<2->{\alert{\Large Obtain map and type of terrain}}
+            \end{block}
+        \end{column}
+        \begin{column}{0.45\textwidth}
+            \begin{block}{Problem 2}
+                How to obtain a useful information about terrain,\textbf{ when main navigation system died}?
+                \vspace{5pt}
+
+                \uncover<2->{\alert{\Large Problem 1 + localization}}
+            \end{block}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[t]{Proposed solutions}
+    \framesubtitle{}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.45\textwidth}
+            \begin{block}{Problem 1}
+                \textit{Map can be built} \textbf{using tactile sensors} on each leg of the robot and create a \textbf{dense point cloud} using sampling from generated mesh using \textbf{modified Delaunay triangulation}.
+                \vspace{5pt}
+
+                \textit{Terrain type} can be obtained solving \textbf{terrain classification} problem using \textbf{machine learning}.
+            \end{block}
+        \end{column}
+        \begin{column}{0.45\textwidth}
+            \begin{block}{Problem 2}
+                \textit{Localization problem} can be solved by \textbf{fused data} from net of \textbf{beacons} plus \textbf{several IMU} on board and knowing a \textbf{kinematics} of the system.
+            \end{block}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[t]{Literature review}
+    \framesubtitle{}
+    \Large
+    I searched about:
+    \begin{itemize}
+        \item Cave environment: obstacles, dimensions.
+        \item Robots for cave exploration. From zeppelins, to quadruped robots.
+        \item Methods for map creation using classical way and haptic. Based on cameras, lidars, tactile sensors and etc.
+    \end{itemize}
+    \begin{block}{Summary}
+        I haven't found any paper, who tried to create a map using tactile sensors in a cave.
+    \end{block}
+\end{frame}
+
+\begin{frame}[t]{Robot design}
+    \framesubtitle{Requirements}
+    \Large
+    \textbf{Problem} --  choose robot mover type. This robot should:
+    \begin{itemize}
+        \item should have \textit{small dimensions} to sneak through holes;
+        \item have enough \textit{mobility} to pass a granular terrain;
+        \item should \textit{pass a small water obstacles};
+        \item can \textit{climb on a big stones};
+    \end{itemize}
+    \uncover<2->{\LARGE\centering\alert{1-DoF multilegged robot was chosen}}
+\end{frame}
+
+\begin{frame}[t]{Robot design}
+    \framesubtitle{Structural synthesis problem}
+    \only<1-2>{\LARGE\begin{block}{Question}
+            What the optimal amount of legs should be in such robot?
+        \end{block}}
+    \only<2>{\LARGE\begin{block}{Answer}
+            \centering Robot should have \textbf{10-12 legs} in total!
+        \end{block}}
+\end{frame}
+
+\begin{frame}[c]{Robot design}
+    \framesubtitle{Technological stack}
+    \vspace{-1.2cm}
+    \begin{figure}[H]
+        \begin{subfigure}{0.32\textwidth}
+            \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{c1_paper.png}
+            \caption*{Generating terrain approach}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.32\textwidth}
+            \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{gazebo_logo.png}
+            \caption*{Robot simulator}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.32\textwidth}
+            \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{gen_algo.jpg}
+            \caption*{Genetic algorithm (DEAP Library)}
+        \end{subfigure}
+        \hfill
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Robot design}
+    \framesubtitle{Proposed solution}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.49\textwidth}
+            \begin{figure}[H]
+                \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{optimization_idea.png}
+                \caption*{\textbf{Idea}: Minimize number of legs without losing cross-road passability}
+                \label{fig{optimization_idea.png}}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.49\textwidth}
+            \begin{eqnarray*}
+                F = \beta \left( {\omega}_{1} \cdot \overbrace{\delta}^{\text{Distance}} + {\omega}_{2} \cdot \overbrace{\frac{1}{(\gamma - 1) sin(x)}}^{\text{Body length}}\right) +\\ \nonumber + (1 - \beta) {\delta}^{{\omega}_{1}} {\left( \frac{1}{(\gamma - 1) sin(x)}\right)}^{{\omega}_{2}}
+            \end{eqnarray*}
+            \vspace{1pt}
+
+            $\beta$ is adaptive parameter, ${\omega}_{1,2}$ are the weight coefficients.
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[t]{Robot design}
+    \framesubtitle{Results}
+    \vspace{-0.5cm}
+    \begin{figure}[H]
+        \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{table_terrain.png}
+        \caption*{\textbf{Result}: robot should have 10-12 legs in total}
+        \label{fig:table_terrain.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Robot design}
+    \framesubtitle{Increasing maneuverablity}
+    \only<1-2>{\LARGE\begin{block}{Question}
+            Long robot can stuck in a cave hole, while rotating. How to avoid it?
+        \end{block}}
+    \only<2>{\LARGE\begin{block}{Answer}
+            \centering Add an ability to sidestep without changing orientation
+        \end{block}}
+\end{frame}
+
+\begin{frame}[t]{Robot design}
+    \framesubtitle{Proposed solution}
+    \vspace{-0.7cm}
+    \begin{figure}[H]
+        \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{omni_rot.png}
+        \caption*{Vector representation of forces in  the conventional and omni-direction states}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Robot design}
+    \framesubtitle{StriRus prototypes (1)}
+    \vspace{-0.5cm}
+    \begin{figure}[H]
+        \begin{subfigure}{0.32\textwidth}
+            \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{strirus_0.png}
+            \caption*{1st gen, 54 legs, no segments}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.32\textwidth}
+            \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{strirus_1.png}
+            \caption*{2nd gen, 12 legs, 1 DoF segment, continuous leg inclination up to 45 deg}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.32\textwidth}
+            \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{strirus_2.jpg}
+            \caption*{3rd gen, 12 legs, 2 DoF segments, discrete leg inclination up to 45 deg}
+        \end{subfigure}
+        \hfill
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Robot design}
+    \framesubtitle{StriRus prototypes (2)}
+    \vspace{-0.5cm}
+    \begin{figure}[H]
+        \begin{subfigure}{0.45\textwidth}
+            \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{strirus_3.JPG}
+            \caption*{4th gen, 6 big legs, no segments}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.45\textwidth}
+            \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{strirus_4.png}
+            \caption*{5th gen, 10 biggest legs, 1 DoF segment, discrete leg inclination up to 15 deg}
+        \end{subfigure}
+        \hfill
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Force tranducer design}
+    \framesubtitle{}
+    \only<1-2>{\LARGE\begin{block}{Question}
+            How to receive a reaction force from the ground?
+        \end{block}}
+    \only<2>{\LARGE\begin{block}{Answer}
+            \centering Installing a force sensor on each leg
+        \end{block}}
+\end{frame}
+
+\begin{frame}[t]{Force tranducer design}
+    \framesubtitle{Force sensor types}
+    \vspace{-20pt}
+    \begin{multicols}{2}
+        \begin{itemize}
+            \item \textbf{F/T sensors}: too big and expencive for small robots.
+            \item \textbf{Optical}: too thick.
+            \item \textbf{Magnetic}: too thick.
+            \item \textbf{Capacitive}: expencive, but the best in terms of requirements.
+            \item \textbf{Piezoresistive sensors
+                      based on conductive inks or polymers}: inexpencive and robust, but has problems with hysteresis
+            \item \textbf{Stain gages}: challenge for wiring between continuously rotating legs and the robot body.
+        \end{itemize}
+    \end{multicols}
+    \vspace{-10pt}
+    \begin{exampleblock}{My choice is \textbf{Resistive sensor based on Velostat}}
+        It's cheap and it can be made by hand.
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}[t]{Force tranducer design}
+    \framesubtitle{Velostat: Faced problems}
+    \vspace{-20pt}
+    \begin{multicols}{2}
+        {\Large
+            \begin{itemize}
+                \item Hysteresis
+                \item Nonlinearity
+                \item Different values with the same pressure if the square of load is less then the sensor
+            \end{itemize}}
+        \begin{figure}[H]
+            \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{velostat_pressure_resistance.jpg}
+            \label{fig:velostat_pressure_resistance.jpg}
+        \end{figure}
+    \end{multicols}
+    \vspace{-12pt}
+    \begin{block}{Scientific Problem Statement}
+        To characterize Velostat material for cases when point load is less than sensor size and propose solutions for avoiding such issues.
+    \end{block}
+\end{frame}
+
+\begin{frame}[t]{Force tranducer design}
+    \framesubtitle{Experimental setup requirements}
+    {\Large
+        \begin{itemize}
+            \item Force control.
+            \item Position and force repeatability.
+            \item To have an ability to apply force only on a part of a sensor.
+            \item To change object of the experiment quickly.
+        \end{itemize}}
+    \only<2>{\centering\Large\alert{All requirements are fulfilled}}
+\end{frame}
+
+\begin{frame}[t]{Force tranducer design}
+    \framesubtitle{Experimental Setup: Hardware overall}
+    \vspace{-15pt}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.3\textwidth}
+            \begin{enumerate}
+                \item UR5
+                \item Futek force sensor
+                \item Arduino
+                \item Self-made PCB
+                \item Velostat sensors
+                \item Aruco Markers
+                \item Smartphone camera
+            \end{enumerate}
+        \end{column}
+        \begin{column}{0.69\textwidth}
+            \begin{figure}[H]
+                \begin{subfigure}{\textwidth}
+                    \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{exp_stand1}
+                    % \caption{caption_name}
+                    \label{fig:exp_stand1}
+                \end{subfigure}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[t]{Force tranducer design}
+    \framesubtitle{Experimental Setup: Hardware, aruco markers}
+    \vspace{-15pt}
+    \begin{figure}[H]
+        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{exp_stand2}
+        % \caption{caption_name}
+        \label{fig:exp_stand2}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Force tranducer design}
+    \framesubtitle{Experimental Setup: Hardware, end-effector}
+    \begin{figure}[H]
+        \begin{subfigure}[b]{0.29\textwidth}
+            \centering\includegraphics[width=0.99\textwidth]{point_load.JPG}\\
+            \caption{Point load}
+            \label{fig:point_load}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.29\textwidth}
+            \centering\includegraphics[width=0.99\textwidth]{rolling_load.JPG}\\
+            \caption{Rolling load}
+            \label{fig:rolling_load}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.29\textwidth}
+            \centering\includegraphics[width=0.99\textwidth]{LTH350-DONUT-LOAD-CELL-1.png}\\
+            \caption{Futek LTH350}
+            \label{fig:futek}
+        \end{subfigure}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Force tranducer design}
+    \framesubtitle{Experimental Setup: Software}
+    {\Large
+        \begin{itemize}
+            \item \textbf{Language}: Python3
+            \item \textbf{Frequency}: $450 hz$, using RTDE protocol
+            \item \textbf{Control}: Impedance control
+        \end{itemize}
+    }
 \end{frame}
 
 
+\begin{frame}[t]{Force tranducer design}
+    \framesubtitle{Experiments}
+    \vspace{-15pt}
+    {\large
+        \begin{enumerate}
+            \item Static experiment. The goal is to identify the coefficients for the transducer model.
+            \item Dynamic experiment. We are representing a transducer as a $4\times4$ matrix. We touch with the same pressure using five different end-effectors (area starting from 2mm till 15mm).
+            \item As the previous, but we are using 1st and last end-effector. We touch with different forces (5, 10, 20, 30, 40 H).
+        \end{enumerate}
+    }
+\end{frame}
+
+\begin{frame}[t]{Force tranducer design}
+    \framesubtitle{Result: static experiment}
+    \vspace{-0.5cm}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.52\textwidth}
+            \begin{eqnarray*}
+                V_{out} = V_0 + p[k_p + k_e(1-e^\frac{-(t-t_0)}{\tau_{res}})](1-e^{-\frac{A}{p}}) \\
+                k_p = A_1e^{-A_2p}; \tau_{res} = B_0 + B_1e^{-\frac{p}{B_2}}
+            \end{eqnarray*}
+            Where $V_0$ -- initial voltage, $p,\ A_i,\ B_i,\ \tau_{res},\ k_i$ are constants, $t$ -- current time, $t_0$ -- the time when the pressure appeared.
+        \end{column}
+        \begin{column}{0.45\textwidth}
+            \vspace{-15pt}
+            \begin{figure}[H]
+                \centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{least_square_model.png}
+                \label{fig:least_square_model.png}
+            \end{figure}
+        \end{column}
+    \end{columns}
+    \vspace{-11pt}
+    \begin{figure}[H]
+        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{pikes.png}
+        \caption*{Normalized force data from sensor and transducer}
+        \label{fig:pikes.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Force tranducer design}
+    \framesubtitle{Result: dynamic experiment}
+    \vspace{-15pt}
+    \begin{figure}[H]
+        \begin{subfigure}{0.49\textwidth}
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{sens1_pike1.png}
+            \caption*{2mm end-effector diam}
+            \label{fig:sens1_pike1}
+        \end{subfigure}
+        \begin{subfigure}{0.49\textwidth}
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{sens1_pike3.png}
+            \caption*{8mm end-effector diam}
+            \label{fig:sens1_pike3}
+        \end{subfigure}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Force tranducer design}
+    \framesubtitle{Results}
+    \vspace{-15pt}
+    {\Large
+        \begin{enumerate}
+            \item Static experiment: transducers coefficients were identified.
+            \item Dynamic experiment. The sensor can be represented as one body, when pressure area is higher than 50 \% of the sensor area.
+        \end{enumerate}
+    }
+\end{frame}
+
+\begin{frame}[t]{Terrain classification}
+    \framesubtitle{}
+    \only<1-2>{\LARGE\begin{block}{Question}
+            How to define the terrain type during the movement on such terrain?
+        \end{block}}
+    \only<2>{\LARGE\begin{block}{Answer}
+            \centering Solving terrain classification problem using Machine learning
+        \end{block}}
+\end{frame}
+
+\begin{frame}[t]{Terrain classification}
+    \framesubtitle{Experimental Setup}
+    \vspace{-15pt}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.49\textwidth}
+            \begin{enumerate}
+                \item Dynamixel MX28 -- 47 rev/min
+                \item Velostat transducer -- 25 HZ freq.
+                \item Experiment duration -- 120 sec
+            \end{enumerate}
+            \vspace{-0.3cm}
+            \begin{figure}[H]
+                \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{s_shape_leg/s_leg_setup.JPG}
+                % \caption{caption_name}
+                \label{fig:s_shape_leg/}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.49\textwidth}
+            \vspace{-0.5cm}
+            \begin{figure}[H]
+                \begin{subfigure}{\textwidth}
+                    \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{s_shape_leg/leg_design.png}
+                    % \caption{caption_name}
+                \end{subfigure}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+
+\begin{frame}[t]{Terrain classification}
+    \framesubtitle{Experimental setup: rock terrain}
+    \vspace{-15pt}
+    \begin{figure}[H]
+        \begin{subfigure}{0.49\textwidth}
+            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{s_shape_leg/view.jpg}
+            % \caption*{2mm end-effector diam}    
+        \end{subfigure}
+        \begin{subfigure}{0.49\textwidth}
+            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{s_shape_leg/rocks.jpg}
+            % \caption*{8mm end-effector diam}
+        \end{subfigure}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Terrain classification}
+    \framesubtitle{How it works}
+    \
+\end{frame}
+
+\begin{frame}[t]{Terrain classification}
+    \framesubtitle{Obtained data from one experiment}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.49\textwidth}
+            \begin{figure}[H]
+                \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{s_shape_leg/segment6_compare.png}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.49\textwidth}
+            \vspace{-2.4cm}
+            \begin{figure}[H]
+                \begin{subfigure}{0.99\textwidth}
+                    \centering\includegraphics[height=3.8cm,width=1\textwidth,keepaspectratio]{s_shape_leg/segment8_compare_front.png}
+                    % \caption*{2mm end-effector diam}    
+                \end{subfigure}
+
+                \begin{subfigure}{0.99\textwidth}
+                    \centering\includegraphics[height=3.8cm,width=1\textwidth,keepaspectratio]{s_shape_leg/segment6_compare_front.png}
+                    % \caption*{8mm end-effector diam}
+                \end{subfigure}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[t]{Terrain classification}
+    \framesubtitle{Results}
+    \Large
+    \begin{itemize}
+        \item Can distinct rubber and rock terrains
+        \item Choose terrain classification parameters
+              \begin{itemize}
+                  \item RPM
+                  \item Motor Torque
+                  \item Acceleration from IMU
+                  \item Force data which are represented as Sensor value\/segment, Peak amplitude, Average amplitude
+              \end{itemize}
+        \item Prove that force transducer is working
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Map creation based on tactile data}
+    \framesubtitle{}
+    \only<1-2>{\LARGE\begin{block}{Question}
+            How to create a dense point cloud using sparse data from legs?
+        \end{block}}
+    \only<2>{\LARGE\begin{block}{Answer}
+            \centering Take this data, create a mesh using concave hull Delaunay triangulation, sampling it and return to the main algorithm
+        \end{block}}
+\end{frame}
+
+\begin{frame}[t]{Map creation based on tactile data}
+    \framesubtitle{Experimental setup}
+    \vspace{-15pt}
+    \begin{figure}[H]
+        \begin{subfigure}{0.49\textwidth}
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{coppelia_sim.png}
+            \caption*{CoppeliaSim simulator, 5th StriRus iteration}
+        \end{subfigure}
+        \begin{subfigure}{0.49\textwidth}
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{rl_sim.JPG}
+            \caption*{4th StriRus iteration}
+        \end{subfigure}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Map creation based on tactile data}
+    \framesubtitle{Assumptions}
+    \Large
+    Current solution considering such assumptions:
+    \begin{itemize}
+        \item Our terrain can be represented $z = f(x,y)$. We can use 2D Delaunay triangulation (projected points on a plane)
+        \item All simulation data are preprocessed by white noise
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Map creation based on tactile data}
+    \framesubtitle{Result: simulator}
+    \vspace{-15pt}
+    \begin{figure}[H]
+        \begin{subfigure}{0.49\textwidth}
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{terrain_w_water1.png}
+            % \caption*{CoppeliaSim simulator, 5th StriRus iteration}    
+        \end{subfigure}
+        \begin{subfigure}{0.49\textwidth}
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{terrain_w_water_end.png}
+            % \caption*{4th StriRus iteration}
+        \end{subfigure}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Map creation based on tactile data}
+    \framesubtitle{Result: Mesh}
+    \vspace{-15pt}
+    \begin{figure}[H]
+        \begin{subfigure}{0.49\textwidth}
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{mesh_rviz.png}
+            \caption*{Mesh created using concave hull 2D Delaunay triangulation}
+        \end{subfigure}
+        \begin{subfigure}{0.49\textwidth}
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{sampled_pcd.png}
+            \caption*{Sampled point cloud}
+        \end{subfigure}
+    \end{figure}
+\end{frame}
+
+
+\begin{frame}[t]{Map creation based on tactile data}
+    \framesubtitle{Why do we need concave hull}
+    \vspace{-15pt}
+    \begin{figure}[H]
+        \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{concave_expl.png}
+        \caption{Convex hull VS Concave hull}
+        \label{fig:concave_expl.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Map creation based on tactile data}
+    \framesubtitle{Result: point cloud comparison with ground truth}
+    \vspace{-15pt}
+    \begin{figure}[H]
+        \begin{subfigure}{0.49\textwidth}
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{cropped_pcd.png}
+            % \caption*{CoppeliaSim simulator, 5th StriRus iteration}    
+        \end{subfigure}
+        \begin{subfigure}{0.49\textwidth}
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{pcd_hist.png}
+            % \caption*{4th StriRus iteration}
+        \end{subfigure}
+    \end{figure}
+    \alert{\Large RMSE 0.053074, std 0.025}
+\end{frame}
+
+\begin{frame}[t]{Map creation based on tactile data}
+    \framesubtitle{Result: mesh comparison with ground truth}
+    \vspace{-15pt}
+    \begin{figure}[H]
+        \begin{subfigure}{0.49\textwidth}
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{mesh_comp.png}
+            % \caption*{CoppeliaSim simulator, 5th StriRus iteration}    
+        \end{subfigure}
+        \begin{subfigure}{0.49\textwidth}
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{mesh_hist.png}
+            % \caption*{4th StriRus iteration}
+        \end{subfigure}
+    \end{figure}
+    \alert{\Large RMSE 0.00167067, std 0.0005}
+\end{frame}
+
+\begin{frame}[t]{Summary}
+\framesubtitle{}
+    \Large
+    \begin{itemize}
+        \item Robot was created
+        \item Force transducer based on Velostat was created and was investigated
+        \item Robot can distinct rubber and rock terrains
+        \item Robot can build a map using tactile sensors
+    \end{itemize}
+\end{frame}
 
 \fbckg{fibeamer/figs/last_page.png}
 \frame[plain]{}
