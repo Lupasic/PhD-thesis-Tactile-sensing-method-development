@@ -23,9 +23,7 @@
 \usepackage{amsmath, amssymb}
 \usepackage{url}       % `\url`s
 \usepackage{listings}  % Code listings
-% \usepackage{subfigure}
 \usepackage{floatrow}
-\usepackage{subcaption}
 \usepackage{mathtools}
 \usepackage{todonotes}
 \usepackage{fontspec}
@@ -35,6 +33,11 @@
 \usepackage{animate}
 \usepackage{booktabs}
 \usepackage{multirow}
+
+
+\usepackage[font={large}, labelfont=it,textfont={it},justification=centering, skip=2pt]{caption}
+% will apply to all subcaptions
+\usepackage[font={large},skip=2pt]{subcaption}
 
 \graphicspath{{../images/}}
 \frenchspacing
@@ -87,50 +90,72 @@
 \fbckg{fibeamer/figs/common.png}
 
 \begin{frame}[t]{Motivation: why do we need to explore caves by robots}
-    \framesubtitle{Cave obstacles}
+    % \framesubtitle{Cave dangerous obstacles}
+    \vspace{-0.55cm}
     \begin{figure}[H]
-        \begin{subfigure}{0.24\textwidth}
-            \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{siphon.png}
-            \caption*{Syphon}
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering\includegraphics[height=2.5cm]{surface_types/salt.jpg}\\
+            \caption*{Salt}
+            \label{fig:salt}
         \end{subfigure}
         \hfill
-        \begin{subfigure}{0.24\textwidth}
-            \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{splash.png}
-            \caption*{Splash}
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering\includegraphics[height=2.5cm]{surface_types/siphon.png}\\
+            \caption*{Siphon}
+            \label{fig:siphon}
         \end{subfigure}
         \hfill
-        \begin{subfigure}{0.24\textwidth}
-            \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{ice.png}
-            \caption*{Glacial caves}
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering\includegraphics[height=2.5cm]{surface_types/ice.png}\\
+            \caption*{Glacier cave}
+            \label{fig:ice}
         \end{subfigure}
-        \hfill
-        \begin{subfigure}{0.24\textwidth}
-            \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{clay.jpg}
+        
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering\includegraphics[height=2.5cm]{surface_types/clay.jpg}\\
             \caption*{Clay}
+            \label{fig:clay}
         \end{subfigure}
         \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering\includegraphics[height=2.5cm]{surface_types/splash.png}\\
+            \caption*{Splash}
+            \label{fig:splash}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering\includegraphics[height=2.5cm]{surface_types/moss.jpg}\\
+            \caption*{Moss}
+            \label{fig:moss}
+        \end{subfigure}
     \end{figure}
 \end{frame}
 
 \begin{frame}[t]{Motivation: unsolvable problem for cameras and lidars}
     \framesubtitle{Question: how to make a terrain map when you have a spash above?}
-    \begin{figure}[H]
-        \begin{subfigure}{0.32\textwidth}
-            \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{terrain_wo_water.png}
-            \caption*{Terrain without water}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}{0.32\textwidth}
-            \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{terrain_w_water1.png}
-            \caption*{Terrain with water, lidar data}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}{0.32\textwidth}
-            \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{terrain_w_water_camera.png}
-            \caption*{Camera view}
-        \end{subfigure}
-        \hfill
-    \end{figure}
+    \vspace{-1cm}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.55\textwidth}
+            \begin{figure}[H]
+                \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{terrain_wo_water.png}
+                \caption*{Terrain without water}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.44\textwidth}
+            \begin{figure}[H]
+                \begin{subfigure}[b]{0.8\textwidth}
+                    \centering\includegraphics[height=3.5cm,width=1\textwidth,keepaspectratio]{terrain_w_water1.png}
+                    % \caption*{Terrain with water, \\ lidar data}
+                \end{subfigure}
+        
+                \begin{subfigure}{0.8\textwidth}
+                    \centering\includegraphics[height=2cm,width=1\textwidth,keepaspectratio]{terrain_w_water_camera.png}
+                    \caption*{Camera view}
+                \end{subfigure}
+            \end{figure} 
+        \end{column}
+    \end{columns}
+
 \end{frame}
 
 \begin{frame}[t]{Problem statement}
@@ -159,17 +184,17 @@
     \framesubtitle{}
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.45\textwidth}
-            \begin{block}{Problem 1}
+            \begin{exampleblock}{Problem 1}
                 \textit{Map can be built} \textbf{using tactile sensors} on each leg of the robot and create a \textbf{dense point cloud} using sampling from generated mesh using \textbf{modified Delaunay triangulation}.
                 \vspace{5pt}
 
                 \textit{Terrain type} can be obtained solving \textbf{terrain classification} problem using \textbf{machine learning}.
-            \end{block}
+            \end{exampleblock}
         \end{column}
         \begin{column}{0.45\textwidth}
-            \begin{block}{Problem 2}
+            \begin{exampleblock}{Problem 2}
                 \textit{Localization problem} can be solved by \textbf{fused data} from net of \textbf{beacons} plus \textbf{several IMU} on board and knowing a \textbf{kinematics} of the system.
-            \end{block}
+            \end{exampleblock}
         \end{column}
     \end{columns}
 \end{frame}
@@ -206,9 +231,9 @@
     \only<1-2>{\LARGE\begin{block}{Question}
             What the optimal amount of legs should be in such robot?
         \end{block}}
-    \only<2>{\LARGE\begin{block}{Answer}
+    \only<2>{\LARGE\begin{alertblock}{Answer}
             \centering Robot should have \textbf{10-12 legs} in total!
-        \end{block}}
+        \end{alertblock}}
 \end{frame}
 
 \begin{frame}[c]{Robot design}
@@ -227,7 +252,7 @@
         \hfill
         \begin{subfigure}{0.32\textwidth}
             \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{gen_algo.jpg}
-            \caption*{Genetic algorithm (DEAP Library)}
+            \caption*{Genetic algorithm \\ (DEAP Library)}
         \end{subfigure}
         \hfill
     \end{figure}
@@ -255,28 +280,56 @@
 \end{frame}
 
 \begin{frame}[t]{Robot design}
+    \framesubtitle{Video: story of one generated robot}
+    \vspace{-0.6cm}
+    Вставить видео как робот ходит по сгенерированной истории
+    % \begin{figure}[H]
+    %     \href{}{
+    %         \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{file_name}}
+    %     % \caption{Click on a picture for a video}
+    %     \label{fig:file_name}
+    % \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Robot design}
     \framesubtitle{Results}
     \vspace{-0.5cm}
     \begin{figure}[H]
         \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{table_terrain.png}
-        \caption*{\textbf{Result}: robot should have 10-12 legs in total}
+        \caption*{\LARGE\centering\textbf{Summary}: robot should have 10-12 legs in total}
         \label{fig:table_terrain.png}
     \end{figure}
 \end{frame}
 
 \begin{frame}[t]{Robot design}
     \framesubtitle{Increasing maneuverablity}
-    \only<1-2>{\LARGE\begin{block}{Question}
-            Long robot can stuck in a cave hole, while rotating. How to avoid it?
+    \only<1-2>{\Large\begin{block}{Question}
+            1. Long robot can stuck in a cave hole, while rotating. How to avoid it?
+
+            2. How to climb on big stones?
         \end{block}}
-    \only<2>{\LARGE\begin{block}{Answer}
-            \centering Add an ability to sidestep without changing orientation
-        \end{block}}
+    \only<2>{\Large\begin{alertblock}{Answer}
+            \centering 1. Add an ability to sidestep without changing orientation.
+
+            2. Make a segmented body.
+        \end{alertblock}}
+\end{frame}
+
+\begin{frame}[t]{Robot design}
+    \framesubtitle{Video}
+    \vspace{-0.6cm}
+    Add video robot
+    % \begin{figure}[H]
+    %     \href{}{
+    %         \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{file_name}}
+    %     % \caption{Click on a picture for a video}
+    %     \label{fig:file_name}
+    % \end{figure}
 \end{frame}
 
 \begin{frame}[t]{Robot design}
     \framesubtitle{Proposed solution}
-    \vspace{-0.7cm}
+    \vspace{-0.8cm}
     \begin{figure}[H]
         \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{omni_rot.png}
         \caption*{Vector representation of forces in  the conventional and omni-direction states}
@@ -285,21 +338,21 @@
 
 \begin{frame}[t]{Robot design}
     \framesubtitle{StriRus prototypes (1)}
-    \vspace{-0.5cm}
+    \vspace{-0.7cm}
     \begin{figure}[H]
-        \begin{subfigure}{0.32\textwidth}
+        \begin{subfigure}[t]{0.32\textwidth}
             \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{strirus_0.png}
-            \caption*{1st gen, 54 legs, no segments}
+            \caption*{\textbf{1st gen}: 54 legs \\ 1 segment}
         \end{subfigure}
         \hfill
-        \begin{subfigure}{0.32\textwidth}
+        \begin{subfigure}[t]{0.32\textwidth}
             \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{strirus_1.png}
-            \caption*{2nd gen, 12 legs, 1 DoF segment, continuous leg inclination up to 45 deg}
+            \caption*{\textbf{2nd gen}: 12 legs \\ 2 segments, 1 DoF connection \\ Continuous leg to body angle up to 45 deg}
         \end{subfigure}
         \hfill
-        \begin{subfigure}{0.32\textwidth}
+        \begin{subfigure}[t]{0.32\textwidth}
             \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{strirus_2.jpg}
-            \caption*{3rd gen, 12 legs, 2 DoF segments, discrete leg inclination up to 45 deg}
+            \caption*{\textbf{3rd gen}: 12 legs \\ 2 segments, 2 DoF connection \\ Discrete leg to body angle up to 45 deg}
         \end{subfigure}
         \hfill
     \end{figure}
@@ -309,30 +362,30 @@
     \framesubtitle{StriRus prototypes (2)}
     \vspace{-0.5cm}
     \begin{figure}[H]
-        \begin{subfigure}{0.45\textwidth}
+        \begin{subfigure}[t]{0.45\textwidth}
             \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{strirus_3.JPG}
-            \caption*{4th gen, 6 big legs, no segments}
+            \caption*{\textbf{3th+ gen}: 6 big legs \\ 1 segment}
         \end{subfigure}
         \hfill
-        \begin{subfigure}{0.45\textwidth}
+        \begin{subfigure}[t]{0.45\textwidth}
             \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{strirus_4.png}
-            \caption*{5th gen, 10 biggest legs, 1 DoF segment, discrete leg inclination up to 15 deg}
+            \caption*{\textbf{4th gen}: 10 biggest legs \\ 2 segments, 1 DoF connection \\  Discrete leg to body angle up to 15 deg}
         \end{subfigure}
         \hfill
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Force tranducer design}
+\begin{frame}[t]{Force transducer design}
     \framesubtitle{}
     \only<1-2>{\LARGE\begin{block}{Question}
             How to receive a reaction force from the ground?
         \end{block}}
-    \only<2>{\LARGE\begin{block}{Answer}
+    \only<2>{\LARGE\begin{alertblock}{Answer}
             \centering Installing a force sensor on each leg
-        \end{block}}
+        \end{alertblock}}
 \end{frame}
 
-\begin{frame}[t]{Force tranducer design}
+\begin{frame}[t]{Force transducer design}
     \framesubtitle{Force sensor types}
     \vspace{-20pt}
     \begin{multicols}{2}
@@ -352,7 +405,42 @@
     \end{exampleblock}
 \end{frame}
 
-\begin{frame}[t]{Force tranducer design}
+\begin{frame}[t]{Force transducer design}
+    \framesubtitle{Velostat}
+    \vspace{-20pt}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.6\textwidth}
+            \begin{exampleblock}{Definition}
+                The Velostat is a polymer material filled with carbon black.\\
+                \textbf{Expected effects}:
+                \begin{itemize}
+                    \item \underline{Quantum tunnelling} (Precolation) -- Diod is using such effect;
+                    \item \underline{Piezoresistive} -- electrical resistivity of semiconductor is changed by mechanical strain;
+                    \item \underline{Viscoelasticity} -- material can damp vibrations.
+                \end{itemize}                
+            \end{exampleblock}
+        \end{column}
+        \begin{column}{0.38\textwidth}
+            \vspace{-0.7cm}
+            \begin{figure}[H]
+                \begin{subfigure}{0.9\textwidth}
+                    \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{velostat_sensor.jpg}
+                    % \caption*{Velostat material}
+                    \label{fig:velostat_sensor.jpg}
+                \end{subfigure}
+
+                \begin{subfigure}{0.9\textwidth}
+                    \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{simplest_sensor.jpg}
+                    \caption*{Simplest force transducer}
+                    \label{fig:simplest_sensor.jpg}
+                \end{subfigure}
+            \end{figure}
+        \end{column}
+    \end{columns}
+
+\end{frame}
+
+\begin{frame}[t]{Force transducer design}
     \framesubtitle{Velostat: Faced problems}
     \vspace{-20pt}
     \begin{multicols}{2}
@@ -373,19 +461,21 @@
     \end{block}
 \end{frame}
 
-\begin{frame}[t]{Force tranducer design}
+\begin{frame}[t]{Force transducer design}
     \framesubtitle{Experimental setup requirements}
+    \vspace{-0.5cm}
     {\Large
         \begin{itemize}
-            \item Force control.
-            \item Position and force repeatability.
-            \item To have an ability to apply force only on a part of a sensor.
-            \item To change object of the experiment quickly.
+            \item Force control. \only<2>{\alert{Solved by Impedance Control}}
+            \item Position and force repeatability. \only<2>{\alert{Solved by adding manipulator and camera}}
+            \item To have an ability to apply force only on a part of a sensor. \only<2>{\alert{Solved by adding several end-effectors}}
+            \item To change object of the experiment quickly. \only<2>{\alert{Solved by experimental setup}}
         \end{itemize}}
     \only<2>{\centering\Large\alert{All requirements are fulfilled}}
 \end{frame}
 
-\begin{frame}[t]{Force tranducer design}
+
+\begin{frame}[t]{Force transducer design}
     \framesubtitle{Experimental Setup: Hardware overall}
     \vspace{-15pt}
     \begin{columns}[T,onlytextwidth]
@@ -412,7 +502,9 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}[t]{Force tranducer design}
+
+
+\begin{frame}[t]{Force transducer design}
     \framesubtitle{Experimental Setup: Hardware, aruco markers}
     \vspace{-15pt}
     \begin{figure}[H]
@@ -422,52 +514,59 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Force tranducer design}
+\begin{frame}[t]{Force transducer design}
     \framesubtitle{Experimental Setup: Hardware, end-effector}
     \begin{figure}[H]
         \begin{subfigure}[b]{0.29\textwidth}
             \centering\includegraphics[width=0.99\textwidth]{point_load.JPG}\\
-            \caption{Point load}
+            \caption*{Point load: 2mm diameter}
             \label{fig:point_load}
         \end{subfigure}
         \begin{subfigure}[b]{0.29\textwidth}
             \centering\includegraphics[width=0.99\textwidth]{rolling_load.JPG}\\
-            \caption{Rolling load}
+            \caption*{Rolling load}
             \label{fig:rolling_load}
         \end{subfigure}
         \begin{subfigure}[b]{0.29\textwidth}
             \centering\includegraphics[width=0.99\textwidth]{LTH350-DONUT-LOAD-CELL-1.png}\\
-            \caption{Futek LTH350}
+            \caption*{Futek LTH350}
             \label{fig:futek}
         \end{subfigure}
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Force tranducer design}
-    \framesubtitle{Experimental Setup: Software}
-    {\Large
-        \begin{itemize}
-            \item \textbf{Language}: Python3
-            \item \textbf{Frequency}: $450 hz$, using RTDE protocol
-            \item \textbf{Control}: Impedance control
-        \end{itemize}
-    }
+\begin{frame}[t]{Experiment Design}
+    \framesubtitle{Experimental Setup: Hardware, video}
+    \vspace{-15pt}
+    \begin{figure}[H]
+        \href{https://youtu.be/Sw0xCt78gIg}{
+            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{exp_stand_video_preview.jpg}}
+        % \caption{caption_name}
+    \end{figure}
 \end{frame}
 
 
-\begin{frame}[t]{Force tranducer design}
+\begin{frame}[t]{Force transducer design}
     \framesubtitle{Experiments}
     \vspace{-15pt}
-    {\large
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.6\textwidth}
+            {\large
         \begin{enumerate}
             \item Static experiment. The goal is to identify the coefficients for the transducer model.
             \item Dynamic experiment. We are representing a transducer as a $4\times4$ matrix. We touch with the same pressure using five different end-effectors (area starting from 2mm till 15mm).
             \item As the previous, but we are using 1st and last end-effector. We touch with different forces (5, 10, 20, 30, 40 H).
         \end{enumerate}
-    }
+    }    
+        \end{column}
+        \begin{column}{0.39\textwidth}
+            Нарисовать сетку, чтобы объяснить что такое представление трансдьюсера
+        \end{column}
+    \end{columns}
+
 \end{frame}
 
-\begin{frame}[t]{Force tranducer design}
+\begin{frame}[t]{Force transducer design}
     \framesubtitle{Result: static experiment}
     \vspace{-0.5cm}
     \begin{columns}[T,onlytextwidth]
@@ -489,12 +588,12 @@
     \vspace{-11pt}
     \begin{figure}[H]
         \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{pikes.png}
-        \caption*{Normalized force data from sensor and transducer}
+        \caption*{ Normalized force data from sensor and transducer}
         \label{fig:pikes.png}
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Force tranducer design}
+\begin{frame}[t]{Force transducer design}
     \framesubtitle{Result: dynamic experiment}
     \vspace{-15pt}
     \begin{figure}[H]
@@ -511,8 +610,8 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Force tranducer design}
-    \framesubtitle{Results}
+\begin{frame}[t]{Force transducer design}
+    \framesubtitle{Summary}
     \vspace{-15pt}
     {\Large
         \begin{enumerate}
@@ -527,9 +626,9 @@
     \only<1-2>{\LARGE\begin{block}{Question}
             How to define the terrain type during the movement on such terrain?
         \end{block}}
-    \only<2>{\LARGE\begin{block}{Answer}
+    \only<2>{\LARGE\begin{alertblock}{Answer}
             \centering Solving terrain classification problem using Machine learning
-        \end{block}}
+        \end{alertblock}}
 \end{frame}
 
 \begin{frame}[t]{Terrain classification}
@@ -579,7 +678,7 @@
 
 \begin{frame}[t]{Terrain classification}
     \framesubtitle{How it works}
-    \
+    Добавить видео
 \end{frame}
 
 \begin{frame}[t]{Terrain classification}
@@ -608,7 +707,7 @@
 \end{frame}
 
 \begin{frame}[t]{Terrain classification}
-    \framesubtitle{Results}
+    \framesubtitle{Summary}
     \Large
     \begin{itemize}
         \item Can distinct rubber and rock terrains
@@ -626,24 +725,24 @@
 \begin{frame}[t]{Map creation based on tactile data}
     \framesubtitle{}
     \only<1-2>{\LARGE\begin{block}{Question}
-            How to create a dense point cloud using sparse data from legs?
+            How to create a dense point cloud, using sparse data from legs?
         \end{block}}
-    \only<2>{\LARGE\begin{block}{Answer}
+    \only<2>{\LARGE\begin{alertblock}{Answer}
             \centering Take this data, create a mesh using concave hull Delaunay triangulation, sampling it and return to the main algorithm
-        \end{block}}
+        \end{alertblock}}
 \end{frame}
 
 \begin{frame}[t]{Map creation based on tactile data}
     \framesubtitle{Experimental setup}
     \vspace{-15pt}
     \begin{figure}[H]
-        \begin{subfigure}{0.49\textwidth}
+        \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{coppelia_sim.png}
-            \caption*{CoppeliaSim simulator, 5th StriRus iteration}
+            \caption*{CoppeliaSim simulator, \textbf{4th gen} StriRus iteration}
         \end{subfigure}
-        \begin{subfigure}{0.49\textwidth}
+        \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{rl_sim.JPG}
-            \caption*{4th StriRus iteration}
+            \caption*{URL, \textbf{3th+ gen} StriRus}
         \end{subfigure}
     \end{figure}
 \end{frame}
@@ -659,16 +758,23 @@
 \end{frame}
 
 \begin{frame}[t]{Map creation based on tactile data}
+    \framesubtitle{Delaunay triangulation}
+    \Large
+        вставить идею.
+    (подписать common Delaunay triangulation (convex hull))
+\end{frame}
+
+\begin{frame}[t]{Map creation based on tactile data}
     \framesubtitle{Result: simulator}
     \vspace{-15pt}
     \begin{figure}[H]
         \begin{subfigure}{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{terrain_w_water1.png}
-            % \caption*{CoppeliaSim simulator, 5th StriRus iteration}    
+            \caption*{Start point}    
         \end{subfigure}
         \begin{subfigure}{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{terrain_w_water_end.png}
-            % \caption*{4th StriRus iteration}
+            \caption*{End point}
         \end{subfigure}
     \end{figure}
 \end{frame}
@@ -677,11 +783,11 @@
     \framesubtitle{Result: Mesh}
     \vspace{-15pt}
     \begin{figure}[H]
-        \begin{subfigure}{0.49\textwidth}
+        \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{mesh_rviz.png}
             \caption*{Mesh created using concave hull 2D Delaunay triangulation}
         \end{subfigure}
-        \begin{subfigure}{0.49\textwidth}
+        \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{sampled_pcd.png}
             \caption*{Sampled point cloud}
         \end{subfigure}
@@ -693,43 +799,94 @@
     \framesubtitle{Why do we need concave hull}
     \vspace{-15pt}
     \begin{figure}[H]
-        \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{concave_expl.png}
-        \caption{Convex hull VS Concave hull}
-        \label{fig:concave_expl.png}
+        \begin{subfigure}{0.3\textwidth}
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{convex_terr.png}
+            \caption*{Case study}
+            \label{fig:convex_terr.png}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.33\textwidth}
+            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{conv_convex.png}
+            \caption*{Convex Hull}
+            \label{fig:conv_convex.png}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.33\textwidth}
+            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{conv_concave.png}
+            \caption*{Concave Hull}
+            \label{fig:conv_concave.png}
+        \end{subfigure}    
+
     \end{figure}
 \end{frame}
 
 \begin{frame}[t]{Map creation based on tactile data}
-    \framesubtitle{Result: point cloud comparison with ground truth}
+    \framesubtitle{Metric: point cloud comparison with ground truth}
     \vspace{-15pt}
     \begin{figure}[H]
-        \begin{subfigure}{0.49\textwidth}
+        \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{cropped_pcd.png}
-            % \caption*{CoppeliaSim simulator, 5th StriRus iteration}    
+            \caption*{Overlaid point clouds}    
         \end{subfigure}
-        \begin{subfigure}{0.49\textwidth}
+        \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{pcd_hist.png}
-            % \caption*{4th StriRus iteration}
+            \caption*{Error histogram (distance from point to closest ground truth point)}
         \end{subfigure}
     \end{figure}
-    \alert{\Large RMSE 0.053074, std 0.025}
+    % \alert{\Large RMSE 0.053074, std 0.025}
 \end{frame}
 
 \begin{frame}[t]{Map creation based on tactile data}
-    \framesubtitle{Result: mesh comparison with ground truth}
+    \framesubtitle{Metric: mesh comparison with ground truth}
     \vspace{-15pt}
     \begin{figure}[H]
-        \begin{subfigure}{0.49\textwidth}
+        \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{mesh_comp.png}
-            % \caption*{CoppeliaSim simulator, 5th StriRus iteration}    
+            \caption*{Overlaid meshes}    
         \end{subfigure}
-        \begin{subfigure}{0.49\textwidth}
+        \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{mesh_hist.png}
-            % \caption*{4th StriRus iteration}
+            \caption*{Error histogram (distance from point to closest ground truth point)}
         \end{subfigure}
     \end{figure}
-    \alert{\Large RMSE 0.00167067, std 0.0005}
+    % \alert{\Large RMSE 0.00167067, std 0.0005}
 \end{frame}
+
+\begin{frame}[t]{Map creation based on tactile data}
+\framesubtitle{Result: real world experiment}
+Вставить видео из реального эксперимента и все это
+    % \begin{figure}[H]
+    %     \begin{subfigure}{0.49\textwidth}
+    %         \href{}{
+    %             \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{file_name}}
+    %         % \caption{Click on a picture for a video}
+    %         \label{fig:file_name}
+    %     \end{subfigure}
+    %     \begin{subfigure}{0.49\textwidth}
+    %         \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{file_name2}
+    %         \caption{capture2}
+    %         \label{fig:file_name2}
+    %     \end{subfigure}
+    
+\end{frame}
+
+\begin{frame}[t]{Map creation based on tactile data}
+    \framesubtitle{Summary}
+        \Large
+        \begin{itemize}
+            \item Map can be built using concave hull 2D Delaunay triangulation. 
+            
+            A Sparse point cloud obtained from force sensors, installed on legs.
+            \item \textit{Simulator}: \begin{itemize}
+                \item Avg. Point cloud comparison RMSE is about 5 cm.
+                \item Avg. Mesh comparison RMSE is about 1 cm.
+            \end{itemize}
+            \item \textit{Real world experiment}: \begin{itemize}
+                \item Avg. Point cloud comparison RMSE is about 8 cm.
+            %     \item Avg. Mesh comparison RMSE is about 1 cm.
+            \end{itemize}
+        \end{itemize}
+    \end{frame}
 
 \begin{frame}[t]{Summary}
 \framesubtitle{}
