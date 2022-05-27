@@ -42,6 +42,9 @@
 \graphicspath{{../images/}}
 \frenchspacing
 
+
+\usetikzlibrary{calc}
+
 \setbeamertemplate{caption}[numbered]
 \usetikzlibrary{graphs}
 
@@ -110,7 +113,7 @@
             \caption*{Glacier cave}
             \label{fig:ice}
         \end{subfigure}
-        
+
         \begin{subfigure}[b]{0.3\textwidth}
             \centering\includegraphics[height=2.5cm]{surface_types/clay.jpg}\\
             \caption*{Clay}
@@ -147,12 +150,12 @@
                     \centering\includegraphics[height=3.5cm,width=1\textwidth,keepaspectratio]{terrain_w_water1.png}
                     % \caption*{Terrain with water, \\ lidar data}
                 \end{subfigure}
-        
+
                 \begin{subfigure}{0.8\textwidth}
                     \centering\includegraphics[height=2cm,width=1\textwidth,keepaspectratio]{terrain_w_water_camera.png}
                     \caption*{Camera view}
                 \end{subfigure}
-            \end{figure} 
+            \end{figure}
         \end{column}
     \end{columns}
 
@@ -413,7 +416,7 @@
                     \item \underline{Quantum tunnelling} (Precolation) -- Diod is using such effect;
                     \item \underline{Piezoresistive} -- electrical resistivity of semiconductor is changed by mechanical strain;
                     \item \underline{Viscoelasticity} -- material can damp vibrations.
-                \end{itemize}                
+                \end{itemize}
             \end{exampleblock}
         \end{column}
         \begin{column}{0.38\textwidth}
@@ -473,31 +476,56 @@
 
 \begin{frame}[t]{Force transducer design}
     \framesubtitle{Experimental Setup: Hardware overall}
-    \vspace{-15pt}
-    \begin{columns}[T,onlytextwidth]
-        \begin{column}{0.3\textwidth}
-            \begin{enumerate}
-                \item UR5
-                \item Futek force sensor
-                \item Arduino
-                \item Self-made PCB
-                \item Velostat sensors
-                \item Aruco Markers
-                \item Smartphone camera
-            \end{enumerate}
-        \end{column}
-        \begin{column}{0.69\textwidth}
-            \begin{figure}[H]
-                \begin{subfigure}{\textwidth}
-                    \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{exp_stand1}
-                    % \caption{caption_name}
-                    \label{fig:exp_stand1}
-                \end{subfigure}
-            \end{figure}
-        \end{column}
-    \end{columns}
-\end{frame}
+    \vspace{-12pt}
+    \begin{center}
+    \begin{tikzpicture}
 
+        % Include the image in a node
+        \node [
+            above right,
+            inner sep=0] (image) at (0,0) {\centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{exp_stand1}};
+
+        % Create scope with normalized axes
+        \begin{scope}[
+                x={($0.1*(image.south east)$)},
+                y={($0.1*(image.north west)$)}]
+
+            % Grid
+            % \draw[lightgray,step=1] (image.south west) grid (image.north east);
+
+            % % Axes' labels
+            % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
+            % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
+
+            % Labels
+            % \node[circle,fill=green] at (7.25,6.75){\small 2};
+
+            \draw[latex-, very thick,green] (3.5,2.2) -- (2.5,1)
+            node[below left,black,fill=white]{\small Velostat sensors};
+
+            \draw[stealth-, very thick,green] (3.5,2.6) -- ++(-0.7,+0.5)
+            node[left,black,fill=white]{\small Force sensor};
+
+            \draw[stealth-, very thick,green] (6.5,3) -- (7,6)
+            node[above right,black,fill=white]{\small Self made PCB};
+
+            \draw[stealth-, very thick,green] (7.2,1.5) -- (8,5)
+            node[above right,black,fill=white]{\small Arduino};
+
+            \draw[stealth-, very thick,green] (2.5,9.5) -- (4,9.5)
+            node[right,black,fill=white]{\small Camera};
+
+            \draw[very thick,green] (0.5,2.5) rectangle (4.2,9)
+            node[below left,black,fill=green]{\small UR5e};
+
+            \draw[latex-, very thick,green] (4.5,7.2) edge (5.5,7.5)
+            (4.8,5.3) -- (5.5,7.5)
+            node[above,black,fill=white]{\small Aruco markers};
+        \end{scope}
+
+    \end{tikzpicture}
+\end{center}
+\end{frame}
 
 
 \begin{frame}[t]{Force transducer design}
@@ -548,12 +576,12 @@
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.6\textwidth}
             {\large
-        \begin{enumerate}
-            \item Static experiment. The goal is to identify the coefficients for the transducer model.
-            \item Dynamic experiment. We are representing a transducer as a $4\times4$ matrix. We touch with the same pressure using five different end-effectors (area starting from 2mm till 15mm).
-            \item As the previous, but we are using 1st and last end-effector. We touch with different forces (5, 10, 20, 30, 40 H).
-        \end{enumerate}
-    }    
+                \begin{enumerate}
+                    \item Static experiment. The goal is to identify the coefficients for the transducer model.
+                    \item Dynamic experiment. We are representing a transducer as a $4\times4$ matrix. We touch with the same pressure using five different end-effectors (area starting from 2mm till 15mm).
+                    \item As the previous, but we are using 1st and last end-effector. We touch with different forces (5, 10, 20, 30, 40 H).
+                \end{enumerate}
+            }
         \end{column}
         \begin{column}{0.39\textwidth}
             Нарисовать сетку, чтобы объяснить что такое представление трансдьюсера
@@ -751,9 +779,12 @@
 
 \begin{frame}[t]{Map creation based on tactile data}
     \framesubtitle{Delaunay triangulation}
-    \Large
-        вставить идею.
-    (подписать common Delaunay triangulation (convex hull))
+    \vspace{-0.2cm}
+    \begin{figure}[H]
+        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{delone_idea.png}
+        \caption*{Common 2D Delaunay triangulation (Convex Hull)}
+        \label{fig:delone_idea.png}
+    \end{figure}
 \end{frame}
 
 \begin{frame}[t]{Map creation based on tactile data}
@@ -762,7 +793,7 @@
     \begin{figure}[H]
         \begin{subfigure}{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{terrain_w_water1.png}
-            \caption*{Start point}    
+            \caption*{Start point}
         \end{subfigure}
         \begin{subfigure}{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{terrain_w_water_end.png}
@@ -807,7 +838,7 @@
             \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{conv_concave.png}
             \caption*{Concave Hull}
             \label{fig:conv_concave.png}
-        \end{subfigure}    
+        \end{subfigure}
 
     \end{figure}
 \end{frame}
@@ -818,7 +849,7 @@
     \begin{figure}[H]
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{cropped_pcd.png}
-            \caption*{Overlaid point clouds}    
+            \caption*{Overlaid point clouds}
         \end{subfigure}
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{pcd_hist.png}
@@ -834,7 +865,7 @@
     \begin{figure}[H]
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{mesh_comp.png}
-            \caption*{Overlaid meshes}    
+            \caption*{Overlaid meshes}
         \end{subfigure}
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{mesh_hist.png}
@@ -845,8 +876,8 @@
 \end{frame}
 
 \begin{frame}[t]{Map creation based on tactile data}
-\framesubtitle{Result: real world experiment, video}
-\vspace{-0.5cm}
+    \framesubtitle{Result: real world experiment, video}
+    \vspace{-0.5cm}
     \begin{figure}[H]
         \begin{subfigure}[t]{0.49\textwidth}
             \href{run:./videos/big_angle2.mp4}{
@@ -862,24 +893,24 @@
 
 \begin{frame}[t]{Map creation based on tactile data}
     \framesubtitle{Summary}
-        \Large
-        \begin{itemize}
-            \item Map can be built using concave hull 2D Delaunay triangulation. 
-            
-            A Sparse point cloud obtained from force sensors, installed on legs.
-            \item \textit{Simulator}: \begin{itemize}
-                \item Avg. Point cloud comparison RMSE is about 5 cm.
-                \item Avg. Mesh comparison RMSE is about 1 cm.
-            \end{itemize}
-            \item \textit{Real world experiment}: \begin{itemize}
-                \item Avg. Point cloud comparison RMSE is about 8 cm.
-            %     \item Avg. Mesh comparison RMSE is about 1 cm.
-            \end{itemize}
-        \end{itemize}
-    \end{frame}
+    \Large
+    \begin{itemize}
+        \item Map can be built using concave hull 2D Delaunay triangulation.
+
+              A Sparse point cloud obtained from force sensors, installed on legs.
+        \item \textit{Simulator}: \begin{itemize}
+                  \item Avg. Point cloud comparison RMSE is about 5 cm.
+                  \item Avg. Mesh comparison RMSE is about 1 cm.
+              \end{itemize}
+        \item \textit{Real world experiment}: \begin{itemize}
+                  \item Avg. Point cloud comparison RMSE is about 8 cm.
+                        %     \item Avg. Mesh comparison RMSE is about 1 cm.
+              \end{itemize}
+    \end{itemize}
+\end{frame}
 
 \begin{frame}[t]{Summary}
-\framesubtitle{}
+    \framesubtitle{}
     \Large
     \begin{itemize}
         \item Robot was created
