@@ -43,7 +43,7 @@
 \frenchspacing
 
 
-\usetikzlibrary{calc}
+\usetikzlibrary{decorations.pathreplacing,calligraphy,calc}
 
 \setbeamertemplate{caption}[numbered]
 \usetikzlibrary{graphs}
@@ -161,46 +161,70 @@
 
 \end{frame}
 
+% \begin{frame}[t]{Problem statement}
+%     \framesubtitle{}
+%     \begin{columns}[T,onlytextwidth]
+%         \begin{column}{0.45\textwidth}
+%             \begin{block}{Problem 1}
+%                 How to obtain a useful information about terrain, \textbf{when we have a SLAM based on lidars, cameras}?
+%                 \vspace{5pt}
+
+%                 \uncover<2->{\alert{\Large Obtain map and type of terrain}}
+%             \end{block}
+%         \end{column}
+%         \begin{column}{0.45\textwidth}
+%             \begin{block}{Problem 2}
+%                 How to obtain a useful information about terrain,\textbf{ when main navigation system died}?
+%                 \vspace{5pt}
+
+%                 \uncover<2->{\alert{\Large Problem 1 + localization}}
+%             \end{block}
+%         \end{column}
+%     \end{columns}
+% \end{frame}
+
 \begin{frame}[t]{Problem statement}
     \framesubtitle{}
-    \begin{columns}[T,onlytextwidth]
-        \begin{column}{0.45\textwidth}
-            \begin{block}{Problem 1}
-                How to obtain a useful information about terrain, \textbf{when we have a SLAM based on lidars, cameras}?
-                \vspace{5pt}
+    \begin{block}{Problem 1}
+        \Large
+        How to obtain a useful information about terrain, \textbf{when we have a SLAM based on lidars, cameras}?
+        \vspace{5pt}
 
-                \uncover<2->{\alert{\Large Obtain map and type of terrain}}
-            \end{block}
-        \end{column}
-        \begin{column}{0.45\textwidth}
-            \begin{block}{Problem 2}
-                How to obtain a useful information about terrain,\textbf{ when main navigation system died}?
-                \vspace{5pt}
-
-                \uncover<2->{\alert{\Large Problem 1 + localization}}
-            \end{block}
-        \end{column}
-    \end{columns}
+        \uncover<2->{\alert{\Large Obtain map and type of terrain}}
+    \end{block}
 \end{frame}
 
 \begin{frame}[t]{Proposed solutions}
     \framesubtitle{}
-    \begin{columns}[T,onlytextwidth]
-        \begin{column}{0.45\textwidth}
-            \begin{exampleblock}{Problem 1}
-                \textit{Map can be built} \textbf{using tactile sensors} on each leg of the robot and create a \textbf{dense point cloud} using sampling from generated mesh using \textbf{modified Delaunay triangulation}.
-                \vspace{5pt}
+    \begin{exampleblock}{Problem 1}
+        \Large
+        \textit{Map can be built} \textbf{using tactile sensors} on each leg of the robot and create a \textbf{dense point cloud} using sampling from generated mesh using \textbf{modified Delaunay triangulation}.
+        \vspace{5pt}
 
-                \textit{Terrain type} can be obtained solving \textbf{terrain classification} problem using \textbf{machine learning}.
-            \end{exampleblock}
-        \end{column}
-        \begin{column}{0.45\textwidth}
-            \begin{exampleblock}{Problem 2}
-                \textit{Localization problem} can be solved by \textbf{fused data} from net of \textbf{beacons} plus \textbf{several IMU} on board and knowing a \textbf{kinematics} of the system.
-            \end{exampleblock}
-        \end{column}
-    \end{columns}
+        \textit{Terrain type} can be obtained solving \textbf{terrain classification} problem using \textbf{machine learning}.
+    \end{exampleblock}
 \end{frame}
+
+% \begin{frame}[t]{Proposed solutions}
+%     \framesubtitle{}
+%     \begin{columns}[T,onlytextwidth]
+%         \begin{column}{0.45\textwidth}
+%             \begin{exampleblock}{Problem 1}
+%                 \textit{Map can be built} \textbf{using tactile sensors} on each leg of the robot and create a \textbf{dense point cloud} using sampling from generated mesh using \textbf{modified Delaunay triangulation}.
+%                 \vspace{5pt}
+
+%                 \textit{Terrain type} can be obtained solving \textbf{terrain classification} problem using \textbf{machine learning}.
+%             \end{exampleblock}
+%         \end{column}
+%         \begin{column}{0.45\textwidth}
+%             \begin{exampleblock}{Problem 2}
+%                 \textit{Localization problem} can be solved by \textbf{fused data} from net of \textbf{beacons} plus \textbf{several IMU} on board and knowing a \textbf{kinematics} of the system.
+%             \end{exampleblock}
+%         \end{column}
+%     \end{columns}
+% \end{frame}
+
+
 
 \begin{frame}[t]{Literature review}
     \framesubtitle{}
@@ -283,7 +307,7 @@
 \end{frame}
 
 \begin{frame}[t]{Robot design}
-    \framesubtitle{Video: story of one generated robot}
+    \framesubtitle{Video: the story of one generated robot}
     \vspace{-0.6cm}
     \begin{figure}[H]
         \href{run:./videos/pass_rand_terr.mp4}{
@@ -563,7 +587,7 @@
     \framesubtitle{Experimental Setup: Hardware, video}
     \vspace{-15pt}
     \begin{figure}[H]
-        \href{run:./videos/exp_stand_video.MP4}{
+        \href{run:./videos/exp_stand_video.mp4}{
             \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{exp_stand_video_preview.jpg}}
         % \caption{caption_name}
     \end{figure}
@@ -577,14 +601,88 @@
         \begin{column}{0.6\textwidth}
             {\large
                 \begin{enumerate}
-                    \item Static experiment. The goal is to identify the coefficients for the transducer model.
-                    \item Dynamic experiment. We are representing a transducer as a $4\times4$ matrix. We touch with the same pressure using five different end-effectors (area starting from 2mm till 15mm).
-                    \item As the previous, but we are using 1st and last end-effector. We touch with different forces (5, 10, 20, 30, 40 H).
+                    \item \textbf{Static experiment}. The goal is to identify the coefficients for the transducer model.
+                    \item\textbf{ Dynamic experiment}. 
+                    \begin{itemize}
+                        \item We are representing a transducer as a $4\times4$ matrix. We touch with the same pressure using five different end-effectors (area starting from 2mm till 15mm).
+                        \item We are using 1st and last end-effector. We touch with different forces (5, 10, 20, 30, 40 H).
+                    \end{itemize}
                 \end{enumerate}
             }
         \end{column}
         \begin{column}{0.39\textwidth}
-            Нарисовать сетку, чтобы объяснить что такое представление трансдьюсера
+            \vspace{-0.5cm}
+            \begin{figure}[H]
+                \centering
+                \begin{tikzpicture}
+            
+                    % Include the image in a node
+                    \node [
+                        above right,
+                        inner sep=0] (image) at (0,0) {\centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{sensors_grid.png}};
+            
+                    % Create scope with normalized axes
+                    \begin{scope}[
+                            x={($0.1*(image.south east)$)},
+                            y={($0.1*(image.north west)$)}]
+            
+                        % Grid
+                        % \draw[lightgray,step=1] (image.south west) grid (image.north east);
+            
+                        % % Axes' labels
+                        % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
+                        % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
+            
+                        % Labels
+                        % Simple brace
+                        \draw [green, very thick,
+                            decorate, 
+                            decoration = {brace,
+                                raise=5pt,
+                                amplitude=5pt,
+                                aspect=0.5}] (6,3.7) --  (3,3.7)
+                        node[pos=0.5,below=10pt,green]{$15\ mm$};
+
+                        \draw [green, very thick,
+                        decorate, 
+                        decoration = {brace, mirror,
+                            raise=5pt,
+                            amplitude=5pt,
+                            aspect=0.5}] (6,3.6) --  (6,6.4)
+                    node[pos=0.5,right=10pt,green]{$15\ mm$};
+
+                    \draw[green,step=1,xshift=34, yshift=43]  (0.5,0.5) grid +(3,3);
+
+                        \node[circle,fill=green,scale=0.4] at (3.3,6.27){\small 1};
+                        \node[circle,fill=green,scale=0.4] at (5.92,3.7){\small 16};
+            
+                        % \draw[latex-, very thick,green] (3.5,2.2) -- (2.5,1)
+                        % node[below left,black,fill=white]{\small Velostat sensors};
+            
+                        % \draw[stealth-, very thick,green] (3.5,2.6) -- ++(-0.7,+0.5)
+                        % node[left,black,fill=white]{\small Force sensor};
+            
+                        % \draw[stealth-, very thick,green] (6.5,3) -- (7,6)
+                        % node[above right,black,fill=white]{\small Self made PCB};
+            
+                        % \draw[stealth-, very thick,green] (7.2,1.5) -- (8,5)
+                        % node[above right,black,fill=white]{\small Arduino};
+            
+                        % \draw[stealth-, very thick,green] (2.5,9.5) -- (4,9.5)
+                        % node[right,black,fill=white]{\small Camera};
+            
+                        % \draw[very thick,green] (0.5,2.5) rectangle (4.2,9)
+                        % node[below left,black,fill=green]{\small UR5e};
+            
+                        % \draw[latex-, very thick,green] (4.5,7.2) edge (5.5,7.5)
+                        % (4.8,5.3) -- (5.5,7.5)
+                        % node[above,black,fill=white]{\small Aruco markers};
+                    \end{scope}
+
+                \end{tikzpicture}
+                \caption*{Sensor representation \\ as 4x4 grid}
+                \label{fig:file_name}
+            \end{figure}
         \end{column}
     \end{columns}
 
@@ -640,7 +738,7 @@
     {\Large
         \begin{enumerate}
             \item Static experiment: transducers coefficients were identified.
-            \item Dynamic experiment. The sensor can be represented as one body, when pressure area is higher than 50 \% of the sensor area.
+            \item Dynamic experiment: a transducer can be represented as one body, when pressure area is higher than 50\% of the sensor area.
         \end{enumerate}
     }
 \end{frame}
@@ -702,6 +800,15 @@
 \end{frame}
 
 \begin{frame}[t]{Terrain classification}
+\framesubtitle{Velostat transducer properties}
+\Large
+\begin{itemize}
+    \item 'cause of high hysteresis and difficulties with calibration, we have to work with relative data.
+\end{itemize}
+    
+\end{frame}
+
+\begin{frame}[t]{Terrain classification}
     \framesubtitle{Obtained data from one experiment}
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.49\textwidth}
@@ -758,7 +865,7 @@
     \begin{figure}[H]
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{coppelia_sim.png}
-            \caption*{CoppeliaSim simulator, \textbf{4th gen} StriRus iteration}
+            \caption*{CoppeliaSim simulator, \textbf{4th gen} StriRus}
         \end{subfigure}
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{rl_sim.JPG}
