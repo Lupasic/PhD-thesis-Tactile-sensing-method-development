@@ -52,7 +52,45 @@
 		"description": "Print"
 	},
 
-
+	"Create a tikz picture": {
+		"scope": "latex",
+		"prefix": "\\tikzfig",
+		"body": [
+		  "\\begin{figure}[H]",
+		  "    \\centering",
+		  "     \\begin{tikzpicture}",
+		  "        % Include the image in a node",
+		  "        \\node [above right, inner sep=0] (image) at (0,0) ",
+		  "        {\\centering\\includegraphics[height=${1:5}cm,width=${2:1}\\textwidth,keepaspectratio]{${3:file_name}}};          ",
+		  "        % Create scope with normalized axes",
+		  "        \\begin{scope}[",
+		  "            x={($ 0.1*(image.south east)$)},",
+		  "            y={($ 0.1*(image.north west)$)}]",
+		  "            % Grid and axes' labels",
+		  "            \\draw[lightgray,step=1] (image.south west) grid (image.north east);",
+		  "            \\foreach \\x in {0,1,...,10} { \\node [below] at (\\x,0) {\\x}; }",
+		  "            \\foreach \\y in {0,1,...,10} { \\node [left] at (0,\\y) {\\y};}",
+		  " ",
+		  "            % Labels",
+		  "$0",
+		  "            % \\node[circle,fill=green,scale=0.4] at (3.3,6.27){\\small 1};",
+		  " ",
+		  "            % \\draw[latex-, very thick,green] (3.5,2.2) -- (2.5,1)",
+		  "            % node[below left,black,fill=white]{\\small test};",
+		  " ",
+		  "            % \\draw[stealth-, very thick,green] (3.5,2.6) -- ++(-0.7,+0.5)",
+		  "            % node[rounded corners=3pt,left,black,fill=white]{\\small test};",
+		  " ",
+		  "            % \\draw[very thick,green] (0.5,2.5) rectangle (4.2,9)",
+		  "            % node[below left,black,fill=green]{\\small test};",
+		  "        \\end{scope}",
+		  "    \\end{tikzpicture}",
+		  "    \\caption*{$4}",
+		  "    \\label{fig:${3:file_name}}",
+		  "\\end{figure}"
+		],
+		"description": "Create a tikz picture"
+	  },
 
 	"Right Side caption": {
 		"scope": "latex",
