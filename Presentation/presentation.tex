@@ -309,7 +309,7 @@
     \end{block}
     \vspace{-0.2cm}
 
-    \only<2>{\centering\alert{New problem was found}}
+    \only<2>{\centering\alert{New problem is proposed}}
 \end{frame}
 
 \begin{frame}[t]{Robot design}
@@ -318,7 +318,7 @@
     \textbf{Problem} --  choose robot mover type. This robot should:
     \begin{itemize}
         \item should have \textit{small dimensions} to sneak through holes;
-        \item have enough \textit{off-road possibility} to pass a granular terrain;
+        \item have enough \textit{off-road passability} to pass a granular terrain;
         \item should \textit{traverse through small water obstacles};
         \item can \textit{climb on big stones};
     \end{itemize}
@@ -359,15 +359,16 @@
 
 \begin{frame}[t]{Robot design}
     \framesubtitle{Assumptions}
-    \Large
+    \large
     \begin{itemize}
         \item Generated terrain family with the same constants has the same complexity. 
-        
+        \\ 
         Parameters:
               \begin{itemize}
-                  \item cell width and length
-                  \item cell height range
-                  \item distribution parameter
+                \large
+                  \item Cell width and length
+                  \item Cell height range
+                  \item Distribution parameter
               \end{itemize}
               % \item We can generate 
     \end{itemize}
@@ -414,9 +415,9 @@
                         \draw[stealth-, very thick,green] (1.5,2.8) -- (7,1)
                         node[rounded corners=3pt,right,black,fill=white]{\tiny $\gamma = 6$};
 
-                        \draw[thick,green] (6.7,4) -- (5.75,9);
-                        \draw[thick,green] (4.85,3.5) -- (5.75,9);
-                        \draw[thick,green] (6.32,6) arc (-79.2:-99.2:3) node [rounded corners=3pt,below = 2pt,black,fill=white, midway] {\tiny $x$};
+                        \draw[thin,green] (6.7,4) -- (5.75,9);
+                        \draw[thin,green] (4.85,3.5) -- (5.75,9);
+                        \draw[thin,green,stealth-stealth] (6.32,6) arc (-79.2:-99.2:3) node [rounded corners=3pt,below = 2pt,black,fill=white, midway] {\tiny $\alpha$};
                         % \draw[very thick,green] (8,6) -- (5,8);
                         % \draw[very thick,green] (0.5,2.5) rectangle (4.2,9)
                         % node[below left,black,fill=green]{\small test};
@@ -429,7 +430,7 @@
             {\footnotesize
                 \begin{eqnarray*}
                     % \resizebox{0.9\hsize}{!}{
-                    F \rightarrow max = \beta \left( {\omega}_{1} \cdot \overbrace{\delta}^{\text{Distance}} + {\omega}_{2} \cdot \overbrace{\frac{1}{(\gamma - 1) h_{\text{leg}}sin(x)}}^{\text{Simplified body length}}\right) +\\ \nonumber + (1 - \beta) {\delta}^{{\omega}_{1}} {\left( \frac{1}{(\gamma - 1)h_{\text{leg}}sin(x)}\right)}^{{\omega}_{2}}
+                    F \rightarrow max = \beta \left( {\omega}_{1} \cdot \overbrace{\delta}^{\text{Distance}} + {\omega}_{2} \cdot \overbrace{\frac{1}{(\gamma - 1) h_{\text{leg}}sin(\alpha)}}^{\text{Simplified body length}}\right) +\\ \nonumber + (1 - \beta) {\delta}^{{\omega}_{1}} {\left( \frac{1}{(\gamma - 1)h_{\text{leg}}sin(\alpha)}\right)}^{{\omega}_{2}}
                     % }
                 \end{eqnarray*}
             }
@@ -451,7 +452,7 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Roboti design}
+\begin{frame}[t]{Robot design}
     \framesubtitle{Result interpretation}
     Based on fitness function the number of legs range starts from 8. It can be explained by static stability criteria. In such case 4 legs will touch the ground.
 
@@ -550,7 +551,7 @@
         \vspace{-0.2cm}
 
          \begin{itemize}
-            \color{gray}
+            \color{lightgray}
             \item Current/voltage measurements from motors
                 \item Installing torque sensor on a shaft
                 \item {\color{black} Installing a force sensor on each leg}
@@ -642,8 +643,8 @@
                         % \draw[latex-, very thick,green] (3.5,2.2) -- (2.5,1)
                         % node[below left,black,fill=white]{\small test};
 
-                        \draw[stealth-, very thick,green] (4.2,2.8) -- (6.5,5);
-                        \draw[stealth-, very thick,green] (8.8,2.1) -- (6.5,5)
+                        \draw[stealth-, very thick,green] (4.21,2.75) -- (6.5,5);
+                        \draw[stealth-, very thick,green] (8.75,2.15) -- (6.5,5)
                         node[rounded corners=3pt,above,black,fill=white]{\small Working range};
                     \end{scope}
                 \end{tikzpicture}
@@ -922,7 +923,7 @@
     {\Large
         \begin{enumerate}
             \item Static experiment: transducers coefficients $p,\ A_i,\ B_i,\ \tau_{res},\ k_i$ were identified.
-            \item Dynamic experiment: a transducer can be represented as one body, when pressure area is higher than 50\% of the sensor area.
+            \item Dynamic experiment: a transducer can be represented as a single body, when pressure area is higher than 50\% of the sensor area.
         \end{enumerate}
     }
 \end{frame}
@@ -1070,6 +1071,7 @@
         \item We can distinct rubber and rock surfaces
         \item Terrain classification parameters was chosen:
               \begin{itemize}
+                \large
                   \item RPM
                   \item Motor Torque
                   \item Acceleration from IMU
@@ -1148,8 +1150,31 @@
             \caption*{Mesh created using concave hull 2D Delaunay triangulation}
         \end{subfigure}
         \begin{subfigure}[t]{0.49\textwidth}
-            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{sampled_pcd.png}
-            \caption*{Sampled point cloud}
+                \centering
+                 \begin{tikzpicture}
+                    % Include the image in a node
+                    \node [above right, inner sep=0] (image) at (0,0) 
+                    {\centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{sampled_pcd.png}};          
+                    % Create scope with normalized axes
+                    \begin{scope}[
+                        x={($ 0.1*(image.south east)$)},
+                        y={($ 0.1*(image.north west)$)}]
+                        % Grid and axes' labels
+                        % \draw[lightgray,step=1] (image.south west) grid (image.north east);
+                        % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
+                        % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
+             
+                        % Labels
+                        \draw[stealth-, very thick,green] (3,8) -- (2,8.5);
+                        \draw[stealth-, very thick,green] (1,5.5) -- (2,8.5)
+                        node[rounded corners=3pt,above,black,fill=white]{\tiny Ground Truth Point cloud};
+             
+                        \draw[stealth-, very thick,green] (5.5,3) -- (5.5,8.5)
+                        node[rounded corners=3pt,above,black,fill=white]{\tiny Generated Point Cloud};
+                    \end{scope}
+                \end{tikzpicture}
+                \caption*{Sampled point cloud}
+                \label{fig:sampled_pcd.png}
         \end{subfigure}
     \end{figure}
 \end{frame}
@@ -1263,10 +1288,12 @@
 
               A Sparse point cloud obtained from force sensors, installed on legs.
         \item \textit{Simulator}: \begin{itemize}
+            \large
                   \item Avg. Point cloud comparison RMSE is about 5 cm.
                   \item Avg. Mesh comparison RMSE is about 1 cm.
               \end{itemize}
         \item \textit{Real world experiment}: \begin{itemize}
+            \large
                   \item Avg. Point cloud comparison RMSE is about 8 cm.
                         %     \item Avg. Mesh comparison RMSE is about 1 cm.
               \end{itemize}
