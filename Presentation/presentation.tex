@@ -37,7 +37,7 @@
 
 \usepackage[font={large}, labelfont=it,textfont={it},justification=centering, skip=2pt]{caption}
 % will apply to all subcaptions
-\usepackage[font={large},skip=0pt]{subcaption}
+\usepackage[font={large},skip=2pt]{subcaption}
 
 \graphicspath{{../images/}}
 \frenchspacing
@@ -94,7 +94,7 @@
 
 \begin{frame}[t]{Motivation: why do we need to explore caves by robots}
     % \framesubtitle{Cave dangerous obstacles}
-    \vspace{-0.7cm}
+    \vspace{-0.85cm}
     \begin{figure}[H]
         \begin{subfigure}[b]{0.3\textwidth}
             \centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{surface_types/salt.jpg}\\
@@ -230,7 +230,7 @@
 %                 How to obtain a useful information about terrain, \textbf{when we have a SLAM based on lidars, cameras}?
 %                 \vspace{5pt}
 
-%                 \uncover<2->{\alert{\Large Obtain map and type of terrain}}
+%                 \uncover<2->{\alert{\large Obtain map and type of terrain}}
 %             \end{block}
 %         \end{column}
 %         \begin{column}{0.45\textwidth}
@@ -238,7 +238,7 @@
 %                 How to obtain a useful information about terrain,\textbf{ when main navigation system died}?
 %                 \vspace{5pt}
 
-%                 \uncover<2->{\alert{\Large Problem 1 + localization}}
+%                 \uncover<2->{\alert{\large Problem 1 + localization}}
 %             \end{block}
 %         \end{column}
 %     \end{columns}
@@ -247,18 +247,18 @@
 \begin{frame}[t]{Problem statement}
     \framesubtitle{}
     \begin{block}{Problem 1}
-        \Large
+        \large
         How to obtain a useful information on terrain, \textbf{when we have a SLAM based on lidars, cameras}?
         \vspace{5pt}
 
-        \uncover<2->{\alert{\Large Obtain map and terrain type}}
+        \uncover<2->{\alert{\large Obtain map and terrain type}}
     \end{block}
 \end{frame}
 
 \begin{frame}[t]{Proposed solutions}
     \framesubtitle{}
     \begin{exampleblock}{Problem 1}
-        \Large
+        \large
         \textit{Map can be built} \textbf{using tactile sensors} on each leg of the robot and create a \textbf{dense point cloud} using sampling from generated mesh from \textbf{modified Delaunay triangulation}.
         \vspace{5pt}
 
@@ -314,7 +314,7 @@
 
 \begin{frame}[t]{Robot design}
     \framesubtitle{Requirements}
-    \Large
+    \large
     \textbf{Problem} --  choose robot mover type. This robot should:
     \begin{itemize}
         \item should have \textit{small dimensions} to sneak through holes;
@@ -322,15 +322,15 @@
         \item should \textit{traverse through small water obstacles};
         \item can \textit{climb on big stones};
     \end{itemize}
-    \uncover<2->{\LARGE\centering\alert{Cycling robot with 1 DoF leg}}
+    \uncover<2->{\large\centering\alert{Cycling robot with 1 DoF leg}}
 \end{frame}
 
 \begin{frame}[t]{Robot design}
     \framesubtitle{Structural synthesis problem}
-    \only<1-2>{\LARGE\begin{block}{Question}
+    \only<1-2>{\large\begin{block}{Question}
             What the optimal number of legs should be in such robot?
         \end{block}}
-    \only<2>{\LARGE\begin{alertblock}{Answer}
+    \only<2>{\large\begin{alertblock}{Answer}
             \centering Robot should have \textbf{8-14 legs} in total!
         \end{alertblock}}
 \end{frame}
@@ -464,19 +464,19 @@
     \vspace{-0.5cm}
     \begin{figure}[H]
         \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{table_terrain.png}
-        \caption*{\LARGE\centering\textbf{Summary}: created robot should have 10-12 legs in total}
+        \caption*{\large\centering\textbf{Summary}: created robot should have 10-12 legs in total}
         \label{fig:table_terrain.png}
     \end{figure}
 \end{frame}
 
 \begin{frame}[t]{Robot design}
     \framesubtitle{Increasing maneuverablity}
-    \only<1-2>{\Large\begin{block}{Question}
+    \only<1-2>{\large\begin{block}{Question}
             1. Long robot can stuck in a cave hole, while rotating. How to avoid it?
 
             2. How to climb on big stones?
         \end{block}}
-    \only<2>{\Large\begin{alertblock}{Answer}
+    \only<2>{\large\begin{alertblock}{Answer}
             \centering 1. Add an ability to sidestep without changing orientation.
 
             2. Make a segmented body.
@@ -525,10 +525,10 @@
 
 \begin{frame}[t]{Force transducer design}
     \framesubtitle{}
-    \only<1-2>{\LARGE\begin{block}{Question}
+    \only<1-2>{\large\begin{block}{Question}
             How to receive a reaction force from the ground?
         \end{block}}
-    \only<2>{\LARGE\begin{alertblock}{Answer}
+    \only<2>{\large\begin{alertblock}{Answer}
         \vspace{-0.2cm}
 
          \begin{itemize}
@@ -599,7 +599,7 @@
     \framesubtitle{Velostat: Faced problems}
     \vspace{-20pt}
     \begin{multicols}{2}
-        {\Large
+        {\large
             \begin{itemize}
                 \item Hysteresis
                 \item Nonlinearity
@@ -642,13 +642,13 @@
 \begin{frame}[t]{Force transducer design}
     \framesubtitle{Experimental setup requirements}
     \vspace{-0.5cm}
-    {\Large
+    {\large
         \begin{itemize}
             \item Force control. \uncover<2>{\\ \alert{Solved by Impedance Control}}
             \item Position and force repeatability. \uncover<2>{\\ \alert{Solved by adding a manipulator and a camera}}
             \item To have an ability to apply force only on a particular part of a sensor. \uncover<2>{\\ \alert{Solved by adding several end-effectors}}
         \end{itemize}}
-    \uncover<2>{\centering\Large\alert{All setup requirements are fulfilled}}
+    \uncover<2>{\centering\large\alert{All setup requirements are fulfilled}}
 \end{frame}
 
 
@@ -793,6 +793,7 @@
                     \item \textbf{Static experiment}. The goal is to identify the coefficients for the transducer model.
                           \item\textbf{ Dynamic experiment}.
                           \begin{itemize}
+                            \large
                               \item We are representing a transducer as a $4\times4$ grid. We touch with the same pressure using five different end-effectors (area starting from 2mm till 15mm).
                               \item We are using 2 mm and 15 mm end-effectors. We touch with different forces (5, 10, 20, 30, 40 H).
                           \end{itemize}
@@ -901,7 +902,7 @@
 \begin{frame}[t]{Force transducer design}
     \framesubtitle{Summary}
     \vspace{-15pt}
-    {\Large
+    {\large
         \begin{enumerate}
             \item Static experiment: transducers coefficients $p,\ A_i,\ B_i,\ \tau_{res},\ k_i$ were identified.
             \item Dynamic experiment: a transducer can be represented as a single body, when pressure area is higher than 50\% of the sensor area.
@@ -911,10 +912,10 @@
 
 \begin{frame}[t]{Terrain classification}
     \framesubtitle{}
-    \only<1-2>{\LARGE\begin{block}{Question}
+    \only<1-2>{\large\begin{block}{Question}
             How to define the terrain type during the movement on such terrain?
         \end{block}}
-    \only<2>{\LARGE\begin{alertblock}{Answer}
+    \only<2>{\large\begin{alertblock}{Answer}
             \centering Solving terrain classification problem using Machine learning
         \end{alertblock}}
 \end{frame}
@@ -922,13 +923,13 @@
 \begin{frame}[t]{Terrain classification}
     \framesubtitle{Experimental setup requirements}
     \vspace{-0.5cm}
-    {\Large
+    {\large
         \begin{itemize}
             \item To have a possibility to install new surfaces and change it quickly. \uncover<2>{\\ \alert{Solved by quick detachable table}}
             \item Infinite movement. \uncover<2>{\\ \alert{Solved by creating the 2 DoF mechanism and a S-shape leg}}
             \item Movement part should be the same as on the StriRus \uncover<2>{\\ \alert{Solved by creating a mount for a leg assembly}}
         \end{itemize}}
-    \only<2>{\centering\Large\alert{All setup requirements are fulfilled}}
+    \only<2>{\centering\large\alert{All setup requirements are fulfilled}}
 \end{frame}
 
 \begin{frame}[t]{Terrain classification}
@@ -1013,7 +1014,7 @@
 
 \begin{frame}[t]{Terrain classification}
     \framesubtitle{Velostat transducer properties}
-    \Large
+    \large
     \begin{itemize}
         \item Because of high hysteresis and difficulties with calibration, we have to work with relative data.
     \end{itemize}
@@ -1047,7 +1048,7 @@
 
 \begin{frame}[t]{Terrain classification}
     \framesubtitle{Summary}
-    \Large
+    \large
     \begin{itemize}
         \item We can distinct rubber and rock surfaces
         \item Terrain classification parameters was chosen:
@@ -1064,10 +1065,10 @@
 
 \begin{frame}[t]{Map creation based on tactile data}
     \framesubtitle{}
-    \only<1-2>{\LARGE\begin{block}{Question}
+    \only<1-2>{\large\begin{block}{Question}
             How to create a dense point cloud, using sparse data from legs?
         \end{block}}
-    \only<2>{\LARGE\begin{alertblock}{Answer}
+    \only<2>{\large\begin{alertblock}{Answer}
             \centering \textit{Create a mesh}, using concave hull Delaunay triangulation using sparse data, \textit{sampling it} and return to navigation
         \end{alertblock}}
 \end{frame}
@@ -1089,7 +1090,7 @@
 
 \begin{frame}[t]{Map creation based on tactile data}
     \framesubtitle{Assumptions}
-    \Large
+    \large
     Current solution considering such assumptions:
     \begin{itemize}
         \item Our terrain can be represented $z = f(x,y)$. We can use 2D Delaunay triangulation (projected points on a plane)
@@ -1148,7 +1149,7 @@
                         % Labels
                         \draw[stealth-, very thick,green] (3,8) -- (2,8.5);
                         \draw[stealth-, very thick,green] (1,5.5) -- (2,8.5)
-                        node[rounded corners=3pt,above,black,fill=white]{\tiny Ground Truth Point cloud};
+                        node[rounded corners=3pt,above,black,fill=white]{\tiny Ground Truth Point Cloud};
              
                         \draw[stealth-, very thick,green] (5.5,3) -- (5.5,8.5)
                         node[rounded corners=3pt,above,black,fill=white]{\tiny Generated Point Cloud};
@@ -1218,14 +1219,14 @@
     \begin{figure}[H]
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{cropped_pcd.png}
-            \caption*{Overlaid point clouds}
+            \caption*{Overlaid Point Clouds}
         \end{subfigure}
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{pcd_hist.png}
             \caption*{Error histogram (distance from a point to closest ground truth point)}
         \end{subfigure}
     \end{figure}
-    % \alert{\Large RMSE 0.053074, std 0.025}
+    % \alert{\large RMSE 0.053074, std 0.025}
 \end{frame}
 
 \begin{frame}[t]{Map creation based on tactile data}
@@ -1234,14 +1235,14 @@
     \begin{figure}[H]
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{mesh_comp.png}
-            \caption*{Overlaid meshes}
+            \caption*{Overlaid Meshes}
         \end{subfigure}
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{mesh_hist.png}
             \caption*{Error histogram (distance from a point to closest ground truth point)}
         \end{subfigure}
     \end{figure}
-    % \alert{\Large RMSE 0.00167067, std 0.0005}
+    % \alert{\large RMSE 0.00167067, std 0.0005}
 \end{frame}
 
 \begin{frame}[t]{Map creation based on tactile data}
@@ -1263,7 +1264,7 @@
 
 \begin{frame}[t]{Map creation based on tactile data}
     \framesubtitle{Summary}
-    \Large
+    \large
     \begin{itemize}
         \item Map can be built using concave hull 2D Delaunay triangulation.
 
@@ -1284,7 +1285,7 @@
 
 \begin{frame}[t]{Summary}
     \framesubtitle{}
-    \Large
+    \large
     \begin{itemize}
         \item Robot was created
         \item Force transducer based on Velostat was created and was investigated
