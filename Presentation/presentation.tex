@@ -927,7 +927,7 @@
         \begin{itemize}
             \item To have a possibility to install new surfaces and change it quickly. \uncover<2>{\\ \alert{Solved by quick detachable table}}
             \item Infinite movement. \uncover<2>{\\ \alert{Solved by creating the 2 DoF mechanism and a S-shape leg}}
-            \item Movement part should be the same as on the StriRus \uncover<2>{\\ \alert{Solved by creating a mount for a leg assembly}}
+            \item Movement part should be the same as on the StriRus. \uncover<2>{\\ \alert{Solved by creating a mount for a leg assembly}}
         \end{itemize}}
     \only<2>{\centering\large\alert{All setup requirements are fulfilled}}
 \end{frame}
@@ -1103,7 +1103,7 @@
     \vspace{-0.2cm}
     \begin{figure}[H]
         \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{delone_idea.png}
-        \caption*{Common 2D Delaunay triangulation (Convex Hull) \\ \textbf{From point cloud to mesh}}
+        \caption*{Common 2D Delaunay triangulation (Convex Hull) \\ \textbf{From Point Cloud to mesh}}
         \label{fig:delone_idea.png}
     \end{figure}
 \end{frame}
@@ -1286,12 +1286,32 @@
 \begin{frame}[t]{Summary}
     \framesubtitle{}
     \large
-    \begin{itemize}
-        \item Robot was created
-        \item Force transducer based on Velostat was created and was investigated
-        \item Robot can distinct rubber and rock terrains
-        \item Robot can build a map using tactile sensors
-    \end{itemize}
+    \vspace{-0.7cm}
+    % \begin{itemize}
+    %     \item Robot was created
+    %     \item Force transducer based on Velostat was created and was investigated
+    %     \item Robot can distinct rubber and rock terrains
+    %     \item Robot can build a map using tactile sensors
+    % \end{itemize}
+    \begin{figure}[H]
+        \begin{subfigure}[t]{0.49\textwidth}
+            \centering\includegraphics[height=2.5cm,width=1\textwidth,keepaspectratio]{strirus_3.JPG}
+            \caption*{1. StriRus was designed and assembled}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \centering\includegraphics[height=2.5cm,width=1\textwidth,keepaspectratio]{velostat_sensor_look.JPG}
+            \caption*{2. Force transducer based on Velostat was created and was investigated}
+        \end{subfigure}
+    
+        \begin{subfigure}[t]{0.49\textwidth}
+            \centering\includegraphics[height=2.5cm,width=1\textwidth,keepaspectratio]{s_shape_leg/s_leg_setup.JPG}
+            \caption*{3. Robot distinct rubber and rock surfaces}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \centering\includegraphics[height=2.5cm,width=1\textwidth,keepaspectratio]{conv_concave.png}
+            \caption*{4. Build a map using tactile sensors}
+        \end{subfigure}
+    \end{figure}
 \end{frame}
 
 % \fbckg{fibeamer/figs/last_page.png}
