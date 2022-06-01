@@ -1,5 +1,5 @@
 % \documentclass[aspectratio=169,notes]{beamer}
-\documentclass[aspectratio=169]{beamer}
+\documentclass[aspectratio=169,xcolor=table]{beamer}
 \usetheme[faculty=phil]{fibeamer}
 \usepackage{polyglossia}
 \setmainlanguage{english} %% main locale instead of `english`, you
@@ -506,39 +506,20 @@
 \begin{frame}[t]{Robot design}
     \framesubtitle{StriRus prototypes (1)}
     \vspace{-0.7cm}
-    \begin{figure}[H]
-        \begin{subfigure}[t]{0.32\textwidth}
-            \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{strirus_0.png}
-            \caption*{\textbf{1st gen}: 54 legs \\ 1 segment}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}[t]{0.32\textwidth}
-            \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{strirus_1.png}
-            \caption*{\textbf{2nd gen}: 12 legs \\ 2 segments, 1 DoF connection \\ Continuous angle b/w body, leg up to 45 deg}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}[t]{0.32\textwidth}
-            \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{strirus_2.jpg}
-            \caption*{\textbf{3rd gen}: 12 legs \\ 2 segments, 2 DoF connection \\ Discrete angle b/w body, leg up to 45 deg}
-        \end{subfigure}
-        \hfill
-    \end{figure}
+% Source table can be found in images/source folder 
+\begin{figure}[H]
+    \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{gens_1.png}
+    \label{fig:gens_1.png}
+\end{figure}
+
 \end{frame}
 
 \begin{frame}[t]{Robot design}
     \framesubtitle{StriRus prototypes (2)}
     \vspace{-0.5cm}
     \begin{figure}[H]
-        \begin{subfigure}[t]{0.45\textwidth}
-            \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{strirus_3.JPG}
-            \caption*{\textbf{3th+ gen}: 6 big legs \\ 1 segment}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}[t]{0.45\textwidth}
-            \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{strirus_4.png}
-            \caption*{\textbf{4th gen}: 10 biggest legs \\ 2 segments, 1 DoF connection \\  Discrete angle b/w body, leg up to 15 deg}
-        \end{subfigure}
-        \hfill
+        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{gens_2.png}
+        \label{fig:gens_2.png}
     \end{figure}
 \end{frame}
 
