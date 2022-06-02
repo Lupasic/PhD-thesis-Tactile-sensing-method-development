@@ -15,16 +15,16 @@
   \centerfloat{
       \hfill
       \subcaptionbox[List-of-Figures entry]{Сифон\label{fig:siphon}}{%
-          \includegraphics[width=0.24\linewidth]{siphon.png}}
+          \includegraphics[width=0.24\linewidth]{surface_types/siphon.png}}
       \hfill
       \subcaptionbox{Пещера, заполненная водой по~колено\label{fig:splash}}{%
-      \includegraphics[width=0.24\linewidth]{splash.png}}
+      \includegraphics[width=0.24\linewidth]{surface_types/splash.png}}
       \hfill
       \subcaptionbox{Лед в пещерах\label{fig:ice}}{%
-      \includegraphics[width=0.24\linewidth]{ice.png}}
+      \includegraphics[width=0.24\linewidth]{surface_types/ice.png}}
       \hfill
       \subcaptionbox{Глина\label{fig:clay}}{%
-          \includegraphics[width=0.24\linewidth]{clay.jpg}}
+          \includegraphics[width=0.24\linewidth]{surface_types/clay.jpg}}
       \hfill
   }
   % \legend{Подрисуночный текст, описывающий обозначения, например. Согласно
@@ -84,10 +84,10 @@
 
 {\defpositions}
 \begin{enumerate}[beginpenalty=10000] % https://tex.stackexchange.com/a/476052/104425
-  \item Результаты оптимизации конструкции
-  \item Заключение статьи с Кириллом
-  \item Метод (продумать как подать)
-  \item Четвертое положение
+  \item метод оптимизации конструкции многоногих роботов;
+  \item разработанная методика исследования датчика силы, когда площадь нажатия на сенсор меньше самого сенсора;
+  \item реализация программно-алгоритмического обеспечения (ПАО), позволяющего определять тип поверхности;
+  \item методика построения карты местности с помощью датчиков силы, установленных на ногах робота.
 \end{enumerate}
 
 
@@ -98,12 +98,27 @@
 
 {\probation}
 Основные результаты работы докладывались~на:
-перечисление основных конференций, симпозиумов и~т.\:п.
+\begin{itemize}
+  \item ICINCO 2017 --- 14th International Conference on Informatics in Control, Automation and Robotics (Madrid, Spain, 26-28 july 2017);
+  \item IEEE International Conference on Robotics and Biomimetics, ROBIO 2017 (Macau, China, 5-8 december 2017);
+  \item  международной  научно-практической  конференции  «Прогресс  транспортных 
+  средств и систем» (г. Волгоград, 9-11 октября 2018 г.);
+  \item 23rd IEEE FRUCT Conference (Bologna, Italy, 13-16 november 2018).
+  \item XXXI международной конференции молодых ученых и студентов МИКМУС-2019 
+  (г. Москва, 4-6 декабря 2019 г.);
+  \item Международная конференция <<Зимняя Школа Робототехники в Сириусе --- 2022>> (г. Адлер, Россия, 25 января - 6 февраля 2022)
+\end{itemize}
 
 {\contribution} Все научные результаты диссертации, выдвигаемые для защиты, получены автором лично.
 
 % Вставка кто сколько опубликовался
 \input{common/fancybibcalc.tex}
+
+Диссертационная работа была выполнена при поддержке грантов:
+\begin{itemize}
+    \item НТИ по поддержке Центра <<Технологий Компонентов Робототехники и Мехатроники>> на базе Университета Иннополис по теме <<Разработка роботизированных платформ для автономной подземной и наземной инспекции местности в условиях трудной проходимости и плохой видимости>>. 
+    \item РФФИ № 20-38-90265 по теме <<Разработка метода очувствления мобильного шагающего робота, перемещающегося в закрытом пространстве естественного происхождения>>.
+\end{itemize}
 
 {\struct}
 В введении рассказывается об актуальности проблемы, в чем научная новизна и цель проекта.
