@@ -27,6 +27,8 @@
     \input{biblio/biblatex}   % Реализация пакетом biblatex через движок biber
 }
 
+\setcounter{draft}{1}
+
 % Вывести информацию о выбранных опциях в лог сборки
 \typeout{Selected options:}
 \typeout{Draft mode: \arabic{draft}}
@@ -34,8 +36,10 @@
 \typeout{AltFont: \arabic{usealtfont}}
 \typeout{Bibliography backend: \arabic{bibliosel}}
 \typeout{Precompile images: \arabic{imgprecompile}}
+
+
 % Вывести информацию о версиях используемых библиотек в лог сборки
-\listfiles
+% \listfiles
 
 \begin{document}
 

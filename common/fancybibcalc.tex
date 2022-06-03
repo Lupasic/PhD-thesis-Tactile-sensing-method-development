@@ -6,6 +6,8 @@
     X "--- в тезисах докладов.
 }%
 {%%% Реализация пакетом biblatex через движок biber
+\typeout{refsection: \arabic{refsection}}
+\typeout{usefootcite: \arabic{usefootcite}}
     \begin{refsection}[bl-author, bl-registered]
         % Это refsection=1.
         % Процитированные здесь работы:
@@ -68,11 +70,11 @@
         % Процитированные здесь работы:
         %  * попадают в авторскую библиографию, при usefootcite==0 и стиле `\insertbiblioauthorimportant`.
         %  * ни на что не влияют в противном случае
-        \nocite{vakbib2}%vak
-        \nocite{patbib1}%patent
-        \nocite{progbib1}%program
-        \nocite{bib1}%other
-        \nocite{confbib1}%conf
+        % \nocite{vakbib2}%vak
+        % \nocite{patbib1}%patent
+        % \nocite{progbib1}%program
+        % \nocite{bib1}%other
+        % \nocite{confbib1}%conf
     \end{refsection}%
         %
         % Всё, что вне этих двух refsection, это refsection=0,

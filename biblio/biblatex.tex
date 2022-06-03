@@ -632,3 +632,13 @@ sorting=none,% настройка сортировки списка литера
 \newcommand*{\insertbiblioexternal}{
     \printbibliography[heading=pubgroup,    section=0, keyword=biblioexternal,     title=\bibtitlefull]
 }
+
+\newcommand*{\insertbiblioauthorgroupedSynopsis}{
+    \section*{\bibtitleauthor}
+    \printbibliography[heading=pubsubgroup, section=0, keyword=biblioauthorvak,    title=\bibtitleauthorvak,resetnumbers=true] % Работы автора из списка ВАК (сброс нумерации)
+    \printbibliography[heading=pubsubgroup, section=0, keyword=biblioauthorscopus, title=\bibtitleauthorscopus,resetnumbers=true]% Работы автора, индексируемые Scopus
+    \printbibliography[heading=pubsubgroup, section=0, keyword=biblioauthorpatent, title=\bibtitleauthorpatent,resetnumbers=true]% Патенты
+    \printbibliography[heading=pubsubgroup, section=0, keyword=biblioauthorprogram,title=\bibtitleauthorprogram,resetnumbers=true]% Программы для ЭВМ
+
+    \textbf{Другие публикации} -- \arabic{citeauthorother} шт.
+}
