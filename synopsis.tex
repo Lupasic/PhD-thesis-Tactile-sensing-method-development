@@ -46,7 +46,39 @@
 % \input{Synopsis/title}        % Титульный лист
 %\mainmatter                   % В том числе начинает нумерацию страниц арабскими цифрами с единицы
 \mainmatter*                  % Нумерация страниц не изменится, но начнётся с новой страницы
-\input{Synopsis/content}      % Содержание автореферата
+
+\pdfbookmark{Общая характеристика работы}{characteristic}             % Закладка pdf
+\section*{Общая характеристика работы}
+
+\input{Synopsis/newcommands.tex}
+
+\input{common/characteristic} % Характеристика работы по структуре во введении и в автореферате не отличается (ГОСТ Р 7.0.11, пункты 5.3.1 и 9.2.1), потому её загружаем из одного и того же внешнего файла, предварительно задав форму выделения некоторым параметрам
+
+%\underline{\textbf{Объем и структура работы.}} Диссертация состоит из~введения,
+%четырех глав, заключения и~приложения. Полный объем диссертации
+%\textbf{ХХХ}~страниц текста с~\textbf{ХХ}~рисунками и~5~таблицами. Список
+%литературы содержит \textbf{ХХX}~наименование.
+
+\pdfbookmark{Содержание работы}{description}                          % Закладка pdf
+\section*{Содержание работы}
+\subsection*{\underline{Литературный обзор}}
+\input{Synopsis/chap1.tex}
+\subsubsection*{\underline{Разработка робота}}
+\input{Synopsis/chap2.tex}
+\section*{\underline{Разработка и исследование преобразователя силы на основе Velostat}}
+\input{Synopsis/chap3.tex}
+\section*{\underline{Разработка метода очувствления}}
+\input{Synopsis/chap4.tex}
+\section*{\underline{Заключение}}
+\input{common/concl.tex}
+
+\pdfbookmark{Литература}{bibliography}                                % Закладка pdf
+\nocite{*}
+\insertbiblioauthorgroupedSynopsis
+
+\ifdefmacro{\microtypesetup}{\microtypesetup{protrusion=true}}{}
+\urlstyle{tt}        
+
 
 %%% Выходные сведения типографии
 % \newpage\thispagestyle{empty}

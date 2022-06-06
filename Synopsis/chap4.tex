@@ -1,48 +1,56 @@
-
 \subsection{Построение карты поверхности}
 
+Обычно, карта для навигации представляется в виде облаков точек. С решенной проблемой локализации мы можем получить очень разреженное облако точек, где точки будут являться точками касания лапок робота с поверхностью.
 
-\subsubsection{Теория}
+Сделав предположение, что расстояние между ногами робота мало относительно целой пещеры, мы можем аппроксимировать это расстояние в виде плоскости.
 
+Так же, сделав предположение про то, что робот движется по поверхности, где координата $z$ уникальная для каждого набора $(x,y)$. Возможно реализовать следующий алгоритм. Используя полученное разреженное облако точек, делаем очистку данных. Потом из него создаем полигональную сетку с помощью 2D Триангуляции Делоне \pic{fig:delone_idea.png} (вогнутая оболочка \pic{fig:exp_concave_hull}), а потом генерируем необходимое плотное облако точек. 
 
 \begin{figure}[H]
-    \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{delone_idea.png}
-    \caption*{Common 2D Delaunay triangulation (Convex Hull) \\ \textbf{From Point Cloud to mesh}}
+    \centering\includegraphics[height=2.5cm,width=1\textwidth,keepaspectratio]{delone_idea.png}
+    \caption{2D Триангуляция Делоне (выпуклая оболочка)}
     \label{fig:delone_idea.png}
 \end{figure}
 
-\begin{figure}[H]
-    \begin{subfigure}[t]{0.49\textwidth}
-        \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{terrain_w_water1.png}
-        \caption*{Start point}
-    \end{subfigure}
-    \begin{subfigure}[t]{0.49\textwidth}
-        \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{terrain_w_water_end.png}
-        \caption*{End point}
-    \end{subfigure}
-\end{figure}
+Эксперимент проводился как в симуляции (Рис. \ref{fig:unsolvable_case}, \ref{fig:start_end_exp}), так и на реальном роботе \pic{fig:real_exp_map_creation}.
+
 
 \begin{figure}[H]
     \begin{subfigure}[t]{0.49\textwidth}
-        \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{mesh_rviz.png}
-        \caption*{Mesh created using concave hull 2D Delaunay triangulation}
+        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{terrain_w_water1.png}
+        \caption{Начало движения}
     \end{subfigure}
     \begin{subfigure}[t]{0.49\textwidth}
+        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{terrain_w_water_end.png}
+        \caption{Конец движения}
+    \end{subfigure}
+    \caption{Эксперимент в симуляторе}
+    \label{fig:start_end_exp}
+\end{figure}
+
+Ниже представлены полученные результаты \pic{fig:result_meshes_blah}. Для оценки точности полученных данных было решено использовать 2 метрики C2C и C2M \pic{fig:metrics}.
+
+\begin{figure}[H]
+    \begin{center}
+    \begin{subfigure}[t]{0.4\textwidth}
+        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{mesh_rviz.png}
+        \caption{Полигональная сетка, созданная 2D Триангуляцией Делоне (вогнутая оболочка)}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.59\textwidth}
+        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{mesh_comp.png}
+        \caption{Наложенные полигональные сетки}
+    \end{subfigure}
+
+    \begin{subfigure}[t]{0.9\textwidth}
             \centering
              \begin{tikzpicture}
                 % Include the image in a node
                 \node [above right, inner sep=0] (image) at (0,0) 
-                {\centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{sampled_pcd.png}};          
+                {\centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{sampled_pcd.png}};          
                 % Create scope with normalized axes
                 \begin{scope}[
                     x={($ 0.1*(image.south east)$)},
                     y={($ 0.1*(image.north west)$)}]
-                    % Grid and axes' labels
-                    % \draw[lightgray,step=1] (image.south west) grid (image.north east);
-                    % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
-                    % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
-         
-                    % Labels
                     \draw[stealth-, very thick,green] (3,8) -- (2,8.5);
                     \draw[stealth-, very thick,green] (1,5.5) -- (2,8.5)
                     node[rounded corners=3pt,above,black,fill=white]{\tiny Ground Truth Point Cloud};
@@ -51,15 +59,20 @@
                     node[rounded corners=3pt,above,black,fill=white]{\tiny Generated Point Cloud};
                 \end{scope}
             \end{tikzpicture}
-            \caption*{Sampled point cloud}
+            \caption{Наложенные облака точек}
             \label{fig:sampled_pcd.png}
     \end{subfigure}
+    \caption{Результат эксперимента}
+    \label{fig:result_meshes_blah}
+\end{center}
 \end{figure}
+
+На рисунке \ref{fig:exp_concave_hull} объясняется важность модификации триангуляции Делоне. Как можно заметить \pic{fig:conv_convex.png} алгоритм построил карту местности там, где робот не ходил и стоит стена. При использовании вогнутой оболочки \pic{fig:conv_concave.png} данная проблема не наблюдается.
 
 \begin{figure}[H]
     \begin{subfigure}[t]{0.3\textwidth}
-        \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{convex_terr.png}
-        \caption*{Case study}
+        \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{convex_terr.png}
+        \caption{Пример поля}
         \label{fig:convex_terr.png}
     \end{subfigure}
     \hfill
@@ -68,84 +81,72 @@
              \begin{tikzpicture}
                 % Include the image in a node
                 \node [above right, inner sep=0] (image) at (0,0) 
-                {\centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{conv_convex.png}};          
+                {\centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{conv_convex.png}};          
                 % Create scope with normalized axes
                 \begin{scope}[
                     x={($ 0.1*(image.south east)$)},
                     y={($ 0.1*(image.north west)$)}]
-                    % Grid and axes' labels
-                    % \draw[lightgray,step=1] (image.south west) grid (image.north east);
-                    % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
-                    % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
-         
-                    % Labels
                     \draw[stealth-, very thick,green] (5.2,3.5) -- ++(1,-1)
                     node[rounded corners=3pt,right,black,fill=white]{\tiny Generated mesh};
                     
                     \draw[stealth-, very thick,green] (5.5,5.5) -- (7.4,4)
                     node[rounded corners=3pt,right,black,fill=white]{\tiny Lidar data};
-                    
-                    
                     \draw[stealth-, very thick,green] (3.4,0.8) -- (5,1);            
                     \draw[stealth-, very thick,green] (3.4,2.6) -- (5,1)
                     node[rounded corners=3pt,right,black,fill=white]{\tiny Cloud of contact points};
                 \end{scope}
             \end{tikzpicture}
-            \caption*{Convex Hull}
+            \caption{Выпуклая оболочка}
             \label{fig:conv_convex.png}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[t]{0.33\textwidth}
-        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{conv_concave.png}
-        \caption*{Concave Hull}
+    \begin{subfigure}[t]{0.30\textwidth}
+        \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{conv_concave.png}
+        \caption{Вогнутая оболочка}
         \label{fig:conv_concave.png}
     \end{subfigure}
-
+    \caption{Объяснение необходимости модификации алгоритма}
+    \label{fig:exp_concave_hull}
 \end{figure}
 
 \begin{figure}[H]
     \begin{subfigure}[t]{0.49\textwidth}
-        \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{cropped_pcd.png}
-        \caption*{Overlaid Point Clouds}
-    \end{subfigure}
-    \begin{subfigure}[t]{0.49\textwidth}
-        \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{pcd_hist.png}
-        \caption*{Error histogram (distance from a point to closest ground truth point)}
-    \end{subfigure}
-\end{figure}
-
-\begin{figure}[H]
-    \begin{subfigure}[t]{0.49\textwidth}
-        \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{mesh_comp.png}
-        \caption*{Overlaid Meshes}
+        \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{pcd_hist.png}
+        \caption{Метрика C2C: гистограмма ошибок (абсолютное расстояние от точки до ближайшей реферальной точки)}
+        \label{fig:metric_c2c}
     \end{subfigure}
     \begin{subfigure}[t]{0.49\textwidth}
         \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{mesh_hist.png}
-        \caption*{Error histogram (distance from a point to closest ground truth point)}
+        \caption{Метрика C2M: Гистограмма ошибок (относительное расстояние от точки до ближайшей реферальной точки)}
+        \label{fig:metric_c2m}
     \end{subfigure}
+    \caption{Метрики оценки точности полученной карты}
+    \label{fig:metrics}
 \end{figure}
+
 
 \begin{figure}[H]
     \begin{subfigure}[t]{0.49\textwidth}
-        % \href{run:./videos/big_angle2.mp4}{
-        \href{https://youtu.be/2dxHHTG4psQ}{
-            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{real_robot_mesh_video_preview.png}}
-        \caption*{Robot is passing the obstacle}
+            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{real_robot_mesh_video_preview.png}
+        \caption{Робот проходит препятствие}
+        \label{fig:real_robot_mesh_video_preview.png}
     \end{subfigure}
     \begin{subfigure}[t]{0.49\textwidth}
         \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{real_mesh.jpg}
-        \caption*{Mesh, obtained from legs}
+        \caption{Полученная полигональная сетка}
+        \label{fig:real_mesh.jpg}
     \end{subfigure}
+    \caption{Пример натурного эксперимента}
+    \label{fig:real_exp_map_creation}
 \end{figure}
 
-текст
-
-Расписываю текущую работу. Уверен, что там будет доп подглавы.
-
+Как итог, $RMSE$ для C2C метрики была в среднем равна 5 см. А для C2M 1 см. В натурном эксперименте $RMSE$ по метрике C2C получился 8 см. Это адекватные результаты, которые позволяют получить общее представление о пройденной местности.
 
 \subsection{Определение типа поверхности}
 
-Для нужно
+Для решения задачи определения типа поверхности необходимо сделать экспериментальную установку. Она должна соответствовать следующим требованиям: возможность установить новые поверхность и сменять их быстро. Бесконечное движение. Узел с ногой должен быть взят с робота.
+
+Все это было достигнуто благодаря разборному экспериментальному столу и 2ух степенному механизму, который ходит по окружности \pic{fig:s_shape_leg/s_leg_setup.JPG}.
 
 \begin{figure}[H]
     \begin{subfigure}[t]{0.49\textwidth}
@@ -153,7 +154,7 @@
         \begin{tikzpicture}
             % Include the image in a node
             \node [above right, inner sep=0] (image) at (0,0)
-            {\centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{s_shape_leg/s_leg_setup.JPG}};
+            {\centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{s_shape_leg/s_leg_setup.JPG}};
             % Create scope with normalized axes
             \begin{scope}[
                     x={($ 0.1*(image.south east)$)},
@@ -172,38 +173,38 @@
         \label{fig:s_shape_leg/s_leg_setup.JPG}
     \end{subfigure}
     \begin{subfigure}[t]{0.49\textwidth}
-        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{s_shape_leg/leg_design.png}
+        \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{s_shape_leg/leg_design.png}
         \caption{Пояснение по расположению сенсоров на ноге робота}
         \label{fig:s_shape_leg/leg_design.png}
     \end{subfigure}
     \caption{Экспериментальная установка для определения типа поверхности}
 \end{figure}
 
-Текст текст
+Для начала было решено взять 2 сильно разных поверхности и посмотреть на сырые данные. Было решено использовать резину \pic{fig:s_shape_leg/flat.jpg} и камень \pic{fig:s_shape_leg/view.jpg}.
 
 \begin{figure}[H]
-    \begin{subfigure}{0.49\textwidth}
-        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{s_shape_leg/flat.jpg}
+    \begin{subfigure}[t]{0.49\textwidth}
+        \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{s_shape_leg/flat.jpg}
         \caption{Резина}
         \label{fig:s_shape_leg/flat.jpg}
     \end{subfigure}
     \hfill
-    \begin{subfigure}{0.49\textwidth}
-        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{s_shape_leg/view.jpg}
+    \begin{subfigure}[t]{0.49\textwidth}
+        \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{s_shape_leg/view.jpg}
         \caption{Каменистая поверхность}
         \label{fig:s_shape_leg/view.jpg}
     \end{subfigure}
     \caption{Типы определяемых поверхностей}
 \end{figure}
 
-Из-за большого гистерезиса и трудностью с калибровкой необходимо работать с относительными данными.
+Ниже \pic{fig:data_from_legs} представлены сырые данные с лапок робота. Из-за большого гистерезиса и трудностью с калибровкой необходимо работать с относительными данными.
 
 \begin{figure}[H]
-    \begin{subfigure}{0.49\textwidth}
+    \begin{subfigure}[t]{0.49\textwidth}
         \centering\includegraphics[height=3.8cm,width=1\textwidth,keepaspectratio]{s_shape_leg/segment8_compare_front.png}
         \caption{Передняя часть ноги, 8ой сегмент}
     \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
+    \begin{subfigure}[t]{0.49\textwidth}
         \centering\includegraphics[height=3.8cm,width=1\textwidth,keepaspectratio]{s_shape_leg/segment6_compare_front.png}
         \caption{Передняя часть ноги, 6ой сегмент}
     \end{subfigure}
@@ -211,4 +212,11 @@
     \label{fig:data_from_legs}
 \end{figure}
 
-На данный момент возможно явно различать резину и каменистую поверхность. Более того было доказано, что разработанный и исследованный преобразователь силы позволяет определять тип поверхности.
+
+\subsection{Выводы}
+
+Карта местности может быть построена с помощью 2D триангуляции Делоне (вогнутая оболочка). Входными данными для алгоритма является разреженное облако точек касаний робота поверхности. Они получены с помощью преобразователя силы на основе Velostat.
+
+Точность, полученная в симуляторе равна примерно 5 см, а во время натурного эксперимента -- 8 см, что является адекватным результатом для поставленной задачи.
+
+С помощью разработанного преобразователя силы возможно различать 2 типа поверхности: резину и каменистую гряду.
