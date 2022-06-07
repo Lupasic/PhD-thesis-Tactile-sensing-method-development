@@ -36,7 +36,7 @@
             node[rounded corners=3pt,above,black,fill=white]{\small Рабочая область};
         \end{scope}
     \end{tikzpicture}
-    \caption{График зависимости прикладываемого веса от сопротивления на преобразователе}
+    \caption{График зависимости прикладываемого веса от сопротивления}
     \label{fig:velostat_pressure_resistance.jpg}
 \end{figure}
 
@@ -47,7 +47,7 @@
 
 Использование коллаборативного робота позволяет также удовлетворить требованиям безопасности и допустить работу робота в непосредственно близости от экспериментатора. Разработанный стенд, представлен на рисунке \ref{fig:exp_standd}. \href{https://youtu.be/Gw4wVZ-ESuE}{Видео работы стенда}.
 
-\begin{figure}[H]
+\begin{figure}[h]
     \begin{center}
         \begin{subfigure}{0.8\textwidth}
             \begin{tikzpicture}
@@ -98,7 +98,7 @@
 
 Для касания только части объекта исследования были разработаны различные концевые инструменты. К примеру, \pic{fig:all_end_effectors.png}
 
-\begin{figure}[H]
+\begin{figure}[h]
     \begin{subfigure}{0.6\textwidth}
         \centering
         \begin{tikzpicture}
@@ -184,12 +184,12 @@ Impedance управление состоит из двух блоков -- мо
 \end{eqnarray}
 
 На рисунке ниже \pic{fig:force_data_pos.png} представлен результат работы алгоритма на частоте 450 $Hz$. Необходимая сила нажатия --- $17\ H$.
-\begin{figure}[H]
+\begin{figure}[h]
         \centering
          \begin{tikzpicture}
             % Include the image in a node
             \node [above right, inner sep=0] (image) at (0,0) 
-            {\centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{force_data_pos.png}};          
+            {\centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{force_data_pos.png}};          
             % Create scope with normalized axes
             \begin{scope}[
                 x={($ 0.1*(image.south east)$)},
@@ -231,12 +231,12 @@ Impedance управление состоит из двух блоков -- мо
 
 \begin{figure}[H]
     \begin{subfigure}{0.49\textwidth}
-        \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{sens1_pike1.png}
+        \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{sens1_pike1.png}
         \caption{диаметр концевого эффектора равный 2 мм }
         \label{fig:sens1_pike1}
     \end{subfigure}
     \begin{subfigure}{0.49\textwidth}
-        \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{sens1_pike3.png}
+        \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{sens1_pike3.png}
         \caption{Диаметр концевого эффектора равный 8 мм }
         \label{fig:sens1_pike3}
     \end{subfigure}
