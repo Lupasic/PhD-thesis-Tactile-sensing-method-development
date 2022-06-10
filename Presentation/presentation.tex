@@ -34,6 +34,7 @@
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage{multimedia}
+\usepackage{makecell}
 
 \usepackage[font={large}, labelfont=it,textfont={it},justification=centering, skip=2pt]{caption}
 % will apply to all subcaptions
@@ -506,10 +507,60 @@
     \framesubtitle{StriRus prototypes (1)}
     \vspace{-0.7cm}
 % Source table can be found in images/source folder 
-\begin{figure}[H]
-    \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{gens_1.png}
-    \label{fig:gens_1.png}
-\end{figure}
+% \begin{figure}[H]
+%     \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{gens_1.png}
+%     \label{fig:gens_1.png}
+% \end{figure}
+% \begin{table}[H]
+%     \begin{tabular}{ p{0.1\textwidth}|p{0.3\textwidth}|p{0.3\textwidth}|p{0.3\textwidth} }
+%     % \toprule
+%     % \toprule
+%     % \rowcolor{Gray}
+%     %  Итерация &  \begin{minipage}{.3\textwidth}\centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{strirus_0.png} \end{minipage}  &  \begin{minipage}{.3\textwidth}\centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{strirus_1.png} \end{minipage} &   \begin{minipage}{.3\textwidth}\centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{strirus_2.jpg}  \end{minipage} \\
+%      \hline
+%      Кол-во ног & 54 & 12 & 12\\ 
+%     %   \rowcolor{lightgray}
+%      \makecell[l]{Кол-во \\ сегментов} & 1 & 2 & 2\\
+%      \makecell[l]{Тип \\ соединения} & --- & Тангаж & \makecell[l]{Тангаж,\\ рыскание}\\
+%     %  \rowcolor{lightgray}
+%      Отн. угол между телом и лапкой, градусы & 0 & 0--45 & 0, 15, 30, 45 \\
+%      \makecell[l]{Высота \\ лапки, мм} & 54 & 60 & 60 \\
+%      \hline
+%      Особенности & Волноход & Механизм, который позволяет непрерывно изменять относительный угол & Двухстепенной узел, соединяющий сегменты \\
+%     %  \rowcolor{lightgray}
+%     \hline
+%      Недостатки & Невозможно установить сенсоры на лапки. Много подвижных частей & Слишком сложный механизм, изменяющий отн. угол & Маленькие лапки. Избыточная вторая степень свободы в соединительном узле \\
+%     \bottomrule
+%     \bottomrule
+%     \end{tabular}
+%     \end{table}
+
+\begin{table}[H]
+    % \caption{Сравнение итераций робота}
+    % \label{tabular:robot_comparison}
+    % \begin{center}
+    \begin{tiny}
+    \begin{tabular}{>{\bfseries}p{1.3 cm}|>{\centering}p{3.5cm}|>{\centering}p{3.5cm}|>{\centering \arraybackslash}p{3.5cm}}
+    % \rowcolor{Gray}
+    \multicolumn{1}{p{1.3 cm}}{}  & \multicolumn{1}{p{3.5cm}}{\includegraphics[height=3cm,width=3.5cm,keepaspectratio]{strirus_0.png}}  &  \multicolumn{1}{p{3.5cm}}{\includegraphics[height=3cm,width=3.5cm,keepaspectratio]{strirus_1.png}} & \multicolumn{1}{p{3.5cm}}{\includegraphics[height=3cm,width=3.5cm,keepaspectratio]{strirus_2.jpg}} \\
+     Generation & 1  & 2 &  3 \\
+     \hline
+     No. legs & 54 & 12 & 12 \\ 
+    %   \rowcolor{lightgray}
+     No. segments & 1 & 2 & 2 \\
+     Connect. joint & --- & Pitch & Pitch, Yaw \\
+    %  \rowcolor{lightgray}
+    \makecell[l]{Rel. body-leg \\ angle, deg} & 0 & 0--45 & 0, 15, 30, 45 \\
+     Leg height, mm & 54 & 60 & 60 \\
+     \hline
+     Features & Wave propelled robot & Continuous mechanism & 2 DoF connection joint mech. \\
+    %  \rowcolor{lightgray}
+    \hline
+     Withdraws &  \makecell[l]{-- Cannot install force sensors \\ -- high friction} & \makecell[l]{ -- Too complicated changing relaltive \\  angle mechanism} & \makecell[l]{ -- Small legs \\ -- Useless 2nd DoF in connection joint} \\
+    \end{tabular}
+    \end{tiny}
+    % \end{center}
+    \end{table}
 
 \end{frame}
 
@@ -1281,6 +1332,7 @@
               It is appropriate accuracy for such task.
     \end{itemize}
 \end{frame}
+
 
 \begin{frame}[t]{Summary}
     \framesubtitle{}
