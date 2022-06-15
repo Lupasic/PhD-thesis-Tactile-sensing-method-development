@@ -1,10 +1,14 @@
-\subsection{Построение карты поверхности}
 
-Традиционно, карта для навигации представляется в виде облаков точек. Тогда, без предложенного алгоритма, будут получено очень разреженное облако точек, где точки будут являться точками касания лапок робота с поверхностью.
+\textbf{\underline{Четвертая глава}} раскрывает детали создания алгоритма построения карты с помощью тактильного очувствления, определения типа поверхности.
 
-Сделав предположение, что расстояние между ногами робота мало относительно целой пещеры, мы можем аппроксимировать это расстояние в виде плоскости.
+Традиционно, карта для навигации представляется в виде облака точек. Тогда, без предложенного алгоритма, будут получено очень разреженное облако точек, где точки будут являться точками касания лапок робота с поверхностью.
 
-Так же, сделав предположение про то, что робот движется по поверхности, где координата $z$ уникальная для каждого набора $(x,y)$. Возможно реализовать следующий алгоритм. Вначале необходимо очистить оригинальное облако точек от шумов и усреднить близлежащие точки с помощью Voxel grid. Потом из него создаем полигональную сетку с помощью 2D Триангуляции Делоне \pic{fig:delone_idea.png} (вогнутая оболочка \pic{fig:exp_concave_hull}), а потом генерируем необходимое плотное облако точек \pic{fig:sampled_pcd.png}. 
+Сделав предположение, что расстояние между ногами робота мало относительно целой пещеры, мы можем предположить, что поверхность между ногами является плоскостью.
+
+
+В рамках исследования предполагается, что робот движется по поверхности, у которой каждому набору координат $x,\ y$ соответствует одно и только одно значение координаты $z$.
+
+Был реализован следующий алгоритм. Вначале необходимо очистить оригинальное облако точек от шумов и усреднить близлежащие точки с помощью Voxel grid. Потом из него генерируется полигональная сетка с помощью 2D Триангуляции Делоне \pic{fig:delone_idea.png} (вогнутая оболочка \pic{fig:exp_concave_hull}). На ее основе получается необходимое плотное облако точек \pic{fig:sampled_pcd.png}. 
 
 \begin{figure}[H]
     \centering\includegraphics[height=2.5cm,width=1\textwidth,keepaspectratio]{delone_idea.png}
@@ -12,7 +16,7 @@
     \label{fig:delone_idea.png}
 \end{figure}
 
-Реализованный алгоритм проверялся, как в симуляции (Рис. \ref{fig:unsolvable_case}, \ref{fig:start_end_exp}), так и на реальном роботе \pic{fig:real_exp_map_creation} (\href{https://youtu.be/2dxHHTG4psQ}{видео}).
+Реализованный алгоритм проверялся, как в симуляции (Рис. \ref{fig:unsolvable_case}, \ref{fig:start_end_exp}), так и на реальном роботе \pic{fig:real_exp_map_creation}. Видео \quad \qrcode[height=1.5cm]{https://youtu.be/2dxHHTG4psQ}
 
 
 \begin{figure}[H]
@@ -28,9 +32,17 @@
     \label{fig:start_end_exp}
 \end{figure}
 
-Ниже представлены полученные результаты \pic{fig:result_meshes_blah}. Для оценки точности полученных данных было решено использовать 2 метрики C2C и C2M \pic{fig:metrics}.
+Ниже представлены полученные результаты \pic{fig:result_meshes_blah}. Для оценки точности полученных данных использовались метрики C2C \eqref{eqn:hauff} и C2M \pic{fig:metrics}.
 
-\begin{figure}[H]
+\begin{equation}
+    \label{eqn:hauff}
+    d_{H}(X,\;Y)=\sup _{m\in M}\left\{\,|\mathrm {dist} _{X}(m)-\mathrm {dist} _{Y}(m)|\,\right\}    
+\end{equation}
+Где $X,\ Y$ непустые подмножества метрического пространства $M$; $\mathrm {dist} _{X}\colon M\to \mathbb {R}$ $\mathrm {dist} _{X}\colon M\to \mathbb {R}$ обозначает функцию расстояния до множества $X$.
+
+
+
+\begin{figure}[h]
     \begin{center}
     \begin{subfigure}[t]{0.4\textwidth}
         \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{mesh_rviz.png}
@@ -67,9 +79,9 @@
 \end{center}
 \end{figure}
 
-На рисунке \ref{fig:exp_concave_hull} объясняется важность модификации триангуляции Делоне. Как можно заметить \pic{fig:conv_convex.png} алгоритм построил карту местности там, где робот не ходил и стоит стена. При использовании вогнутой оболочки \pic{fig:conv_concave.png} данная проблема не наблюдается.
+На рисунке \ref{fig:exp_concave_hull} проиллюстрирована  важность модификации триангуляции Делоне. Как можно заметить \pic{fig:conv_convex.png} алгоритм построил карту местности там, где робот не ходил и стоит стена. При использовании вогнутой оболочки \pic{fig:conv_concave.png} данная проблема не наблюдается.
 
-\begin{figure}[H]
+\begin{figure}[h]
     \begin{subfigure}[t]{0.3\textwidth}
         \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{convex_terr.png}
         \caption{Пример поля}
@@ -109,7 +121,7 @@
     \label{fig:exp_concave_hull}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[h]
     \begin{subfigure}[t]{0.49\textwidth}
         \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{pcd_hist.png}
         \caption{Метрика C2C: гистограмма ошибок (абсолютное расстояние от точки до ближайшей реферальной точки)}
@@ -125,7 +137,7 @@
 \end{figure}
 
 
-\begin{figure}[H]
+\begin{figure}[h]
     \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{real_robot_mesh_video_preview.png}
         \caption{Робот проходит препятствие}
@@ -140,17 +152,16 @@
     \label{fig:real_exp_map_creation}
 \end{figure}
 
-Как итог, $RMSE$ для C2C метрики была в среднем равна 5 см. А для C2M 1 см. В натурном эксперименте $RMSE$ по метрике C2C получился 8 см. Это адекватные результаты, которые позволяют получить общее представление о пройденной местности.
+Как итог, среднеквадратичная ошибка для C2C метрики была в среднем равна 5 см. А для C2M 1 см. В натурном эксперименте среднеквадратичная ошибка по метрике C2C получился 8 см.
 
-\subsection{Определение типа поверхности}
-Задачу определения типа поверхности можно определить следующим образом. Робот идет по поверхности, и собирает данные с разных сенсоров. На основе предварительного обучения, данные превращаются в нужный вид и кластеризуются, на основе предварительно определенной базе знаний территорий.
+Задачу определения типа поверхности можно определить следующим образом. Робот идет по поверхности, и собирает данные с датчиков силы, с момента на моторе и IMU. На основе предварительного обучения, данные обрабатываются и кластеризуются, на основе предварительно определенной базе знаний территорий.
 
-Задачу обучения удобнее всего проводить в лабораторных условиях, поэтому создадим экспериментальную установку. Она должна соответствовать следующим требованиям: возможность установить новые поверхность и сменять их быстро. Это нужно для легкого создания базы знаний поверхностей. Бесконечное движение, для скорости обучения. Узел с ногой должен быть взят с робота, чтобы не пришлось решать похожую задачу на роботе.
+Задачу обучения удобнее всего проводить в лабораторных условиях. Экспериментальная установка соответствует следующим требованиям: возможность установить новые поверхность и сменять их быстро. Это нужно для легкого создания базы знаний поверхностей. Бесконечное движение, для скорости обучения. Узел с ногой должен быть взят с робота, чтобы не пришлось решать похожую задачу на роботе.
 
 Все это было достигнуто благодаря разборному экспериментальному столу и 2ух степенному механизму, который ходит по окружности \pic{fig:s_shape_leg/s_leg_setup.JPG}. Для бесконечного движения пришлось соединить две ноги робота в одну. На рисунке ниже \pic{fig:s_shape_leg/leg_design.png} показаны как установлены сенсоры на получившейся ноге.
 
 \begin{figure}[H]
-    \begin{subfigure}[t]{0.49\textwidth}
+    \begin{subfigure}[t]{0.48\textwidth}
         \centering
         \begin{tikzpicture}
             % Include the image in a node
@@ -173,30 +184,35 @@
         \caption{Общий вид экспериментальной установки}
         \label{fig:s_shape_leg/s_leg_setup.JPG}
     \end{subfigure}
-    \begin{subfigure}[t]{0.49\textwidth}
+    \begin{subfigure}[t]{0.24\textwidth}
         \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{s_shape_leg/leg_design.png}
         \caption{Пояснение по расположению сенсоров на ноге робота}
         \label{fig:s_shape_leg/leg_design.png}
     \end{subfigure}
-    \caption{Экспериментальная установка для определения типа поверхности}
-\end{figure}
-
-Для начала было решено взять 2 сильно разных поверхности и посмотреть на сырые данные. Было решено использовать резину \pic{fig:s_shape_leg/flat.jpg} и камень \pic{fig:s_shape_leg/view.jpg}. \href{https://gifyu.com/image/SxatY}{Видео прохождения по резине}, \href{https://gifyu.com/image/Sxatt}{по камню}.
-
-\begin{figure}[H]
-    \begin{subfigure}[t]{0.49\textwidth}
-        \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{s_shape_leg/flat.jpg}
-        \caption{Резина}
-        \label{fig:s_shape_leg/flat.jpg}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[t]{0.49\textwidth}
+    \begin{subfigure}[t]{0.24\textwidth}
         \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{s_shape_leg/view.jpg}
         \caption{Каменистая поверхность}
         \label{fig:s_shape_leg/view.jpg}
     \end{subfigure}
-    \caption{Типы определяемых поверхностей}
+    \caption{Экспериментальная установка для определения типа поверхности}
 \end{figure}
+
+Были взяты 2 сильно разных поверхности и изучены сырые данные. Резина \pic{fig:s_shape_leg/s_leg_setup.JPG}  \quad \qrcode[height=1.5cm]{https://gifyu.com/image/SxatY} \quad, камень \pic{fig:s_shape_leg/view.jpg} \quad \qrcode[height=1.5cm]{https://gifyu.com/image/Sxatt} 
+
+% \begin{figure}[H]
+%     \begin{subfigure}[t]{0.49\textwidth}
+%         \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{s_shape_leg/flat.jpg}
+%         \caption{Резина}
+%         \label{fig:s_shape_leg/flat.jpg}
+%     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}[t]{0.49\textwidth}
+%         \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{s_shape_leg/view.jpg}
+%         \caption{Каменистая поверхность}
+%         \label{fig:s_shape_leg/view.jpg}
+%     \end{subfigure}
+%     \caption{Типы определяемых поверхностей}
+% \end{figure}
 
 Ниже \pic{fig:data_from_legs} представлены сырые данные с лапок робота. Сырые данные легко различить, но можно заметить, что абсолютные значения у разных сегментов различно. Поэтому при обучении необходимо их нормализовать.
 
@@ -212,9 +228,6 @@
     \caption{Сравнение сырых данных после эксперимента с разных сегментов ноги}
     \label{fig:data_from_legs}
 \end{figure}
-
-
-\subsection{Выводы}
 
 Карта местности может быть построена с помощью 2D триангуляции Делоне (вогнутая оболочка). Входными данными для алгоритма является разреженное облако точек касаний робота поверхности. Они получены с помощью преобразователя силы на основе Velostat.
 
