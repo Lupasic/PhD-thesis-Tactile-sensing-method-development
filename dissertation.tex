@@ -55,10 +55,12 @@
 \gappto\captionsrussian{\input{common/renames}\unskip} % for polyglossia and babel
 \input{common/renames}
 
+\newcommand*{\nom}[2]{#1 -- #2 \nomenclature{#1}{#2 \nomrefeqpage}}
 
 % \setcounter{refsection}{1}
 %%% Структура диссертации (ГОСТ Р 7.0.11-2011, 4)
 % \include{Dissertation/title}           % Титульный лист
+\setcounter{page}{2}
 \include{Dissertation/contents}        % Оглавление
 \ifnumequal{\value{contnumfig}}{1}{}{\counterwithout{figure}{chapter}}
 \ifnumequal{\value{contnumtab}}{1}{}{\counterwithout{table}{chapter}}
