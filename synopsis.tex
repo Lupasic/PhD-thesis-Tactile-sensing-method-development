@@ -42,7 +42,8 @@
 % \listfiles
 
 \begin{document}
-
+\includepdf[pages=-]{Titles_inno/synopsis_title.pdf}
+% \includepdf[pages=-,fitpaper]{Titles_inno/synopsis_title.pdf}
 % \input{Synopsis/title}        % Титульный лист
 %\mainmatter                   % В том числе начинает нумерацию страниц арабскими цифрами с единицы
 \mainmatter*                  % Нумерация страниц не изменится, но начнётся с новой страницы
@@ -52,7 +53,7 @@
 \section*{Общая характеристика работы}
 
 \input{Synopsis/newcommands.tex}
-
+\setcounter{page}{1}
 \input{common/characteristic} % Характеристика работы по структуре во введении и в автореферате не отличается (ГОСТ Р 7.0.11, пункты 5.3.1 и 9.2.1), потому её загружаем из одного и того же внешнего файла, предварительно задав форму выделения некоторым параметрам
 
 
