@@ -453,36 +453,42 @@
 \end{frame}
 
 \begin{frame}[t]{Robot design}
-    \framesubtitle{Result interpretation}
-    Based on fitness function the number of legs range starts from 8. It can be explained by static stability criteria. In such case 4 legs will touch the ground.
-
-    \alert{TODO}
-\end{frame}
-
-\begin{frame}[t]{Robot design}
-    \framesubtitle{Results}
-    \vspace{-0.9cm}
+    \framesubtitle{Particular results: $\omega_1 = 0.6$, $\omega_2 = 0.4$}
+    \vspace{-0.6cm}
 
     \begin{table}[H]
         \centering
         \begin{tabular}{c|c|c|c|c}
-         & \textbf{\begin{tabular}[c]{@{}c@{}}Terrain\\ types\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}No. legs\\ per side\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Angle b/w\\ neighbor legs\end{tabular}} & \textbf{No. individuals} \\
+         & \textbf{\begin{tabular}[c]{@{}c@{}}Terrain\\ types\end{tabular}} & \textbf{No. Legs} & \textbf{\begin{tabular}[c]{@{}c@{}}Angle b/w\\ neighbor legs\end{tabular}} & \textbf{No. individuals} \\
          \hline
          \rule{0cm}{0.5cm}
-        \textbf{Phase 1} &  & \cellcolor[HTML]{DAE8FC}6 & 73 & 200 \\ \cline{1-1} \cline{3-5} 
-         & \multirow{-2}{*}{\begin{minipage}{2.5cm}\includegraphics[height=3cm,width=2.5cm,keepaspectratio]{terrain_1.jpg}\end{minipage}} & \cellcolor[HTML]{DAE8FC}6 & 72 &  \\ [0.5cm] \cline{3-4} 
-         & \begin{minipage}{2.5cm}\includegraphics[height=3cm,width=2.5cm,keepaspectratio]{terrain_2.jpg}\end{minipage} & \cellcolor[HTML]{DAE8FC}5 & 68 &  \\ [0.5cm] \cline{3-4}
-        \multirow{-3}{*}{\textbf{Phase 2}} & \begin{minipage}{2.5cm}\includegraphics[height=3cm,width=2.5cm,keepaspectratio]{terrain_3.jpg}\end{minipage} & \cellcolor[HTML]{DAE8FC}6 & 77 & \multirow{-3}{*}{55}
+        \textbf{Phase 1} &  & \cellcolor[HTML]{DAE8FC}12 & 73 & 200 \\ \cline{1-1} \cline{3-5} 
+         & \multirow{-2}{*}{\begin{minipage}{2.5cm}\includegraphics[height=3cm,width=2.5cm,keepaspectratio]{terrain_1.jpg}\end{minipage}} & \cellcolor[HTML]{DAE8FC}12 & 72 &  \\ [0.5cm] \cline{3-4} 
+         & \begin{minipage}{2.5cm}\includegraphics[height=3cm,width=2.5cm,keepaspectratio]{terrain_2.jpg}\end{minipage} & \cellcolor[HTML]{DAE8FC}10 & 68 &  \\ [0.5cm] \cline{3-4}
+        \multirow{-3}{*}{\textbf{Phase 2}} & \begin{minipage}{2.5cm}\includegraphics[height=3cm,width=2.5cm,keepaspectratio]{terrain_3.jpg}\end{minipage} & \cellcolor[HTML]{DAE8FC}12 & 77 & \multirow{-3}{*}{55}
         \end{tabular}
-        \caption*{\large\centering\textbf{Summary}: created robot should have 10-12 legs in total}
+        % \caption*{\large\centering\textbf{Summary}: created robot should have 10-12 legs in total}
         \end{table}
 
+\end{frame}
 
-    % \begin{figure}[H]
-    %     \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{table_terrain.png}
-    %     \caption*{\large\centering\textbf{Summary}: created robot should have 10-12 legs in total}
-    %     \label{fig:table_terrain.png}
-    % \end{figure}
+\begin{frame}[t]{Robot design}
+    \framesubtitle{Global results}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.49\textwidth}
+            Based on fitness function the number of legs range starts from 8 till 14 for different $\omega$ values. 
+            
+            It can be explained by static stability criteria. In such case 4 legs will touch the ground.    
+        \end{column}
+        \begin{column}{0.49\textwidth}
+            \vspace{-1.8cm}
+            \begin{figure}[H]
+                \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{box_plot_structural_synthesis.png}
+                \caption*{Correlation between amount of legs and passed distance by best robot individuals from several experiments}
+                \label{fig:box_plot_structural_synthesis.png}
+            \end{figure}
+        \end{column}
+    \end{columns}
 \end{frame}
 
 \begin{frame}[t]{Robot design}
@@ -1087,35 +1093,34 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Terrain classification}
-    \framesubtitle{Velostat transducer properties}
-    \large
-    \begin{itemize}
-        \item Because of high hysteresis and difficulties with calibration, we have to work with relative data.
-    \end{itemize}
-
-\end{frame}
+% \begin{frame}[t]{Terrain classification}
+%     \framesubtitle{Velostat transducer properties}
+%     \large
+%     \begin{itemize}
+%         \item Because of high hysteresis and difficulties with calibration, we have to work with relative data.
+%     \end{itemize}
+% \end{frame}
 
 \begin{frame}[t]{Terrain classification}
     \framesubtitle{Obtained data from one experiment}
     \begin{columns}[T,onlytextwidth]
-        \begin{column}{0.49\textwidth}
+        \begin{column}{0.60\textwidth}
             \begin{figure}[H]
-                \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{s_shape_leg/segment6_compare.png}
+                \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{s_shape_leg/TaxelIndForce.png}
             \end{figure}
         \end{column}
-        \begin{column}{0.49\textwidth}
-            \vspace{-2.4cm}
+        \begin{column}{0.35\textwidth}
+            \vspace{-1.6cm}
             \begin{figure}[H]
                 \begin{subfigure}{0.99\textwidth}
-                    \centering\includegraphics[height=3.8cm,width=1\textwidth,keepaspectratio]{s_shape_leg/segment8_compare_front.png}
-                    % \caption*{2mm end-effector diam}    
+                    \centering\includegraphics[height=3.8cm,width=1\textwidth,keepaspectratio]{s_shape_leg/avg_lin_vel_rev_min.png} 
                 \end{subfigure}
 
                 \begin{subfigure}{0.99\textwidth}
                     \centering\includegraphics[height=3.8cm,width=1\textwidth,keepaspectratio]{s_shape_leg/segment6_compare_front.png}
-                    % \caption*{8mm end-effector diam}
                 \end{subfigure}
+                
+
             \end{figure}
         \end{column}
     \end{columns}
