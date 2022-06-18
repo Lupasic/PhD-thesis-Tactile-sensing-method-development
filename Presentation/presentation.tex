@@ -11,9 +11,9 @@
 %%   \begin{otherlanguage}{slovak}  ... \end{otherlanguage}
 %%
 %% These macros specify information about the presentation
-\title[PhD Thesis]{Tactile perception method development for a mobile \\ walking~robot} %% that will be typeset on the
-\subtitle{Student: Oleg Bulichev \\ Supervisor: Alexander Maloletov \\ \ } %% title page.
-\author{Oleg Bulichev}
+\title[Диссертация]{Разработка метода тактильного очувствления для мобильного шагающего робота} %% that will be typeset on the
+\subtitle{Студент: Олег Буличев \\ Научный руководитель: Александр Малолетов \\ \ } %% title page.
+\author{Олег Буличев}
 %% These additional packages are used within the document:
 \usepackage{ragged2e}  % `\justifying` text
 \usepackage{booktabs}  % Tables
@@ -92,25 +92,25 @@
 
 \fbckg{fibeamer/figs/common.png}
 
-\begin{frame}[t]{Motivation: why do we need to explore caves by robots}
+\begin{frame}[t]{Необходимость исследования пещер роботами}
     % \framesubtitle{Cave dangerous obstacles}
     \vspace{-0.85cm}
     \begin{figure}[H]
         \begin{subfigure}[b]{0.3\textwidth}
             \centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{surface_types/salt.jpg}\\
-            \caption*{Salt}
+            \caption*{Соляные отложения}
             \label{fig:surface_types/salt}
         \end{subfigure}
         \hfill
         \begin{subfigure}[b]{0.3\textwidth}
             \centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{surface_types/siphon.png}\\
-            \caption*{Siphon}
+            \caption*{Сифоны}
             \label{fig:surface_types/siphon}
         \end{subfigure}
         \hfill
         \begin{subfigure}[b]{0.3\textwidth}
             \centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{surface_types/ice.png}\\
-            \caption*{Glacier cave}
+            \caption*{Ледяные пещеры}
             \label{fig:surface_types/ice}
         \end{subfigure}
 
@@ -133,7 +133,7 @@
                     node[rounded corners=3pt,right,black,fill=white]{\tiny Human};
                 \end{scope}
             \end{tikzpicture}
-            \caption*{Clay}
+            \caption*{Глина}
             \label{fig:surface_types/clay.jpg}
         \end{subfigure}
         \hfill
@@ -157,20 +157,20 @@
                     node[rounded corners=3pt,left,black,fill=white]{\tiny Puddle};
                 \end{scope}
             \end{tikzpicture}
-            \caption*{Puddle}
+            \caption*{Лужа}
             \label{fig:surface_types/splash.png}
         \end{subfigure}
         \hfill
         \begin{subfigure}[b]{0.3\textwidth}
             \centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{surface_types/moss.jpg}\\
-            \caption*{Moss}
+            \caption*{Мох}
             \label{fig:surface_types/moss}
         \end{subfigure}
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Motivation: unsolvable problem for cameras and lidars}
-    \framesubtitle{Question: how to make a map when you have a puddle above a surface?}
+\begin{frame}[t]{Нерешаемая задача с помощью камеры или лидара}
+    \framesubtitle{Вопрос: как картографировать поверхность под лужей?}
     \vspace{-1cm}
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.55\textwidth}
@@ -178,7 +178,7 @@
 
             \begin{figure}[H]
                 \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{terrain_wo_water.png}
-                \caption*{Terrain without water}
+                \caption*{Поверхность без воды}
             \end{figure}
         \end{column}
         \begin{column}{0.44\textwidth}
@@ -214,7 +214,7 @@
 
                 \begin{subfigure}{0.8\textwidth}
                     \centering\includegraphics[height=2cm,width=1\textwidth,keepaspectratio]{terrain_w_water_camera.png}
-                    \caption*{Camera view}
+                    \caption*{Вид с камеры}
                 \end{subfigure}
             \end{figure}
         \end{column}
@@ -244,25 +244,25 @@
 %     \end{columns}
 % \end{frame}
 
-\begin{frame}[t]{Problem statement}
+\begin{frame}[t]{Постановка проблемы}
     \framesubtitle{}
-    \begin{block}{Problem 1}
+    \begin{block}{Проблема 1}
         \large
-        How to obtain a useful information on terrain, \textbf{when we have a SLAM based on lidars, cameras}?
+        Как получить \underline{полезную информацию} о поверхности, \textbf{когда имеется решенная навигация}?
         \vspace{5pt}
 
-        \uncover<2->{\alert{\large Obtain map and terrain type}}
+        \uncover<2->{\alert{\large Карта местности и тип поверхности}}
     \end{block}
 \end{frame}
 
-\begin{frame}[t]{Proposed solutions}
+\begin{frame}[t]{Предлагаемое решение}
     \framesubtitle{}
-    \begin{exampleblock}{Problem 1}
+    \begin{exampleblock}{Проблема 1}
         \large
-        \textit{Map can be built} \textbf{using tactile sensors} on each leg of the robot and create a \textbf{dense point cloud} using sampling from generated mesh from \textbf{modified Delaunay triangulation}.
+        \textit{Карта может быть построена}, \textbf{используя датчики силы} на каждой ноге робота, получив \textbf{плотное облако точек}. Облако точек генерируется из построенной полигональной сетки с помощью \textbf{модифицированной 2D Триангуляции Делоне}. Полигональная сетка основана на точках касания ног поверхности.
         \vspace{5pt}
 
-        \textit{Terrain type} can be obtained solving \textbf{terrain classification} problem using \textbf{machine learning}.
+        \textit{Тип поверхности} может быть получен с помощью решения задачи \textbf{классификация поверхности}, используя \textbf{Машинное Обучение}.
     \end{exampleblock}
 \end{frame}
 
@@ -287,100 +287,100 @@
 
 
 
-\begin{frame}[t]{Literature review}
+\begin{frame}[t]{Литературный обзор}
     \framesubtitle{}
     \vspace{-0.3cm}
     \large
-    Consider issues:
+    Рассмотренные проблемы:
     \vspace{-0.1cm}
     \begin{itemize}
-        \item Cave environment: obstacles, dimensions.
-        \item Robots for cave exploration: from zeppelins, to quadruped robots.
-        \item Methods for map creation: using classical and haptic. Based on cameras, lidars, tactile sensors, etc.
+        \item Пещеры: препятствия, размеры.
+        \item Роботы для исследования пещер: от дирижаблей, до шагающих.
+        \item Методы построения карты: оптические и тактильные.
     \end{itemize}
     \vspace{-0.2cm}
 
-    \begin{block}{Existing problems}
+    \begin{block}{Существующие проблемы}
         \begin{itemize}
-            \item Robotics systems for exploring loose caves
-            \item Object mesh creation using tactile sensor installed on manipulator
-            \item Map creation using lidars and cameras
+            \item Робототехнические системы для исследования свободных пещер
+            \item Построение поверхности с помощью датчика силы на манипуляторе
+            \item Построение карты с помощью лидаров и камер
         \end{itemize}
     \end{block}
     \vspace{-0.2cm}
 
-    \only<2>{\centering\alert{New problem is proposed}}
+    \only<2>{\centering\alert{Найдена нерешенная проблема}}
 \end{frame}
 
-\begin{frame}[t]{Robot design}
-    \framesubtitle{Requirements}
+\begin{frame}[t]{Разработка робота}
+    \framesubtitle{Требования к роботу}
     \large
-    \textbf{Problem} --  choose robot mover type. This robot should:
+    \textbf{Проблема} --  выбрать движитель. Робот должен:
     \begin{itemize}
-        \item should have \textit{small dimensions} to sneak through holes;
-        \item have enough \textit{off-road passability} to pass a granular terrain;
-        \item should \textit{traverse through small water obstacles};
-        \item can \textit{climb on big stones};
+        \item иметь \textit{малые размеры}, чтобы лазать и не застевать в щелях;
+        \item обладать достаточной \textit{проходимостью} для преодоления сыпучих грунтов;
+        \item преодолевать \textit{небольшие водные препятствия};
+        \item возможнсоть \textit{залезать на большие валуны};
     \end{itemize}
-    \uncover<2->{\large\centering\alert{Cycling robot with 1 DoF leg}}
+    \uncover<2->{\large\centering\alert{Шагающий цикловой движитель с 1 степенью свободы в ноге}}
 \end{frame}
 
-\begin{frame}[t]{Robot design}
-    \framesubtitle{Structural synthesis problem}
-    \only<1-2>{\large\begin{block}{Question}
-            What the optimal number of legs should be in such robot?
+\begin{frame}[t]{Разработка робота}
+    \framesubtitle{Структурный синтез}
+    \only<1-2>{\large\begin{block}{Вопрос}
+            Какое оптимальное количество ного должно быть в таком движителе?
         \end{block}}
-    \only<2>{\large\begin{alertblock}{Answer}
-            \centering Robot should have \textbf{8-14 legs} in total!
+    \only<2>{\large\begin{alertblock}{Ответ}
+            \centering Робот должен иметь \textbf{8---14 ног}!
         \end{alertblock}}
 \end{frame}
 
-\begin{frame}[c]{Robot design}
-    \framesubtitle{Technological stack}
+\begin{frame}[c]{Разработка робота}
+    \framesubtitle{Используемые технологии}
     \vspace{-0.9cm}
     \begin{figure}[H]
         \begin{subfigure}[t]{0.32\textwidth}
             \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{c1_paper.png}
-            \caption*{\small Generating terrain approach \\ (Robot traverse an \textbf{artificial terrain} based on \textbf{generating parameters})}
+            \caption*{\small Генерация поверхности \\ (Робот проходит по параметризованной \textbf{искусственной территории})}
         \end{subfigure}
         \hfill
         \begin{subfigure}[t]{0.32\textwidth}
             \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{gazebo_logo.png}
-            \caption*{Robot simulator}
+            \caption*{Робототехнический симулятор}
         \end{subfigure}
         \hfill
         \begin{subfigure}[t]{0.32\textwidth}
             \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{gen_algo.jpg}
-            \caption*{Genetic algorithm \\ (DEAP Library)}
+            \caption*{Генетический алгоритм \\ (OpenAI-ES алгоритм)}
         \end{subfigure}
         \hfill
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Robot design}
-    \framesubtitle{Assumptions}
+\begin{frame}[t]{Разработка робота}
+    \framesubtitle{Предположения}
     \large
     \begin{itemize}
-        \item Generated terrain family with the same constants has the same complexity. 
+        \item Сгенерированное семейство с одинаковыми константами имеет ту же сложность. 
         \\ 
-        Parameters:
+        Парметры для генерации:
               \begin{itemize}
                 \large
-                  \item Cell width and length
-                  \item Cell height range
-                  \item Distribution parameter
+                  \item Длина и ширина ячейки
+                  \item Диапазон высот ячейки
+                  \item Закон распределения
               \end{itemize}
               % \item We can generate 
     \end{itemize}
 \end{frame}
 
-\begin{frame}[t]{Robot design}
-    \framesubtitle{Proposed solution}
+\begin{frame}[t]{Разработка робота}
+    \framesubtitle{Предлагаемое решение}
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.49\textwidth}
             \begin{figure}[H]
                 \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{optimization_idea.png}
-                \caption*{\textbf{Idea}: Minimize number of legs without losing off-road passability}
+                \caption*{\textbf{Идея}: Минимизировать кол-во ног без потери проходимости}
                 \label{fig{optimization_idea.png}}
             \end{figure}
         \end{column}
@@ -418,9 +418,6 @@
                         \draw[thin,green] (6.7,4) -- (5.75,9);
                         \draw[thin,green] (4.85,3.5) -- (5.75,9);
                         \draw[thin,green,stealth-stealth] (6.32,6) arc (-79.2:-99.2:3) node [rounded corners=3pt,below = 2pt,black,fill=white, midway] {\tiny $\alpha$};
-                        % \draw[very thick,green] (8,6) -- (5,8);
-                        % \draw[very thick,green] (0.5,2.5) rectangle (4.2,9)
-                        % node[below left,black,fill=green]{\small test};
                     \end{scope}
                 \end{tikzpicture}
                 % \caption*{}
@@ -430,19 +427,19 @@
             {\footnotesize
                 \begin{eqnarray*}
                     % \resizebox{0.9\hsize}{!}{
-                    F \rightarrow max = \beta \left( {\omega}_{1} \cdot \overbrace{\delta}^{\text{Distance}} + {\omega}_{2} \cdot \overbrace{\frac{1}{(\gamma - 1) h_{\text{leg}}sin(\alpha)}}^{\text{Simplified body length}}\right) +\\ \nonumber + (1 - \beta) {\delta}^{{\omega}_{1}} {\left( \frac{1}{(\gamma - 1)h_{\text{leg}}sin(\alpha)}\right)}^{{\omega}_{2}}
+                    F \rightarrow max = \beta \left( {\omega}_{1} \cdot \overbrace{\delta}^{\text{Расстояние}} + {\omega}_{2} \cdot \overbrace{\frac{1}{(\gamma - 1) h_{\text{leg}}sin(\alpha)}}^{\text{Упр. длина корпуса}}\right) +\\ \nonumber + (1 - \beta) {\delta}^{{\omega}_{1}} {\left( \frac{1}{(\gamma - 1)h_{\text{leg}}sin(\alpha)}\right)}^{{\omega}_{2}}
                     % }
                 \end{eqnarray*}
             }
             % \vspace{1pt}
 
-            $\beta$ is adaptive parameter, \\ ${\omega}_{1,2} \in  [ 0..1 ] $ are the weight coefficients.
+            $\beta$ -- адаптивный параметр, \\ ${\omega}_{1,2} \in  [ 0..1 ] $ -- весовые коэффициенты.
         \end{column}
     \end{columns}
 \end{frame}
 
-\begin{frame}[t]{Robot design}
-    \framesubtitle{Video: the story of one generated robot}
+\begin{frame}[t]{Разработка робота}
+    \framesubtitle{Видео: история одного сгенерированного робота}
     \vspace{-0.6cm}
     \begin{figure}[H]
         % \href{run:./videos/pass_rand_terr.mp4}{
@@ -452,61 +449,61 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Robot design}
-    \framesubtitle{Particular results: $\omega_1 = 0.6$, $\omega_2 = 0.4$}
+\begin{frame}[t]{Разработка робота}
+    \framesubtitle{Конкретные результаты: $\omega_1 = 0.6$, $\omega_2 = 0.4$}
     \vspace{-0.6cm}
 
     \begin{table}[H]
         \centering
         \begin{tabular}{c|c|c|c|c}
-         & \textbf{\begin{tabular}[c]{@{}c@{}}Terrain\\ types\end{tabular}} & \textbf{No. Legs} & \textbf{\begin{tabular}[c]{@{}c@{}}Angle b/w\\ neighbor legs\end{tabular}} & \textbf{No. individuals} \\
+         & \textbf{\begin{tabular}[c]{@{}c@{}}Тип\\ территории\end{tabular}} & \textbf{Кол-во ног} & \textbf{\begin{tabular}[c]{@{}c@{}}Угол между\\ соседними ногами\end{tabular}} & \textbf{Кол-во индивидов} \\
          \hline
          \rule{0cm}{0.5cm}
-        \textbf{Phase 1} &  & \cellcolor[HTML]{DAE8FC}12 & 73 & 200 \\ \cline{1-1} \cline{3-5} 
+        \textbf{Этап 1} &  & \cellcolor[HTML]{DAE8FC}12 & 73 & 200 \\ \cline{1-1} \cline{3-5} 
          & \multirow{-2}{*}{\begin{minipage}{2.5cm}\includegraphics[height=3cm,width=2.5cm,keepaspectratio]{terrain_1.jpg}\end{minipage}} & \cellcolor[HTML]{DAE8FC}12 & 72 &  \\ [0.5cm] \cline{3-4} 
          & \begin{minipage}{2.5cm}\includegraphics[height=3cm,width=2.5cm,keepaspectratio]{terrain_2.jpg}\end{minipage} & \cellcolor[HTML]{DAE8FC}10 & 68 &  \\ [0.5cm] \cline{3-4}
-        \multirow{-3}{*}{\textbf{Phase 2}} & \begin{minipage}{2.5cm}\includegraphics[height=3cm,width=2.5cm,keepaspectratio]{terrain_3.jpg}\end{minipage} & \cellcolor[HTML]{DAE8FC}12 & 77 & \multirow{-3}{*}{55}
+        \multirow{-3}{*}{\textbf{Этап 2}} & \begin{minipage}{2.5cm}\includegraphics[height=3cm,width=2.5cm,keepaspectratio]{terrain_3.jpg}\end{minipage} & \cellcolor[HTML]{DAE8FC}12 & 77 & \multirow{-3}{*}{55}
         \end{tabular}
         % \caption*{\large\centering\textbf{Summary}: created robot should have 10-12 legs in total}
         \end{table}
 
 \end{frame}
 
-\begin{frame}[t]{Robot design}
-    \framesubtitle{Global results}
+\begin{frame}[t]{Разработка робота}
+    \framesubtitle{Закономерность}
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.49\textwidth}
-            Based on fitness function the number of legs range starts from 8 till 14 for different $\omega$ values. 
+            Лучшие роботы в экспериментах начинались с 8 до 14 ног для различных значений $\omega$. 
             
-            It can be explained by static stability criteria. In such case 4 legs will touch the ground.    
+            Это объясняется критерием статического равновесия. В таком случае минимум 4 ноги всегда касаются поверхности.    
         \end{column}
         \begin{column}{0.49\textwidth}
             \vspace{-1.8cm}
             \begin{figure}[H]
                 \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{box_plot_structural_synthesis.png}
-                \caption*{Correlation between amount of legs and passed distance by best robot individuals from several experiments}
+                \caption*{Зависимость между кол-вом ног и пройденной дистанцией}
                 \label{fig:box_plot_structural_synthesis.png}
             \end{figure}
         \end{column}
     \end{columns}
 \end{frame}
 
-\begin{frame}[t]{Robot design}
-    \framesubtitle{Increasing maneuverablity}
+\begin{frame}[t]{Разработка робота}
+    \framesubtitle{Улучшение проходимости}
     \only<1-2>{\large\begin{block}{Question}
-            1. Long robot can stuck in a cave hole, while rotating. How to avoid it?
+            1. Длинный робот может застрять в щели во время поворота. Как избежать это?
 
-            2. How to climb on big stones?
+            2. Как залезать на большие уступы?
         \end{block}}
     \only<2>{\large\begin{alertblock}{Answer}
-            \centering 1. Add an ability to sidestep without changing orientation.
+            \centering 1. Добавить возможность двигаться вбок без смены ориентации.
 
-            2. Make a segmented body.
+            2. Сделать сегментированное тело.
         \end{alertblock}}
 \end{frame}
 
-\begin{frame}[t]{Robot design}
-    \framesubtitle{Video}
+\begin{frame}[t]{Разработка робота}
+    \framesubtitle{Видео}
     \vspace{-0.6cm}
     \begin{figure}[H]
         % \href{run:./videos/sidestep_segments.mp4}{
@@ -516,122 +513,121 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Robot design}
-    \framesubtitle{Proposed solution}
+\begin{frame}[t]{Разработка робота}
+    \framesubtitle{Предлагаемое решение}
     \vspace{-0.8cm}
     \begin{figure}[H]
         \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{omni_rot.png}
-        \caption*{Vector representation of forces in  the conventional and omni-direction states}
+        \caption*{Векторное представление сил в стандартной и всенаправленной компоновке}
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Robot design}
-    \framesubtitle{StriRus prototypes (1)}
+\begin{frame}[t]{Разработка робота}
+    \framesubtitle{Проботипы робота СтриРус (1)}
     \vspace{-0.7cm}
 \begin{table}[H]
     \arrayrulecolor[HTML]{C0C0C0}
     \begin{tiny}
     \begin{tabular}{>{\bfseries}p{1.3 cm}|>{\centering}p{3.5cm}|>{\centering}p{3.5cm}|>{\centering \arraybackslash}p{3.5cm}}
     \multicolumn{1}{p{1.3 cm}}{}  & \multicolumn{1}{p{3.5cm}}{\includegraphics[height=3cm,width=3.5cm,keepaspectratio]{strirus_0.png}}  &  \multicolumn{1}{p{3.5cm}}{\includegraphics[height=3cm,width=3.5cm,keepaspectratio]{strirus_1.png}} & \multicolumn{1}{p{3.5cm}}{\includegraphics[height=3cm,width=3.5cm,keepaspectratio]{strirus_2.jpg}} \\
-     Generation & 1  & 2 &  3 \\
+     Поколение & 1  & 2 &  3 \\
      \hline
      \rowcolor[HTML]{EFEFEF} 
-     No. legs & 54 & 12 & 12 \\ 
-     No. segments & 1 & 2 & 2 \\
+    Кол-во ног & 54 & 12 & 12 \\ 
+     Кол-во сегм. & 1 & 2 & 2 \\
      \rowcolor[HTML]{EFEFEF} 
-     Connect. joint & --- & Pitch & Pitch, Yaw \\
-    \makecell[l]{Rel. body-leg \\ angle, deg} & 0 & 0--45 & 0, 15, 30, 45 \\
+     Соед. узел & --- & Тангаж & Тангаж, Рыскание \\
+    \makecell[l]{Отн. угол \\ нога-тело, град} & 0 & 0--45 & 0, 15, 30, 45 \\
     \rowcolor[HTML]{EFEFEF} 
-     Leg height, mm & 54 & 60 & 60 \\
-     Features & Wave propelled robot & Continuous mechanism & 2 DoF connection joint mech. \\
+     Высота ноги, мм & 54 & 60 & 60 \\
+     Особенности & Волноход & Непрерывный механизм & 2 DoF у соед. узла \\
     \rowcolor[HTML]{EFEFEF} 
-     Withdraws &  \makecell[l]{-- Cannot install force sensors \\ -- high friction} & \makecell[l]{ -- Too complicated changing relaltive \\  angle mechanism} & \makecell[l]{ -- Small legs \\ -- Useless 2nd DoF in connection joint} \\
+     Недостатки &  \makecell[l]{-- Невозможно установить датчики силы \\ -- Малый КПД} & \makecell[l]{ -- Сложный механизм изм. угла} & \makecell[l]{ -- Маленькие ноги \\ -- Бесполезная возможность рыскания} \\
     \end{tabular}
     \end{tiny}
     \end{table}
 
 \end{frame}
 
-\begin{frame}[t]{Robot design}
-    \framesubtitle{StriRus prototypes (2)}
+\begin{frame}[t]{Разработка робота}
+    \framesubtitle{Проботипы робота СтриРус (2)}
     \vspace{-0.7cm}
     \begin{table}[H]
         \arrayrulecolor[HTML]{C0C0C0}
         \begin{tiny}
         \begin{tabular}{>{\bfseries}p{1.3 cm}|>{\centering}p{3.5cm}|>{\centering \arraybackslash}p{3.5cm}}
         \multicolumn{1}{p{1.3 cm}}{}  & \multicolumn{1}{p{3.5cm}}{\includegraphics[height=3cm,width=3.5cm,keepaspectratio]{strirus_3.JPG}}  &  \multicolumn{1}{p{3.5cm}}{\includegraphics[height=3cm,width=3.5cm,keepaspectratio]{strirus_4.png}} \\
-         Generation & 3+  & 4 \\
+        Поколение & 3+  & 4 \\
          \hline
          \rowcolor[HTML]{EFEFEF} 
-         No. legs & 6 & 10 \\ 
-         No. segments & 1 & 2 \\
+         Кол-во ног & 6 & 10 \\ 
+         Кол-во сегм. & 1 & 2 \\
          \rowcolor[HTML]{EFEFEF} 
-         Connect. joint & --- & Pitch \\
-        \makecell[l]{Rel. body-leg \\ angle, deg} & 0 & 0, 15 \\
+         Соед. узел & --- & Тангаж \\
+        \makecell[l]{Отн. угол \\ нога-тело, град} & 0 & 0, 15 \\
         \rowcolor[HTML]{EFEFEF} 
-         Leg height, mm & 90 & 180 \\
-         Features & Larger legs & Largest legs \\
+        Высота ноги, мм & 90 & 180 \\
+        Особенности & Удлиненные ноги & Гигантские ноги \\
         \rowcolor[HTML]{EFEFEF} 
-         Withdraws &  \makecell[l]{-- Still small legs \\ -- 1 segment} & \makecell[l]{ -- } \\
+        Недостатки &  \makecell[l]{-- 1 Сегмент} & \makecell[l]{ -- } \\
         \end{tabular}
         \end{tiny}
         \end{table}
 \end{frame}
 
-\begin{frame}[t]{Force transducer design}
+\begin{frame}[t]{Разработка преобразователя силы}
     \framesubtitle{}
     \only<1-2>{\large\begin{block}{Question}
-            How to receive a reaction force from the ground?
+            Как получить силу реакции опоры?
         \end{block}}
     \only<2>{\large\begin{alertblock}{Answer}
         \vspace{-0.2cm}
 
          \begin{itemize}
             \color{lightgray}
-            \item Current/voltage measurements from motors
-                \item Installing torque sensor on a shaft
-                \item {\color{black} Installing a force sensor on each leg}
+            \item Измерив ток/напряжение на моторе
+                \item Установив датчик момента на вал мотора
+                \item {\color{black} Установив датчик силы на ногу робота}
             \end{itemize}
         \end{alertblock}}
 \end{frame}
 
-\begin{frame}[t]{Force transducer design}
-    \framesubtitle{Force sensor types}
+\begin{frame}[t]{Разработка преобразователя силы}
+    \framesubtitle{Типы датчиков силы}
     \vspace{-20pt}
     \begin{multicols}{2}
         \begin{itemize}
             \alt<1>{}{\color{lightgray}}
-            \item  \textbf{F/T sensors}: too massive and expensive for small robots.
-            \item \textbf{Optical}: too thick.
-            \item \textbf{Magnetic}: too thick.
-            \item \textbf{Capacitive}: expensive, but the best in terms of requirements.
-            \item {\color{black}\textbf{Piezoresistive sensors
-                      based on \alt<1>{conductive inks or polymers}{\underline{Velostat}}}: inexpensive and robust, but has problems with hysteresis}
+            \item  \textbf{Силомоментный}: массивный и дорогой для маленьких роботов.
+            \item \textbf{Оптический}: очень габаритный.
+            \item \textbf{Магнитный}: очень габаритный.
+            \item \textbf{Емкостной}: дорогой, но лучший для данной задачи.
+            \item {\color{black}\textbf{Пьезорезистивный датчик основанный \alt<1>{на чернилах или полимерах}{\underline{Velostat}}}: дешевый и надежный, но имеет пробелмы с гистерезисом}
 
-            \item { \alt<1>{}{\color{lightgray}} \textbf{Stain gages}: challenge for wiring between continuously rotating legs and the robot body.}
+            \item { \alt<1>{}{\color{lightgray}} \textbf{Тензометрический}: влияние температуры и влажности на чувствительность}
         \end{itemize}
     \end{multicols}
     \vspace{-10pt}
     \only<2>{\ }
 \end{frame}
 
-\begin{frame}[t]{Force transducer design}
+\begin{frame}[t]{Разработка преобразователя силы}
     \framesubtitle{Velostat}
     \vspace{-20pt}
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.6\textwidth}
-            \begin{exampleblock}{Definition}
-                The Velostat is a polymer material filled with carbon black.\\
-                \textbf{Expected effects}:
+            \begin{exampleblock}{Определение}
+                Velostat представляет собой полимерный материал, наполненный техническим углеродом.\\
+                \textbf{Ожидаемые эффекты}:
                 \begin{itemize}
-                    \item \underline{Quantum tunnelling} (Precolation) -- Diod is using such effect;
-                    \item \underline{Piezoresistive} -- electrical resistivity of semiconductor is changed by mechanical strain;
-                    \item \underline{Viscoelasticity} -- material can damp vibrations.
+                    \item \underline{Туннельный эффект} -- диод обладает данным свойством;
+                    \item \underline{Пьезорезистивный} -- удельное электрическое сопротивление полупроводника изменяется под действием механической деформации;
+                    \item \underline{Вязкоупругий} -- может гасить вибрации.
                 \end{itemize}
             \end{exampleblock}
         \end{column}
         \begin{column}{0.38\textwidth}
-            \vspace{-0.7cm}
+            \vspace{-1cm}
             \begin{figure}[H]
                 \begin{subfigure}{0.9\textwidth}
                     \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{velostat_sensor.jpg}
@@ -641,7 +637,7 @@
 
                 \begin{subfigure}{0.9\textwidth}
                     \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{simplest_sensor.jpg}
-                    \caption*{Simplest force transducer}
+                    \caption*{Простейший преобразователь силы}
                     \label{fig:simplest_sensor.jpg}
                 \end{subfigure}
             \end{figure}
@@ -650,7 +646,7 @@
 
 \end{frame}
 
-\begin{frame}[t]{Force transducer design}
+\begin{frame}[t]{Разработка преобразователя силы}
     \framesubtitle{Velostat: Faced problems}
     \vspace{-20pt}
     \begin{multicols}{2}
@@ -694,7 +690,7 @@
     \end{block}
 \end{frame}
 
-\begin{frame}[t]{Force transducer design}
+\begin{frame}[t]{Разработка преобразователя силы}
     \framesubtitle{Experimental setup requirements}
     \vspace{-0.5cm}
     {\large
@@ -707,7 +703,7 @@
 \end{frame}
 
 
-\begin{frame}[t]{Force transducer design}
+\begin{frame}[t]{Разработка преобразователя силы}
     \framesubtitle{Experimental Setup: Hardware overall}
     \vspace{-12pt}
     \begin{center}
@@ -771,7 +767,7 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Force transducer design}
+\begin{frame}[t]{Разработка преобразователя силы}
     \framesubtitle{Experimental Setup: Hardware, Aruco markers}
     \vspace{-15pt}
 
@@ -807,7 +803,7 @@
 
 \end{frame}
 
-\begin{frame}[t]{Force transducer design}
+\begin{frame}[t]{Разработка преобразователя силы}
     \framesubtitle{Experimental Setup: Hardware, end-effector}
     \vspace{-0.9cm}
     \begin{columns}[T,onlytextwidth]
@@ -864,7 +860,7 @@
 
 
 
-\begin{frame}[t]{Force transducer design}
+\begin{frame}[t]{Разработка преобразователя силы}
     \framesubtitle{Experiments}
     \vspace{-15pt}
     \begin{columns}[T,onlytextwidth]
@@ -936,7 +932,7 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}[t]{Force transducer design}
+\begin{frame}[t]{Разработка преобразователя силы}
     \framesubtitle{Result: static experiment}
     \vspace{-0.5cm}
     \begin{columns}[T,onlytextwidth]
@@ -963,7 +959,7 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Force transducer design}
+\begin{frame}[t]{Разработка преобразователя силы}
     \framesubtitle{Result: dynamic experiment}
     \vspace{-15pt}
     \begin{figure}[H]
@@ -980,7 +976,7 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Force transducer design}
+\begin{frame}[t]{Разработка преобразователя силы}
     \framesubtitle{Summary}
     \vspace{-15pt}
     {\large
