@@ -12,7 +12,7 @@
 %%
 %% These macros specify information about the presentation
 \title[Диссертация]{Разработка метода тактильного очувствления для мобильного шагающего робота} %% that will be typeset on the
-\subtitle{Студент: Олег Буличев \\ Научный руководитель: Александр Малолетов \\ \ } %% title page.
+\subtitle{Студент: Олег Буличев \\ Руководитель: Александр Малолетов \\ \ } %% title page.
 \author{Олег Буличев}
 %% These additional packages are used within the document:
 \usepackage{ragged2e}  % `\justifying` text
@@ -170,7 +170,7 @@
 \end{frame}
 
 \begin{frame}[t]{Нерешаемая задача с помощью камеры или лидара}
-    \framesubtitle{Вопрос: как картографировать поверхность под лужей?}
+    \framesubtitle{Вопрос: Как картографировать поверхность под лужей?}
     \vspace{-1cm}
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.55\textwidth}
@@ -274,7 +274,7 @@
 %                 \textit{Map can be built} \textbf{using tactile sensors} on each leg of the robot and create a \textbf{dense point cloud} using sampling from generated mesh using \textbf{modified Delaunay triangulation}.
 %                 \vspace{5pt}
 
-%                 \textit{Terrain type} can be obtained solving \textbf{terrain classification} problem using \textbf{machine learning}.
+%                 \textit{Terrain type} can be obtained solving \textbf{Определение типа поверхности} problem using \textbf{machine learning}.
 %             \end{exampleblock}
 %         \end{column}
 %         \begin{column}{0.45\textwidth}
@@ -315,12 +315,12 @@
 \begin{frame}[t]{Разработка робота}
     \framesubtitle{Требования к роботу}
     \large
-    \textbf{Проблема} --  выбрать движитель. Робот должен:
+    \textbf{Задача} --  выбрать движитель. Робот должен:
     \begin{itemize}
-        \item иметь \textit{малые размеры}, чтобы лазать и не застевать в щелях;
-        \item обладать достаточной \textit{проходимостью} для преодоления сыпучих грунтов;
-        \item преодолевать \textit{небольшие водные препятствия};
-        \item возможнсоть \textit{залезать на большие валуны};
+        \item Иметь \textit{малые размеры}, чтобы лазать и не застевать в щелях
+        \item Обладать достаточной \textit{проходимостью} для преодоления сыпучих грунтов
+        \item Преодолевать \textit{небольшие водные препятствия}
+        \item Иметь возможнсоть \textit{залезать на большие валуны}
     \end{itemize}
     \uncover<2->{\large\centering\alert{Шагающий цикловой движитель с 1 степенью свободы в ноге}}
 \end{frame}
@@ -328,10 +328,10 @@
 \begin{frame}[t]{Разработка робота}
     \framesubtitle{Структурный синтез}
     \only<1-2>{\large\begin{block}{Вопрос}
-            Какое оптимальное количество ного должно быть в таком движителе?
+            Какое оптимальное количество ног должен иметь такой движитель?
         \end{block}}
     \only<2>{\large\begin{alertblock}{Ответ}
-            \centering Робот должен иметь \textbf{8---14 ног}!
+            \centering Робот с таким движителем должен иметь \textbf{8---14 ног}!
         \end{alertblock}}
 \end{frame}
 
@@ -351,7 +351,7 @@
         \hfill
         \begin{subfigure}[t]{0.32\textwidth}
             \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{gen_algo.jpg}
-            \caption*{Генетический алгоритм \\ (OpenAI-ES алгоритм)}
+            \caption*{Генетический алгоритм \\ (OpenAI-ES)}
         \end{subfigure}
         \hfill
     \end{figure}
@@ -377,14 +377,14 @@
 \begin{frame}[t]{Разработка робота}
     \framesubtitle{Предлагаемое решение}
     \begin{columns}[T,onlytextwidth]
-        \begin{column}{0.49\textwidth}
+        \begin{column}{0.48\textwidth}
             \begin{figure}[H]
                 \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{optimization_idea.png}
                 \caption*{\textbf{Идея}: Минимизировать кол-во ног без потери проходимости}
                 \label{fig{optimization_idea.png}}
             \end{figure}
         \end{column}
-        \begin{column}{0.49\textwidth}
+        \begin{column}{0.50\textwidth}
             \vspace{-2cm}
             \begin{figure}[H]
                 \centering
@@ -427,7 +427,7 @@
             {\footnotesize
                 \begin{eqnarray*}
                     % \resizebox{0.9\hsize}{!}{
-                    F \rightarrow max = \beta \left( {\omega}_{1} \cdot \overbrace{\delta}^{\text{Расстояние}} + {\omega}_{2} \cdot \overbrace{\frac{1}{(\gamma - 1) h_{\text{leg}}sin(\alpha)}}^{\text{Упр. длина корпуса}}\right) +\\ \nonumber + (1 - \beta) {\delta}^{{\omega}_{1}} {\left( \frac{1}{(\gamma - 1)h_{\text{leg}}sin(\alpha)}\right)}^{{\omega}_{2}}
+                    F \rightarrow max = \beta \left( {\omega}_{1} \cdot \overbrace{\delta}^{\text{Дистанция}} + {\omega}_{2} \cdot \overbrace{\frac{1}{(\gamma - 1) h_{\text{leg}}sin(\alpha)}}^{\text{Упр. длина корпуса}}\right) +\\ \nonumber + (1 - \beta) {\delta}^{{\omega}_{1}} {\left( \frac{1}{(\gamma - 1)h_{\text{leg}}sin(\alpha)}\right)}^{{\omega}_{2}}
                     % }
                 \end{eqnarray*}
             }
@@ -439,7 +439,7 @@
 \end{frame}
 
 \begin{frame}[t]{Разработка робота}
-    \framesubtitle{Видео: история одного сгенерированного робота}
+    \framesubtitle{Видео: История одного сгенерированного робота}
     \vspace{-0.6cm}
     \begin{figure}[H]
         % \href{run:./videos/pass_rand_terr.mp4}{
@@ -598,10 +598,10 @@
     \begin{multicols}{2}
         \begin{itemize}
             \alt<1>{}{\color{lightgray}}
-            \item  \textbf{Силомоментный}: массивный и дорогой для маленьких роботов.
-            \item \textbf{Оптический}: очень габаритный.
-            \item \textbf{Магнитный}: очень габаритный.
-            \item \textbf{Емкостной}: дорогой, но лучший для данной задачи.
+            \item  \textbf{Силомоментный}: массивный и дорогой для маленьких роботов
+            \item \textbf{Оптический}: очень габаритный
+            \item \textbf{Магнитный}: очень габаритный
+            \item \textbf{Емкостной}: дорогой, но лучший для данной задачи
             \item {\color{black}\textbf{Пьезорезистивный датчик основанный \alt<1>{на чернилах или полимерах}{\underline{Velostat}}}: дешевый и надежный, но имеет пробелмы с гистерезисом}
 
             \item { \alt<1>{}{\color{lightgray}} \textbf{Тензометрический}: влияние температуры и влажности на чувствительность}
@@ -620,9 +620,9 @@
                 Velostat представляет собой полимерный материал, наполненный техническим углеродом.\\
                 \textbf{Ожидаемые эффекты}:
                 \begin{itemize}
-                    \item \underline{Туннельный эффект} -- диод обладает данным свойством;
-                    \item \underline{Пьезорезистивный} -- удельное электрическое сопротивление полупроводника изменяется под действием механической деформации;
-                    \item \underline{Вязкоупругий} -- может гасить вибрации.
+                    \item \underline{Туннельный эффект} -- диод обладает данным свойством
+                    \item \underline{Пьезорезистивный} -- удельное электрическое сопротивление полупроводника изменяется под действием механической деформации
+                    \item \underline{Вязкоупругий} -- может гасить вибрации
                 \end{itemize}
             \end{exampleblock}
         \end{column}
@@ -647,14 +647,14 @@
 \end{frame}
 
 \begin{frame}[t]{Разработка преобразователя силы}
-    \framesubtitle{Velostat: Faced problems}
+    \framesubtitle{Velostat: Встреченные проблемы}
     \vspace{-20pt}
     \begin{multicols}{2}
         {\large
             \begin{itemize}
-                \item Hysteresis
-                \item Nonlinearity
-                \item Different values with the same pressure if the square of load is less then the sensor
+                \item Гистерезис
+                \item Нелинейность материала
+                \item Разные значения при одинаковом давлении, если площадь нагрузки меньше площади датчика
             \end{itemize}}
             \begin{figure}[H]
                 \centering
@@ -685,26 +685,26 @@
             \end{figure}
     \end{multicols}
     \vspace{-12pt}
-    \begin{block}{Scientific Problem Statement}
-        To characterize Velostat material for cases when point load is less than sensor size and propose solutions for avoiding such issues.
+    \begin{block}{Научная постановка задачи}
+        Охарактеризовать материал Velostat для случаев, когда точечная нагрузка меньше размера датчика, и предложить решения для предотвращения подобных проблем.
     \end{block}
 \end{frame}
 
 \begin{frame}[t]{Разработка преобразователя силы}
-    \framesubtitle{Experimental setup requirements}
+    \framesubtitle{Требования к установке}
     \vspace{-0.5cm}
     {\large
         \begin{itemize}
-            \item Force control. \uncover<2>{\\ \alert{Solved by Impedance Control}}
-            \item Position and force repeatability. \uncover<2>{\\ \alert{Solved by adding a manipulator and a camera}}
-            \item To have an ability to apply force only on a particular part of a sensor. \uncover<2>{\\ \alert{Solved by adding several end-effectors}}
+            \item Управление силой нажатия \uncover<2>{\\ \alert{Решено с помощью импедансного управления}}
+            \item Повторяемость эксперимента по силе и позиции \uncover<2>{\\ \alert{Решено, добавив манипулятор и камеру}}
+            \item Возможность нажимать только на часть сенсора \uncover<2>{\\ \alert{Возможно благодаря насадкам для манипулятора}}
         \end{itemize}}
-    \uncover<2>{\centering\large\alert{All setup requirements are fulfilled}}
+    \uncover<2>{\centering\large\alert{Все требования выполнены}}
 \end{frame}
 
 
 \begin{frame}[t]{Разработка преобразователя силы}
-    \framesubtitle{Experimental Setup: Hardware overall}
+    \framesubtitle{Установка: Общий вид}
     \vspace{-12pt}
     \begin{center}
         \begin{tikzpicture}
@@ -756,8 +756,8 @@
     \end{center}
 \end{frame}
 
-\begin{frame}[t]{Experiment Design}
-    \framesubtitle{Experimental Setup: Hardware, video}
+\begin{frame}[t]{Разработка преобразователя силы}
+    \framesubtitle{Установка: Видео}
     \vspace{-15pt}
     \begin{figure}[H]
         % \href{run:./videos/exp_stand_video.mp4}{
@@ -768,7 +768,7 @@
 \end{frame}
 
 \begin{frame}[t]{Разработка преобразователя силы}
-    \framesubtitle{Experimental Setup: Hardware, Aruco markers}
+    \framesubtitle{Установка: Использование Aruco маркеров}
     \vspace{-15pt}
 
     \begin{figure}[H]
@@ -804,7 +804,7 @@
 \end{frame}
 
 \begin{frame}[t]{Разработка преобразователя силы}
-    \framesubtitle{Experimental Setup: Hardware, end-effector}
+    \framesubtitle{Установка: Насадки}
     \vspace{-0.9cm}
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.6\textwidth}
@@ -831,7 +831,7 @@
                         \node[rounded corners=3pt,black,fill=white] at (8.6,7.9){\tiny 15 mm };
                     \end{scope}
                 \end{tikzpicture}
-                \caption*{All end-effectors}
+                \caption*{Все насадки}
                 \label{fig:all_end_effectors.png}
             \end{figure}
         \end{column}
@@ -841,14 +841,14 @@
             \begin{figure}[H]
                 \begin{subfigure}[t]{0.6\textwidth}
                     \centering\includegraphics[width=0.99\textwidth]{LTH350-DONUT-LOAD-CELL-1.png}\\
-                    \caption*{\normalsize Ground Truth \\ Force sensor}
+                    \caption*{\normalsize Промышленный \\ датчик силы}
                     \label{fig:futek}
                 \end{subfigure}
                 \vspace{-0.2cm}
 
                 \begin{subfigure}[t]{0.6\textwidth}
                     \centering\includegraphics[width=0.99\textwidth]{point_load.JPG}\\
-                    \caption*{\normalsize End-effector in assembly}
+                    \caption*{\normalsize Насадка в сборке}
                     \label{fig:point_load}
                 \end{subfigure}
             \end{figure}
@@ -861,18 +861,18 @@
 
 
 \begin{frame}[t]{Разработка преобразователя силы}
-    \framesubtitle{Experiments}
+    \framesubtitle{Эксперименты}
     \vspace{-15pt}
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.6\textwidth}
             {\large
                 \begin{enumerate}
-                    \item \textbf{Static experiment}. The goal is to identify the coefficients for the transducer model.
-                          \item\textbf{ Dynamic experiment}.
+                    \item \textbf{Статический}. Прикладывается статический груз с размером в сенсор
+                          \item\textbf{Динамический}.
                           \begin{itemize}
                             \large
-                              \item We are representing a transducer as a $4\times4$ grid. We touch with the same pressure using five different end-effectors (area starting from 2mm till 15mm).
-                              \item We are using 2 mm and 15 mm end-effectors. We touch with different forces (5, 10, 20, 30, 40 H).
+                              \item Преобразователь представляется в виде сетки $4\times4$. Мы касаемся с одинаковым давлением, используя все 5 насадок
+                              \item Используются насадки только 2 и 15 мм. Происходит нажатие с силой 5, 10, 20, 30, 40 H
                           \end{itemize}
                 \end{enumerate}
             }
@@ -925,7 +925,7 @@
                     \end{scope}
 
                 \end{tikzpicture}
-                \caption*{Sensor representation \\ as $4\times4$ grid}
+                \caption*{Представление сенсора \\ как $4\times4$ сетки}
                 \label{fig:file_name}
             \end{figure}
         \end{column}
@@ -933,7 +933,7 @@
 \end{frame}
 
 \begin{frame}[t]{Разработка преобразователя силы}
-    \framesubtitle{Result: static experiment}
+    \framesubtitle{Результаты: Статический эксперимент}
     \vspace{-0.5cm}
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.52\textwidth}
@@ -941,7 +941,7 @@
                 V_{out} = V_0 + p[k_p + k_e(1-e^\frac{-(t-t_0)}{\tau_{res}})](1-e^{-\frac{A}{p}}) \\
                 k_p = A_1e^{-A_2p}; \tau_{res} = B_0 + B_1e^{-\frac{p}{B_2}}
             \end{eqnarray*}
-            Where $V_0$ -- initial voltage, $p,\ A_i,\ B_i,\ \tau_{res},\ k_i$ are constants, $t$ -- current time, $t_0$ -- the time when the pressure appeared.
+            Где $V_0$ -- начальное напряжение, $p,\ A_i,\ B_i,\ \tau_{res},\ k_i$ константы, $t$ -- текущее время, $t_0$ -- время начала нажатия.
         \end{column}
         \begin{column}{0.45\textwidth}
             \vspace{-15pt}
@@ -960,57 +960,57 @@
 \end{frame}
 
 \begin{frame}[t]{Разработка преобразователя силы}
-    \framesubtitle{Result: dynamic experiment}
+    \framesubtitle{Результаты: Динамический эксперимент}
     \vspace{-15pt}
     \begin{figure}[H]
         \begin{subfigure}{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{sens1_pike1.png}
-            \caption*{2mm end-effector diam}
+            \caption*{2 мм диаметр насадки}
             \label{fig:sens1_pike1}
         \end{subfigure}
         \begin{subfigure}{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{sens1_pike3.png}
-            \caption*{8mm end-effector diam}
+            \caption*{8 мм диаметр насадки}
             \label{fig:sens1_pike3}
         \end{subfigure}
     \end{figure}
 \end{frame}
 
 \begin{frame}[t]{Разработка преобразователя силы}
-    \framesubtitle{Summary}
+    \framesubtitle{Итог}
     \vspace{-15pt}
     {\large
-        \begin{enumerate}
-            \item Static experiment: transducers coefficients $p,\ A_i,\ B_i,\ \tau_{res},\ k_i$ were identified.
-            \item Dynamic experiment: a transducer can be represented as a single body, when pressure area is higher than 50\% of the sensor area.
-        \end{enumerate}
+    \begin{enumerate}
+        \item Статический эксперимент: определены коэффициенты преобразователей $p,\ A_i,\ B_i,\ \tau_{res},\ k_i$.
+        \item Динамический эксперимент: преобразователь может быть представлен как единое тело, если площадь давления превышает 50\% от площади датчика.
+    \end{enumerate}
     }
 \end{frame}
 
-\begin{frame}[t]{Terrain classification}
+\begin{frame}[t]{Определение типа поверхности}
     \framesubtitle{}
-    \only<1-2>{\large\begin{block}{Question}
-            How to define the terrain type during the movement on such terrain?
+    \only<1-2>{\large\begin{block}{Вопрос}
+        Как определить тип местности во время движения по такой местности?
         \end{block}}
-    \only<2>{\large\begin{alertblock}{Answer}
-            \centering Solving terrain classification problem using Machine learning
+    \only<2>{\large\begin{alertblock}{Ответ}
+            \centering Решенить проблему классификации местности с помощью машинного обучения
         \end{alertblock}}
 \end{frame}
 
-\begin{frame}[t]{Terrain classification}
-    \framesubtitle{Experimental setup requirements}
+\begin{frame}[t]{Определение типа поверхности}
+    \framesubtitle{Требования к установке}
     \vspace{-0.5cm}
     {\large
-        \begin{itemize}
-            \item To have a possibility to install new surfaces and change it quickly. \uncover<2>{\\ \alert{Solved by quick detachable table}}
-            \item Infinite movement. \uncover<2>{\\ \alert{Solved by creating the 2 DoF mechanism and a S-shape leg}}
-            \item Movement part should be the same as on the StriRus. \uncover<2>{\\ \alert{Solved by creating a mount for a leg assembly}}
-        \end{itemize}}
-    \only<2>{\centering\large\alert{All setup requirements are fulfilled}}
+    \begin{itemize}
+        \item Иметь возможность быстро менять используемые поверхности \uncover<2>{\\ \alert{Решается с помощью быстроразборного стола}}
+        \item Бесконечное движение робота \uncover<2>{\\ \alert{Решается путем создания 2-ух степенного механизма и ноги S-образной формы}}
+        \item Узел движителя должен быть такой же как на СтриРусе \uncover<2>{\\ \alert{Решено путем создания крепления для узла ноги}}
+    \end{itemize}}
+\only<2>{\centering\large\alert{Все требования выполнены!}}
 \end{frame}
 
-\begin{frame}[t]{Terrain classification}
-    \framesubtitle{Experimental Setup}
+\begin{frame}[t]{Определение типа поверхности}
+    \framesubtitle{Установка}
     \vspace{-15pt}
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.55\textwidth}
@@ -1069,8 +1069,8 @@
 \end{frame}
 
 
-\begin{frame}[t]{Terrain classification}
-    \framesubtitle{Experimental setup: surface types, video}
+\begin{frame}[t]{Определение типа поверхности}
+    \framesubtitle{Установка: Типы поверхности, видео}
     \vspace{-15pt}
     \begin{figure}[H]
         \begin{subfigure}{0.49\textwidth}
@@ -1089,7 +1089,7 @@
     \end{figure}
 \end{frame}
 
-% \begin{frame}[t]{Terrain classification}
+% \begin{frame}[t]{Определение типа поверхности}
 %     \framesubtitle{Velostat transducer properties}
 %     \large
 %     \begin{itemize}
@@ -1097,8 +1097,8 @@
 %     \end{itemize}
 % \end{frame}
 
-\begin{frame}[t]{Terrain classification}
-    \framesubtitle{Obtained data from one experiment}
+\begin{frame}[t]{Определение типа поверхности}
+    \framesubtitle{Данные с одного эксперимента}
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.60\textwidth}
             \begin{figure}[H]
@@ -1122,90 +1122,90 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}[t]{Terrain classification}
-    \framesubtitle{Summary}
+\begin{frame}[t]{Определение типа поверхности}
+    \framesubtitle{Итог}
     \large
     \begin{itemize}
-        \item We can distinct rubber and rock surfaces
-        \item Terrain classification parameters was chosen:
+        \item Возможность различать резиновую и каменистую поверхность.
+        \item Выбраны параметры классификации рельефа для машинного обучения:
               \begin{itemize}
                 \large
-                  \item RPM
-                  \item Motor Torque
-                  \item Acceleration from IMU
-                  \item Force data which are represented as Sensor value\/segment, Peak amplitude, Average amplitude
+                  \item Число оборотов в минуту
+                  \item Крутящий момент двигателя
+                  \item Ускорение от IMU
+                  \item Данные о силе, которые представлены как значение датчика\/сегмент, пиковая амплитуда, средняя амплитуда
               \end{itemize}
-        \item The force transducer has been proven to work
+        \item Velostat датчик силы доказал свою работоспособность.
     \end{itemize}
 \end{frame}
 
-\begin{frame}[t]{Map creation based on tactile data}
+\begin{frame}[t]{Картографирование с помощью датчиков силы}
     \framesubtitle{}
-    \only<1-2>{\large\begin{block}{Question}
-            How to create a dense point cloud, using sparse data from legs?
+    \only<1-2>{\large\begin{block}{Вопрос}
+        Как создать плотное облако точек, используя разреженные данные ног?
         \end{block}}
-    \only<2>{\large\begin{alertblock}{Answer}
-            \centering \textit{Create a mesh}, using concave hull Delaunay triangulation using sparse data, \textit{sampling it} and return to navigation
+    \only<2>{\large\begin{alertblock}{Ответ}
+            \centering \textit{Создать полигональную сетку}, используя 2D триангуляцию Делоне (вогнутая оболочка) с использованием разреженных данных, \textit{сгенерировать новые точки} и вернуть данные навигации
         \end{alertblock}}
 \end{frame}
 
-\begin{frame}[t]{Map creation based on tactile data}
-    \framesubtitle{Experimental setup}
+\begin{frame}[t]{Картографирование с помощью датчиков силы}
+    \framesubtitle{Места проведения экспериментов}
     \vspace{-15pt}
     \begin{figure}[H]
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{coppelia_sim.png}
-            \caption*{CoppeliaSim simulator, \textbf{4th gen} StriRus}
+            \caption*{CoppeliaSim симулятор,\\ \textbf{4th gen} СтриРус}
         \end{subfigure}
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{rl_sim.JPG}
-            \caption*{IRL, \textbf{3th+ gen} StriRus}
+            \caption*{Натурные испытания,\\ \textbf{3th+ gen} СтриРус}
         \end{subfigure}
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Map creation based on tactile data}
-    \framesubtitle{Assumptions}
+\begin{frame}[t]{Картографирование с помощью датчиков силы}
+    \framesubtitle{Предположения}
     \large
-    Current solution considering such assumptions:
+    Текущее решение с учетом таких предположений:
     \begin{itemize}
-        \item Our terrain can be represented $z = f(x,y)$. We can use 2D Delaunay triangulation (projected points on a plane)
-        \item All simulation data are preprocessed by white noise
+        \item Наша местность может быть представлена $z = f(x,y)$. Поэтому используется 2D триангуляция Делоне (проецирование точек на плоскость)
+        \item Все данные моделирования предварительно обрабатываются белым шумом
     \end{itemize}
 \end{frame}
 
-\begin{frame}[t]{Map creation based on tactile data}
-    \framesubtitle{Delaunay triangulation}
+\begin{frame}[t]{Картографирование с помощью датчиков силы}
+    \framesubtitle{Триангуляция Делоне}
     \vspace{-0.2cm}
     \begin{figure}[H]
         \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{delone_idea.png}
-        \caption*{Common 2D Delaunay triangulation (Convex Hull) \\ \textbf{From Point Cloud to mesh}}
+        \caption*{2D триангуляция Делоне (Выпуклая оболочка) \\ \textbf{От облака точек к полигональной сетке}}
         \label{fig:delone_idea.png}
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Map creation based on tactile data}
-    \framesubtitle{Result: simulator}
+\begin{frame}[t]{Картографирование с помощью датчиков силы}
+    \framesubtitle{Результат: Симулятор, маршрут}
     \vspace{-15pt}
     \begin{figure}[H]
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{terrain_w_water1.png}
-            \caption*{Start point}
+            \caption*{Начало маршрута}
         \end{subfigure}
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{terrain_w_water_end.png}
-            \caption*{End point}
+            \caption*{Конец маршрута}
         \end{subfigure}
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Map creation based on tactile data}
-    \framesubtitle{Result: Mesh}
+\begin{frame}[t]{Картографирование с помощью датчиков силы}
+    \framesubtitle{Результат: Полигональная сетка и сгенерированные точки}
     \vspace{-15pt}
     \begin{figure}[H]
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{mesh_rviz.png}
-            \caption*{Mesh created using concave hull 2D Delaunay triangulation}
+            \caption*{Сетка, созданная 2D триангуляциией Делоне (вогнутая оболочка)}
         \end{subfigure}
         \begin{subfigure}[t]{0.49\textwidth}
                 \centering
@@ -1231,20 +1231,20 @@
                         node[rounded corners=3pt,above,black,fill=white]{\tiny Generated Point Cloud};
                     \end{scope}
                 \end{tikzpicture}
-                \caption*{Sampled point cloud}
+                \caption*{Наложенные облака точек}
                 \label{fig:sampled_pcd.png}
         \end{subfigure}
     \end{figure}
 \end{frame}
 
 
-\begin{frame}[t]{Map creation based on tactile data}
-    \framesubtitle{Why do we need a concave hull solution}
+\begin{frame}[t]{Картографирование с помощью датчиков силы}
+    \framesubtitle{Почему важно использовать вогнутую оболочку}
     \vspace{-15pt}
     \begin{figure}[H]
         \begin{subfigure}[t]{0.3\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{convex_terr.png}
-            \caption*{Case study}
+            \caption*{Пример поверхности}
             \label{fig:convex_terr.png}
         \end{subfigure}
         \hfill
@@ -1276,117 +1276,109 @@
                         node[rounded corners=3pt,right,black,fill=white]{\tiny Cloud of contact points};
                     \end{scope}
                 \end{tikzpicture}
-                \caption*{Convex Hull}
+                \caption*{Выпуклая оболочка}
                 \label{fig:conv_convex.png}
         \end{subfigure}
         \hfill
         \begin{subfigure}[t]{0.33\textwidth}
             \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{conv_concave.png}
-            \caption*{Concave Hull}
+            \caption*{Вогнутая оболочка}
             \label{fig:conv_concave.png}
         \end{subfigure}
 
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Map creation based on tactile data}
-    \framesubtitle{Metric C2C: reference and ground truth point cloud comparison}
+\begin{frame}[t]{Картографирование с помощью датчиков силы}
+    \framesubtitle{Метрика C2C: Сравнение эталонного и полученного облаков точек}
     \vspace{-15pt}
     \begin{figure}[H]
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{cropped_pcd.png}
-            \caption*{Overlaid Point Clouds}
+            \caption*{Наложенные облака точек}
         \end{subfigure}
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{pcd_hist.png}
-            \caption*{Error histogram (distance from a point to closest ground truth point)}
+            \caption*{Гистограмма ошибок (расстояние от точки до ближайшей эталонной)}
         \end{subfigure}
     \end{figure}
     % \alert{\large RMSE 0.053074, std 0.025}
 \end{frame}
 
-\begin{frame}[t]{Map creation based on tactile data}
-    \framesubtitle{Metric C2M: reference and ground truth mesh comparison}
+\begin{frame}[t]{Картографирование с помощью датчиков силы}
+    \framesubtitle{Метрика C2M: Сравнение эталонной и полученной сеток}
     \vspace{-15pt}
     \begin{figure}[H]
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{mesh_comp.png}
-            \caption*{Overlaid Meshes}
+            \caption*{Наложенные сетки}
         \end{subfigure}
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{mesh_hist.png}
-            \caption*{Error histogram (distance from a point to closest ground truth point)}
+            \caption*{Гистограмма ошибок (расстояние от точки до ближайшей эталонной)}
         \end{subfigure}
     \end{figure}
     % \alert{\large RMSE 0.00167067, std 0.0005}
 \end{frame}
 
-\begin{frame}[t]{Map creation based on tactile data}
-    \framesubtitle{Result: real world experiment, video}
+\begin{frame}[t]{Картографирование с помощью датчиков силы}
+    \framesubtitle{Результат: Натурные испытания, Видео}
     \vspace{-0.5cm}
     \begin{figure}[H]
         \begin{subfigure}[t]{0.49\textwidth}
             % \href{run:./videos/big_angle2.mp4}{
             \href{https://youtu.be/2dxHHTG4psQ}{
                 \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{real_robot_mesh_video_preview.png}}
-            \caption*{Robot is passing the obstacle}
+            \caption*{Робот проходит препятствие}
         \end{subfigure}
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{real_mesh.jpg}
-            \caption*{Mesh, obtained from legs}
+            \caption*{Полигональная сетка, полученная с помощью ног}
         \end{subfigure}
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Map creation based on tactile data}
-    \framesubtitle{Summary}
+\begin{frame}[t]{Картографирование с помощью датчиков силы}
+    \framesubtitle{Итог}
     \large
     \begin{itemize}
-        \item Map can be built using concave hull 2D Delaunay triangulation.
-
-              A Sparse point cloud obtained from force sensors, installed on legs.
-        \item \textit{Simulator}: \begin{itemize}
+        \item Карта может быть построена с помощью \textit{вогнутой оболочки 2D триангуляции Делоне}, где входными данными являются \textit{точки касания, определенные датчиком силы}.
+        \item \textit{Симулятор} (Среднее значение среднеквадратичной ошибки): \begin{itemize}
             \large
-                  \item Avg. Point cloud comparison RMSE is about 5 cm.
-                  \item Avg. Mesh comparison RMSE is about 1 cm.
+                  \item При сравнении облаков точек составляет около 5 см.
+                  \item При сравнении сеткок составляет около 1 см.
               \end{itemize}
-        \item \textit{Real world experiment}: \begin{itemize}
+        \item \textit{Натурный эксперимент} (-//-): \begin{itemize}
             \large
-                  \item Avg. Point cloud comparison RMSE is about 8 cm.
-                        %     \item Avg. Mesh comparison RMSE is about 1 cm.
+                  \item При сравнении облаков точек составляет около 8 см.
+                        % \item Среднее значение. RMSE при сравнении сетки составляет около 1 см.
               \end{itemize}
-              It is appropriate accuracy for such task.
+              Это приемлимая точность для такой задачи.
     \end{itemize}
 \end{frame}
 
 
-\begin{frame}[t]{Summary}
+\begin{frame}[t]{Глобальный итог}
     \framesubtitle{}
     \large
-    \vspace{-0.7cm}
-    % \begin{itemize}
-    %     \item Robot was created
-    %     \item Force transducer based on Velostat was created and was investigated
-    %     \item Robot can distinct rubber and rock terrains
-    %     \item Robot can build a map using tactile sensors
-    % \end{itemize}
+    \vspace{-0.5cm}
     \begin{figure}[H]
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=2.5cm,width=1\textwidth,keepaspectratio]{strirus_3.JPG}
-            \caption*{1. StriRus was designed and assembled}
+            \caption*{1. Структурный синтез}
         \end{subfigure}
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=2.5cm,width=1\textwidth,keepaspectratio]{velostat_sensor_look.JPG}
-            \caption*{2. Force transducer based on Velostat was created and was investigated}
+            \caption*{2. Датчик силы на основе Velostat}
         \end{subfigure}
     
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=2.5cm,width=1\textwidth,keepaspectratio]{s_shape_leg/s_leg_setup.JPG}
-            \caption*{3. Robot distinct rubber and rock surfaces}
+            \caption*{3. Определение поверхности}
         \end{subfigure}
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=2.5cm,width=1\textwidth,keepaspectratio]{conv_concave.png}
-            \caption*{4. Build a map using tactile sensors}
+            \caption*{4. Ножное картографирование}
         \end{subfigure}
     \end{figure}
 \end{frame}
