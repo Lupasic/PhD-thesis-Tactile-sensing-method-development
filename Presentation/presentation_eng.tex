@@ -92,7 +92,7 @@
 
 \fbckg{fibeamer/figs/common.png}
 
-\begin{frame}[t]{Motivation: why do we need to explore caves by robots}
+\begin{frame}[t]{Motivation: Why do we need to explore caves by robots}
     % \framesubtitle{Cave dangerous obstacles}
     \vspace{-0.85cm}
     \begin{figure}[H]
@@ -169,7 +169,7 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Motivation: unsolvable problem for cameras and lidars}
+\begin{frame}[t]{Motivation: Unsolvable problem for cameras and lidars}
     \framesubtitle{Question: how to make a map when you have a puddle above a surface?}
     \vspace{-1cm}
     \begin{columns}[T,onlytextwidth]
@@ -248,7 +248,7 @@
     \framesubtitle{}
     \begin{block}{Problem 1}
         \large
-        How to obtain a useful information on terrain, \textbf{when we have a SLAM based on lidars, cameras}?
+        How to obtain a \underline{useful information} on terrain, \textbf{when we have a SLAM based on lidars, cameras}?
         \vspace{5pt}
 
         \uncover<2->{\alert{\large Obtain map and terrain type}}
@@ -259,7 +259,7 @@
     \framesubtitle{}
     \begin{exampleblock}{Problem 1}
         \large
-        \textit{Map can be built} \textbf{using tactile sensors} on each leg of the robot and create a \textbf{dense point cloud} using sampling from generated mesh from \textbf{modified Delaunay triangulation}.
+        \textit{Map can be built} \textbf{using tactile sensors} on each leg of the robot and create a \textbf{dense point cloud} using sampling from generated mesh from \textbf{modified 2D Delaunay triangulation}.
         \vspace{5pt}
 
         \textit{Terrain type} can be obtained solving \textbf{terrain classification} problem using \textbf{machine learning}.
@@ -317,10 +317,10 @@
     \large
     \textbf{Problem} --  choose robot mover type. This robot should:
     \begin{itemize}
-        \item should have \textit{small dimensions} to sneak through holes;
-        \item have enough \textit{off-road passability} to pass a granular terrain;
-        \item should \textit{traverse through small water obstacles};
-        \item can \textit{climb on big stones};
+        \item should have \textit{small dimensions} to sneak through holes
+        \item have enough \textit{off-road passability} to pass a granular terrain
+        \item should \textit{traverse through small water obstacles}
+        \item can \textit{climb on big stones}
     \end{itemize}
     \uncover<2->{\large\centering\alert{Cycling robot with 1 DoF leg}}
 \end{frame}
@@ -328,7 +328,7 @@
 \begin{frame}[t]{Robot design}
     \framesubtitle{Structural synthesis problem}
     \only<1-2>{\large\begin{block}{Question}
-            What the optimal number of legs should be in such robot?
+            What the optimal number of legs should be in such robot mover?
         \end{block}}
     \only<2>{\large\begin{alertblock}{Answer}
             \centering Robot should have \textbf{8-14 legs} in total!
@@ -351,7 +351,7 @@
         \hfill
         \begin{subfigure}[t]{0.32\textwidth}
             \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{gen_algo.jpg}
-            \caption*{Genetic algorithm \\ (DEAP Library)}
+            \caption*{Genetic algorithm \\ (OpenAI-ES)}
         \end{subfigure}
         \hfill
     \end{figure}
@@ -442,7 +442,7 @@
 \end{frame}
 
 \begin{frame}[t]{Robot design}
-    \framesubtitle{Video: the story of one generated robot}
+    \framesubtitle{Video: The story of one generated robot}
     \vspace{-0.6cm}
     \begin{figure}[H]
         % \href{run:./videos/pass_rand_terr.mp4}{
@@ -601,14 +601,14 @@
     \begin{multicols}{2}
         \begin{itemize}
             \alt<1>{}{\color{lightgray}}
-            \item  \textbf{F/T sensors}: too massive and expensive for small robots.
-            \item \textbf{Optical}: too thick.
-            \item \textbf{Magnetic}: too thick.
-            \item \textbf{Capacitive}: expensive, but the best in terms of requirements.
+            \item  \textbf{F/T sensors}: too massive and expensive for small robots
+            \item \textbf{Optical}: too thick
+            \item \textbf{Magnetic}: too thick
+            \item \textbf{Capacitive}: expensive, but the best in terms of requirements
             \item {\color{black}\textbf{Piezoresistive sensors
                       based on \alt<1>{conductive inks or polymers}{\underline{Velostat}}}: inexpensive and robust, but has problems with hysteresis}
 
-            \item { \alt<1>{}{\color{lightgray}} \textbf{Stain gages}: challenge for wiring between continuously rotating legs and the robot body.}
+            \item { \alt<1>{}{\color{lightgray}} \textbf{Stain gages}: temperature and humidity drasticaly influence on the results}
         \end{itemize}
     \end{multicols}
     \vspace{-10pt}
@@ -658,7 +658,7 @@
             \begin{itemize}
                 \item Hysteresis
                 \item Nonlinearity
-                \item Different values with the same pressure if the square of load is less then the sensor
+                \item Different values with the same pressure if the area of load is less then the sensor
             \end{itemize}}
             \begin{figure}[H]
                 \centering
@@ -708,7 +708,7 @@
 
 
 \begin{frame}[t]{Force transducer design}
-    \framesubtitle{Experimental Setup: Hardware overall}
+    \framesubtitle{Experimental Setup: Overall view on hardware}
     \vspace{-12pt}
     \begin{center}
         \begin{tikzpicture}
@@ -761,7 +761,7 @@
 \end{frame}
 
 \begin{frame}[t]{Experiment Design}
-    \framesubtitle{Experimental Setup: Hardware, video}
+    \framesubtitle{Experimental Setup: Video}
     \vspace{-15pt}
     \begin{figure}[H]
         % \href{run:./videos/exp_stand_video.mp4}{
@@ -772,7 +772,7 @@
 \end{frame}
 
 \begin{frame}[t]{Force transducer design}
-    \framesubtitle{Experimental Setup: Hardware, Aruco markers}
+    \framesubtitle{Experimental Setup: Angle error correction by Aruco markers}
     \vspace{-15pt}
 
     \begin{figure}[H]
@@ -808,7 +808,7 @@
 \end{frame}
 
 \begin{frame}[t]{Force transducer design}
-    \framesubtitle{Experimental Setup: Hardware, end-effector}
+    \framesubtitle{Experimental Setup: End-effectors}
     \vspace{-0.9cm}
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.6\textwidth}
@@ -871,7 +871,7 @@
         \begin{column}{0.6\textwidth}
             {\large
                 \begin{enumerate}
-                    \item \textbf{Static experiment}. The goal is to identify the coefficients for the transducer model.
+                    \item \textbf{Static experiment}. We are applying static force for identifying transducer model.
                           \item\textbf{ Dynamic experiment}.
                           \begin{itemize}
                             \large
@@ -937,7 +937,7 @@
 \end{frame}
 
 \begin{frame}[t]{Force transducer design}
-    \framesubtitle{Result: static experiment}
+    \framesubtitle{Result: Static experiment}
     \vspace{-0.5cm}
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.52\textwidth}
@@ -950,29 +950,54 @@
         \begin{column}{0.45\textwidth}
             \vspace{-15pt}
             \begin{figure}[H]
-                \centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{least_square_model.png}
-                \label{fig:least_square_model.png}
+                \begin{subfigure}{0.99\textwidth}
+                    \centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{least_square_model.png}
+                    \label{fig:least_square_model.png}
+                \end{subfigure}
+                \vspace{-1cm}
+
+                \begin{subfigure}{0.99\textwidth}
+                        \centering
+                         \begin{tikzpicture}
+                            % Include the image in a node
+                            \node [above right, inner sep=0] (image) at (0,0) 
+                            {\centering\includegraphics[height=3.4cm,width=1\textwidth,keepaspectratio]{static_load_meh.JPG}};          
+                            % Create scope with normalized axes
+                            \begin{scope}[
+                                x={($ 0.1*(image.south east)$)},
+                                y={($ 0.1*(image.north west)$)}]
+                                % Grid and axes' labels
+                                % \draw[lightgray,step=1] (image.south west) grid (image.north east);
+                                % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
+                                % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
+                                % Labels
+                            \draw[latex-, very thick,green] (4.3,2.3) -- (5,1.6)
+                                node[rounded corners=3pt,below right,black,fill=white]{\tiny Velostat sensor};
+                            
+                            \draw[latex-, very thick,green] (4.3,3.5) -- (5.5,2.45)
+                                node[rounded corners=3pt,right,black,fill=white]{\tiny \O \ 15 mm end-effector};
+
+                            \draw[latex-, very thick,green] (6,6) -- (6.4,4.9)
+                                node[rounded corners=3pt,below right,black,fill=white]{\tiny Known static load};
+                            \end{scope}
+                        \end{tikzpicture}
+                        % \caption*{}
+                \end{subfigure}
             \end{figure}
         \end{column}
     \end{columns}
-    \vspace{-11pt}
-    \begin{figure}[H]
-        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{pikes.png}
-        \caption*{ Normalized force data from sensor and transducer}
-        \label{fig:pikes.png}
-    \end{figure}
 \end{frame}
 
 \begin{frame}[t]{Force transducer design}
-    \framesubtitle{Result: dynamic experiment}
+    \framesubtitle{Result: Dynamic experiment}
     \vspace{-15pt}
     \begin{figure}[H]
-        \begin{subfigure}{0.49\textwidth}
-            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{sens1_pike1.png}
+        \begin{subfigure}{0.64\textwidth}
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{sens1_pike1_mod.png}
             \caption*{2mm end-effector diam}
             \label{fig:sens1_pike1}
         \end{subfigure}
-        \begin{subfigure}{0.49\textwidth}
+        \begin{subfigure}{0.34\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{sens1_pike3.png}
             \caption*{8mm end-effector diam}
             \label{fig:sens1_pike3}
@@ -1074,7 +1099,7 @@
 
 
 \begin{frame}[t]{Terrain classification}
-    \framesubtitle{Experimental setup: surface types, video}
+    \framesubtitle{Experimental setup: Surface types, video}
     \vspace{-15pt}
     \begin{figure}[H]
         \begin{subfigure}{0.49\textwidth}
@@ -1139,17 +1164,17 @@
                   \item Acceleration from IMU
                   \item Force data which are represented as Sensor value\/segment, Peak amplitude, Average amplitude
               \end{itemize}
-        \item The force transducer has been proven to work
+        \item The Velostat force transducer has been proven to work
     \end{itemize}
 \end{frame}
 
 \begin{frame}[t]{Map creation based on tactile data}
     \framesubtitle{}
     \only<1-2>{\large\begin{block}{Question}
-            How to create a dense point cloud, using sparse data from legs?
+            How to create a dense point cloud, using sparse data from legs contact points?
         \end{block}}
     \only<2>{\large\begin{alertblock}{Answer}
-            \centering \textit{Create a mesh}, using concave hull Delaunay triangulation using sparse data, \textit{sampling it} and return to navigation
+            \centering \textit{Create a mesh}, using concave hull 2D Delaunay triangulation using sparse data, \textit{sampling a mesh} and return generated points to navigation
         \end{alertblock}}
 \end{frame}
 
@@ -1189,7 +1214,7 @@
 \end{frame}
 
 \begin{frame}[t]{Map creation based on tactile data}
-    \framesubtitle{Result: simulator}
+    \framesubtitle{Result: Simulator, path}
     \vspace{-15pt}
     \begin{figure}[H]
         \begin{subfigure}[t]{0.49\textwidth}
@@ -1204,7 +1229,7 @@
 \end{frame}
 
 \begin{frame}[t]{Map creation based on tactile data}
-    \framesubtitle{Result: Mesh}
+    \framesubtitle{Result: Generated mesh and point cloud}
     \vspace{-15pt}
     \begin{figure}[H]
         \begin{subfigure}[t]{0.49\textwidth}
@@ -1294,7 +1319,7 @@
 \end{frame}
 
 \begin{frame}[t]{Map creation based on tactile data}
-    \framesubtitle{Metric C2C: reference and ground truth point cloud comparison}
+    \framesubtitle{Metric C2C: Reference and ground truth point cloud comparison}
     \vspace{-15pt}
     \begin{figure}[H]
         \begin{subfigure}[t]{0.49\textwidth}
@@ -1310,7 +1335,7 @@
 \end{frame}
 
 \begin{frame}[t]{Map creation based on tactile data}
-    \framesubtitle{Metric C2M: reference and ground truth mesh comparison}
+    \framesubtitle{Metric C2M: Reference and ground truth mesh comparison}
     \vspace{-15pt}
     \begin{figure}[H]
         \begin{subfigure}[t]{0.49\textwidth}
@@ -1326,7 +1351,7 @@
 \end{frame}
 
 \begin{frame}[t]{Map creation based on tactile data}
-    \framesubtitle{Result: real world experiment, video}
+    \framesubtitle{Result: Real world experiment, video}
     \vspace{-0.5cm}
     \begin{figure}[H]
         \begin{subfigure}[t]{0.49\textwidth}
@@ -1346,9 +1371,7 @@
     \framesubtitle{Summary}
     \large
     \begin{itemize}
-        \item Map can be built using concave hull 2D Delaunay triangulation.
-
-              A Sparse point cloud obtained from force sensors, installed on legs.
+        \item Map can be built using concave hull 2D Delaunay triangulation, where input data are the sparse point cloud of contacts.
         \item \textit{Simulator}: \begin{itemize}
             \large
                   \item Avg. Point cloud comparison RMSE is about 5 cm.
@@ -1359,7 +1382,7 @@
                   \item Avg. Point cloud comparison RMSE is about 8 cm.
                         %     \item Avg. Mesh comparison RMSE is about 1 cm.
               \end{itemize}
-              It is appropriate accuracy for such task.
+             \textit{ It is appropriate accuracy for such task.}
     \end{itemize}
 \end{frame}
 
@@ -1377,7 +1400,7 @@
     \begin{figure}[H]
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=2.5cm,width=1\textwidth,keepaspectratio]{strirus_3.JPG}
-            \caption*{1. StriRus was designed and assembled}
+            \caption*{1. Struct. synthesis solution for cycling robots was proposed}
         \end{subfigure}
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=2.5cm,width=1\textwidth,keepaspectratio]{velostat_sensor_look.JPG}
