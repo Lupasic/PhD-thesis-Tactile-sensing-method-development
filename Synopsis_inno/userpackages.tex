@@ -1,0 +1,20 @@
+%%% Микротипографика %%%
+%\ifnumequal{\value{draft}}{0}{% Только если у нас режим чистовика
+%    \usepackage[final]{microtype}[2016/05/14] % улучшает представление букв и слов в строках, может помочь при наличии отдельно висящих слов
+%}{}
+
+% \usepackage[skip=2pt]{caption}
+% % will apply to all subcaptions
+% \usepackage[skip=2pt]{subcaption}
+\captionsetup[subfigure]{textfont=normalsize,labelfont=normalsize}
+
+\setlist[itemize,1]{leftmargin=0pt,itemindent=(\parindent+0.5\labelwidth),topsep=0pt,itemsep=0pt,parsep=0pt,partopsep=0pt}
+\setlist[itemize,2]{leftmargin=\parindent,itemindent=(\parindent+0.5\labelwidth),topsep=0pt,itemsep=0pt,parsep=0pt,partopsep=0pt}
+\setlist[itemize,3]{leftmargin=\parindent,itemindent=(\parindent+0.5\labelwidth),topsep=0pt,itemsep=0pt,parsep=0pt,partopsep=0pt}
+%Интервал в enumirate
+\setlist[enumerate,1]{leftmargin=0pt,itemindent=(\parindent+0.66\labelwidth),topsep=0pt,itemsep=0pt,parsep=0pt,partopsep=0pt}
+\setlist[enumerate,2]{leftmargin=\parindent,itemindent=(\parindent+0.66\labelwidth),topsep=0pt,itemsep=0pt,parsep=0pt,partopsep=0pt}
+\setlist[enumerate,3]{leftmargin=\parindent,itemindent=(\parindent+0.66\labelwidth),topsep=0pt,itemsep=0pt,parsep=0pt,partopsep=0pt}
+
+% \setlength{\abovecaptionskip}{1pt} 
+% \setlength{\belowcaptionskip}{1pt} 

@@ -1,0 +1,247 @@
+
+\textbf{{Третья глава}} посвящена разработке и исследованию самодельного преобразователя силы на основе Velostat
+
+Существует несколько типов датчиков, которые могут измерять контактные силы и распределение давления. Это могут быть оптические, пьезорезистивные, пьезоэлектрические, магнитные, емкостные, на основе оптических волокон. Промышленные датчики силы и момента (F/T) широко распространены на гуманоидах (Atlas, Fedor) или четвероногих (Spot, AnyMal). Однако они слишком велики для небольших роботов, таких как RHEX, WHEGS или StriRus.
+
+Оптические и магнитные датчики обладают теми же недостатками. Емкостные датчики требуют высокой точности изготовления. Кроме того, датчики перечисленных типов довольно дороги, что делает их использование нецелесообразным в исследовательских роботах, которые работают в опасных условиях и могут быть потеряны в процессе исследования пещеры. Недорогой альтернативой являются тензометрические датчики.
+
+Самый популярный тип тензометрического датчика -- тензорезистивный датчик. Другой тип -- пьезорезистивные датчики на основе проводящих волокон или полимеров. Они недорогие, очень гибкие и компактные. Одним из основных недостатков является значительный гистерезис.
+
+В представленной работе используется материал Velostat (Linqstat) \pic{fig:velostat_sensor.jpg} в качестве промежуточного слоя для датчика \pic{fig:simplest_sensor.jpg}.
+
+\begin{figure}[h]
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering\includegraphics[height=2.5cm,width=1\textwidth,keepaspectratio]{velostat_sensor.jpg}
+        \caption{Материал Velostat}
+        \label{fig:velostat_sensor.jpg}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering\includegraphics[height=2.5cm,width=1\textwidth,keepaspectratio]{simplest_sensor.jpg}
+        \caption{Простейший преобразователь силы на основе Velostat}
+        \label{fig:simplest_sensor.jpg}
+    \end{subfigure}
+    \caption{Примеры использования Velostat}
+\end{figure}
+
+При исследовании преобразователя силы на основе Velostat, было замечено, что площадь нажатия влияет на показания преобразователя. Поэтому было решено характеризовать материал для случаев, когда нагрузка меньше, чем размер сенсора.
+
+Созданный преобразователь состоит из двух медных оболочек, разделенных слоем Velostat. Давление на датчик приводит к изменению его сопротивления: чем выше давление, тем ниже сопротивление. На \pic{fig:velostat_pressure_resistance.jpg} показана рабочая область сенсора, основанная на весе, который может быть приложен на одну ногу робота.
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+        % Include the image in a node
+        \node [above right, inner sep=0] (image) at (0,0)
+        {\centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{velostat_pressure_resistance.jpg}};
+        % Create scope with normalized axes
+        \begin{scope}[
+                x={($ 0.1*(image.south east)$)},
+                y={($ 0.1*(image.north west)$)}]
+            \draw[stealth-, very thick,green] (4.21,2.75) -- (6.5,5);
+            \draw[stealth-, very thick,green] (8.75,2.15) -- (6.5,5)
+            node[rounded corners=3pt,above,black,fill=white]{\small Рабочая область};
+        \end{scope}
+    \end{tikzpicture}
+    \caption{График зависимости прикладываемого веса от сопротивления}
+    \label{fig:velostat_pressure_resistance.jpg}
+\end{figure}
+
+Исследования преобразователя Velostat, для случаев которых площадь нагрузки меньше, чем размер преобразователя, были проведены с помощью разработанного для этой цели исследовательского стенда. Среди требований к стенду можно отметить: необходимость контролировать силу нажатия и повторяемость эксперимента как по величине, так и по расположению площадки контакта инструмента и исследуемого преобразователя силы. Указанным требованиям возможно удовлетворить, используя коллаборативный робот-манипулятор, который будет управляться с помощью импедансного управления.
+
+Использование коллаборативного робота позволяет также удовлетворить требованиям безопасности и допустить работу робота в непосредственно близости от экспериментатора. Разработанный стенд, представлен на рисунке \ref{fig:exp_standd}
+
+\begin{figure}[h]
+    \begin{center}
+        \begin{subfigure}{0.8\textwidth}
+            \begin{tikzpicture}
+                % Include the image in a node
+                \node [
+                    above right,
+                    inner sep=0] (image) at (0,0) {\centering\includegraphics[height=8cm,width=1\textwidth,keepaspectratio]{exp_stand1}};
+
+                % Create scope with normalized axes
+                \begin{scope}[
+                        x={($0.1*(image.south east)$)},
+                        y={($0.1*(image.north west)$)}]
+                    \draw[latex-, very thick,green] (3.5,2.2) -- (2.5,1)
+                    node[rounded corners=3pt,below left,black,fill=white]{\small Velostat сенсор};
+
+                    \draw[stealth-, very thick,green] (3.5,2.6) -- ++(-0.7,+0.5)
+                    node[rounded corners=3pt,left,black,fill=white]{\small Датчик силы};
+
+                    \draw[stealth-, very thick,green] (6.5,3) -- (7,6)
+                    node[rounded corners=3pt,above right,black,fill=white]{\small Self-made PCB};
+
+                    \draw[stealth-, very thick,green] (7.2,1.5) -- (8,5)
+                    node[rounded corners=3pt,above right,black,fill=white]{\small Ардуино};
+
+                    \draw[stealth-, very thick,green] (2.5,9.5) -- (4,9.5)
+                    node[rounded corners=3pt,right,black,fill=white]{\small Камера};
+
+                    \draw[very thick,green] (0.5,2.5) rectangle (4.2,9)
+                    node[below left,black,fill=green]{\small UR10e};
+
+                    \draw[latex-, very thick,green] (4.5,7.2) edge (5.5,7.5)
+                    (4.8,5.3) -- (5.5,7.5)
+                    node[rounded corners=3pt,above,black,fill=white]{\small Aruco маркеры};
+                \end{scope}
+            \end{tikzpicture}
+            \caption{Общий вид экспериментального стенда}
+            \label{fig:exp_standd}
+        \end{subfigure}
+
+        \begin{subfigure}{0.5\textwidth}
+            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{exp_stand2}
+            \caption{Способ нивелировать ошибку по углу с помощью Aruco маркеров}
+            \label{fig:exp_stand2}
+        \end{subfigure}
+        \caption{Разработанный экспериментальный стенд}
+    \end{center}
+\end{figure}
+
+Для касания только части объекта исследования были разработаны различные насадки. Такие размеры были выбраны из-за размеров преобразователя. Минимальный размер препятствия, которое может коснуться было взято за 2 мм. А длина ребра датчика -- 15 мм. Поэтому 15 мм насадка является максимальной \pic{fig:all_end_effectors.png}.
+
+\begin{figure}[h]
+    \begin{subfigure}{0.6\textwidth}
+        \centering
+        \begin{tikzpicture}
+            % Include the image in a node
+            \node [above right, inner sep=0] (image) at (0,0)
+            {\centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{all_end_effectors.png}};
+            % Create scope with normalized axes
+            \begin{scope}[
+                    x={($ 0.1*(image.south east)$)},
+                    y={($ 0.1*(image.north west)$)}]
+                \node[rounded corners=3pt,black,fill=white] at (1.1,7.4){\tiny 2 mm };
+                \node[rounded corners=3pt,black,fill=white] at (3.1,7.9){\tiny 6 mm };
+                \node[rounded corners=3pt,black,fill=white] at (4.9,8.1){\tiny 8 mm };
+                \node[rounded corners=3pt,black,fill=white] at (6.7,7.9){\tiny 12 mm };
+                \node[rounded corners=3pt,black,fill=white] at (8.6,7.9){\tiny 15 mm };
+            \end{scope}
+        \end{tikzpicture}
+        \caption{Насадка для нажатия объект
+            исследования с диаметром нажатия меньше, чем сам объект}
+        \label{fig:all_end_effectors.png}
+    \end{subfigure}
+    \begin{subfigure}{0.38\textwidth}
+        \centering
+        \begin{tikzpicture}
+
+            % Include the image in a node
+            \node [
+                above right,
+                inner sep=0] (image) at (0,0) {\centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{sensors_grid.png}};
+
+            % Create scope with normalized axes
+            \begin{scope}[
+                    x={($0.1*(image.south east)$)},
+                    y={($0.1*(image.north west)$)}]
+                \draw [green, very thick,
+                    decorate,
+                    decoration = {brace,
+                            raise=5pt,
+                            amplitude=5pt,
+                            aspect=0.5}] (6,3.7) --  (3,3.7)
+                node[pos=0.5,below=10pt,green]{$15\ mm$};
+
+                \draw [green, very thick,
+                    decorate,
+                    decoration = {brace, mirror,
+                            raise=5pt,
+                            amplitude=5pt,
+                            aspect=0.5}] (6,3.6) --  (6,6.4)
+                node[pos=0.5,right=10pt,green]{$15\ mm$};
+
+                \draw[green,step=1,xshift=34, yshift=43]  (0.5,0.5) grid +(3,3);
+
+                \node[circle,fill=green,scale=0.4] at (3.3,6.27){\small 1};
+                \node[circle,fill=green,scale=0.4] at (5.92,3.7){\small 16};
+            \end{scope}
+
+        \end{tikzpicture}
+        \caption{Сенсор представлен \\ как $4\times4$ сетка}
+        \label{fig:sensor_grid}
+    \end{subfigure}
+    \caption{Представление места нажатия инструментом сенсора и сам инструмент}
+\end{figure}
+
+% Импедансное управление состоит из двух блоков -- модификация траектории для оси $z$, начиная с\eqref{eq:traj_mod}, и управление по скорости -- с \eqref{eq:vel_control}.
+
+% \begin{eqnarray}
+%     \label{eq:traj_mod}
+%     X_s^0 = 0, \dot{X}_s^0 =0,  X_g^k, \dot{X}_g^k \text{ -- goal state}, X_s = X_g - X_d \\
+%     X_g = X_g^0 + \frac{F_d}{\eta } \\
+%     \dot{X}_s + \eta  X_s = F^k \\
+%     X_s^k = odeint(X_s^{k-1},t,F^k), t = [0,dT] \\
+%     X_s^{k-1} = X_s^k;  \dot{X}_s = f(X_s,t,F^k) \\
+%     X_d = X_g - X_s; \dot{X}_d = \dot{X}_g - \dot{X}_s
+% \end{eqnarray}
+
+% \begin{eqnarray}
+%     \label{eq:vel_control}
+%     X_d = \begin{bmatrix}
+%         x_g \\ y_g \\ z_d
+%     \end{bmatrix} \\
+%     U = \dot{X}_d + K(X_d - X), \\ \text{ where } X=get\_state(); \\ 
+%     set\_speed(U)
+% \end{eqnarray}
+
+На рисунке ниже \pic{fig:force_data_pos.png} представлен результат работы импедансного управления на частоте 450 $Hz$. Необходимая сила нажатия --- $17\ H$.
+\begin{figure}[h]
+        \centering
+         \begin{tikzpicture}
+            % Include the image in a node
+            \node [above right, inner sep=0] (image) at (0,0) 
+            {\centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{force_data_pos.png}};          
+            % Create scope with normalized axes
+            \begin{scope}[
+                x={($ 0.1*(image.south east)$)},
+                y={($ 0.1*(image.north west)$)}]
+                \draw[thick,green, dashed] (4.2,1) -- (4.2,8)
+                node[above right,black,fill=white]{\tiny Касание с поверхностью};
+            \end{scope}
+        \end{tikzpicture}
+        \caption{Графики зависимости силы и позиции по $z$ от времени во время эксперимента по исследованию Velostat}
+        \label{fig:force_data_pos.png}
+    \end{figure}
+
+В исследовании были проведены:
+\begin{enumerate}
+    \item \textbf{статический эксперимент}. Цель — определить коэффициенты для математической модели преобразователя. Для этого на сенсор кладется известная нагрузка на 60 секунд (за это время можно явно наблюдать гистерезис) и собираются данные с преобразователя;
+          \item\textbf{динамический эксперимент}. Цель — определить влияние показаний сенсора в зависимости от положения площадки контакта. Для этого преобразователь представлен в виде матрицы $4 \times 4$. Размер преобразователя в эксперименте 15 на 15 мм. Манипулятор нажимает на преобразователь с одинаковым давлением на протяжении всех экспериментов в различные позиции на преобразователе, используя пять различных насадок (диаметр окружности от 2 мм до 15 мм) \pic{fig:sensor_grid}.
+\end{enumerate}
+
+Статическим экспериментом проверялась формула \eqref{eq:velostat_eqn}. Из-за гистерезиса необходимо учитывать время нажатия на объект. При прикладывании на сенсор константной нагрузки показания сенсора будут меняться.
+\begin{eqnarray}
+    \label{eq:velostat_eqn}
+    V_{out} = V_0 + p[k_p + k_e(1-e^\frac{-(t-t_0)}{\tau_{res}})](1-e^{-\frac{A}{p}}) \\
+    k_p = A_1e^{-A_2p}; \tau_{res} = B_0 + B_1e^{-\frac{p}{B_2}}
+\end{eqnarray}
+где,  $V_0$- начальное напряжение,$p,\ A_i,\ B_i,\ \tau_{res},\ k_i$  - настраиваемые константы, $t$ - текущее время, $t_0$ - время начала нажатия.
+Для решения задачи регрессии использовался робастный нелинейный алгоритм наименьших квадратов. Результат представлен ниже \pic{fig:least_square_model.png}.
+
+\begin{figure}[H]
+    \centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{least_square_model.png}
+    \caption{Результаты статического эксперимента}
+    \label{fig:least_square_model.png}
+\end{figure}
+
+Ниже \pic{fig:dynamics_exp} представлены некоторые результаты распределения ошибок по площади сенсора при взаимодействии с насадками разных размеров. Ошибки определялись как разница между показаниями калиброванного сенсора силы Futek и исследуемого преобразователя на базе Velostat. На рисунке \ref{fig:sens1_pike1} показаны ошибки для насадки диаметром 2 мм, а на рисунке \ref{fig:sens1_pike3} — для насадки диаметром 8 мм.
+
+Можно заметить, что в \ref{fig:sens1_pike3} максимальная разница между Futek и Velostat не более 0.2 единиц в одном месте. Остальные элементы сетки не превышают 10\%. Такая же тенденция продолжается как и при увеличении размера насадки, так и на других сенсорах.
+
+\begin{figure}[H]
+    \begin{subfigure}{0.49\textwidth}
+        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{sens1_pike1.png}
+        \caption{диаметр насадки равный 2 мм }
+        \label{fig:sens1_pike1}
+    \end{subfigure}
+    \begin{subfigure}{0.49\textwidth}
+        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{sens1_pike3.png}
+        \caption{Диаметр насадки равный 8 мм }
+        \label{fig:sens1_pike3}
+    \end{subfigure}
+    \caption{Динамический эксперимент}
+    \label{fig:dynamics_exp}
+\end{figure}
+
+По результатам исследований показано, что характеристики преобразователя удовлетворяют требованиям к системе тактильного восприятия шагающего робота, когда ожидаемый размер площади контакта превышает половину размера преобразователя.

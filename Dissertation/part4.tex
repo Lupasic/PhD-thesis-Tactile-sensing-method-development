@@ -1,4 +1,4 @@
-\chapter{Разработка метода тактильного очувствления}\label{ch:ch4}
+\chapter{РАЗРАБОТКА МЕТОДА ТАКТИЛЬНОГО ОЧУВСТВЛЕНИЯ}\label{ch:ch4}
 
 
 Четвертая глава раскрывает детали создания алгоритма построения карты с помощью тактильного очувствления, определения типа поверхности.
@@ -19,7 +19,7 @@
     \label{fig:delone_idea.png}
 \end{figure}
 
-Реализованный алгоритм проверялся, как в симуляции (Рис. \ref{fig:unsolvable_case}, \ref{fig:start_end_exp}), так и на реальном роботе \pic{fig:real_exp_map_creation}. Видео \quad \qrcode[height=1.5cm]{https://youtu.be/2dxHHTG4psQ}
+Реализованный алгоритм проверялся, как в симуляции (Рис. \ref{fig:unsolvable_case}, \ref{fig:start_end_exp}), так и на реальном роботе \pic{fig:real_exp_map_creation}.
 
 
 \begin{figure}[H]
@@ -218,24 +218,7 @@
     \caption{Экспериментальная установка для определения типа поверхности}
 \end{figure}
 
-Были взяты 2 сильно разных поверхности и изучены сырые данные. Резина \pic{fig:s_shape_leg/s_leg_setup.JPG}  \quad \qrcode[height=1.5cm]{https://gifyu.com/image/SxatY} \quad, камень \pic{fig:s_shape_leg/view.jpg} \quad \qrcode[height=1.5cm]{https://gifyu.com/image/Sxatt} 
-
-% \begin{figure}[H]
-%     \begin{subfigure}[t]{0.49\textwidth}
-%         \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{s_shape_leg/flat.jpg}
-%         \caption{Резина}
-%         \label{fig:s_shape_leg/flat.jpg}
-%     \end{subfigure}
-%     \hfill
-%     \begin{subfigure}[t]{0.49\textwidth}
-%         \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{s_shape_leg/view.jpg}
-%         \caption{Каменистая поверхность}
-%         \label{fig:s_shape_leg/view.jpg}
-%     \end{subfigure}
-%     \caption{Типы определяемых поверхностей}
-% \end{figure}
-
-Ниже \pic{fig:data_from_legs} представлены сырые данные с лапок робота. Сырые данные легко различить, но можно заметить, что абсолютные значения у разных сегментов различно. Поэтому при обучении необходимо их нормализовать.
+Были взяты 2 сильно разных поверхности и изучены сырые данные. Ниже \pic{fig:data_from_legs} представлены сырые данные с лапок робота. Сырые данные легко различить, но можно заметить, что абсолютные значения у разных сегментов различно. Поэтому при обучении необходимо их нормализовать.
 
 \begin{figure}[H]
     \begin{subfigure}[t]{0.9\textwidth}
@@ -252,13 +235,13 @@
 \end{figure}
 
 \begin{figure}[H]
-    \centering\includegraphics[height=8cm,width=1\textwidth,keepaspectratio]{s_shape_leg/AverageVelocity (1).png}
+    \centering\includegraphics[height=8cm,width=1\textwidth,keepaspectratio]{s_shape_leg/avg_lin_vel_rev_min.png}
     \caption{Средняя линейная скорость робота}
     \label{fig:s_shape_leg/AverageVelocity (1).png}
 \end{figure}
 
 \begin{figure}[H]
-    \centering\includegraphics[height=8cm,width=1\textwidth,keepaspectratio]{s_shape_leg/TaxelIndForce_full.png}
+    \centering\includegraphics[height=8cm,width=1\textwidth,keepaspectratio]{s_shape_leg/TaxelIndForce.png}
     \caption{Запись активных такселей на разных поверхностях}
     \label{fig:s_shape_leg/TaxelIndForce_full.png}
 \end{figure}
