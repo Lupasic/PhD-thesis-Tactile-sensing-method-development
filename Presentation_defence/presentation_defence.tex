@@ -35,6 +35,8 @@
 \usepackage{multirow}
 \usepackage{multimedia}
 \usepackage{makecell}
+\usepackage{colortbl}
+\usepackage{hhline}
 
 \usepackage[font={large}, labelfont=it,textfont={it},justification=centering, skip=2pt]{caption}
 % will apply to all subcaptions
@@ -185,37 +187,6 @@
 \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Результаты решения задач}
-\framesubtitle{}
-\vspace{-0.7cm}
-    \begin{columns}[T,onlytextwidth]
-        \begin{column}{0.48\textwidth}
-            \begin{block}{Научных задач (научная новизна)}
-                1. Методика \textbf{подбора количества ног для шагающих цикловых движителей}.
-                
-                2. Методика \textbf{характеризации датчика}, когда площадь касания нагрузки меньше, чем размеры датчик.
-                
-                3. Методика \textbf{калибровки} и \textbf{алгоритм определения типа поверхности}.
-                
-                4. Методика определения \textbf{геометрических свойств местности}.   
-                    
-                \end{block}
-        \end{column}
-        \begin{column}{0.48\textwidth}
-            \begin{alertblock}{Инженерных задач}
- 1. \textbf{Шагающий цикловой движитель} с одной степенью свободы в ноге.
-
-2. \textbf{Выбраны, откалиброваны и установлены не оптические сенсоры} для определения свойств поверхности.
-
-3. Алгоритм \textbf{определения типа поверхности}.
-
-4. Алгоритм \textbf{картографирования местности} с помощью \textbf{пальпирования} ногами робота.
-
-            \end{alertblock}
-        \end{column}
-    \end{columns}
-\end{frame}
-
 
 \begin{frame}[t]{Литературный обзор}
     \framesubtitle{}
@@ -223,8 +194,8 @@
     \begin{itemize}
         \item Пещеры: препятствия, размеры. \\ \alert{-- Классификация пещер и препятствий \\ -- Оценка сложности территории}
         \item Роботы для исследования пещер: от дирижаблей, до шагающих. \\ \alert{-- Робототехнические системы для исследования \textbf{свободных пещер}}
-        \item Способы получения силы реакции опоры. \\ \alert{-- Неявные и явные способы. Классификая типов датчиков силы}
-        \item Методы определения типа поверхности. \\ \alert{-- С помощью машинного обучения, используя набор датчиков}
+        \item Способы определения силы реакции опоры. \\ \alert{-- Неявные и явные способы. Классификая типов датчиков силы}
+        \item Методы распознования типа поверхности. \\ \alert{-- С помощью машинного обучения, используя набор датчиков}
         \item Методы построения карты: оптические и тактильные. \\ \alert{-- Построение поверхности \textbf{с помощью датчика силы на манипуляторе} \\ -- Построение карты с помощью \textbf{лидаров и камер}}
     \end{itemize}
 
@@ -431,21 +402,20 @@
 
 \begin{frame}[t]{Разработка преобразователя силы}
     \framesubtitle{Velostat}
-    \vspace{-20pt}
+    \vspace{-15pt}
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.6\textwidth}
-            \begin{exampleblock}{Определение}
-                Velostat представляет собой полимерный материал, наполненный техническим углеродом.\\
-                \textbf{Ожидаемые эффекты}:
+                Представляет собой полимерный материал, наполненный техническим углеродом.\\
+                \textbf{Встреченные проблемы}:
                 \begin{itemize}
-                    \item \underline{Туннельный эффект} -- диод обладает данным свойством
-                    \item \underline{Пьезорезистивный} -- удельное электрическое сопротивление полупроводника изменяется под действием механической деформации
-                    \item \underline{Вязкоупругий} -- может гасить вибрации
+                    \item \underline{Гистерезис} -- зависимость от текущего и предыдущих состояний
+                    \item \underline{Нелинейность материала}
+                    \item \underline{Малая точность} при весе от 300 грамм
+                    \item \underline{Разность значений при одинаковом давлении}, когда площадь нажатия меньше датчика $\rightarrow$ \alert{Научная задача -- охарактеризовать материал для таких случаев}
                 \end{itemize}
-            \end{exampleblock}
         \end{column}
         \begin{column}{0.38\textwidth}
-            \vspace{-1cm}
+            \vspace{-1.1cm}
             \begin{figure}[H]
                 \begin{subfigure}{0.9\textwidth}
                     \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{velostat_sensor.jpg}
@@ -454,7 +424,7 @@
                 \end{subfigure}
 
                 \begin{subfigure}{0.9\textwidth}
-                    \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{simplest_sensor.jpg}
+                    \centering\includegraphics[height=2.9cm,width=1\textwidth,keepaspectratio]{simplest_sensor.jpg}
                     \caption*{Простейший преобразователь силы}
                     \label{fig:simplest_sensor.jpg}
                 \end{subfigure}
@@ -463,184 +433,6 @@
     \end{columns}
 
 \end{frame}
-
-\begin{frame}[t]{Разработка преобразователя силы}
-    \framesubtitle{Velostat: Встреченные проблемы}
-    \vspace{-20pt}
-    \begin{multicols}{2}
-        {\large
-            \begin{itemize}
-                \item Гистерезис
-                \item Нелинейность материала
-                \item Разные значения при одинаковом давлении, если площадь нагрузки меньше площади датчика
-            \end{itemize}}
-            \begin{figure}[H]
-                \centering
-                 \begin{tikzpicture}
-                    % Include the image in a node
-                    \node [above right, inner sep=0] (image) at (0,0) 
-                    {\centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{velostat_pressure_resistance.jpg}};          
-                    % Create scope with normalized axes
-                    \begin{scope}[
-                        x={($ 0.1*(image.south east)$)},
-                        y={($ 0.1*(image.north west)$)}]
-                        % Grid and axes' labels
-                        % \draw[lightgray,step=1] (image.south west) grid (image.north east);
-                        % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
-                        % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
-             
-                        % Labels
-                        % \draw[latex-, very thick,green] (3.5,2.2) -- (2.5,1)
-                        % node[below left,black,fill=white]{\small test};
-
-                        \draw[stealth-, very thick,green] (4.21,2.75) -- (6.5,5);
-                        \draw[stealth-, very thick,green] (8.75,2.15) -- (6.5,5)
-                        node[rounded corners=3pt,above,black,fill=white]{\small Working range};
-                    \end{scope}
-                \end{tikzpicture}
-                % \caption*{}
-                \label{fig:velostat_pressure_resistance.jpg}
-            \end{figure}
-    \end{multicols}
-    \vspace{-12pt}
-    \begin{block}{Научная постановка задачи}
-        Охарактеризовать материал Velostat для случаев, когда точечная нагрузка меньше размера датчика, и предложить решения для предотвращения подобных проблем.
-    \end{block}
-\end{frame}
-
-\begin{frame}[t]{Разработка преобразователя силы}
-    \framesubtitle{Требования к установке}
-    \vspace{-0.5cm}
-    \begin{columns}[T,onlytextwidth]
-        \begin{column}{0.39\textwidth}
-            \begin{itemize}
-                \item Управление силой нажатия {\\ \alert{Импедансное управления}}
-                \item Повторяемость эксперимента по силе и позиции{\\ \alert{Добавив манипулятор и камеру}}
-                \item Возможность нажимать только на часть сенсора{\\ \alert{Насадки для манипулятора}}
-            \end{itemize}
-        \end{column}
-        \begin{column}{0.8\textwidth}
-            \scalebox{0.81}{
-            \begin{tikzpicture}
-
-                % Include the image in a node
-                \node [
-                    above right,
-                    inner sep=0] (image) at (0,0) {\centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{exp_stand1}};
-    
-                % Create scope with normalized axes
-                \begin{scope}[
-                        x={($0.1*(image.south east)$)},
-                        y={($0.1*(image.north west)$)}]
-    
-                    % Grid
-                    % \draw[lightgray,step=1] (image.south west) grid (image.north east);
-    
-                    % % Axes' labels
-                    % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
-                    % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
-    
-                    % Labels
-                    % \node[circle,fill=green] at (7.25,6.75){\small 2};
-    
-                    \draw[latex-, very thick,green] (3.5,2.2) -- (2.5,1)
-                    node[rounded corners=3pt,below left,black,fill=white]{\small Velostat sensors};
-    
-                    \draw[stealth-, very thick,green] (3.5,2.6) -- ++(-0.7,+0.5)
-                    node[rounded corners=3pt,left,black,fill=white]{\small Force sensor};
-    
-                    \draw[stealth-, very thick,green] (6.5,3) -- (7,6)
-                    node[rounded corners=3pt,above right,black,fill=white]{\small Self-made PCB};
-    
-                    \draw[stealth-, very thick,green] (7.2,1.5) -- (8,5)
-                    node[rounded corners=3pt,above right,black,fill=white]{\small Arduino};
-    
-                    \draw[stealth-, very thick,green] (2.5,9.5) -- (4,9.5)
-                    node[rounded corners=3pt,right,black,fill=white]{\small Camera};
-    
-                    \draw[very thick,green] (0.5,2.5) rectangle (4.2,9)
-                    node[below left,black,fill=green]{\small UR10e};
-    
-                    \draw[latex-, very thick,green] (4.5,7.2) edge (5.5,7.5)
-                    (4.8,5.3) -- (5.5,7.5)
-                    node[rounded corners=3pt,above,black,fill=white]{\small Aruco markers};
-                \end{scope}
-    
-            \end{tikzpicture}
-            }
-        \end{column}
-    \end{columns}
-
-\end{frame}
-
-\begin{frame}[t]{Разработка преобразователя силы}
-    \framesubtitle{Установка: Видео}
-    \vspace{-15pt}
-    \begin{figure}[H]
-        % \href{run:./videos/exp_stand_video.mp4}{
-        \href{https://youtu.be/Gw4wVZ-ESuE}{
-            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{exp_stand_video_preview.jpg}}
-        % \caption{caption_name}
-    \end{figure}
-\end{frame}
-
-
-\begin{frame}[t]{Разработка преобразователя силы}
-    \framesubtitle{Установка: Насадки}
-    \vspace{-0.9cm}
-    \begin{columns}[T,onlytextwidth]
-        \begin{column}{0.6\textwidth}
-            \begin{figure}[H]
-                \centering
-                \begin{tikzpicture}
-                    % Include the image in a node
-                    \node [above right, inner sep=0] (image) at (0,0)
-                    {\centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{all_end_effectors.png}};
-                    % Create scope with normalized axes
-                    \begin{scope}[
-                            x={($ 0.1*(image.south east)$)},
-                            y={($ 0.1*(image.north west)$)}]
-                        % Grid and axes' labels
-                        % \draw[lightgray,step=1] (image.south west) grid (image.north east);
-                        % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
-                        % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
-
-                        % Labels
-                        \node[rounded corners=3pt,black,fill=white] at (1.1,7.4){\tiny 2 mm };
-                        \node[rounded corners=3pt,black,fill=white] at (3.1,7.9){\tiny 6 mm };
-                        \node[rounded corners=3pt,black,fill=white] at (4.9,8.1){\tiny 8 mm };
-                        \node[rounded corners=3pt,black,fill=white] at (6.7,7.9){\tiny 12 mm };
-                        \node[rounded corners=3pt,black,fill=white] at (8.6,7.9){\tiny 15 mm };
-                    \end{scope}
-                \end{tikzpicture}
-                \caption*{Все насадки}
-                \label{fig:all_end_effectors.png}
-            \end{figure}
-        \end{column}
-        \begin{column}{0.39\textwidth}
-            \vspace{-1.3cm}
-
-            \begin{figure}[H]
-                \begin{subfigure}[t]{0.6\textwidth}
-                    \centering\includegraphics[width=0.99\textwidth]{LTH350-DONUT-LOAD-CELL-1.png}\\
-                    \caption*{\normalsize Промышленный \\ датчик силы}
-                    \label{fig:futek}
-                \end{subfigure}
-                \vspace{-0.2cm}
-
-                \begin{subfigure}[t]{0.6\textwidth}
-                    \centering\includegraphics[width=0.99\textwidth]{point_load.JPG}\\
-                    \caption*{\normalsize Насадка в сборке}
-                    \label{fig:point_load}
-                \end{subfigure}
-            \end{figure}
-
-        \end{column}
-    \end{columns}
-\end{frame}
-
-
-
 
 \begin{frame}[t]{Разработка преобразователя силы}
     \framesubtitle{Эксперименты}
@@ -723,7 +515,8 @@
                 V_{out} = V_0 + p[k_p + k_e(1-e^\frac{-(t-t_0)}{\tau_{res}})](1-e^{-\frac{A}{p}}) \\
                 k_p = A_1e^{-A_2p}; \tau_{res} = B_0 + B_1e^{-\frac{p}{B_2}}
             \end{eqnarray*}
-            Где $V_0$ -- начальное напряжение, \\ $p$ -- приложенное давление, \\ $A_i,\ B_i,\ \tau_{res},\ k_i$ искомые параметры, \\  $t$ -- текущее время, $t_0$ -- время начала нажатия.
+            Где $V_0$ -- начальное напряжение, \\ $p$ -- приложенное давление, \\ $A_i,\ B_i,\ \tau_{res},\ k_i$ искомые параметры, \\  $t$ -- текущее время, $t_0$ -- время начала нажатия. 
+            \\ \alert{Апробированна модель для калибровки датчика}
         \end{column}
         \begin{column}{0.45\textwidth}
             \vspace{-15pt}
@@ -767,6 +560,138 @@
 \end{frame}
 
 \begin{frame}[t]{Разработка преобразователя силы}
+    \framesubtitle{Требования к установке}
+    \vspace{-0.5cm}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.39\textwidth}
+            \begin{itemize}
+                \item Управление силой нажатия {\\ \alert{Импедансное управления}}
+                \item Повторяемость эксперимента по силе и позиции{\\ \alert{Добавив манипулятор и камеру}}
+                \item Возможность нажимать только на часть сенсора{\\ \alert{Насадки для манипулятора}}
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.8\textwidth}
+            \scalebox{0.81}{
+            \begin{tikzpicture}
+
+                % Include the image in a node
+                \node [
+                    above right,
+                    inner sep=0] (image) at (0,0) {\centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{exp_stand1}};
+    
+                % Create scope with normalized axes
+                \begin{scope}[
+                        x={($0.1*(image.south east)$)},
+                        y={($0.1*(image.north west)$)}]
+    
+                    % Grid
+                    % \draw[lightgray,step=1] (image.south west) grid (image.north east);
+    
+                    % % Axes' labels
+                    % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
+                    % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
+    
+                    % Labels
+                    % \node[circle,fill=green] at (7.25,6.75){\small 2};
+    
+                    \draw[latex-, very thick,green] (3.5,2.2) -- (2.5,1)
+                    node[rounded corners=3pt,below left,black,fill=white]{\small Velostat sensors};
+    
+                    \draw[stealth-, very thick,green] (3.5,2.6) -- ++(-0.7,+0.5)
+                    node[rounded corners=3pt,left,black,fill=white]{\small Force sensor};
+    
+                    \draw[stealth-, very thick,green] (6.5,3) -- (7,6)
+                    node[rounded corners=3pt,above right,black,fill=white]{\small Self-made PCB};
+    
+                    \draw[stealth-, very thick,green] (7.2,1.5) -- (8,5)
+                    node[rounded corners=3pt,above right,black,fill=white]{\small Arduino};
+    
+                    \draw[stealth-, very thick,green] (2.5,9.5) -- (4,9.5)
+                    node[rounded corners=3pt,right,black,fill=white]{\small Camera};
+    
+                    \draw[very thick,green] (0.5,2.5) rectangle (4.2,9)
+                    node[below left,black,fill=green]{\small UR10e};
+    
+                    \draw[latex-, very thick,green] (4.5,7.2) edge (5.5,7.5)
+                    (4.8,5.3) -- (5.5,7.5)
+                    node[rounded corners=3pt,above,black,fill=white]{\small Aruco markers};
+                \end{scope}
+    
+            \end{tikzpicture}
+            }
+        \end{column}
+    \end{columns}
+
+\end{frame}
+
+\begin{frame}[t]{Разработка преобразователя силы}
+    \framesubtitle{Установка: Насадки}
+    \vspace{-0.9cm}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.6\textwidth}
+            \begin{figure}[H]
+                \centering
+                \begin{tikzpicture}
+                    % Include the image in a node
+                    \node [above right, inner sep=0] (image) at (0,0)
+                    {\centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{all_end_effectors.png}};
+                    % Create scope with normalized axes
+                    \begin{scope}[
+                            x={($ 0.1*(image.south east)$)},
+                            y={($ 0.1*(image.north west)$)}]
+                        % Grid and axes' labels
+                        % \draw[lightgray,step=1] (image.south west) grid (image.north east);
+                        % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
+                        % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
+
+                        % Labels
+                        \node[rounded corners=3pt,black,fill=white] at (1.1,7.4){\tiny 2 mm };
+                        \node[rounded corners=3pt,black,fill=white] at (3.1,7.9){\tiny 6 mm };
+                        \node[rounded corners=3pt,black,fill=white] at (4.9,8.1){\tiny 8 mm };
+                        \node[rounded corners=3pt,black,fill=white] at (6.7,7.9){\tiny 12 mm };
+                        \node[rounded corners=3pt,black,fill=white] at (8.6,7.9){\tiny 15 mm };
+                    \end{scope}
+                \end{tikzpicture}
+                \caption*{Все насадки}
+                \label{fig:all_end_effectors.png}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.39\textwidth}
+            \vspace{-1.3cm}
+
+            \begin{figure}[H]
+                \begin{subfigure}[t]{0.6\textwidth}
+                    \centering\includegraphics[width=0.99\textwidth]{LTH350-DONUT-LOAD-CELL-1.png}\\
+                    \caption*{\normalsize Промышленный \\ датчик силы}
+                    \label{fig:futek}
+                \end{subfigure}
+                \vspace{-0.2cm}
+
+                \begin{subfigure}[t]{0.6\textwidth}
+                    \centering\includegraphics[width=0.99\textwidth]{point_load.JPG}\\
+                    \caption*{\normalsize Насадка в сборке}
+                    \label{fig:point_load}
+                \end{subfigure}
+            \end{figure}
+
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[t]{Разработка преобразователя силы}
+    \framesubtitle{Установка: Видео}
+    \vspace{-15pt}
+    \begin{figure}[H]
+        \href{run:./videos/exp_stand_video.mp4}{
+        % \href{https://youtu.be/Gw4wVZ-ESuE}{
+            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{exp_stand_video_preview.jpg}}
+        % \caption{caption_name}
+    \end{figure}
+\end{frame}
+
+
+
+\begin{frame}[t]{Разработка преобразователя силы}
     \framesubtitle{Результаты: Динамический эксперимент}
     \vspace{-15pt}
     \begin{figure}[H]
@@ -781,52 +706,42 @@
             \label{fig:sens1_pike3}
         \end{subfigure}
     \end{figure}
+    \vspace{-0.8cm}
+    \alert{Одинаковые данные, когда площадь нажатия превышает 50\% от площади датчика}
 \end{frame}
 
-\begin{frame}[t]{Разработка преобразователя силы}
-    \framesubtitle{Итог}
-    \vspace{-15pt}
-    {\large
-    \begin{enumerate}
-        \item Статический эксперимент: определены коэффициенты преобразователей $p,\ A_i,\ B_i,\ \tau_{res},\ k_i$.
-        \item Динамический эксперимент: преобразователь может быть представлен как единое тело, если площадь давления превышает 50\% от площади датчика.
-    \end{enumerate}
-    }
-\end{frame}
-
-\begin{frame}[t]{Определение типа поверхности}
+\begin{frame}[t]{Определение физических свойств поверхности}
     \framesubtitle{}
-    \only<1-2>{\large\begin{block}{Вопрос}
+    \vspace{-0.3cm}
+    {\large\begin{block}{Вопрос}
         Как определить тип местности во время движения по такой местности?
         \end{block}}
-    \only<2>{\large\begin{alertblock}{Ответ}
-            \centering Решенить проблему классификации местности с помощью машинного обучения
+    {\large\begin{alertblock}{Ответ}
+        1. Подготовить для экспериментов различные поверхности.
+
+        2. Собрать датасет, состоящий из угловой скорости мотора и показаний датчиков с ног робота.
+
+        3. Представить их в виде вектора фич.
+
+        4. Решить задачу кластеризации данных с помощью SVM, используя метрику 10-fold cross validation. 
+
+        5. Протестировать модель на собранных данных.
         \end{alertblock}}
 \end{frame}
 
-\begin{frame}[t]{Определение типа поверхности}
+\begin{frame}[t]{Определение физических свойств поверхности}
     \framesubtitle{Требования к установке}
     \vspace{-0.5cm}
-    {\large
-    \begin{itemize}
-        \item Иметь возможность быстро менять используемые поверхности \uncover<2>{\\ \alert{Решается с помощью быстроразборного стола}}
-        \item Бесконечное движение робота \uncover<2>{\\ \alert{Решается путем создания 2-ух степенного механизма и ноги S-образной формы}}
-        \item Узел движителя должен быть такой же как на СтриРусе \uncover<2>{\\ \alert{Решено путем создания крепления для узла ноги}}
-    \end{itemize}}
-\only<2>{\centering\large\alert{Все требования выполнены}}
-\end{frame}
-
-\begin{frame}[t]{Определение типа поверхности}
-    \framesubtitle{Установка}
-    \vspace{-15pt}
     \begin{columns}[T,onlytextwidth]
-        \begin{column}{0.55\textwidth}
-            % \begin{enumerate}
-            %     \item Dynamixel MX28 -- 47 rev/min
-            %     \item Velostat transducer -- 25 HZ freq.
-            %     \item Experiment duration -- 120 sec
-            % \end{enumerate}
-            \vspace{-0.3cm}
+        \begin{column}{0.57\textwidth}
+            \begin{itemize}
+                \item Иметь возможность быстро менять используемые поверхности {\\ \alert{Быстроразборный стол}}
+                \item Бесконечное движение робота {\\ \alert{2-ух степенной механизм и нога S-образной формы}}
+                \item Узел движителя должен быть такой же как на СтриРусе {\\ \alert{Создано крепление для узла ноги робота}}
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.42\textwidth}
+            \vspace{-0.8cm}
             \begin{figure}[H]
                 \centering
                 \begin{tikzpicture}
@@ -863,48 +778,36 @@
                 \label{fig:s_shape_leg/s_leg_setup.JPG}
             \end{figure}
         \end{column}
-        \begin{column}{0.44\textwidth}
-            \vspace{-0.5cm}
-            \begin{figure}[H]
-                \begin{subfigure}{\textwidth}
-                    \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{s_shape_leg/leg_design.png}
-                    % \caption{caption_name}
-                \end{subfigure}
-            \end{figure}
-        \end{column}
     \end{columns}
 \end{frame}
 
 
-\begin{frame}[t]{Определение типа поверхности}
+\begin{frame}[t]{Определение физических свойств поверхности}
     \framesubtitle{Установка: Типы поверхности, видео}
     \vspace{-15pt}
     \begin{figure}[H]
-        \begin{subfigure}{0.49\textwidth}
-            % \href{run:./videos/flat.gif}
-            \href{https://gifyu.com/image/SxatY}
-            {\centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{s_shape_leg/flat.jpg}}
-            % \caption*{2mm end-effector diam}    
+        \begin{subfigure}{0.22\textwidth}
+            \href{run:./videos/flat.gif}
+            % \href{https://gifyu.com/image/SxatY}
+            {\centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{s_shape_leg/flat.jpg}} 
+            \caption*{Резина}
         \end{subfigure}
         \hfill
-        \begin{subfigure}{0.49\textwidth}
-            % \href{run:./videos/rock.gif}
-            \href{https://gifyu.com/image/Sxatt}
+        \begin{subfigure}{0.26\textwidth}
+            \href{run:./videos/rock.gif}
+            % \href{https://gifyu.com/image/Sxatt}
             {\centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{s_shape_leg/view.jpg}}
-            % \caption*{8mm end-effector diam}
+            \caption*{Каменная гряда}
+        \end{subfigure}
+        \begin{subfigure}{0.5\textwidth}
+            {\centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{s_shape_leg/mould.jpg}}
+            \caption*{Земля}
         \end{subfigure}
     \end{figure}
 \end{frame}
 
-% \begin{frame}[t]{Определение типа поверхности}
-%     \framesubtitle{Velostat transducer properties}
-%     \large
-%     \begin{itemize}
-%         \item Because of high hysteresis and difficulties with calibration, we have to work with relative data.
-%     \end{itemize}
-% \end{frame}
 
-\begin{frame}[t]{Определение типа поверхности}
+\begin{frame}[t]{Определение физических свойств поверхности}
     \framesubtitle{Данные с одного эксперимента}
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.60\textwidth}
@@ -913,50 +816,59 @@
             \end{figure}
         \end{column}
         \begin{column}{0.35\textwidth}
-            \vspace{-1.6cm}
+            \vspace{-1.4cm}
             \begin{figure}[H]
-                \begin{subfigure}{0.99\textwidth}
                     \centering\includegraphics[height=3.8cm,width=1\textwidth,keepaspectratio]{s_shape_leg/avg_lin_vel_rev_min.png} 
-                \end{subfigure}
-
-                \begin{subfigure}{0.99\textwidth}
-                    \centering\includegraphics[height=3.8cm,width=1\textwidth,keepaspectratio]{s_shape_leg/segment6_compare_front.png}
-                \end{subfigure}
-                
-
             \end{figure}
+
+            \resizebox{\linewidth}{!}{%
+            \begin{tabular}{|c|c|c|c|c|} 
+            \cline{3-5}
+            \multicolumn{1}{l}{} & \multicolumn{1}{l|}{} & \multicolumn{3}{c|}{\textbf{Predicted Class}} \\ 
+            \cline{3-5}
+            \multicolumn{1}{l}{} &  & Rubber & Rock & Ground \\ 
+            \hline
+            \multirow{3}{*}{\rotcell{\textbf{True class}}} & Rubber & {\cellcolor[rgb]{0.741,0.843,0.929}}84.0\% & 2.56\% & 13.44\% \\ 
+            \hhline{|~----|}
+             & Rock & 20.1\% & {\cellcolor[rgb]{0.741,0.843,0.929}}67.8\% & 12.1\% \\ 
+            \hhline{|~----|}
+             & Ground & 1.0\% & 18.9\% & {\cellcolor[rgb]{0.741,0.843,0.929}}80.1\% \\
+            \hline
+            \end{tabular}
+            }
+            
         \end{column}
     \end{columns}
 \end{frame}
 
-\begin{frame}[t]{Определение типа поверхности}
-    \framesubtitle{Итог}
-    \large
-    \begin{itemize}
-        \item Возможность различать резиновую и каменистую поверхность.
-        \item Выбраны параметры классификации рельефа для машинного обучения:
-              \begin{itemize}
-                \large
-                  \item Число оборотов в минуту
-                  \item Крутящий момент двигателя
-                  \item Ускорение от IMU
-                  \item Данные о силе, которые представлены как значение датчика\/сегмент, пиковая амплитуда, средняя амплитуда
-              \end{itemize}
-        \item Velostat датчик силы доказал свою работоспособность.
-    \end{itemize}
-\end{frame}
+% \begin{frame}[t]{Определение физических свойств поверхности}
+%     \framesubtitle{Итог}
+%     \large
+%     \begin{itemize}
+%         \item Возможность различать резиновую и каменистую поверхность.
+%         \item Выбраны параметры классификации рельефа для машинного обучения:
+%               \begin{itemize}
+%                 \large
+%                   \item Число оборотов в минуту
+%                   \item Крутящий момент двигателя
+%                   \item Ускорение от IMU
+%                   \item Данные о силе, которые представлены как значение датчика\/сегмент, пиковая амплитуда, средняя амплитуда
+%               \end{itemize}
+%         \item Velostat датчик силы доказал свою работоспособность.
+%     \end{itemize}
+% \end{frame}
 
-\begin{frame}[t]{Картографирование с помощью датчиков силы}
+\begin{frame}[t]{Определение геометрических свойств поверхности}
     \framesubtitle{}
-    \only<1-2>{\large\begin{block}{Вопрос}
+    {\large\begin{block}{Вопрос}
         Как создать плотное облако точек, используя разреженные данные об точках касания ног?
         \end{block}}
-    \only<2>{\large\begin{alertblock}{Ответ}
+    {\large\begin{alertblock}{Ответ}
             \centering \textit{Создать полигональную сетку}, используя 2D триангуляцию Делоне (вогнутая оболочка) с использованием разреженных данных, \textit{сгенерировать новые точки} и вернуть данные навигации
         \end{alertblock}}
 \end{frame}
 
-\begin{frame}[t]{Картографирование с помощью датчиков силы}
+\begin{frame}[t]{Определение геометрических свойств поверхности}
     \framesubtitle{Места проведения экспериментов}
     \vspace{-15pt}
     \begin{figure}[H]
@@ -971,17 +883,7 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Картографирование с помощью датчиков силы}
-    \framesubtitle{Предположения}
-    \large
-    Текущее решение с учетом таких предположений:
-    \begin{itemize}
-        \item Наша местность может быть представлена $z = f(x,y)$. Поэтому используется 2D триангуляция Делоне (проецирование точек на плоскость)
-        \item Все данные моделирования предварительно обрабатываются белым шумом
-    \end{itemize}
-\end{frame}
-
-\begin{frame}[t]{Картографирование с помощью датчиков силы}
+\begin{frame}[t]{Определение геометрических свойств поверхности}
     \framesubtitle{Триангуляция Делоне}
     \vspace{-0.2cm}
     \begin{figure}[H]
@@ -991,62 +893,8 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Картографирование с помощью датчиков силы}
-    \framesubtitle{Результат: Симулятор, маршрут}
-    \vspace{-15pt}
-    \begin{figure}[H]
-        \begin{subfigure}[t]{0.49\textwidth}
-            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{terrain_w_water1.png}
-            \caption*{Начало маршрута}
-        \end{subfigure}
-        \begin{subfigure}[t]{0.49\textwidth}
-            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{terrain_w_water_end.png}
-            \caption*{Конец маршрута}
-        \end{subfigure}
-    \end{figure}
-\end{frame}
-
-\begin{frame}[t]{Картографирование с помощью датчиков силы}
-    \framesubtitle{Результат: Полигональная сетка и сгенерированные точки}
-    \vspace{-15pt}
-    \begin{figure}[H]
-        \begin{subfigure}[t]{0.49\textwidth}
-            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{mesh_rviz.png}
-            \caption*{Сетка, созданная 2D триангуляциией Делоне (вогнутая оболочка)}
-        \end{subfigure}
-        \begin{subfigure}[t]{0.49\textwidth}
-                \centering
-                 \begin{tikzpicture}
-                    % Include the image in a node
-                    \node [above right, inner sep=0] (image) at (0,0) 
-                    {\centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{sampled_pcd.png}};          
-                    % Create scope with normalized axes
-                    \begin{scope}[
-                        x={($ 0.1*(image.south east)$)},
-                        y={($ 0.1*(image.north west)$)}]
-                        % Grid and axes' labels
-                        % \draw[lightgray,step=1] (image.south west) grid (image.north east);
-                        % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
-                        % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
-             
-                        % Labels
-                        \draw[stealth-, very thick,green] (3,8) -- (2,8.5);
-                        \draw[stealth-, very thick,green] (1,5.5) -- (2,8.5)
-                        node[rounded corners=3pt,above,black,fill=white]{\tiny Ground Truth Point Cloud};
-             
-                        \draw[stealth-, very thick,green] (5.5,3) -- (5.5,8.5)
-                        node[rounded corners=3pt,above,black,fill=white]{\tiny Generated Point Cloud};
-                    \end{scope}
-                \end{tikzpicture}
-                \caption*{Наложенные облака точек}
-                \label{fig:sampled_pcd.png}
-        \end{subfigure}
-    \end{figure}
-\end{frame}
-
-
-\begin{frame}[t]{Картографирование с помощью датчиков силы}
-    \framesubtitle{Почему важно использовать вогнутую оболочку}
+\begin{frame}[t]{Определение геометрических свойств поверхности}
+    \framesubtitle{Почему важно использовать вогнутую оболочку (модификация Делоне)}
     \vspace{-15pt}
     \begin{figure}[H]
         \begin{subfigure}[t]{0.3\textwidth}
@@ -1096,45 +944,81 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Картографирование с помощью датчиков силы}
-    \framesubtitle{Метрика C2C: Сравнение эталонного и полученного облаков точек}
+\begin{frame}[t]{Определение геометрических свойств поверхности}
+    \framesubtitle{Результат: Маршрут, полигональная сетка}
+    \vspace{-15pt}
+            \begin{figure}[H]
+                \begin{subfigure}[t]{0.36\textwidth}
+                    \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{terrain_wo_water.png}
+                    \caption*{Начало маршрута}
+                \end{subfigure}
+                \begin{subfigure}[t]{0.36\textwidth}
+                    \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{terrain_w_water_end.png}
+                    \caption*{Конец маршрута}
+                \end{subfigure}
+                \begin{subfigure}[t]{0.26\textwidth}
+                    \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{mesh_rviz.png}
+                    \caption*{Созданная сетка}
+                \end{subfigure}
+            \end{figure}  
+
+
+\end{frame}
+
+\begin{frame}[t]{Определение геометрических свойств поверхности}
+    \framesubtitle{Метрики Cloud2Cloud и Cloud2Mesh}
     \vspace{-15pt}
     \begin{figure}[H]
         \begin{subfigure}[t]{0.49\textwidth}
-            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{cropped_pcd.png}
-            \caption*{Наложенные облака точек}
+            \centering
+             \begin{tikzpicture}
+                % Include the image in a node
+                \node [above right, inner sep=0] (image) at (0,0) 
+                {\centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{sampled_pcd.png}};          
+                % Create scope with normalized axes
+                \begin{scope}[
+                    x={($ 0.1*(image.south east)$)},
+                    y={($ 0.1*(image.north west)$)}]
+                    % Grid and axes' labels
+                    % \draw[lightgray,step=1] (image.south west) grid (image.north east);
+                    % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
+                    % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
+         
+                    % Labels
+                    \draw[stealth-, very thick,green] (3,8) -- (2,8.5);
+                    \draw[stealth-, very thick,green] (1,5.5) -- (2,8.5)
+                    node[rounded corners=3pt,above,black,fill=white]{\tiny Ground Truth Point Cloud};
+         
+                    \draw[stealth-, very thick,green] (5.5,3) -- (5.5,8.5)
+                    node[rounded corners=3pt,above,black,fill=white]{\tiny Generated Point Cloud};
+                \end{scope}
+            \end{tikzpicture}
+            % \caption*{Наложенные облака точек}
+            \label{fig:sampled_pcd.png}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.49\textwidth}
+        \centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{mesh_comp.png}
+        % \caption*{Наложенные сетки}
+    \end{subfigure}
+
+        \begin{subfigure}[t]{0.49\textwidth}
+            \centering\includegraphics[height=2.6cm,width=1\textwidth,keepaspectratio]{pcd_hist.png}
+            \caption*{Гистограмма ошибок C2C}
         \end{subfigure}
         \begin{subfigure}[t]{0.49\textwidth}
-            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{pcd_hist.png}
-            \caption*{Гистограмма ошибок (расстояние от точки до ближайшей эталонной)}
+            \centering\includegraphics[height=2.6cm,width=1\textwidth,keepaspectratio]{mesh_hist.png}
+            \caption*{Гистограмма ошибок C2M}
         \end{subfigure}
     \end{figure}
-    % \alert{\large RMSE 0.053074, std 0.025}
 \end{frame}
 
-\begin{frame}[t]{Картографирование с помощью датчиков силы}
-    \framesubtitle{Метрика C2M: Сравнение эталонной и полученной сеток}
-    \vspace{-15pt}
-    \begin{figure}[H]
-        \begin{subfigure}[t]{0.49\textwidth}
-            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{mesh_comp.png}
-            \caption*{Наложенные сетки}
-        \end{subfigure}
-        \begin{subfigure}[t]{0.49\textwidth}
-            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{mesh_hist.png}
-            \caption*{Гистограмма ошибок (расстояние от точки до ближайшей эталонной)}
-        \end{subfigure}
-    \end{figure}
-    % \alert{\large RMSE 0.00167067, std 0.0005}
-\end{frame}
-
-\begin{frame}[t]{Картографирование с помощью датчиков силы}
+\begin{frame}[t]{Определение геометрических свойств поверхности}
     \framesubtitle{Результат: Натурные испытания, Видео}
     \vspace{-0.5cm}
     \begin{figure}[H]
         \begin{subfigure}[t]{0.49\textwidth}
-            % \href{run:./videos/big_angle2.mp4}{
-            \href{https://youtu.be/2dxHHTG4psQ}{
+            \href{run:./videos/big_angle2.mp4}{
+            % \href{https://youtu.be/2dxHHTG4psQ}{
                 \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{real_robot_mesh_video_preview.png}}
             \caption*{Робот проходит препятствие}
         \end{subfigure}
@@ -1145,24 +1029,24 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Картографирование с помощью датчиков силы}
-    \framesubtitle{Итог}
-    \large
-    \begin{itemize}
-        \item Карта может быть построена с помощью \textit{вогнутой оболочки 2D триангуляции Делоне}, где входными данными являются \textit{точки касания, определенные датчиком силы}.
-        \item \textit{Симулятор} (Среднее значение среднеквадратичной ошибки): \begin{itemize}
-            \large
-                  \item При сравнении облаков точек составляет около 5 см.
-                  \item При сравнении сеткок составляет около 1 см.
-              \end{itemize}
-        \item \textit{Натурный эксперимент} (---//---): \begin{itemize}
-            \large
-                  \item При сравнении облаков точек составляет около 8 см.
-                        % \item Среднее значение. RMSE при сравнении сетки составляет около 1 см.
-              \end{itemize}
-              \textit{Это приемлимая точность для такой задачи.}
-    \end{itemize}
-\end{frame}
+% \begin{frame}[t]{Определение геометрических свойств поверхности}
+%     \framesubtitle{Итог}
+%     \large
+%     \begin{itemize}
+%         \item Карта может быть построена с помощью \textit{вогнутой оболочки 2D триангуляции Делоне}, где входными данными являются \textit{точки касания, определенные датчиком силы}.
+%         \item \textit{Симулятор} (Среднее значение среднеквадратичной ошибки): \begin{itemize}
+%             \large
+%                   \item При сравнении облаков точек составляет около 5 см.
+%                   \item При сравнении сеткок составляет около 1 см.
+%               \end{itemize}
+%         \item \textit{Натурный эксперимент} (---//---): \begin{itemize}
+%             \large
+%                   \item При сравнении облаков точек составляет около 8 см.
+%                         % \item Среднее значение. RMSE при сравнении сетки составляет около 1 см.
+%               \end{itemize}
+%               \textit{Это приемлимая точность для такой задачи.}
+%     \end{itemize}
+% \end{frame}
 
 
 \begin{frame}[t]{Глобальный итог}
@@ -1189,6 +1073,37 @@
         \end{subfigure}
     \end{figure}
 \end{frame}
+
+\begin{frame}[t]{Результаты решения задач}
+    \framesubtitle{}
+    \vspace{-0.7cm}
+        \begin{columns}[T,onlytextwidth]
+            \begin{column}{0.48\textwidth}
+                \begin{block}{Научных задач (научная новизна)}
+                    1. Методика \textbf{подбора количества ног для шагающих цикловых движителей}.
+                    
+                    2. Методика \textbf{характеризации датчика}, когда площадь касания нагрузки меньше, чем размеры датчик.
+                    
+                    3. Методика \textbf{калибровки} и \textbf{алгоритм определения типа поверхности}.
+                    
+                    4. Методика определения \textbf{геометрических свойств местности}.   
+                        
+                    \end{block}
+            \end{column}
+            \begin{column}{0.48\textwidth}
+                \begin{alertblock}{Инженерных задач}
+     1. \textbf{Шагающий цикловой движитель} с одной степенью свободы в ноге.
+    
+    2. \textbf{Выбраны, откалиброваны и установлены не оптические сенсоры} для определения свойств поверхности.
+    
+    3. Алгоритм \textbf{определения типа поверхности}.
+    
+    4. Алгоритм \textbf{картографирования местности} с помощью \textbf{пальпирования} ногами робота.
+    
+                \end{alertblock}
+            \end{column}
+        \end{columns}
+    \end{frame}
 
 % \fbckg{fibeamer/figs/last_page.png}
 % \frame[plain]{}
