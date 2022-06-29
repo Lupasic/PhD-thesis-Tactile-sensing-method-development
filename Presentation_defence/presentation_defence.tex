@@ -11,7 +11,7 @@
 %%   \begin{otherlanguage}{slovak}  ... \end{otherlanguage}
 %%
 %% These macros specify information about the presentation
-\title[Диссертация]{Разработка метода тактильного очувствления для мобильного шагающего робота} %% that will be typeset on the
+\title[]{Разработка метода тактильного очувствления для мобильного шагающего робота} %% that will be typeset on the
 \subtitle{Аспирант: Олег Буличев \\ Руководитель: Александр Малолетов \\ \ } %% title page.
 \author{Олег Буличев}
 %% These additional packages are used within the document:
@@ -171,17 +171,17 @@
 \begin{figure}[H]
     \begin{subfigure}[t]{0.32\textwidth}
         \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{Darpa_SubT.png}
-        % \caption{capture1}
+        \caption*{Соревнование по автономному исследованию пещер}
         \label{fig:Darpa_SubT.png}
     \end{subfigure}
     \begin{subfigure}[t]{0.32\textwidth}
         \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{NTI.png}
-        % \caption{capture2}
+        \caption*{Спонсирование проекта по тематике}
         \label{fig:NTI.png}
     \end{subfigure}
     \begin{subfigure}[t]{0.32\textwidth}
         \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{rffi.jpeg}
-        % \caption{capture2}
+        \caption*{Грант по тематике}
         \label{fig:rffi.jpeg}
     \end{subfigure}
 \end{figure}
@@ -864,7 +864,11 @@
         Как создать плотное облако точек, используя разреженные данные об точках касания ног?
         \end{block}}
     {\large\begin{alertblock}{Ответ}
-            \centering \textit{Создать полигональную сетку}, используя 2D триангуляцию Делоне (вогнутая оболочка) с использованием разреженных данных, \textit{сгенерировать новые точки} и вернуть данные навигации
+1. \textit{Создать полигональную сетку}, используя 2D триангуляцию Делоне (вогнутая оболочка) с использованием разреженных данных
+
+2. \textit{Сгенерировать новые точки} из полигональной сетки
+
+3. Вернуть плотное облако точек навигации навигации
         \end{alertblock}}
 \end{frame}
 
