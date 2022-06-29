@@ -92,81 +92,23 @@
 
 \fbckg{fibeamer/figs/common.png}
 
-\begin{frame}[t]{Необходимость исследования пещер роботами}
-    % \framesubtitle{Cave dangerous obstacles}
-    \vspace{-0.85cm}
-    \begin{figure}[H]
-        \begin{subfigure}[b]{0.3\textwidth}
-            \centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{surface_types/salt.jpg}\\
-            \caption*{Соляные отложения}
-            \label{fig:surface_types/salt}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}[b]{0.3\textwidth}
-            \centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{surface_types/siphon.png}\\
-            \caption*{Сифоны}
-            \label{fig:surface_types/siphon}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}[b]{0.3\textwidth}
-            \centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{surface_types/ice.png}\\
-            \caption*{Ледяные пещеры}
-            \label{fig:surface_types/ice}
-        \end{subfigure}
+\begin{frame}[t]{Цель работы}
+\framesubtitle{}
+\vspace{-0.4cm}
+    Определить \underline{геометрические} и \underline{физические} свойства пройденной \textbf{поверхности} с помощью шагающего движителя, используя \textit{тактильное очувствление}.
 
-        \begin{subfigure}[b]{0.3\textwidth}
-            \centering
-            \begin{tikzpicture}
-                % Include the image in a node
-                \node [above right, inner sep=0] (image) at (0,0)
-                {\centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{surface_types/clay.jpg}};
-                % Create scope with normalized axes
-                \begin{scope}[
-                        x={($ 0.1*(image.south east)$)},
-                        y={($ 0.1*(image.north west)$)}]
-                    % Grid and axes' labels
-                    % \draw[lightgray,step=1] (image.south west) grid (image.north east);
-                    % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
-                    % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
-                    % Labels
-                    \draw[stealth-, very thick,green] (6,8) -- ++(1,1)
-                    node[rounded corners=3pt,right,black,fill=white]{\tiny Human};
-                \end{scope}
-            \end{tikzpicture}
-            \caption*{Глина}
-            \label{fig:surface_types/clay.jpg}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}[b]{0.3\textwidth}
-            \centering
-            \begin{tikzpicture}
-                % Include the image in a node
-                \node [above right, inner sep=0] (image) at (0,0)
-                {\centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{surface_types/splash.png}};
-                % Create scope with normalized axes
-                \begin{scope}[
-                        x={($ 0.1*(image.south east)$)},
-                        y={($ 0.1*(image.north west)$)}]
-                    % Grid and axes' labels
-                    % \draw[lightgray,step=1] (image.south west) grid (image.north east);
-                    % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
-                    % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
+\begin{figure}[H]
+    \begin{subfigure}{0.49\textwidth}
+        \centering\includegraphics[height=4.5cm,width=1\textwidth,keepaspectratio]{conv_concave.png}
+        \caption*{Определение геометрических свойств}
+    \end{subfigure}
+    \begin{subfigure}{0.49\textwidth}
+        \centering\includegraphics[height=4.5cm,width=1\textwidth,keepaspectratio]{s_shape_leg/view.jpg}
+        \caption*{Определение физических свойств}
+        \label{fig:s_shape_leg/view.jpg}
+    \end{subfigure}
+\end{figure}
 
-                    % Labels
-                    \draw[stealth-, very thick,green] (5,2) -- ++(-2,+1)
-                    node[rounded corners=3pt,left,black,fill=white]{\tiny Puddle};
-                \end{scope}
-            \end{tikzpicture}
-            \caption*{Лужа}
-            \label{fig:surface_types/splash.png}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}[b]{0.3\textwidth}
-            \centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{surface_types/moss.jpg}\\
-            \caption*{Мох}
-            \label{fig:surface_types/moss}
-        \end{subfigure}
-    \end{figure}
 \end{frame}
 
 \begin{frame}[t]{Нерешаемая задача с помощью камеры или лидара}
@@ -222,156 +164,138 @@
 
 \end{frame}
 
-% \begin{frame}[t]{Problem statement}
-%     \framesubtitle{}
-%     \begin{columns}[T,onlytextwidth]
-%         \begin{column}{0.45\textwidth}
-%             \begin{block}{Problem 1}
-%                 How to obtain a useful information about terrain, \textbf{when we have a SLAM based on lidars, cameras}?
-%                 \vspace{5pt}
-
-%                 \uncover<2->{\alert{\large Obtain map and type of terrain}}
-%             \end{block}
-%         \end{column}
-%         \begin{column}{0.45\textwidth}
-%             \begin{block}{Problem 2}
-%                 How to obtain a useful information about terrain,\textbf{ when main navigation system died}?
-%                 \vspace{5pt}
-
-%                 \uncover<2->{\alert{\large Problem 1 + localization}}
-%             \end{block}
-%         \end{column}
-%     \end{columns}
-% \end{frame}
-
-\begin{frame}[t]{Постановка проблемы}
-    \framesubtitle{}
-    \begin{block}{Проблема 1}
-        \large
-        Как получить \underline{полезную информацию} о поверхности, \textbf{когда имеется решенная навигация}?
-        \vspace{5pt}
-
-        \uncover<2->{\alert{\large Карта местности и тип поверхности}}
-    \end{block}
+\begin{frame}[t]{Актуальность проблематики}
+\framesubtitle{}
+\begin{figure}[H]
+    \begin{subfigure}[t]{0.32\textwidth}
+        \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{Darpa_SubT.png}
+        % \caption{capture1}
+        \label{fig:Darpa_SubT.png}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.32\textwidth}
+        \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{NTI.png}
+        % \caption{capture2}
+        \label{fig:NTI.png}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.32\textwidth}
+        \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{rffi.jpeg}
+        % \caption{capture2}
+        \label{fig:rffi.jpeg}
+    \end{subfigure}
+\end{figure}
 \end{frame}
 
-\begin{frame}[t]{Предлагаемое решение}
-    \framesubtitle{}
-    \begin{exampleblock}{Проблема 1}
-        \large
-        \textit{Карта может быть построена}, \textbf{используя датчики силы} на каждой ноге робота, получив \textbf{плотное облако точек}. Облако точек генерируется из построенной полигональной сетки с помощью \textbf{модифицированной 2D триангуляции Делоне}. Полигональная сетка основана на точках касания ног поверхности.
-        \vspace{5pt}
+\begin{frame}[t]{Результаты решения задач}
+\framesubtitle{}
+\vspace{-0.7cm}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.48\textwidth}
+            \begin{block}{Научных задач (научная новизна)}
+                1. Методика \textbf{подбора количества ног для шагающих цикловых движителей}.
+                
+                2. Методика \textbf{характеризации датчика}, когда площадь касания нагрузки меньше, чем размеры датчик.
+                
+                3. Методика \textbf{калибровки} и \textbf{алгоритм определения типа поверхности}.
+                
+                4. Методика определения \textbf{геометрических свойств местности}.   
+                    
+                \end{block}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \begin{alertblock}{Инженерных задач}
+ 1. \textbf{Шагающий цикловой движитель} с одной степенью свободы в ноге.
 
-        \textit{Тип поверхности} может быть получен с помощью решения задачи \textbf{классификация поверхности}, используя \textbf{Машинное Обучение}.
-    \end{exampleblock}
+2. \textbf{Выбраны, откалиброваны и установлены не оптические сенсоры} для определения свойств поверхности.
+
+3. Алгоритм \textbf{определения типа поверхности}.
+
+4. Алгоритм \textbf{картографирования местности} с помощью \textbf{пальпирования} ногами робота.
+
+            \end{alertblock}
+        \end{column}
+    \end{columns}
 \end{frame}
-
-% \begin{frame}[t]{Proposed solutions}
-%     \framesubtitle{}
-%     \begin{columns}[T,onlytextwidth]
-%         \begin{column}{0.45\textwidth}
-%             \begin{exampleblock}{Problem 1}
-%                 \textit{Map can be built} \textbf{using tactile sensors} on each leg of the robot and create a \textbf{dense point cloud} using sampling from generated mesh using \textbf{modified Delaunay triangulation}.
-%                 \vspace{5pt}
-
-%                 \textit{Terrain type} can be obtained solving \textbf{Определение типа поверхности} problem using \textbf{machine learning}.
-%             \end{exampleblock}
-%         \end{column}
-%         \begin{column}{0.45\textwidth}
-%             \begin{exampleblock}{Problem 2}
-%                 \textit{Localization problem} can be solved by \textbf{fused data} from net of \textbf{beacons} plus \textbf{several IMU} on board and knowing a \textbf{kinematics} of the system.
-%             \end{exampleblock}
-%         \end{column}
-%     \end{columns}
-% \end{frame}
-
 
 
 \begin{frame}[t]{Литературный обзор}
     \framesubtitle{}
-    \vspace{-0.3cm}
-    \large
-    Рассмотренные проблемы:
-    \vspace{-0.1cm}
+    \vspace{-0.65cm}
     \begin{itemize}
-        \item Пещеры: препятствия, размеры.
-        \item Роботы для исследования пещер: от дирижаблей, до шагающих.
-        \item Методы построения карты: оптические и тактильные.
+        \item Пещеры: препятствия, размеры. \\ \alert{-- Классификация пещер и препятствий \\ -- Оценка сложности территории}
+        \item Роботы для исследования пещер: от дирижаблей, до шагающих. \\ \alert{-- Робототехнические системы для исследования \textbf{свободных пещер}}
+        \item Способы получения силы реакции опоры. \\ \alert{-- Неявные и явные способы. Классификая типов датчиков силы}
+        \item Методы определения типа поверхности. \\ \alert{-- С помощью машинного обучения, используя набор датчиков}
+        \item Методы построения карты: оптические и тактильные. \\ \alert{-- Построение поверхности \textbf{с помощью датчика силы на манипуляторе} \\ -- Построение карты с помощью \textbf{лидаров и камер}}
     \end{itemize}
-    \vspace{-0.2cm}
 
-    \begin{block}{Существующие проблемы}
-        \begin{itemize}
-            \item Робототехнические системы для исследования свободных пещер
-            \item Построение поверхности с помощью датчика силы на манипуляторе
-            \item Построение карты с помощью лидаров и камер
-        \end{itemize}
-    \end{block}
-    \vspace{-0.2cm}
-
-    \only<2>{\centering\alert{Найдена нерешенная проблема}}
 \end{frame}
 
 \begin{frame}[t]{Разработка робота}
     \framesubtitle{Требования к роботу}
     \large
-    \textbf{Задача} --  выбрать движитель. Робот должен:
-    \begin{itemize}
-        \item Иметь \textit{малые размеры}, чтобы лазать и не застевать в щелях
-        \item Обладать достаточной \textit{проходимостью} для преодоления сыпучих грунтов
-        \item Преодолевать \textit{небольшие водные препятствия}
-        \item Иметь возможнсоть \textit{залезать на большие валуны}
-    \end{itemize}
-    \uncover<2->{\large\centering\alert{Шагающий цикловой движитель с 1 степенью свободы в ноге}}
+\vspace{-0.5cm}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.49\textwidth}
+            \textbf{Задача} --  выбрать движитель. Робот должен:
+            \begin{itemize}
+                \item Иметь \textit{малые размеры}, чтобы лазать и не застевать в щелях
+                \item Обладать \textit{проходимостью} для преодоления сыпучих грунтов
+                \item Преодолевать \textit{небольшие водные препятствия}
+                \item Иметь возможнсоть \textit{залезать на большие валуны}
+            \end{itemize}        
+        \end{column}
+        \begin{column}{0.49\textwidth}
+            \vspace{-1.1cm}
+            \begin{figure}[H]
+                \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{strirus_4.png}
+                \caption*{Шагающий цикловой движитель с 1 степенью свободы в ноге \\ \textbf{СтриРус}, 4-ая итерация}
+                \label{fig:strirus_4.png}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[t]{Разработка робота}
+    \framesubtitle{Видео}
+    \vspace{-0.6cm}
+    \begin{figure}[H]
+        \href{run:./videos/sidestep_segments.mp4}{
+        % \href{https://youtu.be/EQ6oGZVDpoc}{
+            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{sidestep_segment_video_preview.png}}
+        % \caption{Click on a picture for a video}
+    \end{figure}
 \end{frame}
 
 \begin{frame}[t]{Разработка робота}
     \framesubtitle{Структурный синтез}
-    \only<1-2>{\large\begin{block}{Вопрос}
+    {\large\begin{block}{Вопрос}
             Какое оптимальное количество ног должен иметь такой движитель?
         \end{block}}
-    \only<2>{\large\begin{alertblock}{Ответ}
+    {\large\begin{alertblock}{Ответ}
             \centering Робот с таким движителем должен иметь \textbf{8---14 ног}!
         \end{alertblock}}
 \end{frame}
 
 \begin{frame}[c]{Разработка робота}
     \framesubtitle{Используемые технологии}
-    \vspace{-0.9cm}
+    \vspace{-0.7cm}
     \begin{figure}[H]
         \begin{subfigure}[t]{0.32\textwidth}
             \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{c1_paper.png}
-            \caption*{\small Генерация поверхности \\ (Робот проходит по параметризованной \textbf{искусственной территории})}
+            \caption*{\small Генерация поверхности \\ (Параметризованная \textbf{искусственная территория}) \\ \alert{Проблема формализации сложности поверхности}}
         \end{subfigure}
         \hfill
         \begin{subfigure}[t]{0.32\textwidth}
             \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{gazebo_logo.png}
-            \caption*{Робототехнический симулятор}
+            \caption*{\small Робосимулятор \\ (Неявная математическая модель) \\ \alert{Громоздкость явной модели}}
         \end{subfigure}
         \hfill
         \begin{subfigure}[t]{0.32\textwidth}
             \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{gen_algo.jpg}
-            \caption*{Генетический алгоритм \\ (OpenAI-ES)}
+            \caption*{ \small Генетический алгоритм \\ \alert{Отличен для \\ дискретной глобальной \\ мультикретиральной задачи оптимизации}}
         \end{subfigure}
         \hfill
     \end{figure}
-\end{frame}
-
-\begin{frame}[t]{Разработка робота}
-    \framesubtitle{Предположения}
-    \large
-    \begin{itemize}
-        \item Сгенерированное семейство с одинаковыми константами имеет ту же сложность. 
-        \\ 
-        Парметры для генерации:
-              \begin{itemize}
-                \large
-                  \item Длина и ширина ячейки
-                  \item Диапазон высот ячейки
-                  \item Закон распределения
-              \end{itemize}
-              % \item We can generate 
-    \end{itemize}
 \end{frame}
 
 \begin{frame}[t]{Разработка робота}
@@ -442,8 +366,8 @@
     \framesubtitle{Видео: История одного сгенерированного робота}
     \vspace{-0.6cm}
     \begin{figure}[H]
-        % \href{run:./videos/pass_rand_terr.mp4}{
-        \href{https://youtu.be/DcovvkTZgsg}{
+        \href{run:./videos/pass_rand_terr.mp4}{
+        % \href{https://youtu.be/DcovvkTZgsg}{
             \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{genetic_video_preview.jpg}}
         % \caption{Click on a picture for a video}
     \end{figure}
@@ -488,127 +412,21 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}[t]{Разработка робота}
-    \framesubtitle{Улучшение проходимости}
-    \only<1-2>{\large\begin{block}{Question}
-            1. Длинный робот может застрять в щели во время поворота. Как избежать это?
-
-            2. Как залезать на большие уступы?
-        \end{block}}
-    \only<2>{\large\begin{alertblock}{Answer}
-            \centering 1. Добавить возможность двигаться вбок без смены ориентации.
-
-            2. Сделать сегментированное тело.
-        \end{alertblock}}
-\end{frame}
-
-\begin{frame}[t]{Разработка робота}
-    \framesubtitle{Видео}
-    \vspace{-0.6cm}
-    \begin{figure}[H]
-        % \href{run:./videos/sidestep_segments.mp4}{
-        \href{https://youtu.be/EQ6oGZVDpoc}{
-            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{sidestep_segment_video_preview.png}}
-        % \caption{Click on a picture for a video}
-    \end{figure}
-\end{frame}
-
-\begin{frame}[t]{Разработка робота}
-    \framesubtitle{Предлагаемое решение}
-    \vspace{-0.8cm}
-    \begin{figure}[H]
-        \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{omni_rot.png}
-        \caption*{Векторное представление сил в стандартной и всенаправленной компоновке}
-    \end{figure}
-\end{frame}
-
-\begin{frame}[t]{Разработка робота}
-    \framesubtitle{Проботипы робота СтриРус (1)}
-    \vspace{-0.7cm}
-\begin{table}[H]
-    \arrayrulecolor[HTML]{C0C0C0}
-    \begin{tiny}
-    \begin{tabular}{>{\bfseries}p{1.3 cm}|>{\centering}p{3.5cm}|>{\centering}p{3.5cm}|>{\centering \arraybackslash}p{3.5cm}}
-    \multicolumn{1}{p{1.3 cm}}{}  & \multicolumn{1}{p{3.5cm}}{\includegraphics[height=3cm,width=3.5cm,keepaspectratio]{strirus_0.png}}  &  \multicolumn{1}{p{3.5cm}}{\includegraphics[height=3cm,width=3.5cm,keepaspectratio]{strirus_1.png}} & \multicolumn{1}{p{3.5cm}}{\includegraphics[height=3cm,width=3.5cm,keepaspectratio]{strirus_2.jpg}} \\
-     Поколение & 1  & 2 &  3 \\
-     \hline
-     \rowcolor[HTML]{EFEFEF} 
-    Кол-во ног & 54 & 12 & 12 \\ 
-     Кол-во сегм. & 1 & 2 & 2 \\
-     \rowcolor[HTML]{EFEFEF} 
-     Соед. узел & --- & Тангаж & Тангаж, Рыскание \\
-    \makecell[l]{Отн. угол \\ нога-тело, град} & 0 & 0--45 & 0, 15, 30, 45 \\
-    \rowcolor[HTML]{EFEFEF} 
-     Высота ноги, мм & 54 & 60 & 60 \\
-     Особенности & Волноход & Непрерывный механизм & 2 DoF у соед. узла \\
-    \rowcolor[HTML]{EFEFEF} 
-     Недостатки &  \makecell[l]{-- Невозможно установить датчики силы \\ -- Малый КПД} & \makecell[l]{ -- Сложный механизм изм. угла} & \makecell[l]{ -- Маленькие ноги \\ -- Бесполезная возможность рыскания} \\
-    \end{tabular}
-    \end{tiny}
-    \end{table}
-
-\end{frame}
-
-\begin{frame}[t]{Разработка робота}
-    \framesubtitle{Проботипы робота СтриРус (2)}
-    \vspace{-0.7cm}
-    \begin{table}[H]
-        \arrayrulecolor[HTML]{C0C0C0}
-        \begin{tiny}
-        \begin{tabular}{>{\bfseries}p{1.3 cm}|>{\centering}p{3.5cm}|>{\centering \arraybackslash}p{3.5cm}}
-        \multicolumn{1}{p{1.3 cm}}{}  & \multicolumn{1}{p{3.5cm}}{\includegraphics[height=3cm,width=3.5cm,keepaspectratio]{strirus_3.JPG}}  &  \multicolumn{1}{p{3.5cm}}{\includegraphics[height=3cm,width=3.5cm,keepaspectratio]{strirus_4.png}} \\
-        Поколение & 3+  & 4 \\
-         \hline
-         \rowcolor[HTML]{EFEFEF} 
-         Кол-во ног & 6 & 10 \\ 
-         Кол-во сегм. & 1 & 2 \\
-         \rowcolor[HTML]{EFEFEF} 
-         Соед. узел & --- & Тангаж \\
-        \makecell[l]{Отн. угол \\ нога-тело, град} & 0 & 0, 15 \\
-        \rowcolor[HTML]{EFEFEF} 
-        Высота ноги, мм & 90 & 180 \\
-        Особенности & Удлиненные ноги & Гигантские ноги \\
-        \rowcolor[HTML]{EFEFEF} 
-        Недостатки &  \makecell[l]{-- 1 Сегмент} & \makecell[l]{ -- } \\
-        \end{tabular}
-        \end{tiny}
-        \end{table}
-\end{frame}
-
 \begin{frame}[t]{Разработка преобразователя силы}
     \framesubtitle{}
-    \only<1-2>{\large\begin{block}{Question}
+    {\large\begin{block}{Вопрос}
             Как получить силу реакции опоры?
         \end{block}}
-    \only<2>{\large\begin{alertblock}{Answer}
+    {\large\begin{alertblock}{Ответ}
         \vspace{-0.2cm}
 
          \begin{itemize}
             \color{lightgray}
             \item Измерив ток/напряжение на моторе
                 \item Установив датчик момента на вал мотора
-                \item {\color{black} Установив датчик силы на ногу робота}
+                \item {\color{black} Установив датчик силы на ногу робота \\  \alert{\textbf{Пьезорезистивный датчик основанный \underline{Velostat}}: дешевый и надежный, но имеет проблемы с гистерезисом}}
             \end{itemize}
         \end{alertblock}}
-\end{frame}
-
-\begin{frame}[t]{Разработка преобразователя силы}
-    \framesubtitle{Типы датчиков силы}
-    \vspace{-20pt}
-    \begin{multicols}{2}
-        \begin{itemize}
-            \alt<1>{}{\color{lightgray}}
-            \item  \textbf{Силомоментный}: массивный и дорогой для маленьких роботов
-            \item \textbf{Оптический}: очень габаритный
-            \item \textbf{Магнитный}: очень габаритный
-            \item \textbf{Емкостной}: дорогой, но лучший для данной задачи
-            \item {\color{black}\textbf{Пьезорезистивный датчик основанный \alt<1>{на чернилах или полимерах}{\underline{Velostat}}}: дешевый и надежный, но имеет проблемы с гистерезисом}
-
-            \item { \alt<1>{}{\color{lightgray}} \textbf{Тензометрический}: влияние температуры и влажности на чувствительность}
-        \end{itemize}
-    \end{multicols}
-    \vspace{-10pt}
-    \only<2>{\ }
 \end{frame}
 
 \begin{frame}[t]{Разработка преобразователя силы}
@@ -693,67 +511,66 @@
 \begin{frame}[t]{Разработка преобразователя силы}
     \framesubtitle{Требования к установке}
     \vspace{-0.5cm}
-    {\large
-        \begin{itemize}
-            \item Управление силой нажатия \uncover<2>{\\ \alert{Решено с помощью импедансного управления}}
-            \item Повторяемость эксперимента по силе и позиции \uncover<2>{\\ \alert{Решено, добавив манипулятор и камеру}}
-            \item Возможность нажимать только на часть сенсора \uncover<2>{\\ \alert{Возможно благодаря насадкам для манипулятора}}
-        \end{itemize}}
-    \uncover<2>{\centering\large\alert{Все требования выполнены}}
-\end{frame}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.39\textwidth}
+            \begin{itemize}
+                \item Управление силой нажатия {\\ \alert{Импедансное управления}}
+                \item Повторяемость эксперимента по силе и позиции{\\ \alert{Добавив манипулятор и камеру}}
+                \item Возможность нажимать только на часть сенсора{\\ \alert{Насадки для манипулятора}}
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.8\textwidth}
+            \scalebox{0.81}{
+            \begin{tikzpicture}
 
+                % Include the image in a node
+                \node [
+                    above right,
+                    inner sep=0] (image) at (0,0) {\centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{exp_stand1}};
+    
+                % Create scope with normalized axes
+                \begin{scope}[
+                        x={($0.1*(image.south east)$)},
+                        y={($0.1*(image.north west)$)}]
+    
+                    % Grid
+                    % \draw[lightgray,step=1] (image.south west) grid (image.north east);
+    
+                    % % Axes' labels
+                    % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
+                    % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
+    
+                    % Labels
+                    % \node[circle,fill=green] at (7.25,6.75){\small 2};
+    
+                    \draw[latex-, very thick,green] (3.5,2.2) -- (2.5,1)
+                    node[rounded corners=3pt,below left,black,fill=white]{\small Velostat sensors};
+    
+                    \draw[stealth-, very thick,green] (3.5,2.6) -- ++(-0.7,+0.5)
+                    node[rounded corners=3pt,left,black,fill=white]{\small Force sensor};
+    
+                    \draw[stealth-, very thick,green] (6.5,3) -- (7,6)
+                    node[rounded corners=3pt,above right,black,fill=white]{\small Self-made PCB};
+    
+                    \draw[stealth-, very thick,green] (7.2,1.5) -- (8,5)
+                    node[rounded corners=3pt,above right,black,fill=white]{\small Arduino};
+    
+                    \draw[stealth-, very thick,green] (2.5,9.5) -- (4,9.5)
+                    node[rounded corners=3pt,right,black,fill=white]{\small Camera};
+    
+                    \draw[very thick,green] (0.5,2.5) rectangle (4.2,9)
+                    node[below left,black,fill=green]{\small UR10e};
+    
+                    \draw[latex-, very thick,green] (4.5,7.2) edge (5.5,7.5)
+                    (4.8,5.3) -- (5.5,7.5)
+                    node[rounded corners=3pt,above,black,fill=white]{\small Aruco markers};
+                \end{scope}
+    
+            \end{tikzpicture}
+            }
+        \end{column}
+    \end{columns}
 
-\begin{frame}[t]{Разработка преобразователя силы}
-    \framesubtitle{Установка: Общий вид}
-    \vspace{-12pt}
-    \begin{center}
-        \begin{tikzpicture}
-
-            % Include the image in a node
-            \node [
-                above right,
-                inner sep=0] (image) at (0,0) {\centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{exp_stand1}};
-
-            % Create scope with normalized axes
-            \begin{scope}[
-                    x={($0.1*(image.south east)$)},
-                    y={($0.1*(image.north west)$)}]
-
-                % Grid
-                % \draw[lightgray,step=1] (image.south west) grid (image.north east);
-
-                % % Axes' labels
-                % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
-                % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
-
-                % Labels
-                % \node[circle,fill=green] at (7.25,6.75){\small 2};
-
-                \draw[latex-, very thick,green] (3.5,2.2) -- (2.5,1)
-                node[rounded corners=3pt,below left,black,fill=white]{\small Velostat sensors};
-
-                \draw[stealth-, very thick,green] (3.5,2.6) -- ++(-0.7,+0.5)
-                node[rounded corners=3pt,left,black,fill=white]{\small Force sensor};
-
-                \draw[stealth-, very thick,green] (6.5,3) -- (7,6)
-                node[rounded corners=3pt,above right,black,fill=white]{\small Self-made PCB};
-
-                \draw[stealth-, very thick,green] (7.2,1.5) -- (8,5)
-                node[rounded corners=3pt,above right,black,fill=white]{\small Arduino};
-
-                \draw[stealth-, very thick,green] (2.5,9.5) -- (4,9.5)
-                node[rounded corners=3pt,right,black,fill=white]{\small Camera};
-
-                \draw[very thick,green] (0.5,2.5) rectangle (4.2,9)
-                node[below left,black,fill=green]{\small UR10e};
-
-                \draw[latex-, very thick,green] (4.5,7.2) edge (5.5,7.5)
-                (4.8,5.3) -- (5.5,7.5)
-                node[rounded corners=3pt,above,black,fill=white]{\small Aruco markers};
-            \end{scope}
-
-        \end{tikzpicture}
-    \end{center}
 \end{frame}
 
 \begin{frame}[t]{Разработка преобразователя силы}
@@ -767,41 +584,6 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Разработка преобразователя силы}
-    \framesubtitle{Установка: Снижение ошибки по углу с помощью Aruco маркеров}
-    \vspace{-15pt}
-
-    \begin{figure}[H]
-        \centering
-         \begin{tikzpicture}
-            % Include the image in a node
-            \node [above right, inner sep=0] (image) at (0,0) 
-            {\centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{exp_stand2.JPG}};          
-            % Create scope with normalized axes
-            \begin{scope}[
-                x={($ 0.1*(image.south east)$)},
-                y={($ 0.1*(image.north west)$)}]
-                % Grid and axes' labels
-                % \draw[lightgray,step=0.5] (image.south west) grid (image.north east);
-                % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
-                % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
-                % Labels
-                \draw[stealth-, very thick,green] (1.2,3) -- (1.2,2)
-                node[rounded corners=3pt,below,black,fill=white, text width=2cm]{\small Manip. base Aruco marker};  
-
-                \draw[stealth-, very thick,green] (2.3,6.5) -- (1.5,7.5)
-                node[rounded corners=3pt,above,black,fill=white, text width=2cm]{\small Sensor plate Aruco marker};  
-
-                \draw[stealth-, very thick,green] (5.4,2) -- (7.5,1.5);
-                \draw[stealth-, very thick,green] (5.75,2.8) -- (7.5,1.5)
-                node[rounded corners=3pt,right,black,fill=white, text width=2.3cm]{\small Transformation calculation b/w markers};  
-            \end{scope}
-        \end{tikzpicture}
-        % \caption*{}
-        \label{fig:exp_stand2.JPG}
-    \end{figure}
-
-\end{frame}
 
 \begin{frame}[t]{Разработка преобразователя силы}
     \framesubtitle{Установка: Насадки}
@@ -941,7 +723,7 @@
                 V_{out} = V_0 + p[k_p + k_e(1-e^\frac{-(t-t_0)}{\tau_{res}})](1-e^{-\frac{A}{p}}) \\
                 k_p = A_1e^{-A_2p}; \tau_{res} = B_0 + B_1e^{-\frac{p}{B_2}}
             \end{eqnarray*}
-            Где $V_0$ -- начальное напряжение, $p,\ A_i,\ B_i,\ \tau_{res},\ k_i$ константы, $t$ -- текущее время, $t_0$ -- время начала нажатия.
+            Где $V_0$ -- начальное напряжение, \\ $p$ -- приложенное давление, \\ $A_i,\ B_i,\ \tau_{res},\ k_i$ искомые параметры, \\  $t$ -- текущее время, $t_0$ -- время начала нажатия.
         \end{column}
         \begin{column}{0.45\textwidth}
             \vspace{-15pt}
