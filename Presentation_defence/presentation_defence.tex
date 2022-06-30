@@ -94,6 +94,23 @@
 
 \fbckg{fibeamer/figs/common.png}
 
+\begin{frame}[t]{О себе}
+\framesubtitle{}
+    \begin{exampleblock}{Образование}
+        \begin{itemize}
+            \item Бакалавриат --- МГТУ им. Н.Э. Баумана, РК6 (красный диплом) \\ \textbf{Тема:} Разработка системы управления наведением МРК <<Пластун>>
+            \item Магистратура --- Университет Иннополис, Робототехника \\ \textbf{Тема:} Development of biomimetic centipede robot <<StriRus>>
+            \item Аспирантура --- Университет Иннополис, Робототехника
+        \end{itemize}
+    \end{exampleblock}
+    \begin{alertblock}{Текущие должности}
+        \begin{itemize}
+        \item Старший преподаватель (Лин. Алг., Теор. Мех., МиМ)
+        \item Инженер-исследователь
+    \end{itemize}
+    \end{alertblock}
+\end{frame}
+
 \begin{frame}[t]{Цель работы}
 \framesubtitle{}
 \vspace{-0.4cm}
@@ -192,10 +209,10 @@
     \framesubtitle{}
     \vspace{-0.65cm}
     \begin{itemize}
-        \item Пещеры: препятствия, размеры. \\ \alert{-- Классификация пещер и препятствий \\ -- Оценка сложности территории}
-        \item Роботы для исследования пещер: от дирижаблей, до шагающих. \\ \alert{-- Робототехнические системы для исследования \textbf{свободных пещер}}
-        \item Способы определения силы реакции опоры. \\ \alert{-- Неявные и явные способы. Классификая типов датчиков силы}
-        \item Методы распознования типа поверхности. \\ \alert{-- С помощью машинного обучения, используя набор датчиков}
+        \item Пещеры: препятствия, размеры. \\ \alert{-- \textbf{Классификация} пещер и препятствий \\ -- \textbf{Оценка сложности} территории}
+        \item Роботы для исследования пещер: от дирижаблей, до шагающих. \\ \alert{-- \textbf{Робототехнические системы} для исследования \textbf{свободных пещер}}
+        \item Способы определения силы реакции опоры. \\ \alert{-- Неявные и явные \textbf{способы}. \textbf{Классификая типов датчиков} силы}
+        \item Методы распознования типа поверхности. \\ \alert{-- С помощью \textbf{машинного обучения}, используя набор датчиков}
         \item Методы построения карты: оптические и тактильные. \\ \alert{-- Построение поверхности \textbf{с помощью датчика силы на манипуляторе} \\ -- Построение карты с помощью \textbf{лидаров и камер}}
     \end{itemize}
 
@@ -230,8 +247,8 @@
     \framesubtitle{Видео}
     \vspace{-0.6cm}
     \begin{figure}[H]
-        \href{run:./videos/sidestep_segments.mp4}{
-        % \href{https://youtu.be/EQ6oGZVDpoc}{
+        % \href{run:./videos/sidestep_segments.mp4}{
+        \href{https://youtu.be/EQ6oGZVDpoc}{
             \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{sidestep_segment_video_preview.png}}
         % \caption{Click on a picture for a video}
     \end{figure}
@@ -243,7 +260,7 @@
             Какое оптимальное количество ног должен иметь такой движитель?
         \end{block}}
     {\large\begin{alertblock}{Ответ}
-            \centering Робот с таким движителем должен иметь \textbf{8---14 ног}!
+            \centering Решив задачу структурного синтеза,\\ результатом которого является движитель с \textbf{8---14 ногами}
         \end{alertblock}}
 \end{frame}
 
@@ -337,8 +354,8 @@
     \framesubtitle{Видео: История одного сгенерированного робота}
     \vspace{-0.6cm}
     \begin{figure}[H]
-        \href{run:./videos/pass_rand_terr.mp4}{
-        % \href{https://youtu.be/DcovvkTZgsg}{
+        % \href{run:./videos/pass_rand_terr.mp4}{
+        \href{https://youtu.be/DcovvkTZgsg}{
             \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{genetic_video_preview.jpg}}
         % \caption{Click on a picture for a video}
     \end{figure}
@@ -395,7 +412,7 @@
             \color{lightgray}
             \item Измерив ток/напряжение на моторе
                 \item Установив датчик момента на вал мотора
-                \item {\color{black} Установив датчик силы на ногу робота \\  \alert{\textbf{Пьезорезистивный датчик основанный \underline{Velostat}}: дешевый и надежный, но имеет проблемы с гистерезисом}}
+                \item {\color{black} Установив датчик силы на ногу робота \\  \alert{\textbf{Пьезорезистивный датчик основанный на \underline{Velostat}}: дешевый и надежный, но имеет проблемы с гистерезисом}}
             \end{itemize}
         \end{alertblock}}
 \end{frame}
@@ -682,8 +699,8 @@
     \framesubtitle{Установка: Видео}
     \vspace{-15pt}
     \begin{figure}[H]
-        \href{run:./videos/exp_stand_video.mp4}{
-        % \href{https://youtu.be/Gw4wVZ-ESuE}{
+        % \href{run:./videos/exp_stand_video.mp4}{
+        \href{https://youtu.be/Gw4wVZ-ESuE}{
             \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{exp_stand_video_preview.jpg}}
         % \caption{caption_name}
     \end{figure}
@@ -723,7 +740,7 @@
 
         3. Представить их в виде вектора фич.
 
-        4. Решить задачу кластеризации данных с помощью SVM, используя метрику 10-fold cross validation. 
+        4. Решить задачу классификации данных с помощью SVM, используя метрику 10-fold cross validation. 
 
         5. Протестировать модель на собранных данных.
         \end{alertblock}}
@@ -787,15 +804,15 @@
     \vspace{-15pt}
     \begin{figure}[H]
         \begin{subfigure}{0.22\textwidth}
-            \href{run:./videos/flat.gif}
-            % \href{https://gifyu.com/image/SxatY}
+            % \href{run:./videos/flat.gif}
+            \href{https://gifyu.com/image/SxatY}
             {\centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{s_shape_leg/flat.jpg}} 
             \caption*{Резина}
         \end{subfigure}
         \hfill
         \begin{subfigure}{0.26\textwidth}
-            \href{run:./videos/rock.gif}
-            % \href{https://gifyu.com/image/Sxatt}
+            % \href{run:./videos/rock.gif}
+            \href{https://gifyu.com/image/Sxatt}
             {\centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{s_shape_leg/view.jpg}}
             \caption*{Каменная гряда}
         \end{subfigure}
@@ -1021,8 +1038,8 @@
     \vspace{-0.5cm}
     \begin{figure}[H]
         \begin{subfigure}[t]{0.49\textwidth}
-            \href{run:./videos/big_angle2.mp4}{
-            % \href{https://youtu.be/2dxHHTG4psQ}{
+            % \href{run:./videos/big_angle2.mp4}{
+            \href{https://youtu.be/2dxHHTG4psQ}{
                 \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{real_robot_mesh_video_preview.png}}
             \caption*{Робот проходит препятствие}
         \end{subfigure}
@@ -1086,7 +1103,7 @@
                 \begin{block}{Научных задач (научная новизна)}
                     1. Методика \textbf{подбора количества ног для шагающих цикловых движителей}.
                     
-                    2. Методика \textbf{характеризации датчика}, когда площадь касания нагрузки меньше, чем размеры датчик.
+                    2. Методика \textbf{характеризации датчика}, когда площадь касания нагрузки меньше, чем размеры датчика.
                     
                     3. Методика \textbf{калибровки} и \textbf{алгоритм определения типа поверхности}.
                     
@@ -1108,6 +1125,24 @@
             \end{column}
         \end{columns}
     \end{frame}
+
+\begin{frame}[t]{Результаты интеллектуальной деятельности}
+\framesubtitle{}
+\large
+\begin{itemize}
+    \item \textit{Количество публикаций} 
+    \begin{itemize}
+        \large
+        \item \textbf{1.5} --- журналы, рекомендованных ВАК
+        \item \textbf{3} --- журналы, индексируемые в Scopus (2 работы Q2)
+        \item \textbf{9} --- РИНЦ
+        \item \textbf{2} --- готовятся к публикации в Scopus
+    \end{itemize}
+    \item \textbf{8} --- Зарегистрированных программ для ЭВМ
+    \item \textbf{3} --- Выигранных гранта (Умник, ЦНТИ, РФФИ)
+\end{itemize}
+\end{frame}
+
 
 % \fbckg{fibeamer/figs/last_page.png}
 % \frame[plain]{}
