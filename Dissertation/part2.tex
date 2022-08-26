@@ -27,6 +27,82 @@
 
 Полный текст статьи можно прочитать \cite{bulichevOptimizationCentipedeRobot2017}.
 
+\section*{Математическая модель робота}
+Исследуется механическая система, состоящая из твёрдых тел \eqref{eq:newton_euler}, движение которых описывается дифференциальными уравнениями вида:
+
+\begin{eqnarray}
+    \label{eq:newton_euler}
+    M \dot{\vec{u}} = \vec{g} \\
+    M = \begin{bmatrix}
+    M_1 & \cdots  & 0 \\
+    \vdots  & \ddots  & \vdots  \\ 
+    0 & \cdots   & M_n 
+    \end{bmatrix},\ M_i = \begin{bmatrix}
+    m_i E_{3\times 3} & 0 \\ 
+    0 & I_i 
+    \end{bmatrix} \\
+    \vec{u}_i^{\ T} = \begin{bmatrix}
+        \vec{v}_i^{\ T} & \vec{\omega}_i^{\ T}
+    \end{bmatrix} \\ 
+    \vec{g}^{\ T} = \begin{bmatrix}
+        \cdots \  \vec{F}_i^{\ T}, & (\vec{\tau}_i - \vec{\omega}_i \times I_i \vec{\omega}_i)^T\  \cdots 
+    \end{bmatrix}
+\end{eqnarray}
+где, $M_i$~---~матрицы, содержащие массово-инерционные характеристики; $m_i$~---~масса тела; $I_i$~---~тензор инерции; $\vec{u_i}$~---~вектор обобщённых скоростей; $E$~---~единичная матрица; $\vec{g}$~---~вектор обобщённых сил; $\vec{v_i}$~---~вектор линейной скорости; $\vec{\omega_i}$~---~вектор угловой скорости; $\vec{F_i}$, $\vec{\tau_i}$~---~силы и моменты сил взаимодействия.
+
+Тела, входящие в систему соединены между собой цилиндрическими шарнирами, которые описываются следующими связями и динамическими ограничениями:
+\begin{eqnarray}
+    \label{eq:kin_constr}
+    \phi(q_{j_1},\ u_{j_1},\ \cdots,\ q_{j_k},\ u_{j_k},\ t) \geqslant  0 \\
+    \vec{q}_i^{\ T} = \begin{bmatrix}
+        \vec{x}_i^{\ T} & \vec{Q}_i^{\ T}
+    \end{bmatrix} \\
+    \dot{\vec{q}_i} = \begin{bmatrix}
+    E_{3\times3} & 0\\ 
+    0 & G(\vec{q}_i) 
+    \end{bmatrix}\vec{u}_i  
+\end{eqnarray}
+
+\begin{eqnarray}
+    \label{eq:phys_constr}
+    \vec{g}_i = \tau_i^T \vec{z}_{i-1} -k\vec{v}_i \dot{\vec{q}_i} 
+\end{eqnarray}
+где через $\phi$ обозначена функция связи; $t$~---~время; $q_{j}$~---~вектор обобщенных координат, включающий в себя координаты центра масс $\vec{x_i}$ и кватернион $\vec{Q_i}$, описывающий ориентацию тела в пространстве; через $G(\vec{q}_i)$ обозначена матрица, вид которой зависит от выбранной системы координат и способа задания ориентации тела; $k$~---~ коэффициент вязкого трения в шарнире.
+
+Контакт ног робота с опорной поверхностью \pic{fig:contact_interaction.png} описывается на базе модели сухого трения и выражатеся следующими уравнениями:
+
+\begin{figure}[H]
+    \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{images/contact_interaction.png}
+    \caption{Описание переменных для модели взаимодействия опорной поверхности и ноги робота}
+    \label{fig:contact_interaction.png}
+\end{figure}
+
+\begin{eqnarray}
+    \label{eq:contact_inter}
+    \phi_u(\vec{q}\ ) = g(\vec{q}\ ) \geqslant 0 \\ 
+    g(\vec{q}\ ) = (\vec{x}_1 + \vec{s}_1 - \vec{x}_2 - \vec{s}_2) \cdot \vec{n} \\
+    \frac{d }{d t}\phi_u(\vec{q}\ ) \approx \begin{bmatrix}
+        \vec{n}^{\ T} & (\vec{s}_1 \times \vec{n})^T & -\vec{n}^{\ T} & (-\vec{s}_2 \times \vec{n})^T
+    \end{bmatrix} \begin{bmatrix}
+        \vec{v}_1\\ 
+    \vec{\omega}_1\\ 
+    \vec{v}_2\\
+    \vec{\omega}_2\\
+    \end{bmatrix}
+\end{eqnarray} 
+
+\begin{eqnarray}
+    \label{eq:ground_inter}
+\left\{\begin{matrix*}[l]
+\mu f_n \geqslant \sqrt{f_1^2 + f_2^2}\\ 
+\left\lVert \vec{v_t}\right\rVert (\mu f_n - \sqrt{f_1^2 + f_2^2}) = 0\\
+\dfrac{\vec{f_t}}{\left\lVert \vec{f_t}\right\rVert } = - \dfrac{\vec{v_t}}{\left\lVert \vec{v_t}\right\rVert }
+\end{matrix*}\right.
+\end{eqnarray}
+где, $\phi_u(\vec{q})$~---~функция связи; $ \mu $~---~ коэффициент трения между ногой и опорной поверхностью;  радиус-векторы $\vec{x}_{1,2},\ \vec{s}_{1,2}$ и орты координатных осей $\vec{t}_{1,2}, \vec{n}$ показаны на рисунке \pic{fig:contact_interaction.png}; $ f_{1,2} $~---~значения сил трения вдоль осей $t_{1,2}$ соответственно.
+
+\section[]{Представление робота}
+
 Геометрическая модель робота представлена в виде трехмерного параллелепипеда. Количество движителей по каждому из бортов обозначается через $\gamma$. Разность фаз между соседними движителями обозначается через  $\alpha$ \pic{fig:best_gen_robot.jpg}.
 
 \begin{figure}[H]
