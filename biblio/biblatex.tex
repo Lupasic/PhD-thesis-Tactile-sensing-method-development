@@ -7,8 +7,9 @@
 \usepackage[%
 backend=biber,% движок
 bibencoding=utf8,% кодировка bib файла
-sorting=none,% настройка сортировки списка литературы
+sorting=nty,% настройка сортировки списка литературы
 style=gost-numeric,% стиль цитирования и библиографии (по ГОСТ)
+% style=gost-alphabetic,
 language=autobib,% получение языка из babel/polyglossia, default: autobib % если ставить autocite или auto, то цитаты в тексте с указанием страницы, получат указание страницы на языке оригинала
 autolang=other,% многоязычная библиография
 clearlang=true,% внутренний сброс поля language, если он совпадает с языком из babel/polyglossia
@@ -132,6 +133,7 @@ sorting=none,% настройка сортировки списка литера
 \addbibresource[label=bl-author]{biblio/author.bib}
 \addbibresource[label=bl-registered]{biblio/registered.bib}
 \addbibresource[label=bl-triangulation]{biblio/triangulation_bib.bib}
+\addbibresource[label=bl-master]{biblio/master_thesis.bib}
 
 %http://tex.stackexchange.com/a/141831/79756
 %There is a way to automatically map the language field to the langid field. The following lines in the preamble should be enough to do that.
