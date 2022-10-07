@@ -5,12 +5,50 @@
 
 Для реализации блока "построение модели поверхности", необходимы входные данные, которые были  описаны в главах выше. Для определения геометрических свойств поверхности необходимо получить облако точек касаний опорных поверхностей. То есть датчик силы работает в режиме определения. Это возможно сделать, решив задачу кинематики и локализации робота.
 
-\section{Определение точки касания роботом}
+% \section{Определение точки касания роботом}
+% \begin{figure}[H]
+%     \centering\includegraphics[height=8cm,width=1\textwidth,keepaspectratio]{StriRus_10_legs_15_angle_v4.png}
+%     \caption{Кинематическая схема для определения точки касания опорной поверхности роботом}
+%     \label{fig:StriRus_10_legs_15_angle_v4.png}
+% \end{figure}
+
 \begin{figure}[H]
-    \centering\includegraphics[height=8cm,width=1\textwidth,keepaspectratio]{StriRus_10_legs_15_angle_v4.png}
+    \centering
+     \begin{tikzpicture}
+        % Include the image in a node
+        \node [above right, inner sep=0] (image) at (0,0) 
+        {\centering\includegraphics[height=10cm,width=1\textwidth,keepaspectratio]{StriRus_10_legs_15_angle_v4.png}};          
+        % Create scope with normalized axes
+        \begin{scope}[
+            x={($ 0.1*(image.south east)$)},
+            y={($ 0.1*(image.north west)$)}]
+            % Grid and axes' labels
+            \draw[lightgray,step=1] (image.south west) grid (image.north east);
+            \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
+            \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
+ 
+            % Labels
+
+            \draw[stealth-, very thick,blue] (1,9) -- ++(0.5,-0.5)
+            \draw[stealth-, very thick,green] (1,9) -- ++(-0.5,-0.5)
+            \draw[stealth-, very thick,red] (1,9) -- ++(0,+0.5)
+            node[rounded corners=3pt,left,black,fill=white]{\small 0_{global}};
+            % \node[circle,fill=green,scale=0.4] at (3.3,6.27){\small 1};
+ 
+            % \draw[latex-, very thick,green] (3.5,2.2) -- (2.5,1)
+            % node[below left,black,fill=white]{\small test};
+ 
+            % \draw[stealth-, very thick,green] (3.5,2.6) -- ++(-0.7,+0.5)
+            % node[rounded corners=3pt,left,black,fill=white]{\small test};
+ 
+            % \draw[very thick,green] (0.5,2.5) rectangle (4.2,9)
+            % node[below left,black,fill=green]{\small test};
+        \end{scope}
+    \end{tikzpicture}
     \caption{Кинематическая схема для определения точки касания опорной поверхности роботом}
     \label{fig:StriRus_10_legs_15_angle_v4.png}
 \end{figure}
+
 \begin{multline}
         H_{global}^{sensor} = H(x_{glob},y_{glob},z_{glob},\alpha_{glob},\beta_{glob},\gamma_{glob})\\ T_x(l_1)R_y(\alpha_2)T_x(l_3)T_y(l_4)R_z(-15^{\circ})T_y(l_5)R_y(\alpha_6)T_x(l_7)T_y(l_8)
 \end{multline}
