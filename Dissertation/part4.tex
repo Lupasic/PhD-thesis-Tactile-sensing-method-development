@@ -29,20 +29,99 @@
  
             % Labels
 
-            \draw[stealth-, very thick,blue] (1,9) -- ++(0.5,-0.5)
-            \draw[stealth-, very thick,green] (1,9) -- ++(-0.5,-0.5)
-            \draw[stealth-, very thick,red] (1,9) -- ++(0,+0.5)
-            node[rounded corners=3pt,left,black,fill=white]{\small 0_{global}};
-            % \node[circle,fill=green,scale=0.4] at (3.3,6.27){\small 1};
- 
-            % \draw[latex-, very thick,green] (3.5,2.2) -- (2.5,1)
-            % node[below left,black,fill=white]{\small test};
- 
-            % \draw[stealth-, very thick,green] (3.5,2.6) -- ++(-0.7,+0.5)
-            % node[rounded corners=3pt,left,black,fill=white]{\small test};
- 
-            % \draw[very thick,green] (0.5,2.5) rectangle (4.2,9)
-            % node[below left,black,fill=green]{\small test};
+            \coordinate (Xc) at (0.4253,-0.2628);
+        \coordinate (Yc) at (-0.4512,-0.2156);
+        \coordinate (Zc) at (0,0.5);
+        % Labels
+
+        \coordinate (o_g) at (1,9);
+        \draw[-stealth, very thick,blue] (o_g) -- ++(Xc);
+        \draw[-stealth, very thick,green] (o_g) -- ++(Yc);
+        \draw[-stealth, very thick,red] (o_g) -- ++(Zc);
+        \node[circle,fill=green,scale=0.35] at (o_g){};
+        \node[rounded corners=3pt,above right=-4pt, black] at (o_g){\tiny\  $O_{glob}$};
+
+        \coordinate (o_b) at (2.9,7.05);
+        \draw[-stealth, very thick,blue] (o_b) -- ++(Xc);
+        \draw[-stealth, very thick,green] (o_b) -- ++(Yc);
+        \draw[-stealth, very thick,red] (o_b) -- ++(Zc);
+        \node[circle,fill=green,scale=0.35] at (o_b){};
+        \node[rounded corners=3pt,above right=-4pt, black] at (o_b){\tiny\  $O_{base}$};
+
+        \coordinate (o_1) at (2.9,6.65);
+        \draw[-stealth, very thick,blue] (o_1) -- ++(Xc);
+        \draw[-stealth, very thick,green] (o_1) -- ++(Yc);
+        \draw[-stealth, very thick,red] (o_1) -- ++(Zc);
+        \node[circle,fill=green,scale=0.35] at (o_1){};
+        \node[rounded corners=3pt,above right=-4pt, black] at (o_1){\tiny\  $O_{1}$};
+
+        \coordinate (o_2) at (4,6);
+        \draw[-stealth, very thick,blue] (o_2) -- ++(Xc);
+        \draw[-stealth, very thick,green] (o_2) -- ++(Yc)
+        node[rounded corners=3pt,below,black]{\tiny $\alpha_3$};
+        \draw[-stealth, very thick,red] (o_2) -- ++(Zc);
+        \node[circle,fill=green,scale=0.35] at (o_2){};
+        \node[rounded corners=3pt,above right=-4pt, black] at (o_2){\tiny\  $O_{2}=O_{3}$};
+
+        \coordinate (o_4) at (7.55,4.65);
+        \draw[-stealth, very thick,blue] (o_4) -- ++(Xc);
+        \draw[-stealth, very thick,green] (o_4) -- ++(Yc);
+        \draw[-stealth, very thick,red] (o_4) -- ++(Zc);
+        \node[circle,fill=green,scale=0.35] at (o_4){};
+        \node[rounded corners=3pt,above right=-4pt, black] at (o_4){\tiny\  $O_{4}$};
+
+        \coordinate (o_5) at (6.7,4.45);
+        \draw[-stealth, very thick,blue] (o_5) -- ++(Xc);
+        \draw[-stealth, very thick,green] (o_5) -- ++(Yc);
+        \draw[-stealth, very thick,red] (o_5) -- ++(Zc);
+        \node[circle,fill=green,scale=0.35] at (o_5){};
+        \node[rounded corners=3pt,above right=-4pt, black] at (o_5){\tiny\  $O_{5}=O_{6}$};
+
+        \coordinate (Xcr) at (0.49,-0.1);
+        \coordinate (Ycr) at (-0.38,-0.32);
+
+        \draw[-stealth, very thick,blue] (o_5) -- ++(Xcr);
+        \draw[-stealth, very thick,green] (o_5) -- ++(Ycr);
+        \node[circle,fill=green,scale=0.35] at (o_5){};
+
+
+        \coordinate (o_7) at (6.36,3.68);
+        \draw[-stealth, very thick,blue] (o_7) -- ++(Xcr);
+        \draw[-stealth, very thick,green] (o_7) -- ++(Ycr)
+        node[rounded corners=3pt,below,black]{\tiny $\alpha_8$};
+        \draw[-stealth, very thick,red] (o_7) -- ++(Zc);
+        \node[circle,fill=green,scale=0.35] at (o_7){};
+        \node[rounded corners=3pt,above right=-4pt, black] at (o_7){\tiny\  $O_{7}=O_{8}$};
+
+        \coordinate (s_1) at (6.6,1.3);
+        \coordinate (s_3) at (5.85,1.7);
+        \coordinate (s_5) at (5.55,2.9);
+
+        \node[circle,fill=green,scale=0.4] at (s_1){1};
+        \node[circle,fill=green,scale=0.4] at (s_3){3};
+        \node[circle,fill=green,scale=0.4] at (s_5){5};
+
+        \draw[-stealth, very thick,green] (o_g) -- (o_b)
+        node[midway,below,black]{\tiny $H_{base}^{glob}$};
+
+        \draw[-stealth, very thick,green] (o_b) -- (o_1)
+        node[midway,below,black]{\tiny $H_{1}^{base}$};
+
+        \draw[-stealth, very thick,green] (o_1) -- (o_2)
+        node[midway,below,black]{\tiny $H_{2}^{1}$};
+
+        \draw[-stealth, very thick,green] (o_2) -- (o_4)
+        node[midway,below,black]{\tiny $H_{4}^{3}$};
+
+        \draw[-stealth, very thick,green] (o_4) -- (o_5)
+        node[midway,below,black]{\tiny $H_{1}^{base}$};
+
+        \draw[-stealth, very thick,green] (o_5) -- (o_7)
+        node[midway,below,black]{\tiny $H_{7}^{6}$};
+
+        \draw[-stealth, very thick,green] (o_7) -- (s_1);
+        \draw[-stealth, very thick,green] (o_7) -- (s_3);
+        \draw[-stealth, very thick,green] (o_7) -- (s_5);
         \end{scope}
     \end{tikzpicture}
     \caption{Кинематическая схема для определения точки касания опорной поверхности роботом}
@@ -50,7 +129,7 @@
 \end{figure}
 
 \begin{multline}
-        H_{global}^{sensor} = H(x_{glob},y_{glob},z_{glob},\alpha_{glob},\beta_{glob},\gamma_{glob})\\ T_x(l_1)R_y(\alpha_2)T_x(l_3)T_y(l_4)R_z(-15^{\circ})T_y(l_5)R_y(\alpha_6)T_x(l_7)T_y(l_8)
+        H_{leg}^{glob} = H(x_{glob},y_{glob},z_{glob},\alpha_{glob},\beta_{glob},\gamma_{glob})T_z(l_1)\\ T_x(l_2)R_y(\alpha_3)T_x(l_4)T_y(l_5)R_z(-15^{\circ})T_y(l_7)R_y(\alpha_8)
 \end{multline}
 Где $H = \begin{bmatrix}
         \underset{3 \times 3}{R} & \underset{3 \times 1}{T} \\
