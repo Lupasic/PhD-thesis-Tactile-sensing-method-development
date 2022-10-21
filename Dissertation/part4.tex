@@ -23,105 +23,104 @@
             x={($ 0.1*(image.south east)$)},
             y={($ 0.1*(image.north west)$)}]
             % Grid and axes' labels
-            \draw[lightgray,step=1] (image.south west) grid (image.north east);
-            \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
-            \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
+            % \draw[lightgray,step=1] (image.south west) grid (image.north east);
+            % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
+            % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
  
             % Labels
 
-            \coordinate (Xc) at (0.4253,-0.2628);
-        \coordinate (Yc) at (-0.4512,-0.2156);
-        \coordinate (Zc) at (0,0.5);
-        % Labels
-
-        \coordinate (o_g) at (1,9);
-        \draw[-stealth, very thick,blue] (o_g) -- ++(Xc);
-        \draw[-stealth, very thick,green] (o_g) -- ++(Yc);
-        \draw[-stealth, very thick,red] (o_g) -- ++(Zc);
-        \node[circle,fill=green,scale=0.35] at (o_g){};
-        \node[rounded corners=3pt,above right=-4pt, black] at (o_g){\tiny\  $O_{glob}$};
-
-        \coordinate (o_b) at (2.9,7.05);
-        \draw[-stealth, very thick,blue] (o_b) -- ++(Xc);
-        \draw[-stealth, very thick,green] (o_b) -- ++(Yc);
-        \draw[-stealth, very thick,red] (o_b) -- ++(Zc);
-        \node[circle,fill=green,scale=0.35] at (o_b){};
-        \node[rounded corners=3pt,above right=-4pt, black] at (o_b){\tiny\  $O_{base}$};
-
-        \coordinate (o_1) at (2.9,6.65);
-        \draw[-stealth, very thick,blue] (o_1) -- ++(Xc);
-        \draw[-stealth, very thick,green] (o_1) -- ++(Yc);
-        \draw[-stealth, very thick,red] (o_1) -- ++(Zc);
-        \node[circle,fill=green,scale=0.35] at (o_1){};
-        \node[rounded corners=3pt,above right=-4pt, black] at (o_1){\tiny\  $O_{1}$};
-
-        \coordinate (o_2) at (4,6);
-        \draw[-stealth, very thick,blue] (o_2) -- ++(Xc);
-        \draw[-stealth, very thick,green] (o_2) -- ++(Yc)
-        node[rounded corners=3pt,below,black]{\tiny $\alpha_3$};
-        \draw[-stealth, very thick,red] (o_2) -- ++(Zc);
-        \node[circle,fill=green,scale=0.35] at (o_2){};
-        \node[rounded corners=3pt,above right=-4pt, black] at (o_2){\tiny\  $O_{2}=O_{3}$};
-
-        \coordinate (o_4) at (7.55,4.65);
-        \draw[-stealth, very thick,blue] (o_4) -- ++(Xc);
-        \draw[-stealth, very thick,green] (o_4) -- ++(Yc);
-        \draw[-stealth, very thick,red] (o_4) -- ++(Zc);
-        \node[circle,fill=green,scale=0.35] at (o_4){};
-        \node[rounded corners=3pt,above right=-4pt, black] at (o_4){\tiny\  $O_{4}$};
-
-        \coordinate (o_5) at (6.7,4.45);
-        \draw[-stealth, very thick,blue] (o_5) -- ++(Xc);
-        \draw[-stealth, very thick,green] (o_5) -- ++(Yc);
-        \draw[-stealth, very thick,red] (o_5) -- ++(Zc);
-        \node[circle,fill=green,scale=0.35] at (o_5){};
-        \node[rounded corners=3pt,above right=-4pt, black] at (o_5){\tiny\  $O_{5}=O_{6}$};
-
-        \coordinate (Xcr) at (0.49,-0.1);
-        \coordinate (Ycr) at (-0.38,-0.32);
-
-        \draw[-stealth, very thick,blue] (o_5) -- ++(Xcr);
-        \draw[-stealth, very thick,green] (o_5) -- ++(Ycr);
-        \node[circle,fill=green,scale=0.35] at (o_5){};
-
-
-        \coordinate (o_7) at (6.36,3.68);
-        \draw[-stealth, very thick,blue] (o_7) -- ++(Xcr);
-        \draw[-stealth, very thick,green] (o_7) -- ++(Ycr)
-        node[rounded corners=3pt,below,black]{\tiny $\alpha_8$};
-        \draw[-stealth, very thick,red] (o_7) -- ++(Zc);
-        \node[circle,fill=green,scale=0.35] at (o_7){};
-        \node[rounded corners=3pt,above right=-4pt, black] at (o_7){\tiny\  $O_{7}=O_{8}$};
-
-        \coordinate (s_1) at (6.6,1.3);
-        \coordinate (s_3) at (5.85,1.7);
-        \coordinate (s_5) at (5.55,2.9);
-
-        \node[circle,fill=green,scale=0.4] at (s_1){1};
-        \node[circle,fill=green,scale=0.4] at (s_3){3};
-        \node[circle,fill=green,scale=0.4] at (s_5){5};
-
-        \draw[-stealth, very thick,green] (o_g) -- (o_b)
-        node[midway,below,black]{\tiny $H_{base}^{glob}$};
-
-        \draw[-stealth, very thick,green] (o_b) -- (o_1)
-        node[midway,below,black]{\tiny $H_{1}^{base}$};
-
-        \draw[-stealth, very thick,green] (o_1) -- (o_2)
-        node[midway,below,black]{\tiny $H_{2}^{1}$};
-
-        \draw[-stealth, very thick,green] (o_2) -- (o_4)
-        node[midway,below,black]{\tiny $H_{4}^{3}$};
-
-        \draw[-stealth, very thick,green] (o_4) -- (o_5)
-        node[midway,below,black]{\tiny $H_{1}^{base}$};
-
-        \draw[-stealth, very thick,green] (o_5) -- (o_7)
-        node[midway,below,black]{\tiny $H_{7}^{6}$};
-
-        \draw[-stealth, very thick,green] (o_7) -- (s_1);
-        \draw[-stealth, very thick,green] (o_7) -- (s_3);
-        \draw[-stealth, very thick,green] (o_7) -- (s_5);
+            \coordinate (Xc) at (0.4415/2,-0.2347/2);
+            \coordinate (Yc) at (-0.4512/2,-0.2156/2);
+            \coordinate (Zc) at (0,0.5/2);
+            % Labels
+            \tikzstyle{origin} = [rounded corners=2pt, black, fill=gray!40, fill opacity=0.75, text opacity=1, scale=0.8,inner sep=1pt]
+            \tikzstyle{transform_text} = [rounded corners=2pt, black, fill=white!85!gray, fill opacity=0.75, text opacity=1, scale=0.8,inner sep=1pt]
+            \tikzstyle{transform_arrow} = [thick, green]
+    
+            % \coordinate (o_g) at (1,9);
+            \node[circle,fill=green,scale=0.25] (o_g) at (1,9){};
+            \draw[-stealth, very thick,blue] (o_g) -- ++(Xc);
+            \draw[-stealth, very thick,green!70!black] (o_g) -- ++(Yc);
+            \draw[-stealth, very thick,red] (o_g) -- ++(Zc);
+            \node[origin,above right=3pt] at (o_g){\tiny $\mathbf{O_{glob}}$};
+    
+            % \coordinate (o_b) at (2.9,7.05);
+            \node[circle,fill=green,scale=0.25] (o_b) at (2.9,7.05){};
+            \draw[-stealth, very thick,blue] (o_b) -- ++(Xc);
+            \draw[-stealth, very thick,green!70!black] (o_b) -- ++(Yc);
+            \draw[-stealth, very thick,red] (o_b) -- ++(Zc);
+            \node[origin,above right=2pt] at (o_b){\tiny $\mathbf{O_{base}}$};
+    
+            % \coordinate (o_1) at (2.9,6.6);
+            \node[circle,fill=green,scale=0.25] (o_1) at (2.9,6.6){};
+            \draw[-stealth, very thick,blue] (o_1) -- ++(Xc);
+            \draw[-stealth, very thick,green!70!black] (o_1) -- ++(Yc);
+            \draw[-stealth, very thick,red] (o_1) -- ++(Zc);
+            \node[origin,above right=2pt] at (o_1){\tiny $\mathbf{O_{1}}$};
+    
+            % \coordinate (o_2) at (4,6);
+            \node[circle,fill=green,scale=0.25] (o_2) at (4,6){};
+            \draw[-stealth, very thick,blue] (o_2) -- ++(Xc);
+            \draw[-stealth, very thick,green!70!black] (o_2) -- ++(Yc)
+            node[origin,below=2pt]{\tiny $\mathbf{\alpha_3}$};
+            \draw[-stealth, very thick,red] (o_2) -- ++(Zc);
+            \node[origin,above right=2pt] at (o_2){\tiny $\mathbf{O_{2}=O_{3}}$};
+    
+            % \coordinate (o_4) at (7.0,4.55);
+            \node[circle,fill=green,scale=0.25] (o_4) at (7.0,4.55){};
+            \draw[-stealth, very thick,blue] (o_4) -- ++(Xc);
+            \draw[-stealth, very thick,green!70!black] (o_4) -- ++(Yc);
+            \draw[-stealth, very thick,red] (o_4) -- ++(Zc);
+            \node[origin,above right=2pt] at (o_4){\tiny $\mathbf{O_{4}}$};
+    
+            % \coordinate (o_5) at (6.7,4.45);
+            \node[circle,fill=green,scale=0.25] (o_5) at (6.7,4.45){};
+            \draw[-stealth, very thick,blue] (o_5) -- ++(Xc);
+            \draw[-stealth, very thick,green!70!black] (o_5) -- ++(Yc);
+            \draw[-stealth, very thick,red] (o_5) -- ++(Zc);
+            \node[origin,above left=3pt] at (o_5){\tiny $\mathbf{O_{5}=O_{6}}$};
+    
+            \coordinate (Xcr) at (0.49/2,0.07/2);
+            % \coordinate (Ycr) at (-0.38/2,-0.32/2);
+            \coordinate (Ycr) at (-0.24/2,-0.43/2);
+    
+            \draw[-stealth, very thick,blue] (o_5) -- ++(Xcr);
+            \draw[-stealth, very thick,green!70!black] (o_5) -- ++(Ycr);
+    
+    
+            % \coordinate (o_7) at (6.36,3.68);
+            \node[circle,fill=green,scale=0.25] (o_7) at (6.36,3.68){};
+            \draw[-stealth, very thick, blue] (o_7) -- ++(Xcr);
+            \draw[-stealth, very thick, green!70!black] (o_7) -- ++(Ycr)
+            node[origin,above left=2pt]{\tiny $\mathbf{\alpha_8}$};
+            \draw[-stealth, very thick, red] (o_7) -- ++(Zc);
+            \node[origin,below right=3pt] at (o_7){\tiny $\mathbf{O_{7}=O_{8}}$};
+    
+            \node[circle, draw ,fill=green,scale=0.4] (s_1) at (6.6,1.3){1};
+            \node[circle,draw, fill=green,scale=0.4] (s_3) at (5.85,1.7){3};
+            \node[circle,draw, fill=green,scale=0.4] (s_5) at (5.55,2.9){5};
+    
+            \draw[-stealth, transform_arrow] (o_g) -- (o_b)
+            node[midway,below left=2pt, transform_text]{\tiny $\mathbf{H_{base}^{glob}}$};
+    
+            \draw[-stealth, transform_arrow] (o_b) -- (o_1)
+            node[midway,left=3pt, transform_text]{\tiny $\mathbf{H_{1}^{base}}$};
+    
+            \draw[-stealth, transform_arrow] (o_1) -- (o_2)
+            node[midway,below=2pt, transform_text]{\tiny $\mathbf{H_{2}^{1}}$};
+    
+            \draw[-stealth, transform_arrow] (o_2) -- (o_4)
+            node[midway,below=2pt, transform_text]{\tiny $\mathbf{H_{4}^{3}}$};
+    
+            \draw[-stealth, transform_arrow] (o_4) -- (o_5)
+            node[midway,below right=2pt, transform_text]{\tiny $\mathbf{H_{5}^{4}}$};
+    
+            \draw[-stealth, transform_arrow] (o_5) -- (o_7)
+            node[midway,left=3pt, transform_text]{\tiny $\mathbf{H_{7}^{6}}$};
+    
+            \draw[-stealth, transform_arrow] (o_7) -- (s_1);
+            \draw[-stealth, transform_arrow] (o_7) -- (s_3);
+            \draw[-stealth, transform_arrow] (o_7) -- (s_5);
         \end{scope}
     \end{tikzpicture}
     \caption{Кинематическая схема для определения точки касания опорной поверхности роботом}
