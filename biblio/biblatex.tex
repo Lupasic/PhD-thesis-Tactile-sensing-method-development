@@ -130,10 +130,10 @@ sorting=none,% настройка сортировки списка литера
 
 %%% Подключение файлов bib %%%
 \addbibresource[label=bl-external]{biblio/external.bib}
-\addbibresource[label=bl-author]{biblio/author.bib}
-\addbibresource[label=bl-registered]{biblio/registered.bib}
 \addbibresource[label=bl-triangulation]{biblio/triangulation_bib.bib}
 \addbibresource[label=bl-master]{biblio/master_thesis.bib}
+\addbibresource[label=bl-author]{biblio/author.bib}
+\addbibresource[label=bl-registered]{biblio/registered.bib}
 
 %http://tex.stackexchange.com/a/141831/79756
 %There is a way to automatically map the language field to the langid field. The following lines in the preamble should be enough to do that.
@@ -222,6 +222,10 @@ sorting=none,% настройка сортировки списка литера
         }
         \map[overwrite]{ % добавляем ключевые слова, чтобы различать источники
             \perdatasource{biblio/external.bib}
+            \step[fieldset=keywords, fieldvalue={,biblioexternal},append=true]
+            \perdatasource{biblio/master_thesis.bib}
+            \step[fieldset=keywords, fieldvalue={,biblioexternal},append=true]
+            \perdatasource{biblio/triangulation_bib.bib}
             \step[fieldset=keywords, fieldvalue={,biblioexternal},append=true]
         }
         \map[overwrite]{ % добавляем ключевые слова, чтобы различать источники
