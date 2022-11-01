@@ -12,7 +12,7 @@
     \item мог взбираться на большие каменные уступы.
 \end{enumerate}
 
-\begin{figure}[ht!]
+\begin{figure}[H]
     \begin{subfigure}{0.9\textwidth}
         \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{f1.png}
         \caption{При увеличении количества ног увеличивается детализация картографируемой поверхности}
@@ -51,7 +51,7 @@
 
 Понятие сложности поверхности субъективно. Поэтому хорошей практикой ей генерация семейства проходимых поверхностей. Затем оценивается пригодность робота для ходьбы с помощью физической симуляции, во время которой робот будет проходить по местности. Также были получены параметризации различных генеративных моделей местности, чтобы было возможно на более позднем этапе исследовать влияние не только типа местности, но и параметров местности и, следовательно, на лучшие конструкции в зависимости от конкретной местности.
 
-Для того чтобы направлять процесс поиска в пространстве возможных значений параметров, решено использовать модифицированный эволюционный алгоритм, который создает последовательные поколения конструкций с помощью соответствующих генетических операторов, играющих роль мутаций и скрещивания. После нескольких инициализаций и поколений были получены многообещающие результаты и полезные идеи, которые позволили создать конструкции, значительно улучшающие производительность, для достижения конечной цели - многоножек, способных преодолевать сложные участки местности \cite{bulichevOptimizationCentipedeRobot2017}.
+Для того чтобы направлять процесс поиска в пространстве возможных значений параметров, решено использовать модифицированный эволюционный алгоритм, который создает последовательные поколения конструкций с помощью соответствующих генетических операторов, играющих роль мутаций и скрещивания. После нескольких инициализаций и поколений были получены многообещающие результаты и полезные идеи, которые позволили создать конструкции, значительно улучшающие производительность, для достижения конечной цели - многоножек, способных преодолевать сложные участки местности.
 
 \subsection{Математическая модель робота}
 Исследуется механическая система, состоящая из твёрдых тел \eqref{eq:newton_euler}, движение которых описывается дифференциальными уравнениями вида:
@@ -98,7 +98,7 @@
 Контакт ног робота с опорной поверхностью \pic{fig:contact_interaction.png} описывается на базе модели сухого трения и выражатеся следующими уравнениями:
 
 \begin{figure}[H]
-    \centering\includegraphics[height=8cm,width=1\textwidth,keepaspectratio]{images/contact_interaction.png}
+    \centering\includegraphics[height=9cm,width=1\textwidth,keepaspectratio]{images/contact_interaction.png}
     \caption{Описание переменных для модели взаимодействия опорной поверхности и ноги робота}
     \label{fig:contact_interaction.png}
 \end{figure}
@@ -136,7 +136,7 @@
     \begin{tikzpicture}
         % Include the image in a node
         \node [above right, inner sep=0] (image) at (0,0)
-        {\centering\includegraphics[height=10cm,width=1\textwidth,keepaspectratio]{best_gen_robot.jpg}};
+        {\centering\includegraphics[height=10cm,width=0.8\textwidth,keepaspectratio]{best_gen_robot.jpg}};
         % Create scope with normalized axes
         \begin{scope}[
                 x={($ 0.1*(image.south east)$)},
@@ -148,7 +148,7 @@
                         raise=5pt,
                         amplitude=5pt,
                         aspect=0.5}] (1.4,3.6) --  (8.1,6.8)
-            node[rounded corners=3pt, pos=0.5,above left =14pt,black,fill=white]{\tiny $(\gamma - 1) h_{\text{leg}}sin(\alpha)$};
+            node[rounded corners=3pt, pos=0.5,above left =14pt,black,fill=white]{\tiny $(\gamma - 1) h_{\text{leg}}\sin(\alpha)$};
 
             \draw[stealth-, very thick,green] (9.5,7.8) -- (7.8,1.94);
             \draw[stealth-, very thick,green] (1.5,2.8) -- (7,1)
@@ -167,7 +167,7 @@
 
 \begin{align}
     \label{eq:second}
-    F \rightarrow max = \beta \left( {\omega}_{1} \cdot \overbrace{\delta}^{\text{Distance}} + {\omega}_{2} \cdot \overbrace{\frac{1}{(\gamma - 1) h_{\text{leg}}sin(\alpha)}}^{\text{Simplified body length}}\right) + \\ \nonumber + (1 - \beta) {\delta}^{{\omega}_{1}} {\left( \frac{1}{(\gamma - 1)h_{\text{leg}}sin(\alpha)}\right)}^{{\omega}_{2}}
+    F \rightarrow max = \beta \left( {\omega}_{1} \cdot \overbrace{\delta}^{\text{Distance}} + {\omega}_{2} \cdot \overbrace{\frac{1}{(\gamma - 1) h_{\text{leg}}\sin(\alpha)}}^{\text{Simplified body length}}\right) + \\ \nonumber + (1 - \beta) {\delta}^{{\omega}_{1}} {\left( \frac{1}{(\gamma - 1)h_{\text{leg}}\sin(\alpha)}\right)}^{{\omega}_{2}}
 \end{align}
 где \nom{$\delta$}{пройденная дистанция}, \nom{$\beta$}{адаптивный параметр}, \nom{${\omega}_{1,2} \in  [ 0..1 ] $}{весовые коэффициенты}.
 
@@ -181,15 +181,15 @@
     \item Построение конкретной местности, которая является достаточно сложной в субъективном плане. В задании Rough Terrain Task в DARPA's Virtual Robotics Challenge используется этот подход. Таким образом тестировался робот ATLAS \cite{feng_Optimizationbased_2015} \pic{fig:terrain_assesment/c2_paper.jpg}.
           
           \begin{figure}[H]
-              \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{terrain_assesment/c2_paper.jpg}
+              \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{terrain_assesment/c2_paper.jpg}
               \caption{Задание на пересеченной местности в конкурсе виртуальной робототехники DARPA}
               \label{fig:terrain_assesment/c2_paper.jpg}
           \end{figure}
           
-    \item Оценка местности в соответствии с возможностями робота. Она основывается на максимальном перепаде высот, который может преодолеть робот. Если робот не может его преодолеть, значит, местность неудовлетворительная \cite{hung_Advanced_2004,howard_Realtime_2000} \pic{fig:terrain_assesment/c3_paper.png}.
+    \item Оценка местности в соответствии с возможностями робота. Она основывается на максимальном перепаде высот, который может преодолеть робот. Если робот не может его преодолеть, значит, местность неудовлетворительная \cite{hung_Advanced_2004,Howard2000} \pic{fig:terrain_assesment/c3_paper.png}.
           
           \begin{figure}[H]
-              \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{terrain_assesment/c3_paper.png}
+              \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{terrain_assesment/c3_paper.png}
               \caption{Пример карт местности: карта опасности местности и карта достоверности местности}
               \label{fig:terrain_assesment/c3_paper.png}
           \end{figure}
@@ -261,7 +261,7 @@
 
 Этот псевдокод дает высокоуровневое описание всего алгоритма.
 
-\begin{algorithm}[h]
+\begin{algorithm}[H]
 \caption{Верхеуровневый генетический алгоритм\label{high_level}}
 % \begin{small}
 \KwIn{$\alpha$ -- количество поколений, $\beta$ -- количество индивидов, $\gamma$ -- количество территорий}
@@ -377,13 +377,13 @@ $avg\_distance = distance / \gamma$\;
 
 \begin{figure}[H]
 \begin{subfigure}{1\textwidth}
-\centering\includegraphics[width=0.8\textwidth]{from_master/forwardBestMean} 
+\centering\includegraphics[width=0.9\textwidth]{from_master/forwardBestMean} 
 \caption{Среднее значение из данных о положении для обоих типов движения}
 \label{fig:forwardBestMean}
 \end{subfigure}
 
 \begin{subfigure}{1\textwidth}
-\centering\includegraphics[width=0.8\textwidth]{from_master/forwardBestSTD} 
+\centering\includegraphics[width=0.9\textwidth]{from_master/forwardBestSTD} 
 \caption{STD из данных о положении для обоих типов движения}
 \label{fig:forwardBestSTD}
 \end{subfigure}
@@ -393,26 +393,26 @@ $avg\_distance = distance / \gamma$\;
 \end{figure}
 
 \begin{figure}[H]
-\centering\includegraphics[width=0.8\textwidth]{from_master/forwardBestRMSrot} 
+\centering\includegraphics[width=0.9\textwidth]{from_master/forwardBestRMSrot} 
 \caption{RMS из данных об ориентации для типа движения вперед}
 \label{fig:forwardBestRMSrot}
 \end{figure}
 
 \begin{figure}[H]
-\centering\includegraphics[width=0.85\textwidth]{from_master/forwardBestSTDRot} 
+\centering\includegraphics[width=0.9\textwidth]{from_master/forwardBestSTDRot} 
 \caption{STD из данных об ориентации для типа движения вперед}
 \label{fig:forwardBestSTDRot}
 \end{figure}
 
 \begin{figure}[H]
 \begin{subfigure}{1\textwidth}
-\centering\includegraphics[width=0.8\textwidth]{from_master/slideBestRMSrot} 
+\centering\includegraphics[width=0.9\textwidth]{from_master/slideBestRMSrot} 
 \caption{RMS из данных об ориентации для типа движения вбок}
 \label{fig:slideBestRMSrot}
 \end{subfigure}
 
 \begin{subfigure}{1\textwidth}
-\centering\includegraphics[width=0.8\textwidth]{from_master/slideBestSTDRot} 
+\centering\includegraphics[width=0.9\textwidth]{from_master/slideBestSTDRot} 
 \caption{STD из данных об ориентации для типа движения вбок}
 \label{fig:slideBestSTDRot}
 \end{subfigure}
@@ -468,10 +468,11 @@ $avg\_distance = distance / \gamma$\;
     \caption{Итерации робота СтриРуса}\label{fig:striruses}
   \end{figure}
 
-\begin{table}[H]
+  \begin{table}[H]
     \caption{Сравнение итераций робота}
     \label{tabular:robot_comparison_body}
     % \begin{center}
+    \small
     \begin{tabular}{p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}}
     \toprule
     \toprule
