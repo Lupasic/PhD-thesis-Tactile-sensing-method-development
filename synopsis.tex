@@ -60,20 +60,15 @@
 
 \pdfbookmark{Содержание работы}{description}                          % Закладка pdf
 \section*{Содержание работы}
-% \subsection*{\underline{Литературный обзор}}
 \input{Synopsis/chap1.tex}
-% \subsubsection*{\underline{Разработка объекта исследования}}
 \input{Synopsis/chap2.tex}
-% \section*{\underline{Разработка и исследование преобразователя силы на основе Velostat}}
 \input{Synopsis/chap3.tex}
-% \section*{\underline{Разработка метода очувствления}}
 \input{Synopsis/chap4.tex}
 \section*{\underline{Заключение}}
 \input{common/concl.tex}
 
 \pdfbookmark{Литература}{bibliography}                                % Закладка pdf
-\nocite{*}
-\insertbiblioauthorgroupedSynopsis
+\insertbiblioauthorgrouped
 
 \ifdefmacro{\microtypesetup}{\microtypesetup{protrusion=true}}{}
 \urlstyle{tt}        
