@@ -12,7 +12,7 @@
 %%
 %% These macros specify information about the presentation
 \title[]{Разработка метода тактильного очувствления для мобильного шагающего робота} %% that will be typeset on the
-\subtitle{Аспирант: Олег Буличев \\ Руководитель: Александр Малолетов \\ \ } %% title page.
+\subtitle{Соискатель: Олег Буличев \\ Руководитель: Александр Малолетов \\ \ } %% title page.
 \author{Олег Буличев}
 %% These additional packages are used within the document:
 \usepackage{ragged2e}  % `\justifying` text
@@ -110,8 +110,8 @@
     \begin{alertblock}{Текущие должности}
         \vspace{-0.2cm}
         \begin{itemize}
-        \item Старший преподаватель (Linear Algebra, Mechanics \& Machines, Theoretical Mech.)
-        \item Тренер - преподаватель (туризм, историческое фехтование, народные игры)
+        \item Старший преподаватель (ЛинАл, Механизмы и Машины, ТеорМех)
+        \item Тренер - преподаватель (Туризм, Историческое фехтование, Народные игры)
     \end{itemize}
     \end{alertblock}
 \end{frame}
@@ -193,52 +193,6 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}[t]{Нерешаемая задача с помощью камеры или лидара}
-    \framesubtitle{Вопрос: Как картографировать поверхность под лужей?}
-    \vspace{-1cm}
-    \begin{columns}[T,onlytextwidth]
-        \begin{column}{0.55\textwidth}
-            \begin{figure}[H]
-                \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{terrain_wo_water.png}
-                \caption*{Поверхность без воды}
-            \end{figure}
-        \end{column}
-        \begin{column}{0.44\textwidth}
-            \begin{figure}[H]
-                \begin{subfigure}[b]{0.9\textwidth}
-                    \centering
-                    \begin{tikzpicture}
-                        % Include the image in a node
-                        \node [above right, inner sep=0] (image) at (0,0)
-                        {\centering\includegraphics[height=3.5cm,width=1\textwidth,keepaspectratio]{terrain_w_water1.png}};
-                        % Create scope with normalized axes
-                        \begin{scope}[
-                                x={($ 0.1*(image.south east)$)},
-                                y={($ 0.1*(image.north west)$)}]
-                            \draw[stealth-, very thick,green] (6,8) -- ++(2,1)
-                            node[rounded corners=3pt,right,black,fill=white]{\tiny Вода};
-
-                            \draw[stealth-, very thick,green] (0.5,5.5) -- (3,2);
-                            \draw[stealth-, very thick,green] (2.5,4.2) -- (3,2);
-                            \draw[stealth-, very thick,green] (4.5,4) -- (3,2)
-                            node[rounded corners=3pt,below,black,fill=white]{\tiny Лазер Лидара};
-                        \end{scope}
-                    \end{tikzpicture}
-                    % \caption*{}
-                    \label{fig:terrain_w_water1.png}
-                \end{subfigure}
-                \vspace{-0.5cm}
-
-                \begin{subfigure}{0.8\textwidth}
-                    \centering\includegraphics[height=2cm,width=1\textwidth,keepaspectratio]{terrain_w_water_camera.png}
-                    \caption*{Вид с камеры}
-                \end{subfigure}
-            \end{figure}
-        \end{column}
-    \end{columns}
-
-\end{frame}
-
 \begin{frame}[t]{Проблематика}
     \framesubtitle{}
     \vspace{-0.3cm}
@@ -262,8 +216,52 @@
             \end{figure}
         \end{column}
      \end{columns}
+    \end{frame}
 
-
+    \begin{frame}[t]{Нерешаемая задача с помощью камеры или лидара}
+        \framesubtitle{Вопрос: Как картографировать поверхность под лужей?}
+        \vspace{-1cm}
+        \begin{columns}[T,onlytextwidth]
+            \begin{column}{0.55\textwidth}
+                \begin{figure}[H]
+                    \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{terrain_wo_water.png}
+                    \caption*{Поверхность без воды}
+                \end{figure}
+            \end{column}
+            \begin{column}{0.44\textwidth}
+                \begin{figure}[H]
+                    \begin{subfigure}[b]{0.9\textwidth}
+                        \centering
+                        \begin{tikzpicture}
+                            % Include the image in a node
+                            \node [above right, inner sep=0] (image) at (0,0)
+                            {\centering\includegraphics[height=3.5cm,width=1\textwidth,keepaspectratio]{terrain_w_water1.png}};
+                            % Create scope with normalized axes
+                            \begin{scope}[
+                                    x={($ 0.1*(image.south east)$)},
+                                    y={($ 0.1*(image.north west)$)}]
+                                \draw[stealth-, very thick,green] (6,8) -- ++(2,1)
+                                node[rounded corners=3pt,right,black,fill=white]{\tiny Вода};
+    
+                                \draw[stealth-, very thick,green] (0.5,5.5) -- (3,2);
+                                \draw[stealth-, very thick,green] (2.5,4.2) -- (3,2);
+                                \draw[stealth-, very thick,green] (4.5,4) -- (3,2)
+                                node[rounded corners=3pt,below,black,fill=white]{\tiny Лазер Лидара};
+                            \end{scope}
+                        \end{tikzpicture}
+                        % \caption*{}
+                        \label{fig:terrain_w_water1.png}
+                    \end{subfigure}
+                    \vspace{-0.5cm}
+    
+                    \begin{subfigure}{0.8\textwidth}
+                        \centering\includegraphics[height=2cm,width=1\textwidth,keepaspectratio]{terrain_w_water_camera.png}
+                        \caption*{Вид с камеры}
+                    \end{subfigure}
+                \end{figure}
+            \end{column}
+        \end{columns}
+    
     \end{frame}
 
 \begin{frame}[t]{Цель работы}
@@ -285,7 +283,7 @@
 
 \begin{frame}[t]{Объект исследования}
 \framesubtitle{}
-Объектом исследования является класс многоногих шагающих роботов с цельным или сочленённым корпусом, и цикловыми движителями с одной степенью свободы, управляемые зависимо или независимо друг от друга.
+Объектом исследования является \textbf{класс многоногих шагающих роботов} с цельным или сочленённым корпусом, и цикловыми движителями с одной степенью свободы, управляемые зависимо или независимо друг от друга.
 
 \begin{figure}[H]
     \begin{subfigure}{0.32\textwidth}
@@ -326,6 +324,10 @@
     \end{frame}
 \fbckg{fibeamer/figs/common.png}
 
+\begin{frame}[c]{}
+    \framesubtitle{}
+        \centering\LARGE Разработка робота
+    \end{frame}
 
 % \begin{frame}[t]{Литературный обзор}
 %     \framesubtitle{}
@@ -340,18 +342,19 @@
 
 % \end{frame}
 
+
+
 \begin{frame}[t]{Разработка робота}
-    \framesubtitle{Требования к роботу}
+    \framesubtitle{Задачи}
     \large
 \vspace{-0.5cm}
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.49\textwidth}
-            \textbf{Задача} --  выбрать движитель. Робот должен:
             \begin{itemize}
-                \item Иметь \textit{малые размеры}, чтобы лазать и не застревать в щелях
-                \item Обладать \textit{проходимостью} для преодоления сыпучих грунтов
-                \item Преодолевать \textit{небольшие водные препятствия}
-                \item Иметь возможнсоть \textit{залезать на большие валуны}
+                \item Смоделировать робота
+                \item Разработать критерий оптимизации конструкции
+                \item Решить задачу оптимизации
+                \item Спроектировать и собрать прототип
             \end{itemize}        
         \end{column}
         \begin{column}{0.49\textwidth}
@@ -366,15 +369,86 @@
 \end{frame}
 
 \begin{frame}[t]{Разработка робота}
-    \framesubtitle{Видео}
-    \vspace{-0.6cm}
-    \begin{figure}[H]
-        % \href{run:./videos/sidestep_segments.mp4}{
-        \href{https://youtu.be/EQ6oGZVDpoc}{
-            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{sidestep_segment_video_preview.png}}
-        % \caption{Click on a picture for a video}
-    \end{figure}
-\end{frame}
+    \framesubtitle{Математическая модель: Описание механической системы}
+    \vspace{-0.8cm}
+                \begin{align*}
+                    M \dot{\vec{u}} = \vec{g} \\
+                    M = \begin{bmatrix}
+                    M_1 & \cdots  & 0 \\
+                    \vdots  & \ddots  & \vdots  \\ 
+                    0 & \cdots   & M_n 
+                    \end{bmatrix},\ M_i = \begin{bmatrix}
+                    m_i E_{3\times 3} & 0 \\ 
+                    0 & I_i 
+                    \end{bmatrix} \\
+                    \vec{u}_i^{\ T} = \begin{bmatrix}
+                        \vec{v}_i^{\ T} & \vec{\omega}_i^{\ T}
+                    \end{bmatrix} \\ 
+                    \vec{g}^{\ T} = \begin{bmatrix}
+                        \cdots \  \vec{F}_i^{\ T}, & (\vec{\tau}_i - \vec{\omega}_i \times I_i \vec{\omega}_i)^T\  \cdots 
+                    \end{bmatrix}
+                \end{align*}
+                где, $M_i$~---~матрицы, содержащие массово-инерционные характеристики; $m_i$~---~масса тела; $I_i$~---~тензор инерции; $\vec{u_i}$~---~вектор обобщённых скоростей; $E$~---~единичная матрица; $\vec{g}$~---~вектор обобщённых сил; $\vec{v_i}$~---~вектор линейной скорости; $\vec{\omega_i}$~---~вектор угловой скорости; $\vec{F_i}$, $\vec{\tau_i}$~---~силы и моменты сил взаимодействия.
+    \end{frame}
+    
+    \begin{frame}[t]{Разработка робота}
+    \framesubtitle{Геометрические связи}
+    \vspace{-0.5cm}
+    Тела соединены цилиндрическими шарнирами:
+    \begin{align*}
+        \label{eq:kin_constr}
+        \phi(q_{j_1},\ u_{j_1},\ \cdots,\ q_{j_k},\ u_{j_k},\ t) \geqslant  0 \\
+        \vec{q_i}^{\ T} = \begin{bmatrix}
+            \vec{x}_i^{\ T} & \vec{Q}_i^{\ T}
+        \end{bmatrix} \\
+        \dot{\vec{q_i}} = \begin{bmatrix}
+        E_{3\times3} & 0\\ 
+        0 & G(\vec{q}_i) 
+        \end{bmatrix}\vec{u}_i  
+    \end{align*}
+    
+    \begin{align*}
+        \vec{g}_i = \tau_i^T \vec{z}_{i-1} -k_i \dot{\vec{q_i}} 
+    \end{align*}
+    где через $\phi$ обозначена функция связи; $t$~---~время; $\vec{q}_{i}$~---~вектор обобщенных координат, включающий в себя координаты центра масс $\vec{x_i}$ и кватернион $\vec{Q_i}$, описывающий ориентацию тела в пространстве; через $G(\vec{q}_i)$ обозначена матрица, вид которой зависит от выбранной системы координат; $k$~---~ коэффициент вязкого трения в шарнире.
+    \end{frame}
+    
+    \begin{frame}[t]{Разработка робота}
+        \framesubtitle{Взаимодействие опорной поверхности и ноги робота}
+        \vspace{-0.6cm}
+            \begin{columns}[T,onlytextwidth]
+                \begin{column}{0.69\textwidth}
+                    \begin{align*}
+                        \phi_u(\vec{q}\ ) \geqslant 0 \\ 
+                        \phi_u(\vec{q}\ ) = (\vec{x}_1 + \vec{s}_1 - \vec{x}_2 - \vec{s}_2) \cdot \vec{n} \\
+                        \frac{d }{d t}\phi_u(\vec{q}\ ) \approx \begin{bmatrix}
+                            \vec{n}^{\ T} & (\vec{s}_1 \times \vec{n})^T & -\vec{n}^{\ T} & (-\vec{s}_2 \times \vec{n})^T
+                        \end{bmatrix} \begin{bmatrix}
+                            \vec{v}_1\\ 
+                        \vec{\omega}_1\\ 
+                        \vec{v}_2\\
+                        \vec{\omega}_2\\
+                        \end{bmatrix}
+                    \end{align*} 
+                    где, $\phi_u(\vec{q})$~---~функция связи; $ \mu $~---~ коэффициент трения между ногой и опорной поверхностью;  радиус-векторы $\vec{x}_{1,2},\ \vec{s}_{1,2}$ и орты координатных осей $\vec{t}_{1,2}, \vec{n}$ показаны на рисунке; $ f_{1,2} $~---~значения сил трения вдоль осей $t_{1,2}$.
+                \end{column}
+                \begin{column}{0.29\textwidth}
+                    \vspace{-0.4cm}
+                    \begin{figure}[H]
+                        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{contact_interaction.png}
+                        \label{fig:contact_interaction.png}
+                    \end{figure}
+                    \vspace{-1cm}
+                    \begin{align*}
+                    \left\{\begin{matrix*}[l]
+                    \mu f_n \geqslant \sqrt{f_1^2 + f_2^2}\\ 
+                    \left\lVert \vec{v_t}\right\rVert (\mu f_n - \sqrt{f_1^2 + f_2^2}) = 0\\
+                    \dfrac{\vec{f_t}}{\left\lVert \vec{f_t}\right\rVert } = - \dfrac{\vec{v_t}}{\left\lVert \vec{v_t}\right\rVert }
+                    \end{matrix*}\right.
+                    \end{align*}
+                \end{column}
+            \end{columns}
+        \end{frame}
 
 \begin{frame}[t]{Разработка робота}
     \framesubtitle{Структурный синтез}
@@ -401,89 +475,6 @@
         \hfill
     \end{figure}
 \end{frame}
-
-
-\begin{frame}[t]{Разработка робота}
-\framesubtitle{Математическая модель: Описание механической системы}
-\vspace{-0.8cm}
-            \begin{align*}
-                M \dot{\vec{u}} = \vec{g} \\
-                M = \begin{bmatrix}
-                M_1 & \cdots  & 0 \\
-                \vdots  & \ddots  & \vdots  \\ 
-                0 & \cdots   & M_n 
-                \end{bmatrix},\ M_i = \begin{bmatrix}
-                m_i E_{3\times 3} & 0 \\ 
-                0 & I_i 
-                \end{bmatrix} \\
-                \vec{u}_i^{\ T} = \begin{bmatrix}
-                    \vec{v}_i^{\ T} & \vec{\omega}_i^{\ T}
-                \end{bmatrix} \\ 
-                \vec{g}^{\ T} = \begin{bmatrix}
-                    \cdots \  \vec{F}_i^{\ T}, & (\vec{\tau}_i - \vec{\omega}_i \times I_i \vec{\omega}_i)^T\  \cdots 
-                \end{bmatrix}
-            \end{align*}
-            где, $M_i$~---~матрицы, содержащие массово-инерционные характеристики; $m_i$~---~масса тела; $I_i$~---~тензор инерции; $\vec{u_i}$~---~вектор обобщённых скоростей; $E$~---~единичная матрица; $\vec{g}$~---~вектор обобщённых сил; $\vec{v_i}$~---~вектор линейной скорости; $\vec{\omega_i}$~---~вектор угловой скорости; $\vec{F_i}$, $\vec{\tau_i}$~---~силы и моменты сил взаимодействия.
-\end{frame}
-
-\begin{frame}[t]{Разработка робота}
-\framesubtitle{Геометрические связи}
-\vspace{-0.5cm}
-Тела соединены цилиндрическими шарнирами:
-\begin{align*}
-    \label{eq:kin_constr}
-    \phi(q_{j_1},\ u_{j_1},\ \cdots,\ q_{j_k},\ u_{j_k},\ t) \geqslant  0 \\
-    \vec{q}_i^{\ T} = \begin{bmatrix}
-        \vec{x}_i^{\ T} & \vec{Q}_i^{\ T}
-    \end{bmatrix} \\
-    \dot{\vec{q}_i} = \begin{bmatrix}
-    E_{3\times3} & 0\\ 
-    0 & G(\vec{q}_i) 
-    \end{bmatrix}\vec{u}_i  
-\end{align*}
-
-\begin{align*}
-    \vec{g}_i = \tau_i^T \vec{z}_{i-1} -k_i \dot{\vec{q}_i} 
-\end{align*}
-где через $\phi$ обозначена функция связи; $t$~---~время; $q_{j}$~---~вектор обобщенных координат, включающий в себя координаты центра масс $\vec{x_i}$ и кватернион $\vec{Q_i}$, описывающий ориентацию тела в пространстве; через $G(\vec{q}_i)$ обозначена матрица, вид которой зависит от выбранной системы координат; $k$~---~ коэффициент вязкого трения в шарнире.
-\end{frame}
-
-\begin{frame}[t]{Разработка робота}
-    \framesubtitle{Взаимодействие опорной поверхности и ноги робота}
-    \vspace{-0.6cm}
-        \begin{columns}[T,onlytextwidth]
-            \begin{column}{0.69\textwidth}
-                \begin{align*}
-                    \phi_u(\vec{q}\ ) = g(\vec{q}\ ) \geqslant 0 \\ 
-                    g(\vec{q}\ ) = (\vec{x}_1 + \vec{s}_1 - \vec{x}_2 - \vec{s}_2) \cdot \vec{n} \\
-                    \frac{d }{d t}\phi_u(\vec{q}\ ) \approx \begin{bmatrix}
-                        \vec{n}^{\ T} & (\vec{s}_1 \times \vec{n})^T & -\vec{n}^{\ T} & (-\vec{s}_2 \times \vec{n})^T
-                    \end{bmatrix} \begin{bmatrix}
-                        \vec{v}_1\\ 
-                    \vec{\omega}_1\\ 
-                    \vec{v}_2\\
-                    \vec{\omega}_2\\
-                    \end{bmatrix}
-                \end{align*} 
-                где, $\phi_u(\vec{q})$~---~функция связи; $ \mu $~---~ коэффициент трения между ногой и опорной поверхностью;  радиус-векторы $\vec{x}_{1,2},\ \vec{s}_{1,2}$ и орты координатных осей $\vec{t}_{1,2}, \vec{n}$ показаны на рисунке; $ f_{1,2} $~---~значения сил трения вдоль осей $t_{1,2}$ соответственно.
-            \end{column}
-            \begin{column}{0.29\textwidth}
-                \vspace{-0.4cm}
-                \begin{figure}[H]
-                    \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{contact_interaction.png}
-                    \label{fig:contact_interaction.png}
-                \end{figure}
-                \vspace{-1cm}
-                \begin{align*}
-                \left\{\begin{matrix*}[l]
-                \mu f_n \geqslant \sqrt{f_1^2 + f_2^2}\\ 
-                \left\lVert \vec{v_t}\right\rVert (\mu f_n - \sqrt{f_1^2 + f_2^2}) = 0\\
-                \dfrac{\vec{f_t}}{\left\lVert \vec{f_t}\right\rVert } = - \dfrac{\vec{v_t}}{\left\lVert \vec{v_t}\right\rVert }
-                \end{matrix*}\right.
-                \end{align*}
-            \end{column}
-        \end{columns}
-    \end{frame}
 
 \begin{frame}[t]{Разработка робота}
     \framesubtitle{Предлагаемое решение}
@@ -599,6 +590,22 @@
     \end{columns}
 \end{frame}
 
+\begin{frame}[t]{Разработка робота}
+    \framesubtitle{Видео}
+    \vspace{-0.6cm}
+    \begin{figure}[H]
+        % \href{run:./videos/sidestep_segments.mp4}{
+        \href{https://youtu.be/EQ6oGZVDpoc}{
+            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{sidestep_segment_video_preview.png}}
+        % \caption{Click on a picture for a video}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[c]{}
+    \framesubtitle{}
+        \centering\LARGE Разработка и исследование преобразователя силы
+    \end{frame}
+
 \begin{frame}[t]{Разработка преобразователя силы}
     \framesubtitle{}
     {\large\begin{block}{Вопрос}
@@ -615,6 +622,8 @@
             \end{itemize}
         \end{alertblock}}
 \end{frame}
+
+
 
 \begin{frame}[t]{Разработка преобразователя силы}
     \framesubtitle{Velostat}
@@ -698,7 +707,7 @@
                                     raise=5pt,
                                     amplitude=5pt,
                                     aspect=0.5}] (6,3.7) --  (3,3.7)
-                        node[pos=0.5,below=10pt,green]{$15\ mm$};
+                        node[pos=0.5,below=10pt,green]{$15\ \text{мм}$};
 
                         \draw [green, very thick,
                             decorate,
@@ -706,7 +715,7 @@
                                     raise=5pt,
                                     amplitude=5pt,
                                     aspect=0.5}] (6,3.6) --  (6,6.4)
-                        node[pos=0.5,right=10pt,green]{$15\ mm$};
+                        node[pos=0.5,right=10pt,green]{$15\ \text{мм}$};
 
                         \draw[green,step=1,xshift=34, yshift=43]  (0.5,0.5) grid +(3,3);
 
@@ -759,13 +768,13 @@
                                 % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
                                 % Labels
                             \draw[latex-, very thick,green] (4.3,2.3) -- (5,1.6)
-                                node[rounded corners=3pt,below right,black,fill=white]{\tiny Velostat sensor};
+                                node[rounded corners=3pt,below right,black,fill=white]{\tiny Исследуемый датчик};
                             
                             \draw[latex-, very thick,green] (4.3,3.5) -- (5.5,2.45)
-                                node[rounded corners=3pt,right,black,fill=white]{\tiny \O \ 15 mm end-effector};
+                                node[rounded corners=3pt,right,black,fill=white]{\tiny \O \ 15 мм насадка};
 
                             \draw[latex-, very thick,green] (6,6) -- (6.4,4.9)
-                                node[rounded corners=3pt,below right,black,fill=white]{\tiny Known static load};
+                                node[rounded corners=3pt,below right,black,fill=white]{\tiny Известная нагрузка};
                             \end{scope}
                         \end{tikzpicture}
                         % \caption*{}
@@ -810,27 +819,27 @@
                     % Labels
                     % \node[circle,fill=green] at (7.25,6.75){\small 2};
     
-                    \draw[latex-, very thick,green] (3.5,2.2) -- (2.5,1)
-                    node[rounded corners=3pt,below left,black,fill=white]{\small Velostat sensors};
+                    \draw[latex-, very thick,green] (3.5,2.2) -- (3.5,1)
+                    node[rounded corners=3pt,below left,black,fill=white]{\small Исследуемые датчики};
     
                     \draw[stealth-, very thick,green] (3.5,2.6) -- ++(-0.7,+0.5)
-                    node[rounded corners=3pt,left,black,fill=white]{\small Force sensor};
+                    node[rounded corners=3pt,left,black,fill=white]{\small Датчик силы};
     
                     \draw[stealth-, very thick,green] (6.5,3) -- (7,6)
-                    node[rounded corners=3pt,above right,black,fill=white]{\small Self-made PCB};
+                    node[rounded corners=3pt,above right,black,fill=white]{\small Печатная плата};
     
                     \draw[stealth-, very thick,green] (7.2,1.5) -- (8,5)
-                    node[rounded corners=3pt,above right,black,fill=white]{\small Arduino};
+                    node[rounded corners=3pt,above right,black,fill=white]{\small Контроллер};
     
                     \draw[stealth-, very thick,green] (2.5,9.5) -- (4,9.5)
-                    node[rounded corners=3pt,right,black,fill=white]{\small Camera};
+                    node[rounded corners=3pt,right,black,fill=white]{\small Камера};
     
                     \draw[very thick,green] (0.5,2.5) rectangle (4.2,9)
                     node[below left,black,fill=green]{\small UR10e};
     
                     \draw[latex-, very thick,green] (4.5,7.2) edge (5.5,7.5)
                     (4.8,5.3) -- (5.5,7.5)
-                    node[rounded corners=3pt,above,black,fill=white]{\small Aruco markers};
+                    node[rounded corners=3pt,above,black,fill=white]{\small Маркеры Аруко};
                 \end{scope}
     
             \end{tikzpicture}
@@ -838,48 +847,6 @@
         \end{column}
     \end{columns}
 
-\end{frame}
-
-\begin{frame}[t]{Разработка преобразователя силы}
-    \framesubtitle{Экспериментальная установка: Импедансное управление (1)}
-    \vspace{-18pt}
-    \begin{columns}[T,onlytextwidth]
-        \begin{column}{0.55\textwidth}
-            \begin{exampleblock}{Модификация траектории (Только ось $z$)}
-                \vspace{-14pt}
-                \begin{eqnarray*}
-                    X_s^0 = 0, \dot{X}_s^0 =0,  X_g^k, \dot{X}_g^k \text{ -- целевое состояние}\\, X_s = X_g - X_d \\
-                    X_g = X_g^0 + \frac{F_d}{\eta } \\
-                    \dot{X}_s + \eta  X_s = F^k \\
-                    X_s^k = odeint(X_s^{k-1},t,F^k), t = [0,dT] \\
-                    X_s^{k-1} = X_s^k;  \dot{X}_s = f(X_s,t,F^k) \\
-                    X_d = X_g - X_s; \dot{X}_d = \dot{X}_g - \dot{X}_s
-                \end{eqnarray*}
-            \end{exampleblock}
-        \end{column}
-        \begin{column}{0.40\textwidth}
-            \begin{exampleblock}{Управление по скорости}
-                \vspace{-14pt}
-                \begin{eqnarray*}
-                    X_d = \begin{bmatrix}
-                        x_g \\ y_g \\ z_d
-                    \end{bmatrix} \\
-                    U = \dot{X}_d + K(X_d - X), \\ \text{ где } X=\text{принять\_состояние}(); \\ 
-                    \text{установить\_скорость}(U)
-                \end{eqnarray*}
-            \end{exampleblock}
-        \end{column}
-    \end{columns}
-\end{frame}
-
-\begin{frame}[t]{Experiment Design}
-    \framesubtitle{Экспериментальная установка: Импедансное управление (1)}
-    \vspace{-15pt}
-    \begin{figure}[H]
-        \centering\includegraphics[height=6.1cm,width=1\textwidth,keepaspectratio]{force_data_pos.png}
-        % \caption{caption_name}
-        \label{fig:impedance}
-    \end{figure}
 \end{frame}
 
 \begin{frame}[t]{Разработка преобразователя силы}
@@ -903,11 +870,11 @@
                         % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
 
                         % Labels
-                        \node[rounded corners=3pt,black,fill=white] at (1.1,7.4){\tiny 2 mm };
-                        \node[rounded corners=3pt,black,fill=white] at (3.1,7.9){\tiny 6 mm };
-                        \node[rounded corners=3pt,black,fill=white] at (4.9,8.1){\tiny 8 mm };
-                        \node[rounded corners=3pt,black,fill=white] at (6.7,7.9){\tiny 12 mm };
-                        \node[rounded corners=3pt,black,fill=white] at (8.6,7.9){\tiny 15 mm };
+                        \node[rounded corners=3pt,black,fill=white] at (1.1,7.4){\tiny 2 мм };
+                        \node[rounded corners=3pt,black,fill=white] at (3.1,7.9){\tiny 6 мм };
+                        \node[rounded corners=3pt,black,fill=white] at (4.9,8.1){\tiny 8 мм };
+                        \node[rounded corners=3pt,black,fill=white] at (6.7,7.9){\tiny 12 мм };
+                        \node[rounded corners=3pt,black,fill=white] at (8.6,7.9){\tiny 15 мм };
                     \end{scope}
                 \end{tikzpicture}
                 \caption*{Все насадки}
@@ -947,6 +914,48 @@
     \end{figure}
 \end{frame}
 
+\begin{frame}[t]{Разработка преобразователя силы}
+    \framesubtitle{Импедансное управление}
+    \vspace{-18pt}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.55\textwidth}
+            \begin{exampleblock}{Модификация траектории (Только ось $z$)}
+                \vspace{-14pt}
+                \begin{eqnarray*}
+                    X_s^0 = 0, \dot{X}_s^0 =0,  X_g^k, \dot{X}_g^k \text{ -- целевое состояние}\\, X_s = X_g - X_d \\
+                    X_g = X_g^0 + \frac{F_d}{\eta } \\
+                    \dot{X}_s + \eta  X_s = F^k \\
+                    X_s^k = odeint(X_s^{k-1},t,F^k), t = [0,dT] \\
+                    X_s^{k-1} = X_s^k;  \dot{X}_s = f(X_s,t,F^k) \\
+                    X_d = X_g - X_s; \dot{X}_d = \dot{X}_g - \dot{X}_s
+                \end{eqnarray*}
+            \end{exampleblock}
+        \end{column}
+        \begin{column}{0.40\textwidth}
+            \begin{exampleblock}{Управление по скорости}
+                \vspace{-14pt}
+                \begin{eqnarray*}
+                    X_d = \begin{bmatrix}
+                        x_g \\ y_g \\ z_d
+                    \end{bmatrix} \\
+                    U = \dot{X}_d + K(X_d - X), \\ \text{ где } X=\text{принять\_состояние}(); \\ 
+                    \text{установить\_скорость}(U)
+                \end{eqnarray*}
+            \end{exampleblock}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[t]{Разработка преобразователя силы}
+    \framesubtitle{Импедансное управление: пример результата}
+    \vspace{-15pt}
+    \begin{figure}[H]
+        \centering\includegraphics[height=6.1cm,width=1\textwidth,keepaspectratio]{force_data_pos.png}
+        % \caption{caption_name}
+        \label{fig:impedance}
+    \end{figure}
+\end{frame}
+
 
 \begin{frame}[t]{Разработка преобразователя силы}
     \framesubtitle{Результаты: Ошибки показаний датчика в динамическом эксперименте}
@@ -967,11 +976,16 @@
     \alert{Одинаковые данные, когда площадь нажатия превышает 25\% от площади датчика}
 \end{frame}
 
+\begin{frame}[c]{}
+    \framesubtitle{}
+        \centering\LARGE Определение физических свойств поверхности
+    \end{frame}
+
 \begin{frame}[t]{Определение физических свойств поверхности}
     \framesubtitle{}
     \vspace{-0.3cm}
     {\large\begin{block}{Вопрос}
-        Как определить тип местности во время движения по такой местности?
+        Как определить физические свойства местности во время движения по ней?
         \end{block}}
     {\large\begin{alertblock}{Ответ}
         1. Подготовить для экспериментов различные поверхности.
@@ -988,19 +1002,17 @@
 
 \begin{frame}[t]{Определение физических свойств поверхности}
     \framesubtitle{Требования к установке}
+    \vspace{-0.5cm}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.57\textwidth}
             \begin{itemize}
                 \item Иметь возможность быстро менять используемые поверхности {\\ \alert{Быстроразборный стол}}
                 \item Бесконечное движение робота {\\ \alert{2-ух степенной механизм и нога S-образной формы}}
                 \item Узел движителя должен быть такой же как на СтриРусе {\\ \alert{Создано крепление для узла ноги робота}}
             \end{itemize}
-
-\end{frame}
-
-\begin{frame}[t]{Определение физических свойств поверхности}
-\framesubtitle{Экспериментальная установка}
-\vspace{-0.8cm}
-    \begin{columns}[T,onlytextwidth]
-        \begin{column}{0.49\textwidth}
+        \end{column}
+        \begin{column}{0.42\textwidth}
+            \vspace{-0.8cm}
             \begin{figure}[H]
                 \centering
                 \begin{tikzpicture}
@@ -1025,14 +1037,24 @@
                 \label{fig:s_shape_leg/s_leg_setup.JPG}
             \end{figure}
         \end{column}
-        \begin{column}{0.49\textwidth}
-            \begin{figure}[H]
-                \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{s_shape_leg/leg_design.png}
-                % \caption{caption_name}
-                \label{fig:s_shape_leg/leg_design.png}
-            \end{figure}
-        \end{column}
     \end{columns}
+\end{frame}
+
+\begin{frame}[t]{Определение физических свойств поверхности}
+\framesubtitle{Установка сенсоров на ногу}
+\vspace{-0.7cm}
+\begin{figure}[H]
+    \begin{subfigure}{0.49\textwidth}
+        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{s_shape_leg/socks.jpg}
+        % \caption{capture1}
+        \label{fig:s_shape_leg/socks.jpg}
+    \end{subfigure}
+    \begin{subfigure}{0.49\textwidth}
+        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{s_shape_leg/leg_design.png}
+        % \caption{capture2}
+        \label{fig:s_shape_leg/leg_design.png}
+    \end{subfigure}
+\end{figure}
 \end{frame}
 
 
@@ -1112,10 +1134,15 @@
 %     \end{itemize}
 % \end{frame}
 
+\begin{frame}[c]{}
+    \framesubtitle{}
+        \centering\LARGE Определение геометрических свойств поверхности
+    \end{frame}
+
 \begin{frame}[t]{Определение геометрических свойств поверхности}
     \framesubtitle{}
     {\large\begin{block}{Вопрос}
-        Как создать плотное облако точек, используя разреженные данные об точках касания ног?
+        Как создать плотное облако точек, используя следовую дорожку?
         \end{block}}
     {\large\begin{alertblock}{Ответ}
 1. \textit{Создать полигональную сетку}, используя 2D триангуляцию Делоне (вогнутая оболочка) с использованием разреженных данных
@@ -1294,16 +1321,16 @@
                         % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
              
                         % Labels
-                        \draw[stealth-, very thick,green] (5.2,3.5) -- ++(1,-1)
-                        node[rounded corners=3pt,right,black,fill=white]{\tiny Generated mesh};
+                        \draw[stealth-, very thick,green] (5.2,3.5) -- ++(0,-1)
+                        node[rounded corners=3pt,right,black,fill=white]{\tiny Полученная сетка};
                         
-                        \draw[stealth-, very thick,green] (5.5,5.5) -- (7.4,4)
-                        node[rounded corners=3pt,right,black,fill=white]{\tiny Lidar data};
+                        \draw[stealth-, very thick,green] (5.5,5.5) -- (6.4,4)
+                        node[rounded corners=3pt,right,black,fill=white]{\tiny Данные лидара};
                         
                         
                         \draw[stealth-, very thick,green] (3.4,0.8) -- (5,1);            
                         \draw[stealth-, very thick,green] (3.4,2.6) -- (5,1)
-                        node[rounded corners=3pt,right,black,fill=white]{\tiny Cloud of contact points};
+                        node[rounded corners=3pt,right,black,fill=white]{\tiny Следовая дорожка};
                     \end{scope}
                 \end{tikzpicture}
                 \caption*{Выпуклая оболочка}
@@ -1336,32 +1363,6 @@
                     \caption*{Созданная сетка}
                 \end{subfigure}
             \end{figure}  
-
-
-\end{frame}
-
-\begin{frame}[t]{Определение геометрических свойств поверхности}
-\framesubtitle{Метрики Cloud2Cloud и Cloud2Mesh}
-
-
-\begin{columns}[T,onlytextwidth]
-    \begin{column}{0.49\textwidth}
-        Метрики Cloud2Cloud и Cloud2Mesh основаны на метрике Хаусдорфа.
-\begin{equation*}
-    d_{H}(X,\;Y)=\sup _{m\in M}\left\{\,|\mathrm {dist} _{X}(m)-\mathrm {dist} _{Y}(m)|\,\right\}
-\end{equation*}
-Где $X,\ Y$ --- непустые подмножества метрического пространства $M$; $\mathrm {dist} _{X}\colon M\to \mathbb {R}$ обозначает функцию расстояния до множества $X$.
-    \end{column}
-    \begin{column}{0.49\textwidth}
-        \vspace{-0.8cm}
-        \begin{figure}[H]
-            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{Hausdorff_distance_sample.svg.png}
-            % \caption{caption_name}
-            \label{fig:Hausdorff_distance_sample.svg.png}
-        \end{figure}
-    \end{column}
-\end{columns}
-
 
 
 \end{frame}
@@ -1460,15 +1461,15 @@
                     
                     2. Методика \textbf{характеризации датчика}, когда площадь касания нагрузки меньше, чем размеры датчика.
                     
-                    3. Алгоритмы \textbf{калибровки} и \textbf{определения физичкских свойств поверхности}.
+                    3. Алгоритмы \textbf{калибровки} и \textbf{определения физических свойств поверхности}.
                     
                     4. Метод определения \textbf{геометрических свойств местности}.   
                         
                     \end{block}
             \end{column}
             \begin{column}{0.48\textwidth}
-                \begin{alertblock}{Инженерных задач}
-     1. \textbf{Шагающий цикловой движитель} с одной степенью свободы в ноге. Было сделано 4 итерации, 2 прототипа.
+                \begin{alertblock}{Экспериментальных разработок}
+     1. Спроектированы и собраны 2 прототипа с \textbf{Шагающим цикловым движителем} с одной степенью свободы в ноге.
     
     2. Разработана и создана \textbf{экспериментальная установка} для \textbf{автоматизированного исследования датчика силы}.
     
@@ -1487,6 +1488,11 @@
     \end{enumerate}
 \end{frame}
 
+\begin{frame}[c]{}
+\framesubtitle{}
+    \centering\LARGE Приложения
+\end{frame}
+
 \begin{frame}[t]{Апробация работы}
     \framesubtitle{В изданиях из списка Scopus}
         \begin{enumerate}
@@ -1502,7 +1508,7 @@
     \item \textit{Количество публикаций} 
     \begin{itemize}
         \large
-        \item \textbf{1.5} --- журналы, рекомендованных ВАК
+        \item \textbf{2} --- журналы, рекомендованных ВАК
         \item \textbf{3} --- журналы, индексируемые в Scopus (2 работы Q2)
         \item \textbf{9} --- РИНЦ
         \item \textbf{2} --- готовятся к публикации в Scopus
@@ -1518,7 +1524,33 @@
     1. Развитие теоретических основ и методов анализа, структурного и параметрического синтеза и автоматизированного проектирования роботов и робототехнических систем. \\
     7. Методы экспериментального исследования, создания прототипов и
     экспериментальных стендов и модульных платформ для разработки роботов, робототехнических и мехатронных систем. \\
+    9. Методы расчета и проектирования мехатронных сервоприводов,
+исполнительных, сенсорных и управляющих компонентов роботов,
+робототехнических и мехатронных систем. 
 \end{frame}
+
+\begin{frame}[t]{Определение геометрических свойств поверхности}
+    \framesubtitle{Метрики Cloud2Cloud и Cloud2Mesh}
+    
+    
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.49\textwidth}
+            Метрики Cloud2Cloud и Cloud2Mesh основаны на метрике Хаусдорфа.
+    \begin{equation*}
+        d_{H}(X,\;Y)=\sup _{m\in M}\left\{\,|\mathrm {dist} _{X}(m)-\mathrm {dist} _{Y}(m)|\,\right\}
+    \end{equation*}
+    Где $X,\ Y$ --- непустые подмножества метрического пространства $M$; $\mathrm {dist} _{X}\colon M\to \mathbb {R}$ обозначает функцию расстояния до множества $X$.
+        \end{column}
+        \begin{column}{0.49\textwidth}
+            \vspace{-0.8cm}
+            \begin{figure}[H]
+                \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{Hausdorff_distance_sample.svg.png}
+                % \caption{caption_name}
+                \label{fig:Hausdorff_distance_sample.svg.png}
+            \end{figure}
+        \end{column}
+    \end{columns}
+    \end{frame}
 
 % \fbckg{fibeamer/figs/last_page.png}
 % \frame[plain]{}
