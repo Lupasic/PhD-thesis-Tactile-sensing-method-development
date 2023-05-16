@@ -38,6 +38,7 @@
 \usepackage{colortbl}
 \usepackage{hhline}
 \usepackage{rotating}
+\usepackage{amsmath}
 
 \usepackage[font={large}, labelfont=it,textfont={it},justification=centering, skip=2pt]{caption}
 % will apply to all subcaptions
@@ -115,23 +116,81 @@
     \end{alertblock}
 \end{frame}
 
-\begin{frame}[t]{Цель работы}
-\framesubtitle{}
-\vspace{-0.4cm}
-    Определить \underline{геометрические} и \underline{физические} свойства пройденной \textbf{поверхности} с помощью шагающего движителя, используя \textit{тактильное очувствление}.
+\begin{frame}[t]{Необходимость исследования пещер роботами}
+    % \framesubtitle{Cave dangerous obstacles}
+    \vspace{-0.85cm}
+    \begin{figure}[H]
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{surface_types/salt.jpg}\\
+            \caption*{Соляные отложения}
+            \label{fig:surface_types/salt}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{surface_types/siphon.png}\\
+            \caption*{Сифоны}
+            \label{fig:surface_types/siphon}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{surface_types/ice.png}\\
+            \caption*{Ледяные пещеры}
+            \label{fig:surface_types/ice}
+        \end{subfigure}
 
-\begin{figure}[H]
-    \begin{subfigure}{0.49\textwidth}
-        \centering\includegraphics[height=4.5cm,width=1\textwidth,keepaspectratio]{conv_concave.png}
-        \caption*{Определение геометрических свойств}
-    \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
-        \centering\includegraphics[height=4.5cm,width=1\textwidth,keepaspectratio]{s_shape_leg/view.jpg}
-        \caption*{Определение физических свойств}
-        \label{fig:s_shape_leg/view.jpg}
-    \end{subfigure}
-\end{figure}
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering
+            \begin{tikzpicture}
+                % Include the image in a node
+                \node [above right, inner sep=0] (image) at (0,0)
+                {\centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{surface_types/clay.jpg}};
+                % Create scope with normalized axes
+                \begin{scope}[
+                        x={($ 0.1*(image.south east)$)},
+                        y={($ 0.1*(image.north west)$)}]
+                    % Grid and axes' labels
+                    % \draw[lightgray,step=1] (image.south west) grid (image.north east);
+                    % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
+                    % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
+                    % Labels
+                    \draw[stealth-, very thick,green] (6,8) -- ++(1,1)
+                    node[rounded corners=3pt,right,black,fill=white]{\tiny Человек};
+                \end{scope}
+            \end{tikzpicture}
+            \caption*{Глина}
+            \label{fig:surface_types/clay.jpg}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering
+            \begin{tikzpicture}
+                % Include the image in a node
+                \node [above right, inner sep=0] (image) at (0,0)
+                {\centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{surface_types/splash.png}};
+                % Create scope with normalized axes
+                \begin{scope}[
+                        x={($ 0.1*(image.south east)$)},
+                        y={($ 0.1*(image.north west)$)}]
+                    % Grid and axes' labels
+                    % \draw[lightgray,step=1] (image.south west) grid (image.north east);
+                    % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
+                    % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
 
+                    % Labels
+                    \draw[stealth-, very thick,green] (5,2) -- ++(-2,+1)
+                    node[rounded corners=3pt,left,black,fill=white]{\tiny Лужа};
+                \end{scope}
+            \end{tikzpicture}
+            \caption*{Лужа}
+            \label{fig:surface_types/splash.png}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{surface_types/moss.jpg}\\
+            \caption*{Мох}
+            \label{fig:surface_types/moss}
+        \end{subfigure}
+    \end{figure}
 \end{frame}
 
 \begin{frame}[t]{Нерешаемая задача с помощью камеры или лидара}
@@ -139,8 +198,6 @@
     \vspace{-1cm}
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.55\textwidth}
-
-
             \begin{figure}[H]
                 \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{terrain_wo_water.png}
                 \caption*{Поверхность без воды}
@@ -158,18 +215,13 @@
                         \begin{scope}[
                                 x={($ 0.1*(image.south east)$)},
                                 y={($ 0.1*(image.north west)$)}]
-                            % Grid and axes' labels
-                            % \draw[lightgray,step=1] (image.south west) grid (image.north east);
-                            % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
-                            % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
-                            % Labels
                             \draw[stealth-, very thick,green] (6,8) -- ++(2,1)
-                            node[rounded corners=3pt,right,black,fill=white]{\tiny Water};
+                            node[rounded corners=3pt,right,black,fill=white]{\tiny Вода};
 
                             \draw[stealth-, very thick,green] (0.5,5.5) -- (3,2);
                             \draw[stealth-, very thick,green] (2.5,4.2) -- (3,2);
                             \draw[stealth-, very thick,green] (4.5,4) -- (3,2)
-                            node[rounded corners=3pt,below,black,fill=white]{\tiny Lidar data};
+                            node[rounded corners=3pt,below,black,fill=white]{\tiny Лазер Лидара};
                         \end{scope}
                     \end{tikzpicture}
                     % \caption*{}
@@ -187,40 +239,106 @@
 
 \end{frame}
 
-\begin{frame}[t]{Актуальность проблематики}
+\begin{frame}[t]{Проблематика}
+    \framesubtitle{}
+    \vspace{-0.3cm}
+    \begin{block}{Проблема}
+        \textit{Нет технологий} для исследования \textbf{узких пещер} естественного происхождения
+    \end{block}
+     \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.59\textwidth}
+            Стандартное решение для автономной навигации не будет работать по следующим причинам:
+            \begin{itemize}
+                \item оптические сенсоры (лидары, камеры) могут покрыться грязью;
+                \item камеры выдают некачественные данные при недостатке освещения;
+                \item спутниковая навигация (GPS) не работает в замкнутых пространствах под землей.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.39\textwidth}
+            \begin{figure}[H]
+                \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{open_cave.jpg}
+                \caption*{DARPA Subterranean Challenge, свободная пещера}
+                \label{fig:open_cave.jpg}
+            \end{figure}
+        \end{column}
+     \end{columns}
+
+
+    \end{frame}
+
+\begin{frame}[t]{Цель работы}
 \framesubtitle{}
+\vspace{-0.4cm}
+    Разработать метод для определения \underline{геометрических} и \underline{физических} свойств пройденной \textbf{поверхности} с помощью многоногого шагающего робота с цикловыми движителемями, используя \textit{тактильное очувствление}, без использования оптических сенсоров.
 \begin{figure}[H]
-    \begin{subfigure}[t]{0.32\textwidth}
-        \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{Darpa_SubT.png}
-        \caption*{Соревнование по автономному исследованию пещер}
-        \label{fig:Darpa_SubT.png}
+    \begin{subfigure}{0.49\textwidth}
+        \centering\includegraphics[height=3.5cm,width=1\textwidth,keepaspectratio]{conv_concave.png}
+        \caption*{Определение геометрических свойств}
     \end{subfigure}
-    \begin{subfigure}[t]{0.32\textwidth}
-        \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{NTI.png}
-        \caption*{Спонсирование проекта по тематике}
-        \label{fig:NTI.png}
-    \end{subfigure}
-    \begin{subfigure}[t]{0.32\textwidth}
-        \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{rffi.jpeg}
-        \caption*{Грант по тематике}
-        \label{fig:rffi.jpeg}
+    \begin{subfigure}{0.49\textwidth}
+        \centering\includegraphics[height=3.5cm,width=1\textwidth,keepaspectratio]{s_shape_leg/view.jpg}
+        \caption*{Определение физических свойств}
+        \label{fig:s_shape_leg/view.jpg}
     \end{subfigure}
 \end{figure}
 \end{frame}
 
+\begin{frame}[t]{Объект исследования}
+\framesubtitle{}
+Объектом исследования является класс многоногих шагающих роботов с цельным или сочленённым корпусом, и цикловыми движителями с одной степенью свободы, управляемые зависимо или независимо друг от друга.
 
-\begin{frame}[t]{Литературный обзор}
-    \framesubtitle{}
-    \vspace{-0.65cm}
-    \begin{itemize}
-        \item Пещеры: препятствия, размеры. \\ \alert{-- \textbf{Классификация} пещер и препятствий \\ -- \textbf{Оценка сложности} территории}
-        \item Роботы для исследования пещер: от дирижаблей, до шагающих. \\ \alert{-- \textbf{Робототехнические системы} для исследования \textbf{свободных пещер}}
-        \item Способы определения силы реакции опоры. \\ \alert{-- Неявные и явные \textbf{способы}. \textbf{Классификая типов датчиков} силы}
-        \item Методы распознования типа поверхности. \\ \alert{-- С помощью \textbf{машинного обучения}, используя набор датчиков}
-        \item Методы построения карты: оптические и тактильные. \\ \alert{-- Построение поверхности \textbf{с помощью датчика силы на манипуляторе} \\ -- Построение карты с помощью \textbf{лидаров и камер}}
-    \end{itemize}
-
+\begin{figure}[H]
+    \begin{subfigure}{0.32\textwidth}
+        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{from_master/gakken.jpg}
+        \label{fig:from_master/gakken.jpg}
+    \end{subfigure}
+    \begin{subfigure}{0.32\textwidth}
+        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{from_master/rhex.jpg}
+        \label{fig:from_master/rhex.jpg}
+    \end{subfigure}
+    \begin{subfigure}{0.32\textwidth}
+        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{from_master/whegs2.jpg}
+        \label{fig:from_master/whegs2.jpg}
+    \end{subfigure}
+\end{figure}
 \end{frame}
+
+\begin{frame}[t]{Основные научные задачи исследования}
+\framesubtitle{}
+\begin{enumerate}
+    \item Разработка метода \textbf{оптимизации конструкции многоногих шагающих роботов} с цикловыми движителями с одной степенью свободы критериям проходимости, покрытия опорной поверхности и её детализации, длины пройденного пути.
+    \item Создание методики \textbf{исследования датчика силы}, когда площадь контакта нажатия на сенсор меньше чувствительной области самого сенсора.
+  \item  Разработка метода \textbf{построения карты местности и определения геометрических свойств поверхности} с помощью тактильного очувствления.
+  \item Реализация алгоритма, позволяющего \textbf{определять физические свойства} опорной поверхности.
+\end{enumerate}
+\end{frame}
+
+
+\usebackgroundtemplate{}
+\setbeamercolor{background canvas}{bg=}
+\begin{frame}[t]{}
+    \framesubtitle{}
+        \vspace{-0.4cm}
+        \begin{figure}[H]
+            \centering\includegraphics[height=12cm,width=1\textwidth,keepaspectratio]{main_diag_hor.png}
+            \label{fig:main_diag_hor.png}
+        \end{figure}
+    \end{frame}
+\fbckg{fibeamer/figs/common.png}
+
+
+% \begin{frame}[t]{Литературный обзор}
+%     \framesubtitle{}
+%     \vspace{-0.65cm}
+%     \begin{itemize}
+%         \item Пещеры: препятствия, размеры. \\ \alert{-- \textbf{Классификация} пещер и препятствий \\ -- \textbf{Оценка сложности} территории}
+%         \item Роботы для исследования пещер: от дирижаблей, до шагающих. \\ \alert{-- \textbf{Робототехнические системы} для исследования \textbf{свободных пещер}}
+%         \item Способы определения силы реакции опоры. \\ \alert{-- Неявные и явные \textbf{способы}. \textbf{Классификая типов датчиков} силы}
+%         \item Методы распознования типа поверхности. \\ \alert{-- С помощью \textbf{машинного обучения}, используя набор датчиков}
+%         \item Методы построения карты: оптические и тактильные. \\ \alert{-- Построение поверхности \textbf{с помощью датчика силы на манипуляторе} \\ -- Построение карты с помощью \textbf{лидаров и камер}}
+%     \end{itemize}
+
+% \end{frame}
 
 \begin{frame}[t]{Разработка робота}
     \framesubtitle{Требования к роботу}
@@ -272,23 +390,100 @@
     \framesubtitle{Используемые технологии}
     \vspace{-0.7cm}
     \begin{figure}[H]
-        \begin{subfigure}[t]{0.32\textwidth}
-            \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{c1_paper.png}
-            \caption*{\small Генерация поверхности \\ (Параметризованная \textbf{искусственная территория}) \\ \alert{Проблема формализации сложности поверхности}}
+        \begin{subfigure}[t]{0.45\textwidth}
+            \centering\includegraphics[height=4.5cm,width=1\textwidth,keepaspectratio]{c1_paper.png}
+            \caption*{\small Генерация поверхности \\ (Параметризованная \\ \textbf{искусственная территория})}
         \end{subfigure}
-        \hfill
-        \begin{subfigure}[t]{0.32\textwidth}
-            \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{gazebo_logo.png}
-            \caption*{\small Робосимулятор \\ (Неявная математическая модель) \\ \alert{Громоздкость явной модели}}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}[t]{0.32\textwidth}
-            \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{gen_algo.jpg}
-            \caption*{ \small Генетический алгоритм \\ \alert{Отличен для \\ дискретной глобальной \\ мультикритериальной задачи оптимизации}}
+        \begin{subfigure}[t]{0.45\textwidth}
+            \centering\includegraphics[height=4.5cm,width=1\textwidth,keepaspectratio]{gen_algo.jpg}
+            \caption*{ \small Генетический алгоритм}
         \end{subfigure}
         \hfill
     \end{figure}
 \end{frame}
+
+
+\begin{frame}[t]{Разработка робота}
+\framesubtitle{Математическая модель: Описание механической системы}
+\vspace{-0.8cm}
+            \begin{align*}
+                M \dot{\vec{u}} = \vec{g} \\
+                M = \begin{bmatrix}
+                M_1 & \cdots  & 0 \\
+                \vdots  & \ddots  & \vdots  \\ 
+                0 & \cdots   & M_n 
+                \end{bmatrix},\ M_i = \begin{bmatrix}
+                m_i E_{3\times 3} & 0 \\ 
+                0 & I_i 
+                \end{bmatrix} \\
+                \vec{u}_i^{\ T} = \begin{bmatrix}
+                    \vec{v}_i^{\ T} & \vec{\omega}_i^{\ T}
+                \end{bmatrix} \\ 
+                \vec{g}^{\ T} = \begin{bmatrix}
+                    \cdots \  \vec{F}_i^{\ T}, & (\vec{\tau}_i - \vec{\omega}_i \times I_i \vec{\omega}_i)^T\  \cdots 
+                \end{bmatrix}
+            \end{align*}
+            где, $M_i$~---~матрицы, содержащие массово-инерционные характеристики; $m_i$~---~масса тела; $I_i$~---~тензор инерции; $\vec{u_i}$~---~вектор обобщённых скоростей; $E$~---~единичная матрица; $\vec{g}$~---~вектор обобщённых сил; $\vec{v_i}$~---~вектор линейной скорости; $\vec{\omega_i}$~---~вектор угловой скорости; $\vec{F_i}$, $\vec{\tau_i}$~---~силы и моменты сил взаимодействия.
+\end{frame}
+
+\begin{frame}[t]{Разработка робота}
+\framesubtitle{Геометрические связи}
+\vspace{-0.5cm}
+Тела соединены цилиндрическими шарнирами:
+\begin{align*}
+    \label{eq:kin_constr}
+    \phi(q_{j_1},\ u_{j_1},\ \cdots,\ q_{j_k},\ u_{j_k},\ t) \geqslant  0 \\
+    \vec{q}_i^{\ T} = \begin{bmatrix}
+        \vec{x}_i^{\ T} & \vec{Q}_i^{\ T}
+    \end{bmatrix} \\
+    \dot{\vec{q}_i} = \begin{bmatrix}
+    E_{3\times3} & 0\\ 
+    0 & G(\vec{q}_i) 
+    \end{bmatrix}\vec{u}_i  
+\end{align*}
+
+\begin{align*}
+    \vec{g}_i = \tau_i^T \vec{z}_{i-1} -k_i \dot{\vec{q}_i} 
+\end{align*}
+где через $\phi$ обозначена функция связи; $t$~---~время; $q_{j}$~---~вектор обобщенных координат, включающий в себя координаты центра масс $\vec{x_i}$ и кватернион $\vec{Q_i}$, описывающий ориентацию тела в пространстве; через $G(\vec{q}_i)$ обозначена матрица, вид которой зависит от выбранной системы координат; $k$~---~ коэффициент вязкого трения в шарнире.
+\end{frame}
+
+\begin{frame}[t]{Разработка робота}
+    \framesubtitle{Взаимодействие опорной поверхности и ноги робота}
+    \vspace{-0.6cm}
+        \begin{columns}[T,onlytextwidth]
+            \begin{column}{0.69\textwidth}
+                \begin{align*}
+                    \phi_u(\vec{q}\ ) = g(\vec{q}\ ) \geqslant 0 \\ 
+                    g(\vec{q}\ ) = (\vec{x}_1 + \vec{s}_1 - \vec{x}_2 - \vec{s}_2) \cdot \vec{n} \\
+                    \frac{d }{d t}\phi_u(\vec{q}\ ) \approx \begin{bmatrix}
+                        \vec{n}^{\ T} & (\vec{s}_1 \times \vec{n})^T & -\vec{n}^{\ T} & (-\vec{s}_2 \times \vec{n})^T
+                    \end{bmatrix} \begin{bmatrix}
+                        \vec{v}_1\\ 
+                    \vec{\omega}_1\\ 
+                    \vec{v}_2\\
+                    \vec{\omega}_2\\
+                    \end{bmatrix}
+                \end{align*} 
+                где, $\phi_u(\vec{q})$~---~функция связи; $ \mu $~---~ коэффициент трения между ногой и опорной поверхностью;  радиус-векторы $\vec{x}_{1,2},\ \vec{s}_{1,2}$ и орты координатных осей $\vec{t}_{1,2}, \vec{n}$ показаны на рисунке; $ f_{1,2} $~---~значения сил трения вдоль осей $t_{1,2}$ соответственно.
+            \end{column}
+            \begin{column}{0.29\textwidth}
+                \vspace{-0.4cm}
+                \begin{figure}[H]
+                    \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{contact_interaction.png}
+                    \label{fig:contact_interaction.png}
+                \end{figure}
+                \vspace{-1cm}
+                \begin{align*}
+                \left\{\begin{matrix*}[l]
+                \mu f_n \geqslant \sqrt{f_1^2 + f_2^2}\\ 
+                \left\lVert \vec{v_t}\right\rVert (\mu f_n - \sqrt{f_1^2 + f_2^2}) = 0\\
+                \dfrac{\vec{f_t}}{\left\lVert \vec{f_t}\right\rVert } = - \dfrac{\vec{v_t}}{\left\lVert \vec{v_t}\right\rVert }
+                \end{matrix*}\right.
+                \end{align*}
+            \end{column}
+        \end{columns}
+    \end{frame}
 
 \begin{frame}[t]{Разработка робота}
     \framesubtitle{Предлагаемое решение}
@@ -646,6 +841,48 @@
 \end{frame}
 
 \begin{frame}[t]{Разработка преобразователя силы}
+    \framesubtitle{Экспериментальная установка: Импедансное управление (1)}
+    \vspace{-18pt}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.55\textwidth}
+            \begin{exampleblock}{Модификация траектории (Только ось $z$)}
+                \vspace{-14pt}
+                \begin{eqnarray*}
+                    X_s^0 = 0, \dot{X}_s^0 =0,  X_g^k, \dot{X}_g^k \text{ -- целевое состояние}\\, X_s = X_g - X_d \\
+                    X_g = X_g^0 + \frac{F_d}{\eta } \\
+                    \dot{X}_s + \eta  X_s = F^k \\
+                    X_s^k = odeint(X_s^{k-1},t,F^k), t = [0,dT] \\
+                    X_s^{k-1} = X_s^k;  \dot{X}_s = f(X_s,t,F^k) \\
+                    X_d = X_g - X_s; \dot{X}_d = \dot{X}_g - \dot{X}_s
+                \end{eqnarray*}
+            \end{exampleblock}
+        \end{column}
+        \begin{column}{0.40\textwidth}
+            \begin{exampleblock}{Управление по скорости}
+                \vspace{-14pt}
+                \begin{eqnarray*}
+                    X_d = \begin{bmatrix}
+                        x_g \\ y_g \\ z_d
+                    \end{bmatrix} \\
+                    U = \dot{X}_d + K(X_d - X), \\ \text{ где } X=\text{принять\_состояние}(); \\ 
+                    \text{установить\_скорость}(U)
+                \end{eqnarray*}
+            \end{exampleblock}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[t]{Experiment Design}
+    \framesubtitle{Экспериментальная установка: Импедансное управление (1)}
+    \vspace{-15pt}
+    \begin{figure}[H]
+        \centering\includegraphics[height=6.1cm,width=1\textwidth,keepaspectratio]{force_data_pos.png}
+        % \caption{caption_name}
+        \label{fig:impedance}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Разработка преобразователя силы}
     \framesubtitle{Установка: Насадки}
     \vspace{-0.9cm}
     \begin{columns}[T,onlytextwidth]
@@ -711,9 +948,8 @@
 \end{frame}
 
 
-
 \begin{frame}[t]{Разработка преобразователя силы}
-    \framesubtitle{Результаты: Динамический эксперимент}
+    \framesubtitle{Результаты: Ошибки показаний датчика в динамическом эксперименте}
     \vspace{-15pt}
     \begin{figure}[H]
         \begin{subfigure}{0.64\textwidth}
@@ -742,7 +978,7 @@
 
         2. Собрать датасет, состоящий из угловой скорости мотора и показаний датчиков с ног робота.
 
-        3. Представить их в виде вектора фич.
+        3. Представить их в виде вектора признаков.
 
         4. Решить задачу классификации данных с помощью SVM, используя метрику 10-fold cross validation. 
 
@@ -752,17 +988,19 @@
 
 \begin{frame}[t]{Определение физических свойств поверхности}
     \framesubtitle{Требования к установке}
-    \vspace{-0.5cm}
-    \begin{columns}[T,onlytextwidth]
-        \begin{column}{0.57\textwidth}
             \begin{itemize}
                 \item Иметь возможность быстро менять используемые поверхности {\\ \alert{Быстроразборный стол}}
                 \item Бесконечное движение робота {\\ \alert{2-ух степенной механизм и нога S-образной формы}}
                 \item Узел движителя должен быть такой же как на СтриРусе {\\ \alert{Создано крепление для узла ноги робота}}
             \end{itemize}
-        \end{column}
-        \begin{column}{0.42\textwidth}
-            \vspace{-0.8cm}
+
+\end{frame}
+
+\begin{frame}[t]{Определение физических свойств поверхности}
+\framesubtitle{Экспериментальная установка}
+\vspace{-0.8cm}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.49\textwidth}
             \begin{figure}[H]
                 \centering
                 \begin{tikzpicture}
@@ -773,23 +1011,11 @@
                     \begin{scope}[
                             x={($ 0.1*(image.south east)$)},
                             y={($ 0.1*(image.north west)$)}]
-                        % Grid and axes' labels
-                        % \draw[lightgray,step=1] (image.south west) grid (image.north east);
-                        % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
-                        % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
-
-                        % Labels
-
-                        % \node[circle,fill=green,scale=0.4] at (3.3,6.27){\small 1};
-
-                        % \draw[latex-, very thick,green] (3.5,2.2) -- (2.5,1)
-                        % node[below left,black,fill=white]{\small test};
-
                         \draw[stealth-, very thick,green] (3.5,2.5) -- (3,1.5)
-                        node[rounded corners=3pt,below,black,fill=white]{\tiny Table for surfaces};
+                        node[rounded corners=3pt,below,black,fill=white]{\tiny Стол для поверхностей};
 
                         \draw[stealth-, very thick,green] (7.1,5.4) -- (7.4,7)
-                        node[rounded corners=3pt,above right,black,fill=white]{\tiny Self-made PCB};
+                        node[rounded corners=3pt,above right,black,fill=white]{\tiny Контроллер};
 
                         \draw[very thick,green] (6,6.1) rectangle (8.5,3.5)
                         node[above left,black,fill=green]{\tiny S leg};
@@ -797,6 +1023,13 @@
                 \end{tikzpicture}
                 % \caption*{}
                 \label{fig:s_shape_leg/s_leg_setup.JPG}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.49\textwidth}
+            \begin{figure}[H]
+                \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{s_shape_leg/leg_design.png}
+                % \caption{caption_name}
+                \label{fig:s_shape_leg/leg_design.png}
             \end{figure}
         \end{column}
     \end{columns}
@@ -811,18 +1044,18 @@
             % \href{run:./videos/flat.gif}
             \href{https://gifyu.com/image/SxatY}
             {\centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{s_shape_leg/flat.jpg}} 
-            \caption*{Резина}
+            \caption*{Упругая}
         \end{subfigure}
         \hfill
         \begin{subfigure}{0.26\textwidth}
             % \href{run:./videos/rock.gif}
             \href{https://gifyu.com/image/Sxatt}
             {\centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{s_shape_leg/view.jpg}}
-            \caption*{Каменная гряда}
+            \caption*{Твердая}
         \end{subfigure}
         \begin{subfigure}{0.5\textwidth}
             {\centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{s_shape_leg/mould.jpg}}
-            \caption*{Земля}
+            \caption*{Пластичная}
         \end{subfigure}
     \end{figure}
 \end{frame}
@@ -905,6 +1138,123 @@
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{rl_sim.JPG}
             \caption*{Натурные испытания,\\ \textbf{3th+ gen} СтриРус}
         \end{subfigure}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{}
+\framesubtitle{}
+    \vspace{-0.6cm}
+    \begin{figure}[H]
+        \centering
+         \begin{tikzpicture}
+            % Include the image in a node
+            \node [above right, inner sep=0] (image) at (0,0) 
+            {\centering\includegraphics[height=9cm,width=1\textwidth,keepaspectratio]{StriRus_10_legs_15_angle_v4.png}};          
+            % Create scope with normalized axes
+            \begin{scope}[
+                x={($ 0.1*(image.south east)$)},
+                y={($ 0.1*(image.north west)$)}]
+                % Grid and axes' labels
+                % \draw[lightgray,step=1] (image.south west) grid (image.north east);
+                % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
+                % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
+     
+                % Labels
+    
+                \coordinate (Xc) at (0.4415/2,-0.2347/2);
+                \coordinate (Yc) at (-0.4512/2,-0.2156/2);
+                \coordinate (Zc) at (0,0.5/2);
+                % Labels
+                \tikzstyle{origin} = [rounded corners=2pt, black, fill=gray!40, fill opacity=0.75, text opacity=1, scale=0.8,inner sep=1pt]
+                \tikzstyle{transform_text} = [rounded corners=2pt, black, fill=white!85!gray, fill opacity=0.75, text opacity=1, scale=0.8,inner sep=1pt]
+                \tikzstyle{transform_arrow} = [thick, green]
+        
+                % \coordinate (o_g) at (1,9);
+                \node[circle,fill=green,scale=0.25] (o_g) at (1,9){};
+                \draw[-stealth, very thick,blue] (o_g) -- ++(Xc);
+                \draw[-stealth, very thick,green!70!black] (o_g) -- ++(Yc);
+                \draw[-stealth, very thick,red] (o_g) -- ++(Zc);
+                \node[origin,above right=3pt] at (o_g){\tiny $\mathbf{O_{glob}}$};
+        
+                % \coordinate (o_b) at (2.9,7.05);
+                \node[circle,fill=green,scale=0.25] (o_b) at (2.9,7.05){};
+                \draw[-stealth, very thick,blue] (o_b) -- ++(Xc);
+                \draw[-stealth, very thick,green!70!black] (o_b) -- ++(Yc);
+                \draw[-stealth, very thick,red] (o_b) -- ++(Zc);
+                \node[origin,above right=2pt] at (o_b){\tiny $\mathbf{O_{base}}$};
+        
+                % \coordinate (o_1) at (2.9,6.6);
+                \node[circle,fill=green,scale=0.25] (o_1) at (2.9,6.6){};
+                \draw[-stealth, very thick,blue] (o_1) -- ++(Xc);
+                \draw[-stealth, very thick,green!70!black] (o_1) -- ++(Yc);
+                \draw[-stealth, very thick,red] (o_1) -- ++(Zc);
+                \node[origin,above right=2pt] at (o_1){\tiny $\mathbf{O_{1}}$};
+        
+                % \coordinate (o_2) at (4,6);
+                \node[circle,fill=green,scale=0.25] (o_2) at (4,6){};
+                \draw[-stealth, very thick,blue] (o_2) -- ++(Xc);
+                \draw[-stealth, very thick,green!70!black] (o_2) -- ++(Yc)
+                node[origin,below=2pt]{\tiny $\mathbf{\alpha_3}$};
+                \draw[-stealth, very thick,red] (o_2) -- ++(Zc);
+                \node[origin,above right=2pt] at (o_2){\tiny $\mathbf{O_{2}=O_{3}}$};
+        
+                % \coordinate (o_4) at (7.0,4.55);
+                \node[circle,fill=green,scale=0.25] (o_4) at (7.0,4.55){};
+                \draw[-stealth, very thick,blue] (o_4) -- ++(Xc);
+                \draw[-stealth, very thick,green!70!black] (o_4) -- ++(Yc);
+                \draw[-stealth, very thick,red] (o_4) -- ++(Zc);
+                \node[origin,above right=2pt] at (o_4){\tiny $\mathbf{O_{4}}$};
+        
+                % \coordinate (o_5) at (6.7,4.45);
+                \node[circle,fill=green,scale=0.25] (o_5) at (6.7,4.45){};
+                \draw[-stealth, very thick,blue] (o_5) -- ++(Xc);
+                \draw[-stealth, very thick,green!70!black] (o_5) -- ++(Yc);
+                \draw[-stealth, very thick,red] (o_5) -- ++(Zc);
+                \node[origin,above left=3pt] at (o_5){\tiny $\mathbf{O_{5}=O_{6}}$};
+        
+                \coordinate (Xcr) at (0.49/2,0.07/2);
+                % \coordinate (Ycr) at (-0.38/2,-0.32/2);
+                \coordinate (Ycr) at (-0.24/2,-0.43/2);
+        
+                \draw[-stealth, very thick,blue] (o_5) -- ++(Xcr);
+                \draw[-stealth, very thick,green!70!black] (o_5) -- ++(Ycr);
+        
+        
+                % \coordinate (o_7) at (6.36,3.68);
+                \node[circle,fill=green,scale=0.25] (o_7) at (6.36,3.68){};
+                \draw[-stealth, very thick, blue] (o_7) -- ++(Xcr);
+                \draw[-stealth, very thick, green!70!black] (o_7) -- ++(Ycr)
+                node[origin,above left=2pt]{\tiny $\mathbf{\alpha_8}$};
+                \draw[-stealth, very thick, red] (o_7) -- ++(Zc);
+                \node[origin,below right=3pt] at (o_7){\tiny $\mathbf{O_{7}=O_{8}}$};
+        
+                \node[circle, draw ,fill=green,scale=0.4] (s_1) at (6.6,1.3){1};
+                \node[circle,draw, fill=green,scale=0.4] (s_3) at (5.85,1.7){3};
+                \node[circle,draw, fill=green,scale=0.4] (s_5) at (5.55,2.9){5};
+        
+                \draw[-stealth, transform_arrow] (o_g) -- (o_b)
+                node[midway,below left=2pt, transform_text]{\tiny $\mathbf{H_{base}^{glob}}$};
+        
+                \draw[-stealth, transform_arrow] (o_b) -- (o_1)
+                node[midway,left=3pt, transform_text]{\tiny $\mathbf{H_{1}^{base}}$};
+        
+                \draw[-stealth, transform_arrow] (o_1) -- (o_2)
+                node[midway,below=2pt, transform_text]{\tiny $\mathbf{H_{2}^{1}}$};
+        
+                \draw[-stealth, transform_arrow] (o_2) -- (o_4)
+                node[midway,below=2pt, transform_text]{\tiny $\mathbf{H_{4}^{3}}$};
+        
+                \draw[-stealth, transform_arrow] (o_4) -- (o_5)
+                node[midway,below right=2pt, transform_text]{\tiny $\mathbf{H_{5}^{4}}$};
+        
+                \draw[-stealth, transform_arrow] (o_5) -- (o_7)
+                node[midway,left=3pt, transform_text]{\tiny $\mathbf{H_{7}^{6}}$};
+        
+                \draw[-stealth, transform_arrow] (o_7) -- (s_1);
+                \draw[-stealth, transform_arrow] (o_7) -- (s_3);
+                \draw[-stealth, transform_arrow] (o_7) -- (s_5);
+            \end{scope}
+        \end{tikzpicture}
     \end{figure}
 \end{frame}
 
@@ -991,7 +1341,33 @@
 \end{frame}
 
 \begin{frame}[t]{Определение геометрических свойств поверхности}
-    \framesubtitle{Метрики Cloud2Cloud и Cloud2Mesh}
+\framesubtitle{Метрики Cloud2Cloud и Cloud2Mesh}
+
+
+\begin{columns}[T,onlytextwidth]
+    \begin{column}{0.49\textwidth}
+        Метрики Cloud2Cloud и Cloud2Mesh основаны на метрике Хаусдорфа.
+\begin{equation*}
+    d_{H}(X,\;Y)=\sup _{m\in M}\left\{\,|\mathrm {dist} _{X}(m)-\mathrm {dist} _{Y}(m)|\,\right\}
+\end{equation*}
+Где $X,\ Y$ --- непустые подмножества метрического пространства $M$; $\mathrm {dist} _{X}\colon M\to \mathbb {R}$ обозначает функцию расстояния до множества $X$.
+    \end{column}
+    \begin{column}{0.49\textwidth}
+        \vspace{-0.8cm}
+        \begin{figure}[H]
+            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{Hausdorff_distance_sample.svg.png}
+            % \caption{caption_name}
+            \label{fig:Hausdorff_distance_sample.svg.png}
+        \end{figure}
+    \end{column}
+\end{columns}
+
+
+
+\end{frame}
+
+\begin{frame}[t]{Определение геометрических свойств поверхности}
+    \framesubtitle{Результаты Cloud2Cloud и Cloud2Mesh}
     \vspace{-15pt}
     \begin{figure}[H]
         \begin{subfigure}[t]{0.49\textwidth}
@@ -1074,60 +1450,49 @@
 % \end{frame}
 
 
-\begin{frame}[t]{Глобальный итог}
-    \framesubtitle{}
-    \large
-    \vspace{-0.5cm}
-    \begin{figure}[H]
-        \begin{subfigure}[t]{0.49\textwidth}
-            \centering\includegraphics[height=2.5cm,width=1\textwidth,keepaspectratio]{strirus_3.JPG}
-            \caption*{1. Структурный синтез}
-        \end{subfigure}
-        \begin{subfigure}[t]{0.49\textwidth}
-            \centering\includegraphics[height=2.5cm,width=1\textwidth,keepaspectratio]{velostat_sensor_look.JPG}
-            \caption*{2. Датчик силы на основе Velostat}
-        \end{subfigure}
-    
-        \begin{subfigure}[t]{0.49\textwidth}
-            \centering\includegraphics[height=2.5cm,width=1\textwidth,keepaspectratio]{s_shape_leg/s_leg_setup.JPG}
-            \caption*{3. Определение поверхности}
-        \end{subfigure}
-        \begin{subfigure}[t]{0.49\textwidth}
-            \centering\includegraphics[height=2.5cm,width=1\textwidth,keepaspectratio]{conv_concave.png}
-            \caption*{4. Ножное картографирование}
-        \end{subfigure}
-    \end{figure}
-\end{frame}
-
 \begin{frame}[t]{Результаты решения задач}
     \framesubtitle{}
     \vspace{-0.7cm}
         \begin{columns}[T,onlytextwidth]
             \begin{column}{0.48\textwidth}
                 \begin{block}{Научных задач (научная новизна)}
-                    1. Методика \textbf{подбора количества ног для шагающих цикловых движителей}.
+                    1. Метод \textbf{подбора количества ног для шагающих цикловых движителей}.
                     
                     2. Методика \textbf{характеризации датчика}, когда площадь касания нагрузки меньше, чем размеры датчика.
                     
-                    3. Методика \textbf{калибровки} и \textbf{алгоритм определения типа поверхности}.
+                    3. Алгоритмы \textbf{калибровки} и \textbf{определения физичкских свойств поверхности}.
                     
-                    4. Методика определения \textbf{геометрических свойств местности}.   
+                    4. Метод определения \textbf{геометрических свойств местности}.   
                         
                     \end{block}
             \end{column}
             \begin{column}{0.48\textwidth}
                 \begin{alertblock}{Инженерных задач}
-     1. \textbf{Шагающий цикловой движитель} с одной степенью свободы в ноге.
+     1. \textbf{Шагающий цикловой движитель} с одной степенью свободы в ноге. Было сделано 4 итерации, 2 прототипа.
     
-    2. \textbf{Выбраны, откалиброваны и установлены не оптические сенсоры} для определения свойств поверхности.
+    2. Разработана и создана \textbf{экспериментальная установка} для \textbf{автоматизированного исследования датчика силы}.
     
-    3. Алгоритм \textbf{определения типа поверхности}.
-    
-    4. Алгоритм \textbf{картографирования местности} с помощью \textbf{пальпирования} ногами робота.
+    3. Разработана и создана \textbf{экспериментальная установка} для \textbf{определения типа поверхности}.
     
                 \end{alertblock}
             \end{column}
         \end{columns}
+    \end{frame}
+
+\begin{frame}[t]{Апробация работы}
+\framesubtitle{Статьи в периодических изданиях по перечню ВАК РФ}
+    \begin{enumerate}
+        \item Буличев О. В., Полёткин К. В., Малолетов А. В. Исследование характеристик датчика силы на основе материала «Velostat» для мобильного шагающего робота // Известия Волгоградского государственного технического университета. 2022. № 4. C. 6–12.
+        \item Буличев О. В., Малолетов А. В. Метод оптимизации количества ног шагающего робота на основе эволюционного алгоритма // Известия Волгоградского государственного технического университета. 2022. № 9. C. 12–19.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}[t]{Апробация работы}
+    \framesubtitle{В изданиях из списка Scopus}
+        \begin{enumerate}
+            \item Bulichev O., Klimchik A. Concept Development Of Biomimetic Centipede Robot StriRus // 2018 23rd Conference of Open Innovations Association (FRUCT). 2018. C. 85–90.
+            \item Bulichev O., Klimchik A., Mavridis N. Optimization of Centipede Robot Body Designs through Evolutionary Algorithms and Multiple Rough Terrains Simulation // 2017 IEEE International Conference on Robotics and Biomimetics (ROBIO). 2017. C. 290–295.
+        \end{enumerate}
     \end{frame}
 
 \begin{frame}[t]{Результаты интеллектуальной деятельности}
@@ -1147,6 +1512,13 @@
 \end{itemize}
 \end{frame}
 
+\begin{frame}[t]{Соответствие паспорту специальности}
+\framesubtitle{2.5.4 Робототехника, Роботы, мехатроника и
+робототехнические системы}
+    1. Развитие теоретических основ и методов анализа, структурного и параметрического синтеза и автоматизированного проектирования роботов и робототехнических систем. \\
+    7. Методы экспериментального исследования, создания прототипов и
+    экспериментальных стендов и модульных платформ для разработки роботов, робототехнических и мехатронных систем. \\
+\end{frame}
 
 % \fbckg{fibeamer/figs/last_page.png}
 % \frame[plain]{}
