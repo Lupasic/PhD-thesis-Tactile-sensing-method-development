@@ -143,7 +143,7 @@
 Для создания геометрической модели поверхности был разработан алгоритм, описанный далее. Вначале необходимо очистить оригинальное облако точек от шумов и усреднить близлежащие точки с помощью Voxel grid. Потом из него генерируется полигональная сетка с помощью 2D Триангуляции Делоне \pic{fig:delone_idea.png} (вогнутая оболочка \pic{fig:exp_concave_hull}). На ее основе получается необходимое плотное облако точек \pic{fig:sampled_pcd.png}.
 
 \begin{figure}[H]
-    \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{delone_idea.png}
+    \centering\includegraphics[height=10cm,width=1\textwidth,keepaspectratio]{delone_idea.png}
     \caption{2D Триангуляция Делоне (выпуклая оболочка)}
     \label{fig:delone_idea.png}
 \end{figure}
@@ -154,12 +154,14 @@
 
 
 \begin{figure}[H]
-    \begin{subfigure}[t]{0.49\textwidth}
-        \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{terrain_w_water1.png}
+    \begin{subfigure}[t]{0.99\textwidth}
+        \centering\includegraphics[height=10cm,width=1\textwidth,keepaspectratio]{terrain_w_water1.png}
         \caption{Начало движения}
     \end{subfigure}
-    \begin{subfigure}[t]{0.49\textwidth}
-        \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{terrain_w_water_end.png}
+
+    \begin{subfigure}[t]{0.99\textwidth}
+        \centering\includegraphics[height=10
+        cm,width=1\textwidth,keepaspectratio]{terrain_w_water_end.png}
         \caption{Конец движения}
     \end{subfigure}
     \caption{Эксперимент в симуляторе}
@@ -214,13 +216,14 @@
 \end{figure}
 
 \begin{figure}[H]
-    \begin{subfigure}{0.9\textwidth}
+    \begin{subfigure}{0.99\textwidth}
         \centering\includegraphics[height=8cm,width=1\textwidth,keepaspectratio]{postament_orig.png}
         \caption{Результат эксперимента по построению карты постамента, симулятор}
         \label{fig:postament_orig.png}
     \end{subfigure}
-    \begin{subfigure}{0.9\textwidth}
-        \centering\includegraphics[height=8cm,width=1\textwidth,keepaspectratio]{postament_mesh.png}
+
+    \begin{subfigure}{0.99\textwidth}
+        \centering\includegraphics[height=10cm,width=1\textwidth,keepaspectratio]{postament_mesh.png}
         \caption{Результат эксперимента по построению карты постамента, Rviz, полигональная сетка}
         \label{fig:postament_mesh.png}
     \end{subfigure}
@@ -232,13 +235,13 @@
 На рисунке \ref{fig:exp_concave_hull} проиллюстрирована  важность модификации триангуляции Делоне. Как можно заметить \pic{fig:conv_convex.png} алгоритм построил карту местности неверно, расположив пройденную территорию там, где робот не перемещался и находится стена. При использовании вогнутой оболочки \pic{fig:conv_concave.png} данная проблема не наблюдается.
 
 \begin{figure}[H]
-    \begin{subfigure}[t]{0.3\textwidth}
+    \begin{subfigure}[t]{0.99\textwidth}
         \centering\includegraphics[height=8cm,width=1\textwidth,keepaspectratio]{convex_terr.png}
         \caption{Пример поля}
         \label{fig:convex_terr.png}
     \end{subfigure}
-    \hfill
-    \begin{subfigure}[t]{0.33\textwidth}
+    
+    \begin{subfigure}[t]{0.99\textwidth}
         \centering
         \begin{tikzpicture}
             % Include the image in a node
@@ -261,8 +264,8 @@
         \caption{Выпуклая оболочка}
         \label{fig:conv_convex.png}
     \end{subfigure}
-    \hfill
-    \begin{subfigure}[t]{0.30\textwidth}
+    
+    \begin{subfigure}[t]{0.99\textwidth}
         \centering\includegraphics[height=8cm,width=1\textwidth,keepaspectratio]{conv_concave.png}
         \caption{Вогнутая оболочка}
         \label{fig:conv_concave.png}
@@ -272,13 +275,14 @@
 \end{figure}
 
 \begin{figure}[H]
-    \begin{subfigure}[t]{0.49\textwidth}
-        \centering\includegraphics[height=8cm,width=1\textwidth,keepaspectratio]{pcd_hist.png}
+    \begin{subfigure}[t]{0.99\textwidth}
+        \centering\includegraphics[height=10cm,width=1\textwidth,keepaspectratio]{pcd_hist.png}
         \caption{Метрика C2C: гистограмма ошибок (абсолютное расстояние от точки до ближайшей реферальной точки)}
         \label{fig:metric_c2c}
     \end{subfigure}
-    \begin{subfigure}[t]{0.49\textwidth}
-        \centering\includegraphics[height=8cm,width=1\textwidth,keepaspectratio]{mesh_hist.png}
+
+    \begin{subfigure}[t]{0.99\textwidth}
+        \centering\includegraphics[height=10cm,width=1\textwidth,keepaspectratio]{mesh_hist.png}
         \caption{Метрика C2M: Гистограмма ошибок (относительное расстояние от точки до ближайшей реферальной точки)}
         \label{fig:metric_c2m}
     \end{subfigure}
@@ -288,13 +292,14 @@
 
 
 \begin{figure}[H]
-    \begin{subfigure}[t]{0.49\textwidth}
-        \centering\includegraphics[height=8cm,width=1\textwidth,keepaspectratio]{real_robot_mesh_video_preview.png}
+    \begin{subfigure}[t]{0.99\textwidth}
+        \centering\includegraphics[height=9cm,width=1\textwidth,keepaspectratio]{real_robot_mesh_video_preview.png}
         \caption{Робот проходит препятствие}
         \label{fig:real_robot_mesh_video_preview.png}
     \end{subfigure}
-    \begin{subfigure}[t]{0.49\textwidth}
-        \centering\includegraphics[height=8cm,width=1\textwidth,keepaspectratio]{real_mesh.jpg}
+
+    \begin{subfigure}[t]{0.99\textwidth}
+        \centering\includegraphics[height=9cm,width=1\textwidth,keepaspectratio]{real_mesh.jpg}
         \caption{Полученная полигональная сетка}
         \label{fig:real_mesh.jpg}
     \end{subfigure}
@@ -314,12 +319,12 @@
 Все это было достигнуто благодаря разборному экспериментальному столу и двухстепенному механизму, который ходит по окружности \pic{fig:s_shape_leg/s_leg_setup.JPG}. Для бесконечного движения по кругу при малых скоростях был применен следующий инженерный приём. Были соединены две ноги робота в одну. На рисунке ниже \pic{fig:s_shape_leg/leg_design.png} показаны как установлены сенсоры на получившейся ноге.
 
 \begin{figure}[H]
-    \begin{subfigure}[t]{0.49\textwidth}
+    \begin{subfigure}[t]{0.99\textwidth}
         \centering
         \begin{tikzpicture}
             % Include the image in a node
             \node [above right, inner sep=0] (image) at (0,0)
-            {\centering\includegraphics[height=8cm,width=1\textwidth,keepaspectratio]{s_shape_leg/s_leg_setup.JPG}};
+            {\centering\includegraphics[height=10cm,width=1\textwidth,keepaspectratio]{s_shape_leg/s_leg_setup.JPG}};
             % Create scope with normalized axes
             \begin{scope}[
                     x={($ 0.1*(image.south east)$)},
@@ -337,8 +342,9 @@
         \caption{Общий вид экспериментальной установки}
         \label{fig:s_shape_leg/s_leg_setup.JPG}
     \end{subfigure}
-    \begin{subfigure}[t]{0.49\textwidth}
-        \centering\includegraphics[height=8cm,width=1\textwidth,keepaspectratio]{s_shape_leg/leg_design.png}
+
+    \begin{subfigure}[t]{0.99\textwidth}
+        \centering\includegraphics[height=10cm,width=1\textwidth,keepaspectratio]{s_shape_leg/leg_design.png}
         \caption{Пояснение по расположению сенсоров на ноге робота}
         \label{fig:s_shape_leg/leg_design.png}
     \end{subfigure}
@@ -350,19 +356,20 @@
 Были взяты 3 сильно разных поверхности и изучены необработанные данные. Резина \pic{fig:s_shape_leg/s_leg_setup.JPG}  \quad \qrcode[height=1.5cm]{https://gifyu.com/image/SxatY} \quad, камень \pic{fig:s_shape_leg/view.jpg} \quad \qrcode[height=1.5cm]{https://gifyu.com/image/Sxatt}, земля \pic{fig:s_shape_leg/mould.jpg}.
 
 \begin{figure}[H]
-    \begin{subfigure}[t]{0.24\textwidth}
-        \centering\includegraphics[height=9cm,width=1\textwidth,keepaspectratio]{s_shape_leg/flat.jpg}
+    \begin{subfigure}[t]{0.99\textwidth}
+        \centering\includegraphics[height=7cm,width=1\textwidth,keepaspectratio]{s_shape_leg/flat.jpg}
         \caption{Резина}
         \label{fig:s_shape_leg/flat.jpg}
     \end{subfigure}
-    \hfill
-    \begin{subfigure}[t]{0.32\textwidth}
-        \centering\includegraphics[height=9cm,width=1\textwidth,keepaspectratio]{s_shape_leg/view.jpg}
+    
+    \begin{subfigure}[t]{0.99\textwidth}
+        \centering\includegraphics[height=7cm,width=1\textwidth,keepaspectratio]{s_shape_leg/view.jpg}
         \caption{Каменистая поверхность}
         \label{fig:s_shape_leg/view.jpg}
     \end{subfigure}
-    \begin{subfigure}[t]{0.42\textwidth}
-        \centering\includegraphics[height=9cm,width=1\textwidth,keepaspectratio]{s_shape_leg/mould.jpg}
+
+    \begin{subfigure}[t]{0.99\textwidth}
+        \centering\includegraphics[height=7cm,width=1\textwidth,keepaspectratio]{s_shape_leg/mould.jpg}
         \caption{Земля}
         \label{fig:s_shape_leg/mould.jpg}
     \end{subfigure}
@@ -370,7 +377,7 @@
 \end{figure}
 
 \begin{figure}[H]
-    \centering\includegraphics[height=8cm,width=1\textwidth,keepaspectratio]{s_shape_leg/avg_lin_vel_rev_min.png}
+    \centering\includegraphics[height=9cm,width=1\textwidth,keepaspectratio]{s_shape_leg/avg_lin_vel_rev_min.png}
     \caption{Средняя линейная скорость робота}
     \label{fig:s_shape_leg/avg_lin_vel_rev_min.png}
 \end{figure}
@@ -381,13 +388,13 @@
 
 
 \begin{figure}[H]
-    \begin{subfigure}[t]{0.9\textwidth}
-        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{s_shape_leg/segment8_compare_front.png}
+    \begin{subfigure}[t]{0.99\textwidth}
+        \centering\includegraphics[height=9cm,width=1\textwidth,keepaspectratio]{s_shape_leg/segment8_compare_front.png}
         \caption{Передняя часть ноги, 8ой сегмент}
     \end{subfigure}
 
-    \begin{subfigure}[t]{0.9\textwidth}
-        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{s_shape_leg/segment6_compare_front.png}
+    \begin{subfigure}[t]{0.99\textwidth}
+        \centering\includegraphics[height=9cm,width=1\textwidth,keepaspectratio]{s_shape_leg/segment6_compare_front.png}
         \caption{Передняя часть ноги, 6ой сегмент}
     \end{subfigure}
     \caption{Сравнение сырых данных после эксперимента с разных сегментов ноги}
