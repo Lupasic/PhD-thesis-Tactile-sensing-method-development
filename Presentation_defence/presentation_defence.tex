@@ -762,11 +762,6 @@
                         \begin{scope}[
                                 x={($ 0.1*(image.south east)$)},
                                 y={($ 0.1*(image.north west)$)}]
-                            % Grid and axes' labels
-                            % \draw[lightgray,step=1] (image.south west) grid (image.north east);
-                            % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
-                            % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
-                            % Labels
                             \draw[latex-, very thick,green] (4.3,2.3) -- (5,1.6)
                             node[rounded corners=3pt,below right,black,fill=white]{\tiny Исследуемый датчик};
 
@@ -1100,15 +1095,15 @@
             \resizebox{\linewidth}{!}{%
                 \begin{tabular}{|c|c|c|c|c|}
                     \cline{3-5}
-                    \multicolumn{1}{l}{}                           & \multicolumn{1}{l|}{} & \multicolumn{3}{c|}{\textbf{Predicted Class}}                                                                                           \\
+                    \multicolumn{1}{l}{}                           & \multicolumn{1}{l|}{} & \multicolumn{3}{c|}{\textbf{Предсказанный класс}}                                                                                           \\
                     \cline{3-5}
-                    \multicolumn{1}{l}{}                           &                       & Rubber                                        & Rock                                       & Ground                                     \\
+                    \multicolumn{1}{l}{}                           &                       & Резина                                        & Камень                                       & Земля                                    \\
                     \hline
-                    \multirow{3}{*}{\rotcell{\textbf{True class}}} & Rubber                & {\cellcolor[rgb]{0.741,0.843,0.929}}84.0\%    & 2.56\%                                     & 13.44\%                                    \\
+                    \multirow{3}{*}{{\textbf{Истин. класс}}} & Резина                & {\cellcolor[rgb]{0.741,0.843,0.929}}84.0\%    & 2.56\%                                     & 13.44\%                                    \\
                     \hhline{|~----|}
-                                                                   & Rock                  & 20.1\%                                        & {\cellcolor[rgb]{0.741,0.843,0.929}}67.8\% & 12.1\%                                     \\
+                                                                   & Камень                  & 20.1\%                                        & {\cellcolor[rgb]{0.741,0.843,0.929}}67.8\% & 12.1\%                                     \\
                     \hhline{|~----|}
-                                                                   & Ground                & 1.0\%                                         & 18.9\%                                     & {\cellcolor[rgb]{0.741,0.843,0.929}}80.1\% \\
+                                                                   & Земля                & 1.0\%                                         & 18.9\%                                     & {\cellcolor[rgb]{0.741,0.843,0.929}}80.1\% \\
                     \hline
                 \end{tabular}
             }
@@ -1117,22 +1112,6 @@
     \end{columns}
 \end{frame}
 
-% \begin{frame}[t]{Определение физических свойств поверхности}
-%     \framesubtitle{Итог}
-%     \large
-%     \begin{itemize}
-%         \item Возможность различать резиновую и каменистую поверхность.
-%         \item Выбраны параметры классификации рельефа для машинного обучения:
-%               \begin{itemize}
-%                 \large
-%                   \item Число оборотов в минуту
-%                   \item Крутящий момент двигателя
-%                   \item Ускорение от IMU
-%                   \item Данные о силе, которые представлены как значение датчика\/сегмент, пиковая амплитуда, средняя амплитуда
-%               \end{itemize}
-%         \item Velostat датчик силы доказал свою работоспособность.
-%     \end{itemize}
-% \end{frame}
 
 \begin{frame}[c]{}
     \framesubtitle{}
@@ -1389,10 +1368,10 @@
                     % Labels
                     \draw[stealth-, very thick,green] (3,8) -- (2,8.5);
                     \draw[stealth-, very thick,green] (1,5.5) -- (2,8.5)
-                    node[rounded corners=3pt,above,black,fill=white]{\tiny Ground Truth Point Cloud};
+                    node[rounded corners=3pt,above,black,fill=white]{\tiny Эталонное Облако};
 
                     \draw[stealth-, very thick,green] (5.5,3) -- (5.5,8.5)
-                    node[rounded corners=3pt,above,black,fill=white]{\tiny Generated Point Cloud};
+                    node[rounded corners=3pt,above,black,fill=white]{\tiny Сгенерированное Облако};
                 \end{scope}
             \end{tikzpicture}
             % \caption*{Наложенные облака точек}

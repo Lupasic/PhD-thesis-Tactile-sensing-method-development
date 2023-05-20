@@ -202,10 +202,10 @@
                         y={($ 0.1*(image.north west)$)}]
                     \draw[stealth-, very thick,green] (3,8) -- (2,8.5);
                     \draw[stealth-, very thick,green] (1,5.5) -- (2,8.5)
-                    node[rounded corners=3pt,above,black,fill=white]{\tiny Ground Truth Point Cloud};
+                    node[rounded corners=3pt,above,black,fill=white]{\tiny Эталонное облако};
 
                     \draw[stealth-, very thick,green] (5.5,3) -- (5.5,8.5)
-                    node[rounded corners=3pt,above,black,fill=white]{\tiny Generated Point Cloud};
+                    node[rounded corners=3pt,above,black,fill=white]{\tiny Сгенерированное облако};
                 \end{scope}
             \end{tikzpicture}
             \caption{Наложенные облака точек}
@@ -249,17 +249,20 @@
             {\centering\includegraphics[height=8cm,width=1\textwidth,keepaspectratio]{conv_convex.png}};
             % Create scope with normalized axes
             \begin{scope}[
-                    x={($ 0.1*(image.south east)$)},
-                    y={($ 0.1*(image.north west)$)}]
-                \draw[stealth-, very thick,green] (5.2,3.5) -- ++(1,-1)
-                node[rounded corners=3pt,right,black,fill=white]{\tiny Generated mesh};
+                x={($ 0.1*(image.south east)$)},
+                y={($ 0.1*(image.north west)$)}]
+            % Labels
+            \draw[stealth-, very thick,green] (5.2,3.5) -- ++(0,-1)
+            node[rounded corners=3pt,right,black,fill=white]{\tiny Полученная сетка};
 
-                \draw[stealth-, very thick,green] (5.5,5.5) -- (7.4,4)
-                node[rounded corners=3pt,right,black,fill=white]{\tiny Lidar data};
-                \draw[stealth-, very thick,green] (3.4,0.8) -- (5,1);
-                \draw[stealth-, very thick,green] (3.4,2.6) -- (5,1)
-                node[rounded corners=3pt,right,black,fill=white]{\tiny Cloud of contact points};
-            \end{scope}
+            \draw[stealth-, very thick,green] (5.5,5.5) -- (6.4,4)
+            node[rounded corners=3pt,right,black,fill=white]{\tiny Данные лидара};
+
+
+            \draw[stealth-, very thick,green] (3.4,0.8) -- (5,1);
+            \draw[stealth-, very thick,green] (3.4,2.6) -- (5,1)
+            node[rounded corners=3pt,right,black,fill=white]{\tiny Следовая дорожка};
+        \end{scope}
         \end{tikzpicture}
         \caption{Выпуклая оболочка}
         \label{fig:conv_convex.png}
@@ -319,41 +322,49 @@
 Все это было достигнуто благодаря разборному экспериментальному столу и двухстепенному механизму, который ходит по окружности \pic{fig:s_shape_leg/s_leg_setup.JPG}. Для бесконечного движения по кругу при малых скоростях был применен следующий инженерный приём. Были соединены две ноги робота в одну. На рисунке ниже \pic{fig:s_shape_leg/leg_design.png} показаны как установлены сенсоры на получившейся ноге.
 
 \begin{figure}[H]
-    \begin{subfigure}[t]{0.99\textwidth}
-        \centering
-        \begin{tikzpicture}
-            % Include the image in a node
-            \node [above right, inner sep=0] (image) at (0,0)
-            {\centering\includegraphics[height=10cm,width=1\textwidth,keepaspectratio]{s_shape_leg/s_leg_setup.JPG}};
-            % Create scope with normalized axes
-            \begin{scope}[
-                    x={($ 0.1*(image.south east)$)},
-                    y={($ 0.1*(image.north west)$)}]
-                \draw[stealth-, very thick,green] (3.5,2.5) -- (3,1.5)
-                node[rounded corners=3pt,below,black,fill=white]{\tiny Table for surfaces};
+    \centering
+    \begin{tikzpicture}
+        % Include the image in a node
+        \node [above right, inner sep=0] (image) at (0,0)
+        {\centering\includegraphics[height=10cm,width=1\textwidth,keepaspectratio]{s_shape_leg/s_leg_setup.JPG}};
+        % Create scope with normalized axes
+        \begin{scope}[
+            x={($ 0.1*(image.south east)$)},
+            y={($ 0.1*(image.north west)$)}]
+        \draw[stealth-, very thick,green] (3.5,2.5) -- (3,1.5)
+        node[rounded corners=3pt,below,black,fill=white]{\tiny Стол для поверхностей};
 
-                \draw[stealth-, very thick,green] (7.1,5.4) -- (7.4,7)
-                node[rounded corners=3pt,above right,black,fill=white]{\tiny Self-made PCB};
+        \draw[stealth-, very thick,green] (7.1,5.4) -- (7.4,7)
+        node[rounded corners=3pt,above right,black,fill=white]{\tiny Контроллер};
 
-                \draw[very thick,green] (6,6.1) rectangle (8.5,3.5)
-                node[above left,black,fill=green]{\tiny S leg};
-            \end{scope}
-        \end{tikzpicture}
-        \caption{Общий вид экспериментальной установки}
-        \label{fig:s_shape_leg/s_leg_setup.JPG}
-    \end{subfigure}
-
-    \begin{subfigure}[t]{0.99\textwidth}
-        \centering\includegraphics[height=10cm,width=1\textwidth,keepaspectratio]{s_shape_leg/leg_design.png}
-        \caption{Пояснение по расположению сенсоров на ноге робота}
-        \label{fig:s_shape_leg/leg_design.png}
-    \end{subfigure}
-    \caption{Экспериментальная установка для определения типа поверхности}
+        \draw[very thick,green] (6,6.1) rectangle (8.5,3.5)
+        node[above left,black,fill=green]{\tiny S leg};
+    \end{scope}
+    \end{tikzpicture}
+    \caption{Общий вид экспериментальной установки}
+    \label{fig:s_shape_leg/s_leg_setup.JPG}
 \end{figure}
 
+\begin{figure}[H]
+        \centering\includegraphics[height=9cm,width=1\textwidth,keepaspectratio]{s_shape_leg/socks.jpg}
+        \caption{Расположение сенсоров на ноге робота}
+        \label{fig:s_shape_leg/socks.jpg}
+\end{figure}
 
+\begin{figure}
+        \centering\includegraphics[height=12cm,width=1\textwidth,keepaspectratio]{s_shape_leg/leg_design.png}
+        \caption{Схематическое расположение сенсоров на ноге установки}
+        \label{fig:s_shape_leg/leg_design.png}
+\end{figure}
 
 Были взяты 3 сильно разных поверхности и изучены необработанные данные. Резина \pic{fig:s_shape_leg/s_leg_setup.JPG}  \quad \qrcode[height=1.5cm]{https://gifyu.com/image/SxatY} \quad, камень \pic{fig:s_shape_leg/view.jpg} \quad \qrcode[height=1.5cm]{https://gifyu.com/image/Sxatt}, земля \pic{fig:s_shape_leg/mould.jpg}.
+
+\begin{figure}[H]
+    \centering\includegraphics[height=9cm,width=1\textwidth,keepaspectratio]{s_shape_leg/avg_lin_vel_rev_min.png}
+    \caption{Средняя линейная скорость робота}
+    \label{fig:s_shape_leg/avg_lin_vel_rev_min.png}
+\end{figure}
+
 
 \begin{figure}[H]
     \begin{subfigure}[t]{0.99\textwidth}
@@ -376,18 +387,20 @@
     \caption{Типы определяемых поверхностей}
 \end{figure}
 
-\begin{figure}[H]
-    \centering\includegraphics[height=9cm,width=1\textwidth,keepaspectratio]{s_shape_leg/avg_lin_vel_rev_min.png}
-    \caption{Средняя линейная скорость робота}
-    \label{fig:s_shape_leg/avg_lin_vel_rev_min.png}
-\end{figure}
+
 
 Были проведены замеры средней линейной скорости движения ноги на разных поверхностях при различных угловых скоростях \pic{fig:s_shape_leg/avg_lin_vel_rev_min.png}. Возможно заметить нелинейную зависимость, что так же может указывать косвенно на тип поверхности.
 
 Ниже \pic{fig:data_from_legs} представлены необработанные данные с лапок робота. Сырые данные легко различить, но можно заметить, что абсолютные значения у разных сегментов различно. Поэтому при обучении необходимо их нормализовать.
 
-
 \begin{figure}[H]
+    \centering\includegraphics[height=8cm,width=1\textwidth,keepaspectratio]{s_shape_leg/TaxelIndForce.png}
+    \caption{Запись активных такселей на разных поверхностях}
+    \label{fig:s_shape_leg/TaxelIndForce_full.png}
+\end{figure}
+
+
+\begin{figure}[ht!]
     \begin{subfigure}[t]{0.99\textwidth}
         \centering\includegraphics[height=9cm,width=1\textwidth,keepaspectratio]{s_shape_leg/segment8_compare_front.png}
         \caption{Передняя часть ноги, 8ой сегмент}
@@ -403,11 +416,7 @@
 
 
 
-\begin{figure}[H]
-    \centering\includegraphics[height=8cm,width=1\textwidth,keepaspectratio]{s_shape_leg/TaxelIndForce.png}
-    \caption{Запись активных такселей на разных поверхностях}
-    \label{fig:s_shape_leg/TaxelIndForce_full.png}
-\end{figure}
+
 
 На рисунке выше \pic{fig:s_shape_leg/TaxelIndForce_full.png} представлены запись касания ногой на разных поверхностях. Можно заметить пиковую нагрузку на пятом такселе, на который приходится самый большой вес. На земле, по причине гранулированности поверхности, нагрузка более распределена. Это так же является хорошим критерием для определения типа поверхности
 
