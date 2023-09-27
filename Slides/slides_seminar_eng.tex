@@ -1,0 +1,1425 @@
+% \documentclass[aspectratio=169,notes]{beamer}
+\documentclass[aspectratio=169,xcolor=table]{beamer}
+\usetheme[faculty=phil]{fibeamer}
+\usepackage{polyglossia}
+\setmainlanguage{english} %% main locale instead of `english`, you
+%% can typeset the presentation in either Czech or Slovak,
+%% respectively.
+\setotherlanguages{russian} %% The additional keys allow
+%%
+%%   \begin{otherlanguage}{czech}   ... \end{otherlanguage}
+%%   \begin{otherlanguage}{slovak}  ... \end{otherlanguage}
+%%
+%% These macros specify information about the presentation
+\title[PhD Thesis]{Tactile perception method development for a mobile \\ walking~robot} %% that will be typeset on the
+\subtitle{Student: Oleg Bulichev \\ Supervisor: Alexander Maloletov \\ \ } %% title page.
+\author{Oleg Bulichev}
+%% These additional packages are used within the document:
+\usepackage{ragged2e}  % `\justifying` text
+\usepackage{booktabs}  % Tables
+\usepackage{tabularx}
+\usepackage{tikz}      % Diagrams
+\usetikzlibrary{calc, shapes, backgrounds}
+\usepackage{amsmath, amssymb}
+\usepackage{url}       % `\url`s
+\usepackage{listings}  % Code listings
+\usepackage{floatrow}
+\usepackage{mathtools}
+\usepackage{todonotes}
+\usepackage{fontspec}
+\usepackage{multicol}
+\usepackage{pdfpages}
+\usepackage{wrapfig}
+\usepackage{animate}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{multimedia}
+\usepackage{makecell}
+
+\usepackage[font={large}, labelfont=it,textfont={it},justification=centering, skip=2pt]{caption}
+% will apply to all subcaptions
+\usepackage[font={large},skip=2pt]{subcaption}
+
+\graphicspath{{../images/}}
+\frenchspacing
+
+
+\usetikzlibrary{decorations.pathreplacing,calligraphy,calc,graphs}
+
+\setbeamertemplate{caption}[numbered]
+
+% \usepackage[backend=biber,style=ieee,autocite=footnote]{biblatex}
+% \addbibresource{biblio.bib}
+% \DefineBibliographyStrings{english}{%
+%   bibliography = {References},}
+
+\newcommand{\oleg}[2][] {\todo[color=red, #1] {OLEG:\\ #2}}
+\newcommand{\fbckg}[1]{\usebackgroundtemplate{\includegraphics[width=\paperwidth]{#1}}}%frame background
+
+\usepackage[framemethod=TikZ]{mdframed}
+\newcommand{\dbox}[1]{
+\begin{mdframed}[roundcorner=3pt, backgroundcolor=yellow, linewidth=0]
+\vspace{1mm}
+{#1}
+\vspace{1mm}
+\end{mdframed}
+}
+
+\begin{document}
+\setlength{\abovedisplayskip}{0pt}
+\setlength{\belowdisplayskip}{0pt}
+\setlength{\abovedisplayshortskip}{0pt}
+\setlength{\belowdisplayshortskip}{0pt}
+
+\fbckg{fibeamer/figs/title_page.png}
+\frame[c]{\setcounter{framenumber}{0}
+    \usebeamerfont{title}%
+    \usebeamercolor[fg]{title}%
+    \begin{minipage}[b][7.5\baselineskip][b]{\textwidth}%
+        \textcolor{black}{\raggedright\inserttitle}
+    \end{minipage}
+    % \vskip-1.5\baselineskip
+
+    \usebeamerfont{subtitle}%
+    \usebeamercolor[fg]{framesubtitle}%
+    \begin{minipage}[b][3\baselineskip][b]{\textwidth}
+        \raggedright%
+        \insertsubtitle%
+    \end{minipage}
+    \vskip.25\baselineskip
+}
+%   \frame[c]{\maketitle}
+
+\fbckg{fibeamer/figs/common.png}
+
+\begin{frame}[t]{Motivation: Why do we need to explore caves by robots}
+    % \framesubtitle{Cave dangerous obstacles}
+    \vspace{-0.85cm}
+    \begin{figure}[H]
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{surface_types/salt.jpg}\\
+            \caption*{Salt}
+            \label{fig:surface_types/salt}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{surface_types/siphon.png}\\
+            \caption*{Siphon}
+            \label{fig:surface_types/siphon}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{surface_types/ice.png}\\
+            \caption*{Glacier cave}
+            \label{fig:surface_types/ice}
+        \end{subfigure}
+
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering
+            \begin{tikzpicture}
+                % Include the image in a node
+                \node [above right, inner sep=0] (image) at (0,0)
+                {\centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{surface_types/clay.jpg}};
+                % Create scope with normalized axes
+                \begin{scope}[
+                        x={($ 0.1*(image.south east)$)},
+                        y={($ 0.1*(image.north west)$)}]
+                    % Grid and axes' labels
+                    % \draw[lightgray,step=1] (image.south west) grid (image.north east);
+                    % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
+                    % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
+                    % Labels
+                    \draw[stealth-, very thick,green] (6,8) -- ++(1,1)
+                    node[rounded corners=3pt,right,black,fill=white]{\tiny Human};
+                \end{scope}
+            \end{tikzpicture}
+            \caption*{Clay}
+            \label{fig:surface_types/clay.jpg}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering
+            \begin{tikzpicture}
+                % Include the image in a node
+                \node [above right, inner sep=0] (image) at (0,0)
+                {\centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{surface_types/splash.png}};
+                % Create scope with normalized axes
+                \begin{scope}[
+                        x={($ 0.1*(image.south east)$)},
+                        y={($ 0.1*(image.north west)$)}]
+                    % Grid and axes' labels
+                    % \draw[lightgray,step=1] (image.south west) grid (image.north east);
+                    % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
+                    % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
+
+                    % Labels
+                    \draw[stealth-, very thick,green] (5,2) -- ++(-2,+1)
+                    node[rounded corners=3pt,left,black,fill=white]{\tiny Puddle};
+                \end{scope}
+            \end{tikzpicture}
+            \caption*{Puddle}
+            \label{fig:surface_types/splash.png}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{surface_types/moss.jpg}\\
+            \caption*{Moss}
+            \label{fig:surface_types/moss}
+        \end{subfigure}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Motivation: Unsolvable problem for cameras and lidars}
+    \framesubtitle{Question: how to make a map when you have a puddle above a surface?}
+    \vspace{-1cm}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.55\textwidth}
+
+
+            \begin{figure}[H]
+                \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{terrain_wo_water.png}
+                \caption*{Terrain without water}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.44\textwidth}
+            \begin{figure}[H]
+                \begin{subfigure}[b]{0.9\textwidth}
+                    \centering
+                    \begin{tikzpicture}
+                        % Include the image in a node
+                        \node [above right, inner sep=0] (image) at (0,0)
+                        {\centering\includegraphics[height=3.5cm,width=1\textwidth,keepaspectratio]{terrain_w_water1.png}};
+                        % Create scope with normalized axes
+                        \begin{scope}[
+                                x={($ 0.1*(image.south east)$)},
+                                y={($ 0.1*(image.north west)$)}]
+                            % Grid and axes' labels
+                            % \draw[lightgray,step=1] (image.south west) grid (image.north east);
+                            % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
+                            % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
+                            % Labels
+                            \draw[stealth-, very thick,green] (6,8) -- ++(2,1)
+                            node[rounded corners=3pt,right,black,fill=white]{\tiny Water};
+
+                            \draw[stealth-, very thick,green] (0.5,5.5) -- (3,2);
+                            \draw[stealth-, very thick,green] (2.5,4.2) -- (3,2);
+                            \draw[stealth-, very thick,green] (4.5,4) -- (3,2)
+                            node[rounded corners=3pt,below,black,fill=white]{\tiny Lidar data};
+                        \end{scope}
+                    \end{tikzpicture}
+                    % \caption*{}
+                    \label{fig:terrain_w_water1.png}
+                \end{subfigure}
+                \vspace{-0.5cm}
+
+                \begin{subfigure}{0.8\textwidth}
+                    \centering\includegraphics[height=2cm,width=1\textwidth,keepaspectratio]{terrain_w_water_camera.png}
+                    \caption*{Camera view}
+                \end{subfigure}
+            \end{figure}
+        \end{column}
+    \end{columns}
+
+\end{frame}
+
+% \begin{frame}[t]{Problem statement}
+%     \framesubtitle{}
+%     \begin{columns}[T,onlytextwidth]
+%         \begin{column}{0.45\textwidth}
+%             \begin{block}{Problem 1}
+%                 How to obtain a useful information about terrain, \textbf{when we have a SLAM based on lidars, cameras}?
+%                 \vspace{5pt}
+
+%                 \uncover<2->{\alert{\large Obtain map and type of terrain}}
+%             \end{block}
+%         \end{column}
+%         \begin{column}{0.45\textwidth}
+%             \begin{block}{Problem 2}
+%                 How to obtain a useful information about terrain,\textbf{ when main navigation system died}?
+%                 \vspace{5pt}
+
+%                 \uncover<2->{\alert{\large Problem 1 + localization}}
+%             \end{block}
+%         \end{column}
+%     \end{columns}
+% \end{frame}
+
+\begin{frame}[t]{Problem statement}
+    \framesubtitle{}
+    \begin{block}{Problem 1}
+        \large
+        How to obtain a \underline{useful information} on terrain, \textbf{when we have a SLAM based on lidars, cameras}?
+        \vspace{5pt}
+
+        \uncover<2->{\alert{\large Obtain map and terrain type}}
+    \end{block}
+\end{frame}
+
+\begin{frame}[t]{Proposed solutions}
+    \framesubtitle{}
+    \begin{exampleblock}{Problem 1}
+        \large
+        \textit{Map can be built} \textbf{using tactile sensors} on each leg of the robot and create a \textbf{dense point cloud} using sampling from generated mesh from \textbf{modified 2D Delaunay triangulation}.
+        \vspace{5pt}
+
+        \textit{Terrain type} can be obtained solving \textbf{terrain classification} problem using \textbf{machine learning}.
+    \end{exampleblock}
+\end{frame}
+
+% \begin{frame}[t]{Proposed solutions}
+%     \framesubtitle{}
+%     \begin{columns}[T,onlytextwidth]
+%         \begin{column}{0.45\textwidth}
+%             \begin{exampleblock}{Problem 1}
+%                 \textit{Map can be built} \textbf{using tactile sensors} on each leg of the robot and create a \textbf{dense point cloud} using sampling from generated mesh using \textbf{modified Delaunay triangulation}.
+%                 \vspace{5pt}
+
+%                 \textit{Terrain type} can be obtained solving \textbf{terrain classification} problem using \textbf{machine learning}.
+%             \end{exampleblock}
+%         \end{column}
+%         \begin{column}{0.45\textwidth}
+%             \begin{exampleblock}{Problem 2}
+%                 \textit{Localization problem} can be solved by \textbf{fused data} from net of \textbf{beacons} plus \textbf{several IMU} on board and knowing a \textbf{kinematics} of the system.
+%             \end{exampleblock}
+%         \end{column}
+%     \end{columns}
+% \end{frame}
+
+
+
+\begin{frame}[t]{Literature review}
+    \framesubtitle{}
+    \vspace{-0.3cm}
+    \large
+    Consider issues:
+    \vspace{-0.1cm}
+    \begin{itemize}
+        \item Cave environment: obstacles, dimensions.
+        \item Robots for cave exploration: from zeppelins, to quadruped robots.
+        \item Methods for map creation: using classical and haptic. Based on cameras, lidars, tactile sensors, etc.
+    \end{itemize}
+    \vspace{-0.2cm}
+
+    \begin{block}{Existing problems}
+        \begin{itemize}
+            \item Robotics systems for exploring loose caves
+            \item Object mesh creation using tactile sensor installed on manipulator
+            \item Map creation using lidars and cameras
+        \end{itemize}
+    \end{block}
+    \vspace{-0.2cm}
+
+    \only<2>{\centering\alert{New problem is proposed}}
+\end{frame}
+
+\begin{frame}[t]{Robot design}
+    \framesubtitle{Requirements}
+    \large
+    \textbf{Problem} --  choose robot mover type. This robot should:
+    \begin{itemize}
+        \item should have \textit{small dimensions} to sneak through holes
+        \item have enough \textit{off-road passability} to pass a granular terrain
+        \item should \textit{traverse through small water obstacles}
+        \item can \textit{climb on big stones}
+    \end{itemize}
+    \uncover<2->{\large\centering\alert{Cycling robot with 1 DoF leg}}
+\end{frame}
+
+\begin{frame}[t]{Robot design}
+    \framesubtitle{Structural synthesis problem}
+    \only<1-2>{\large\begin{block}{Question}
+            What the optimal number of legs should be in such robot mover?
+        \end{block}}
+    \only<2>{\large\begin{alertblock}{Answer}
+            \centering Robot should have \textbf{8-14 legs} in total!
+        \end{alertblock}}
+\end{frame}
+
+\begin{frame}[c]{Robot design}
+    \framesubtitle{Technological stack}
+    \vspace{-0.9cm}
+    \begin{figure}[H]
+        \begin{subfigure}[t]{0.32\textwidth}
+            \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{c1_paper.png}
+            \caption*{\small Generating terrain approach \\ (Robot traverse an \textbf{artificial terrain} based on \textbf{generating parameters})}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[t]{0.32\textwidth}
+            \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{gazebo_logo.png}
+            \caption*{Robot simulator}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[t]{0.32\textwidth}
+            \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{gen_algo.jpg}
+            \caption*{Genetic algorithm \\ (OpenAI-ES)}
+        \end{subfigure}
+        \hfill
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Robot design}
+    \framesubtitle{Assumptions}
+    \large
+    \begin{itemize}
+        \item Generated terrain family with the same constants has the same complexity. 
+        \\ 
+        Parameters:
+              \begin{itemize}
+                \large
+                  \item Cell width and length
+                  \item Cell height range
+                  \item Distribution parameter
+              \end{itemize}
+              % \item We can generate 
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Robot design}
+    \framesubtitle{Proposed solution}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.49\textwidth}
+            \begin{figure}[H]
+                \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{optimization_idea.png}
+                \caption*{\textbf{Idea}: Minimize number of legs without losing off-road passability}
+                \label{fig{optimization_idea.png}}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.49\textwidth}
+            \vspace{-2cm}
+            \begin{figure}[H]
+                \centering
+                \begin{tikzpicture}
+                    % Include the image in a node
+                    \node [above right, inner sep=0] (image) at (0,0)
+                    {\centering\includegraphics[height=2.5cm,width=1\textwidth,keepaspectratio]{best_gen_robot.jpg}};
+                    % Create scope with normalized axes
+                    \begin{scope}[
+                            x={($ 0.1*(image.south east)$)},
+                            y={($ 0.1*(image.north west)$)}]
+                        % Grid and axes' labels
+                        % \draw[lightgray,step=1] (image.south west) grid (image.north east);
+                        % \draw[lightgray,step=0.5] (image.south west) grid (image.north east);
+                        % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
+                        % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
+
+                        % Labels
+                        \draw [green, very thick,
+                            decorate,
+                            decoration = {brace,
+                                    raise=5pt,
+                                    amplitude=5pt,
+                                    aspect=0.5}] (1.4,3.6) --  (8.1,6.8)
+                        node[rounded corners=3pt, pos=0.5,above left =14pt,black,fill=white]{\tiny $(\gamma - 1) h_{\text{leg}}sin(\alpha)$};
+
+                        \draw[stealth-, very thick,green] (9.5,7.8) -- (7.8,1.94);
+                        \draw[stealth-, very thick,green] (1.5,2.8) -- (7,1)
+                        node[rounded corners=3pt,right,black,fill=white]{\tiny $\gamma = 6$};
+
+                        \draw[thin,green] (6.7,4) -- (5.75,9);
+                        \draw[thin,green] (4.85,3.5) -- (5.75,9);
+                        \draw[thin,green,stealth-stealth] (6.32,6) arc (-79.2:-99.2:3) node [rounded corners=3pt,below = 2pt,black,fill=white, midway] {\tiny $\alpha$};
+                        % \draw[very thick,green] (8,6) -- (5,8);
+                        % \draw[very thick,green] (0.5,2.5) rectangle (4.2,9)
+                        % node[below left,black,fill=green]{\small test};
+                    \end{scope}
+                \end{tikzpicture}
+                % \caption*{}
+                \label{fig:best_gen_robot.jpg}
+            \end{figure}
+            \vspace{-1cm}
+            {\footnotesize
+                \begin{eqnarray*}
+                    % \resizebox{0.9\hsize}{!}{
+                    F \rightarrow max = \beta \left( {\omega}_{1} \cdot \overbrace{\delta}^{\text{Distance}} + {\omega}_{2} \cdot \overbrace{\frac{1}{(\gamma - 1) h_{\text{leg}}sin(\alpha)}}^{\text{Simplified body length}}\right) +\\ \nonumber + (1 - \beta) {\delta}^{{\omega}_{1}} {\left( \frac{1}{(\gamma - 1)h_{\text{leg}}sin(\alpha)}\right)}^{{\omega}_{2}}
+                    % }
+                \end{eqnarray*}
+            }
+            % \vspace{1pt}
+
+            $\beta$ is adaptive parameter, \\ ${\omega}_{1,2} \in  [ 0..1 ] $ are the weight coefficients.
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[t]{Robot design}
+    \framesubtitle{Video: The story of one generated robot}
+    \vspace{-0.6cm}
+    \begin{figure}[H]
+        % \href{run:./videos/pass_rand_terr.mp4}{
+        \href{https://youtu.be/DcovvkTZgsg}{
+            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{genetic_video_preview.jpg}}
+        % \caption{Click on a picture for a video}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Robot design}
+    \framesubtitle{Particular results: $\omega_1 = 0.6$, $\omega_2 = 0.4$}
+    \vspace{-0.6cm}
+
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{c|c|c|c|c}
+         & \textbf{\begin{tabular}[c]{@{}c@{}}Terrain\\ types\end{tabular}} & \textbf{No. Legs} & \textbf{\begin{tabular}[c]{@{}c@{}}Angle b/w\\ neighbor legs\end{tabular}} & \textbf{No. individuals} \\
+         \hline
+         \rule{0cm}{0.5cm}
+        \textbf{Phase 1} &  & \cellcolor[HTML]{DAE8FC}12 & 73 & 200 \\ \cline{1-1} \cline{3-5} 
+         & \multirow{-2}{*}{\begin{minipage}{2.5cm}\includegraphics[height=3cm,width=2.5cm,keepaspectratio]{terrain_1.jpg}\end{minipage}} & \cellcolor[HTML]{DAE8FC}12 & 72 &  \\ [0.5cm] \cline{3-4} 
+         & \begin{minipage}{2.5cm}\includegraphics[height=3cm,width=2.5cm,keepaspectratio]{terrain_2.jpg}\end{minipage} & \cellcolor[HTML]{DAE8FC}10 & 68 &  \\ [0.5cm] \cline{3-4}
+        \multirow{-3}{*}{\textbf{Phase 2}} & \begin{minipage}{2.5cm}\includegraphics[height=3cm,width=2.5cm,keepaspectratio]{terrain_3.jpg}\end{minipage} & \cellcolor[HTML]{DAE8FC}12 & 77 & \multirow{-3}{*}{55}
+        \end{tabular}
+        % \caption*{\large\centering\textbf{Summary}: created robot should have 10-12 legs in total}
+        \end{table}
+
+\end{frame}
+
+\begin{frame}[t]{Robot design}
+    \framesubtitle{Global results}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.49\textwidth}
+            Based on fitness function the number of legs range starts from 8 till 14 for different $\omega$ values. 
+            
+            It can be explained by static stability criteria. In such case 4 legs will touch the ground.    
+        \end{column}
+        \begin{column}{0.49\textwidth}
+            \vspace{-1.8cm}
+            \begin{figure}[H]
+                \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{box_plot_structural_synthesis.png}
+                \caption*{Correlation between amount of legs and passed distance by best robot individuals from several experiments}
+                \label{fig:box_plot_structural_synthesis.png}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[t]{Robot design}
+    \framesubtitle{Increasing maneuverablity}
+    \only<1-2>{\large\begin{block}{Question}
+            1. Long robot can stuck in a cave hole, while rotating. How to avoid it?
+
+            2. How to climb on big stones?
+        \end{block}}
+    \only<2>{\large\begin{alertblock}{Answer}
+            \centering 1. Add an ability to sidestep without changing orientation.
+
+            2. Make a segmented body.
+        \end{alertblock}}
+\end{frame}
+
+\begin{frame}[t]{Robot design}
+    \framesubtitle{Video}
+    \vspace{-0.6cm}
+    \begin{figure}[H]
+        % \href{run:./videos/sidestep_segments.mp4}{
+        \href{https://youtu.be/EQ6oGZVDpoc}{
+            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{sidestep_segment_video_preview.png}}
+        % \caption{Click on a picture for a video}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Robot design}
+    \framesubtitle{Proposed solution}
+    \vspace{-0.8cm}
+    \begin{figure}[H]
+        \centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{omni_rot.png}
+        \caption*{Vector representation of forces in  the conventional and omni-direction states}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Robot design}
+    \framesubtitle{StriRus prototypes (1)}
+    \vspace{-0.7cm}
+\begin{table}[H]
+    \arrayrulecolor[HTML]{C0C0C0}
+    \begin{tiny}
+    \begin{tabular}{>{\bfseries}p{1.3 cm}|>{\centering}p{3.5cm}|>{\centering}p{3.5cm}|>{\centering \arraybackslash}p{3.5cm}}
+    \multicolumn{1}{p{1.3 cm}}{}  & \multicolumn{1}{p{3.5cm}}{\includegraphics[height=3cm,width=3.5cm,keepaspectratio]{strirus_0.png}}  &  \multicolumn{1}{p{3.5cm}}{\includegraphics[height=3cm,width=3.5cm,keepaspectratio]{strirus_1.png}} & \multicolumn{1}{p{3.5cm}}{\includegraphics[height=3cm,width=3.5cm,keepaspectratio]{strirus_2.jpg}} \\
+     Generation & 1  & 2 &  3 \\
+     \hline
+     \rowcolor[HTML]{EFEFEF} 
+     No. legs & 54 & 12 & 12 \\ 
+     No. segments & 1 & 2 & 2 \\
+     \rowcolor[HTML]{EFEFEF} 
+     Connect. joint & --- & Pitch & Pitch, Yaw \\
+    \makecell[l]{Rel. body-leg \\ angle, deg} & 0 & 0--45 & 0, 15, 30, 45 \\
+    \rowcolor[HTML]{EFEFEF} 
+     Leg height, mm & 54 & 60 & 60 \\
+     Features & Wave propelled robot & Continuous mechanism & 2 DoF connection joint mech. \\
+    \rowcolor[HTML]{EFEFEF} 
+     Withdraws &  \makecell[l]{-- Cannot install force sensors \\ -- high friction} & \makecell[l]{ -- Too complicated changing relaltive \\  angle mechanism} & \makecell[l]{ -- Small legs \\ -- Useless 2nd DoF in connection joint} \\
+    \end{tabular}
+    \end{tiny}
+    \end{table}
+
+\end{frame}
+
+\begin{frame}[t]{Robot design}
+    \framesubtitle{StriRus prototypes (2)}
+    \vspace{-0.7cm}
+    \begin{table}[H]
+        \arrayrulecolor[HTML]{C0C0C0}
+        \begin{tiny}
+        \begin{tabular}{>{\bfseries}p{1.3 cm}|>{\centering}p{3.5cm}|>{\centering \arraybackslash}p{3.5cm}}
+        \multicolumn{1}{p{1.3 cm}}{}  & \multicolumn{1}{p{3.5cm}}{\includegraphics[height=3cm,width=3.5cm,keepaspectratio]{strirus_3.JPG}}  &  \multicolumn{1}{p{3.5cm}}{\includegraphics[height=3cm,width=3.5cm,keepaspectratio]{strirus_4.png}} \\
+         Generation & 3+  & 4 \\
+         \hline
+         \rowcolor[HTML]{EFEFEF} 
+         No. legs & 6 & 10 \\ 
+         No. segments & 1 & 2 \\
+         \rowcolor[HTML]{EFEFEF} 
+         Connect. joint & --- & Pitch \\
+        \makecell[l]{Rel. body-leg \\ angle, deg} & 0 & 0, 15 \\
+        \rowcolor[HTML]{EFEFEF} 
+         Leg height, mm & 90 & 180 \\
+         Features & Larger legs & Largest legs \\
+        \rowcolor[HTML]{EFEFEF} 
+         Withdraws &  \makecell[l]{-- Still small legs \\ -- 1 segment} & \makecell[l]{ -- } \\
+        \end{tabular}
+        \end{tiny}
+        \end{table}
+\end{frame}
+
+\begin{frame}[t]{Force transducer design}
+    \framesubtitle{}
+    \only<1-2>{\large\begin{block}{Question}
+            How to receive a reaction force from the ground?
+        \end{block}}
+    \only<2>{\large\begin{alertblock}{Answer}
+        \vspace{-0.2cm}
+
+         \begin{itemize}
+            \color{lightgray}
+            \item Current/voltage measurements from motors
+                \item Installing torque sensor on a shaft
+                \item {\color{black} Installing a force sensor on each leg}
+            \end{itemize}
+        \end{alertblock}}
+\end{frame}
+
+\begin{frame}[t]{Force transducer design}
+    \framesubtitle{Force sensor types}
+    \vspace{-20pt}
+    \begin{multicols}{2}
+        \begin{itemize}
+            \alt<1>{}{\color{lightgray}}
+            \item  \textbf{F/T sensors}: too massive and expensive for small robots
+            \item \textbf{Optical}: too thick
+            \item \textbf{Magnetic}: too thick
+            \item \textbf{Capacitive}: expensive, but the best in terms of requirements
+            \item {\color{black}\textbf{Piezoresistive sensors
+                      based on \alt<1>{conductive inks or polymers}{\underline{Velostat}}}: inexpensive and robust, but has problems with hysteresis}
+
+            \item { \alt<1>{}{\color{lightgray}} \textbf{Stain gages}: temperature and humidity drasticaly influence on the results}
+        \end{itemize}
+    \end{multicols}
+    \vspace{-10pt}
+    \only<2>{\ }
+\end{frame}
+
+\begin{frame}[t]{Force transducer design}
+    \framesubtitle{Velostat}
+    \vspace{-20pt}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.6\textwidth}
+            \begin{exampleblock}{Definition}
+                The Velostat is a polymer material filled with carbon black.\\
+                \textbf{Expected effects}:
+                \begin{itemize}
+                    \item \underline{Quantum tunnelling} (Precolation) -- Diod is using such effect;
+                    \item \underline{Piezoresistive} -- electrical resistivity of semiconductor is changed by mechanical strain;
+                    \item \underline{Viscoelasticity} -- material can damp vibrations.
+                \end{itemize}
+            \end{exampleblock}
+        \end{column}
+        \begin{column}{0.38\textwidth}
+            \vspace{-0.7cm}
+            \begin{figure}[H]
+                \begin{subfigure}{0.9\textwidth}
+                    \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{velostat_sensor.jpg}
+                    % \caption*{Velostat material}
+                    \label{fig:velostat_sensor.jpg}
+                \end{subfigure}
+
+                \begin{subfigure}{0.9\textwidth}
+                    \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{simplest_sensor.jpg}
+                    \caption*{Simplest force transducer}
+                    \label{fig:simplest_sensor.jpg}
+                \end{subfigure}
+            \end{figure}
+        \end{column}
+    \end{columns}
+
+\end{frame}
+
+\begin{frame}[t]{Force transducer design}
+    \framesubtitle{Velostat: Faced problems}
+    \vspace{-20pt}
+    \begin{multicols}{2}
+        {\large
+            \begin{itemize}
+                \item Hysteresis
+                \item Nonlinearity
+                \item Different values with the same pressure if the area of load is less then the sensor
+            \end{itemize}}
+            \begin{figure}[H]
+                \centering
+                 \begin{tikzpicture}
+                    % Include the image in a node
+                    \node [above right, inner sep=0] (image) at (0,0) 
+                    {\centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{velostat_pressure_resistance.jpg}};          
+                    % Create scope with normalized axes
+                    \begin{scope}[
+                        x={($ 0.1*(image.south east)$)},
+                        y={($ 0.1*(image.north west)$)}]
+                        % Grid and axes' labels
+                        % \draw[lightgray,step=1] (image.south west) grid (image.north east);
+                        % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
+                        % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
+             
+                        % Labels
+                        % \draw[latex-, very thick,green] (3.5,2.2) -- (2.5,1)
+                        % node[below left,black,fill=white]{\small test};
+
+                        \draw[stealth-, very thick,green] (4.21,2.75) -- (6.5,5);
+                        \draw[stealth-, very thick,green] (8.75,2.15) -- (6.5,5)
+                        node[rounded corners=3pt,above,black,fill=white]{\small Working range};
+                    \end{scope}
+                \end{tikzpicture}
+                % \caption*{}
+                \label{fig:velostat_pressure_resistance.jpg}
+            \end{figure}
+    \end{multicols}
+    \vspace{-12pt}
+    \begin{block}{Scientific Problem Statement}
+        To characterize Velostat material for cases when point load is less than sensor size and propose solutions for avoiding such issues.
+    \end{block}
+\end{frame}
+
+\begin{frame}[t]{Force transducer design}
+    \framesubtitle{Experimental setup requirements}
+    \vspace{-0.5cm}
+    {\large
+        \begin{itemize}
+            \item Force control. \uncover<2>{\\ \alert{Solved by Impedance Control}}
+            \item Position and force repeatability. \uncover<2>{\\ \alert{Solved by adding a manipulator and a camera}}
+            \item To have an ability to apply force only on a particular part of a sensor. \uncover<2>{\\ \alert{Solved by adding several end-effectors}}
+        \end{itemize}}
+    \uncover<2>{\centering\large\alert{All setup requirements are fulfilled}}
+\end{frame}
+
+
+\begin{frame}[t]{Force transducer design}
+    \framesubtitle{Experimental Setup: Overall view on hardware}
+    \vspace{-12pt}
+    \begin{center}
+        \begin{tikzpicture}
+
+            % Include the image in a node
+            \node [
+                above right,
+                inner sep=0] (image) at (0,0) {\centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{exp_stand1}};
+
+            % Create scope with normalized axes
+            \begin{scope}[
+                    x={($0.1*(image.south east)$)},
+                    y={($0.1*(image.north west)$)}]
+
+                % Grid
+                % \draw[lightgray,step=1] (image.south west) grid (image.north east);
+
+                % % Axes' labels
+                % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
+                % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
+
+                % Labels
+                % \node[circle,fill=green] at (7.25,6.75){\small 2};
+
+                \draw[latex-, very thick,green] (3.5,2.2) -- (2.5,1)
+                node[rounded corners=3pt,below left,black,fill=white]{\small Velostat sensors};
+
+                \draw[stealth-, very thick,green] (3.5,2.6) -- ++(-0.7,+0.5)
+                node[rounded corners=3pt,left,black,fill=white]{\small Force sensor};
+
+                \draw[stealth-, very thick,green] (6.5,3) -- (7,6)
+                node[rounded corners=3pt,above right,black,fill=white]{\small Self-made PCB};
+
+                \draw[stealth-, very thick,green] (7.2,1.5) -- (8,5)
+                node[rounded corners=3pt,above right,black,fill=white]{\small Arduino};
+
+                \draw[stealth-, very thick,green] (2.5,9.5) -- (4,9.5)
+                node[rounded corners=3pt,right,black,fill=white]{\small Camera};
+
+                \draw[very thick,green] (0.5,2.5) rectangle (4.2,9)
+                node[below left,black,fill=green]{\small UR10e};
+
+                \draw[latex-, very thick,green] (4.5,7.2) edge (5.5,7.5)
+                (4.8,5.3) -- (5.5,7.5)
+                node[rounded corners=3pt,above,black,fill=white]{\small Aruco markers};
+            \end{scope}
+
+        \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+\begin{frame}[t]{Experiment Design}
+    \framesubtitle{Experimental Setup: Video}
+    \vspace{-15pt}
+    \begin{figure}[H]
+        % \href{run:./videos/exp_stand_video.mp4}{
+        \href{https://youtu.be/Gw4wVZ-ESuE}{
+            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{exp_stand_video_preview.jpg}}
+        % \caption{caption_name}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Force transducer design}
+    \framesubtitle{Experimental Setup: Angle error correction by Aruco markers}
+    \vspace{-15pt}
+
+    \begin{figure}[H]
+        \centering
+         \begin{tikzpicture}
+            % Include the image in a node
+            \node [above right, inner sep=0] (image) at (0,0) 
+            {\centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{exp_stand2.JPG}};          
+            % Create scope with normalized axes
+            \begin{scope}[
+                x={($ 0.1*(image.south east)$)},
+                y={($ 0.1*(image.north west)$)}]
+                % Grid and axes' labels
+                % \draw[lightgray,step=0.5] (image.south west) grid (image.north east);
+                % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
+                % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
+                % Labels
+                \draw[stealth-, very thick,green] (1.2,3) -- (1.2,2)
+                node[rounded corners=3pt,below,black,fill=white, text width=2cm]{\small Manip. base Aruco marker};  
+
+                \draw[stealth-, very thick,green] (2.3,6.5) -- (1.5,7.5)
+                node[rounded corners=3pt,above,black,fill=white, text width=2cm]{\small Sensor plate Aruco marker};  
+
+                \draw[stealth-, very thick,green] (5.4,2) -- (7.5,1.5);
+                \draw[stealth-, very thick,green] (5.75,2.8) -- (7.5,1.5)
+                node[rounded corners=3pt,right,black,fill=white, text width=2.3cm]{\small Transformation calculation b/w markers};  
+            \end{scope}
+        \end{tikzpicture}
+        % \caption*{}
+        \label{fig:exp_stand2.JPG}
+    \end{figure}
+
+\end{frame}
+
+\begin{frame}[t]{Force transducer design}
+    \framesubtitle{Experimental Setup: End-effectors}
+    \vspace{-0.9cm}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.6\textwidth}
+            \begin{figure}[H]
+                \centering
+                \begin{tikzpicture}
+                    % Include the image in a node
+                    \node [above right, inner sep=0] (image) at (0,0)
+                    {\centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{all_end_effectors.png}};
+                    % Create scope with normalized axes
+                    \begin{scope}[
+                            x={($ 0.1*(image.south east)$)},
+                            y={($ 0.1*(image.north west)$)}]
+                        % Grid and axes' labels
+                        % \draw[lightgray,step=1] (image.south west) grid (image.north east);
+                        % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
+                        % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
+
+                        % Labels
+                        \node[rounded corners=3pt,black,fill=white] at (1.1,7.4){\tiny 2 mm };
+                        \node[rounded corners=3pt,black,fill=white] at (3.1,7.9){\tiny 6 mm };
+                        \node[rounded corners=3pt,black,fill=white] at (4.9,8.1){\tiny 8 mm };
+                        \node[rounded corners=3pt,black,fill=white] at (6.7,7.9){\tiny 12 mm };
+                        \node[rounded corners=3pt,black,fill=white] at (8.6,7.9){\tiny 15 mm };
+                    \end{scope}
+                \end{tikzpicture}
+                \caption*{All end-effectors}
+                \label{fig:all_end_effectors.png}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.39\textwidth}
+            \vspace{-1.3cm}
+
+            \begin{figure}[H]
+                \begin{subfigure}[t]{0.6\textwidth}
+                    \centering\includegraphics[width=0.99\textwidth]{LTH350-DONUT-LOAD-CELL-1.png}\\
+                    \caption*{\normalsize Ground Truth \\ Force sensor}
+                    \label{fig:futek}
+                \end{subfigure}
+                \vspace{-0.2cm}
+
+                \begin{subfigure}[t]{0.6\textwidth}
+                    \centering\includegraphics[width=0.99\textwidth]{point_load.JPG}\\
+                    \caption*{\normalsize End-effector in assembly}
+                    \label{fig:point_load}
+                \end{subfigure}
+            \end{figure}
+
+        \end{column}
+    \end{columns}
+\end{frame}
+
+
+
+
+\begin{frame}[t]{Force transducer design}
+    \framesubtitle{Experiments}
+    \vspace{-15pt}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.6\textwidth}
+            {\large
+                \begin{enumerate}
+                    \item \textbf{Static experiment}. We are applying static force for identifying transducer model.
+                          \item\textbf{ Dynamic experiment}.
+                          \begin{itemize}
+                            \large
+                              \item We are representing a transducer as a $4\times4$ grid. We touch with the same pressure using five different end-effectors (area starting from 2mm till 15mm).
+                              \item We are using 2 mm and 15 mm end-effectors. We touch with different forces (5, 10, 20, 30, 40 H).
+                          \end{itemize}
+                \end{enumerate}
+            }
+        \end{column}
+        \begin{column}{0.39\textwidth}
+            \vspace{-0.5cm}
+            \begin{figure}[H]
+                \centering
+                \begin{tikzpicture}
+
+                    % Include the image in a node
+                    \node [
+                        above right,
+                        inner sep=0] (image) at (0,0) {\centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{sensors_grid.png}};
+
+                    % Create scope with normalized axes
+                    \begin{scope}[
+                            x={($0.1*(image.south east)$)},
+                            y={($0.1*(image.north west)$)}]
+
+                        % Grid
+                        % \draw[lightgray,step=1] (image.south west) grid (image.north east);
+
+                        % % Axes' labels
+                        % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
+                        % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
+
+                        % Labels
+                        % Simple brace
+                        \draw [green, very thick,
+                            decorate,
+                            decoration = {brace,
+                                    raise=5pt,
+                                    amplitude=5pt,
+                                    aspect=0.5}] (6,3.7) --  (3,3.7)
+                        node[pos=0.5,below=10pt,green]{$15\ mm$};
+
+                        \draw [green, very thick,
+                            decorate,
+                            decoration = {brace, mirror,
+                                    raise=5pt,
+                                    amplitude=5pt,
+                                    aspect=0.5}] (6,3.6) --  (6,6.4)
+                        node[pos=0.5,right=10pt,green]{$15\ mm$};
+
+                        \draw[green,step=1,xshift=34, yshift=43]  (0.5,0.5) grid +(3,3);
+
+                        \node[circle,fill=green,scale=0.4] at (3.3,6.27){\small 1};
+                        \node[circle,fill=green,scale=0.4] at (5.92,3.7){\small 16};
+                    \end{scope}
+
+                \end{tikzpicture}
+                \caption*{Sensor representation \\ as $4\times4$ grid}
+                \label{fig:file_name}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[t]{Force transducer design}
+    \framesubtitle{Result: Static experiment}
+    \vspace{-0.5cm}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.52\textwidth}
+            \begin{eqnarray*}
+                V_{out} = V_0 + p[k_p + k_e(1-e^\frac{-(t-t_0)}{\tau_{res}})](1-e^{-\frac{A}{p}}) \\
+                k_p = A_1e^{-A_2p}; \tau_{res} = B_0 + B_1e^{-\frac{p}{B_2}}
+            \end{eqnarray*}
+            Where $V_0$ -- initial voltage, $p,\ A_i,\ B_i,\ \tau_{res},\ k_i$ are constants, $t$ -- current time, $t_0$ -- the time when the pressure appeared.
+        \end{column}
+        \begin{column}{0.45\textwidth}
+            \vspace{-15pt}
+            \begin{figure}[H]
+                \begin{subfigure}{0.99\textwidth}
+                    \centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{least_square_model.png}
+                    \label{fig:least_square_model.png}
+                \end{subfigure}
+                \vspace{-1cm}
+
+                \begin{subfigure}{0.99\textwidth}
+                        \centering
+                         \begin{tikzpicture}
+                            % Include the image in a node
+                            \node [above right, inner sep=0] (image) at (0,0) 
+                            {\centering\includegraphics[height=3.4cm,width=1\textwidth,keepaspectratio]{static_load_meh.JPG}};          
+                            % Create scope with normalized axes
+                            \begin{scope}[
+                                x={($ 0.1*(image.south east)$)},
+                                y={($ 0.1*(image.north west)$)}]
+                                % Grid and axes' labels
+                                % \draw[lightgray,step=1] (image.south west) grid (image.north east);
+                                % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
+                                % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
+                                % Labels
+                            \draw[latex-, very thick,green] (4.3,2.3) -- (5,1.6)
+                                node[rounded corners=3pt,below right,black,fill=white]{\tiny Velostat sensor};
+                            
+                            \draw[latex-, very thick,green] (4.3,3.5) -- (5.5,2.45)
+                                node[rounded corners=3pt,right,black,fill=white]{\tiny \O \ 15 mm end-effector};
+
+                            \draw[latex-, very thick,green] (6,6) -- (6.4,4.9)
+                                node[rounded corners=3pt,below right,black,fill=white]{\tiny Known static load};
+                            \end{scope}
+                        \end{tikzpicture}
+                        % \caption*{}
+                \end{subfigure}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[t]{Force transducer design}
+    \framesubtitle{Result: Dynamic experiment}
+    \vspace{-15pt}
+    \begin{figure}[H]
+        \begin{subfigure}{0.64\textwidth}
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{sens1_pike1_mod.png}
+            \caption*{2mm end-effector diam}
+            \label{fig:sens1_pike1}
+        \end{subfigure}
+        \begin{subfigure}{0.34\textwidth}
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{sens1_pike3.png}
+            \caption*{8mm end-effector diam}
+            \label{fig:sens1_pike3}
+        \end{subfigure}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Force transducer design}
+    \framesubtitle{Summary}
+    \vspace{-15pt}
+    {\large
+        \begin{enumerate}
+            \item Static experiment: transducers coefficients $p,\ A_i,\ B_i,\ \tau_{res},\ k_i$ were identified.
+            \item Dynamic experiment: a transducer can be represented as a single body, when pressure area is higher than 50\% of the sensor area.
+        \end{enumerate}
+    }
+\end{frame}
+
+\begin{frame}[t]{Terrain classification}
+    \framesubtitle{}
+    \only<1-2>{\large\begin{block}{Question}
+            How to define the terrain type during the movement on such terrain?
+        \end{block}}
+    \only<2>{\large\begin{alertblock}{Answer}
+            \centering Solving terrain classification problem using Machine learning
+        \end{alertblock}}
+\end{frame}
+
+\begin{frame}[t]{Terrain classification}
+    \framesubtitle{Experimental setup requirements}
+    \vspace{-0.5cm}
+    {\large
+        \begin{itemize}
+            \item To have a possibility to install new surfaces and change it quickly. \uncover<2>{\\ \alert{Solved by quick detachable table}}
+            \item Infinite movement. \uncover<2>{\\ \alert{Solved by creating the 2 DoF mechanism and a S-shape leg}}
+            \item Movement part should be the same as on the StriRus. \uncover<2>{\\ \alert{Solved by creating a mount for a leg assembly}}
+        \end{itemize}}
+    \only<2>{\centering\large\alert{All setup requirements are fulfilled}}
+\end{frame}
+
+\begin{frame}[t]{Terrain classification}
+    \framesubtitle{Experimental Setup}
+    \vspace{-15pt}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.55\textwidth}
+            % \begin{enumerate}
+            %     \item Dynamixel MX28 -- 47 rev/min
+            %     \item Velostat transducer -- 25 HZ freq.
+            %     \item Experiment duration -- 120 sec
+            % \end{enumerate}
+            \vspace{-0.3cm}
+            \begin{figure}[H]
+                \centering
+                \begin{tikzpicture}
+                    % Include the image in a node
+                    \node [above right, inner sep=0] (image) at (0,0)
+                    {\centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{s_shape_leg/s_leg_setup.JPG}};
+                    % Create scope with normalized axes
+                    \begin{scope}[
+                            x={($ 0.1*(image.south east)$)},
+                            y={($ 0.1*(image.north west)$)}]
+                        % Grid and axes' labels
+                        % \draw[lightgray,step=1] (image.south west) grid (image.north east);
+                        % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
+                        % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
+
+                        % Labels
+
+                        % \node[circle,fill=green,scale=0.4] at (3.3,6.27){\small 1};
+
+                        % \draw[latex-, very thick,green] (3.5,2.2) -- (2.5,1)
+                        % node[below left,black,fill=white]{\small test};
+
+                        \draw[stealth-, very thick,green] (3.5,2.5) -- (3,1.5)
+                        node[rounded corners=3pt,below,black,fill=white]{\tiny Table for surfaces};
+
+                        \draw[stealth-, very thick,green] (7.1,5.4) -- (7.4,7)
+                        node[rounded corners=3pt,above right,black,fill=white]{\tiny Self-made PCB};
+
+                        \draw[very thick,green] (6,6.1) rectangle (8.5,3.5)
+                        node[above left,black,fill=green]{\tiny S leg};
+                    \end{scope}
+                \end{tikzpicture}
+                % \caption*{}
+                \label{fig:s_shape_leg/s_leg_setup.JPG}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.44\textwidth}
+            \vspace{-0.5cm}
+            \begin{figure}[H]
+                \begin{subfigure}{\textwidth}
+                    \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{s_shape_leg/leg_design.png}
+                    % \caption{caption_name}
+                \end{subfigure}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+
+\begin{frame}[t]{Terrain classification}
+    \framesubtitle{Experimental setup: Surface types, video}
+    \vspace{-15pt}
+    \begin{figure}[H]
+        \begin{subfigure}{0.49\textwidth}
+            % \href{run:./videos/flat.gif}
+            \href{https://gifyu.com/image/SxatY}
+            {\centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{s_shape_leg/flat.jpg}}
+            % \caption*{2mm end-effector diam}    
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.49\textwidth}
+            % \href{run:./videos/rock.gif}
+            \href{https://gifyu.com/image/Sxatt}
+            {\centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{s_shape_leg/view.jpg}}
+            % \caption*{8mm end-effector diam}
+        \end{subfigure}
+    \end{figure}
+\end{frame}
+
+% \begin{frame}[t]{Terrain classification}
+%     \framesubtitle{Velostat transducer properties}
+%     \large
+%     \begin{itemize}
+%         \item Because of high hysteresis and difficulties with calibration, we have to work with relative data.
+%     \end{itemize}
+% \end{frame}
+
+\begin{frame}[t]{Terrain classification}
+    \framesubtitle{Obtained data from one experiment}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.60\textwidth}
+            \begin{figure}[H]
+                \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{s_shape_leg/TaxelIndForce.png}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.35\textwidth}
+            \vspace{-1.6cm}
+            \begin{figure}[H]
+                \begin{subfigure}{0.99\textwidth}
+                    \centering\includegraphics[height=3.8cm,width=1\textwidth,keepaspectratio]{s_shape_leg/avg_lin_vel_rev_min.png} 
+                \end{subfigure}
+
+                \begin{subfigure}{0.99\textwidth}
+                    \centering\includegraphics[height=3.8cm,width=1\textwidth,keepaspectratio]{s_shape_leg/segment6_compare_front.png}
+                \end{subfigure}
+                
+
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[t]{Terrain classification}
+    \framesubtitle{Summary}
+    \large
+    \begin{itemize}
+        \item We can distinct rubber and rock surfaces
+        \item Terrain classification parameters was chosen:
+              \begin{itemize}
+                \large
+                  \item RPM
+                  \item Motor Torque
+                  \item Acceleration from IMU
+                  \item Force data which are represented as Sensor value\/segment, Peak amplitude, Average amplitude
+              \end{itemize}
+        \item The Velostat force transducer has been proven to work
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Map creation based on tactile data}
+    \framesubtitle{}
+    \only<1-2>{\large\begin{block}{Question}
+            How to create a dense point cloud, using sparse data from legs contact points?
+        \end{block}}
+    \only<2>{\large\begin{alertblock}{Answer}
+            \centering \textit{Create a mesh}, using concave hull 2D Delaunay triangulation using sparse data, \textit{sampling a mesh} and return generated points to navigation
+        \end{alertblock}}
+\end{frame}
+
+\begin{frame}[t]{Map creation based on tactile data}
+    \framesubtitle{Experimental setup}
+    \vspace{-15pt}
+    \begin{figure}[H]
+        \begin{subfigure}[t]{0.49\textwidth}
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{coppelia_sim.png}
+            \caption*{CoppeliaSim simulator, \textbf{4th gen} StriRus}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{rl_sim.JPG}
+            \caption*{IRL, \textbf{3th+ gen} StriRus}
+        \end{subfigure}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Map creation based on tactile data}
+    \framesubtitle{Assumptions}
+    \large
+    Current solution considering such assumptions:
+    \begin{itemize}
+        \item Our terrain can be represented $z = f(x,y)$. We can use 2D Delaunay triangulation (projected points on a plane)
+        \item All simulation data are preprocessed by white noise
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Map creation based on tactile data}
+    \framesubtitle{Delaunay triangulation}
+    \vspace{-0.2cm}
+    \begin{figure}[H]
+        \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{delone_idea.png}
+        \caption*{Common 2D Delaunay triangulation (Convex Hull) \\ \textbf{From Point Cloud to mesh}}
+        \label{fig:delone_idea.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Map creation based on tactile data}
+    \framesubtitle{Result: Simulator, path}
+    \vspace{-15pt}
+    \begin{figure}[H]
+        \begin{subfigure}[t]{0.49\textwidth}
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{terrain_w_water1.png}
+            \caption*{Start point}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{terrain_w_water_end.png}
+            \caption*{End point}
+        \end{subfigure}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Map creation based on tactile data}
+    \framesubtitle{Result: Generated mesh and point cloud}
+    \vspace{-15pt}
+    \begin{figure}[H]
+        \begin{subfigure}[t]{0.49\textwidth}
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{mesh_rviz.png}
+            \caption*{Mesh created using concave hull 2D Delaunay triangulation}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+                \centering
+                 \begin{tikzpicture}
+                    % Include the image in a node
+                    \node [above right, inner sep=0] (image) at (0,0) 
+                    {\centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{sampled_pcd.png}};          
+                    % Create scope with normalized axes
+                    \begin{scope}[
+                        x={($ 0.1*(image.south east)$)},
+                        y={($ 0.1*(image.north west)$)}]
+                        % Grid and axes' labels
+                        % \draw[lightgray,step=1] (image.south west) grid (image.north east);
+                        % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
+                        % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
+             
+                        % Labels
+                        \draw[stealth-, very thick,green] (3,8) -- (2,8.5);
+                        \draw[stealth-, very thick,green] (1,5.5) -- (2,8.5)
+                        node[rounded corners=3pt,above,black,fill=white]{\tiny Ground Truth Point Cloud};
+             
+                        \draw[stealth-, very thick,green] (5.5,3) -- (5.5,8.5)
+                        node[rounded corners=3pt,above,black,fill=white]{\tiny Generated Point Cloud};
+                    \end{scope}
+                \end{tikzpicture}
+                \caption*{Sampled point cloud}
+                \label{fig:sampled_pcd.png}
+        \end{subfigure}
+    \end{figure}
+\end{frame}
+
+
+\begin{frame}[t]{Map creation based on tactile data}
+    \framesubtitle{Why do we need a concave hull solution}
+    \vspace{-15pt}
+    \begin{figure}[H]
+        \begin{subfigure}[t]{0.3\textwidth}
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{convex_terr.png}
+            \caption*{Case study}
+            \label{fig:convex_terr.png}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[t]{0.33\textwidth}
+                \centering
+                 \begin{tikzpicture}
+                    % Include the image in a node
+                    \node [above right, inner sep=0] (image) at (0,0) 
+                    {\centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{conv_convex.png}};          
+                    % Create scope with normalized axes
+                    \begin{scope}[
+                        x={($ 0.1*(image.south east)$)},
+                        y={($ 0.1*(image.north west)$)}]
+                        % Grid and axes' labels
+                        % \draw[lightgray,step=1] (image.south west) grid (image.north east);
+                        % \foreach \x in {0,1,...,10} { \node [below] at (\x,0) {\x}; }
+                        % \foreach \y in {0,1,...,10} { \node [left] at (0,\y) {\y};}
+             
+                        % Labels
+                        \draw[stealth-, very thick,green] (5.2,3.5) -- ++(1,-1)
+                        node[rounded corners=3pt,right,black,fill=white]{\tiny Generated mesh};
+                        
+                        \draw[stealth-, very thick,green] (5.5,5.5) -- (7.4,4)
+                        node[rounded corners=3pt,right,black,fill=white]{\tiny Lidar data};
+                        
+                        
+                        \draw[stealth-, very thick,green] (3.4,0.8) -- (5,1);            
+                        \draw[stealth-, very thick,green] (3.4,2.6) -- (5,1)
+                        node[rounded corners=3pt,right,black,fill=white]{\tiny Cloud of contact points};
+                    \end{scope}
+                \end{tikzpicture}
+                \caption*{Convex Hull}
+                \label{fig:conv_convex.png}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[t]{0.33\textwidth}
+            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{conv_concave.png}
+            \caption*{Concave Hull}
+            \label{fig:conv_concave.png}
+        \end{subfigure}
+
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Map creation based on tactile data}
+    \framesubtitle{Metric C2C: Reference and ground truth point cloud comparison}
+    \vspace{-15pt}
+    \begin{figure}[H]
+        \begin{subfigure}[t]{0.49\textwidth}
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{cropped_pcd.png}
+            \caption*{Overlaid Point Clouds}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{pcd_hist.png}
+            \caption*{Error histogram (distance from a point to closest ground truth point)}
+        \end{subfigure}
+    \end{figure}
+    % \alert{\large RMSE 0.053074, std 0.025}
+\end{frame}
+
+\begin{frame}[t]{Map creation based on tactile data}
+    \framesubtitle{Metric C2M: Reference and ground truth mesh comparison}
+    \vspace{-15pt}
+    \begin{figure}[H]
+        \begin{subfigure}[t]{0.49\textwidth}
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{mesh_comp.png}
+            \caption*{Overlaid Meshes}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{mesh_hist.png}
+            \caption*{Error histogram (distance from a point to closest ground truth point)}
+        \end{subfigure}
+    \end{figure}
+    % \alert{\large RMSE 0.00167067, std 0.0005}
+\end{frame}
+
+\begin{frame}[t]{Map creation based on tactile data}
+    \framesubtitle{Result: Real world experiment, video}
+    \vspace{-0.5cm}
+    \begin{figure}[H]
+        \begin{subfigure}[t]{0.49\textwidth}
+            % \href{run:./videos/big_angle2.mp4}{
+            \href{https://youtu.be/2dxHHTG4psQ}{
+                \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{real_robot_mesh_video_preview.png}}
+            \caption*{Robot is passing the obstacle}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{real_mesh.jpg}
+            \caption*{Mesh, obtained from legs}
+        \end{subfigure}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Map creation based on tactile data}
+    \framesubtitle{Summary}
+    \large
+    \begin{itemize}
+        \item Map can be built using concave hull 2D Delaunay triangulation, where input data are the sparse point cloud of contacts.
+        \item \textit{Simulator}: \begin{itemize}
+            \large
+                  \item Avg. Point cloud comparison RMSE is about 5 cm.
+                  \item Avg. Mesh comparison RMSE is about 1 cm.
+              \end{itemize}
+        \item \textit{Real world experiment}: \begin{itemize}
+            \large
+                  \item Avg. Point cloud comparison RMSE is about 8 cm.
+                        %     \item Avg. Mesh comparison RMSE is about 1 cm.
+              \end{itemize}
+             \textit{ It is appropriate accuracy for such task.}
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}[t]{Summary}
+    \framesubtitle{}
+    \large
+    \vspace{-0.7cm}
+    % \begin{itemize}
+    %     \item Robot was created
+    %     \item Force transducer based on Velostat was created and was investigated
+    %     \item Robot can distinct rubber and rock terrains
+    %     \item Robot can build a map using tactile sensors
+    % \end{itemize}
+    \begin{figure}[H]
+        \begin{subfigure}[t]{0.49\textwidth}
+            \centering\includegraphics[height=2.5cm,width=1\textwidth,keepaspectratio]{strirus_3.JPG}
+            \caption*{1. Struct. synthesis solution for cycling robots was proposed}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \centering\includegraphics[height=2.5cm,width=1\textwidth,keepaspectratio]{velostat_sensor_look.JPG}
+            \caption*{2. Force transducer based on Velostat was created and was investigated}
+        \end{subfigure}
+    
+        \begin{subfigure}[t]{0.49\textwidth}
+            \centering\includegraphics[height=2.5cm,width=1\textwidth,keepaspectratio]{s_shape_leg/s_leg_setup.JPG}
+            \caption*{3. Robot distinct rubber and rock surfaces}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \centering\includegraphics[height=2.5cm,width=1\textwidth,keepaspectratio]{conv_concave.png}
+            \caption*{4. Build a map using tactile sensors}
+        \end{subfigure}
+    \end{figure}
+\end{frame}
+
+% \fbckg{fibeamer/figs/last_page.png}
+% \frame[plain]{}
+% \fbckg{fibeamer/figs/common.png}
+
+\end{document}
