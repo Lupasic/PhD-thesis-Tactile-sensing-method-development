@@ -1,21 +1,19 @@
 
-\textbf{\underline{Четвертая глава}} раскрывает детали определения профиля опорной поверхности, на основе информации о точках её касания ногами робота и внутренних датчиков, характеризующих механическое состояние аппарата. Вторая часть главы показывает определение физико-механических свойств опорной поверхности:
-жесткости, вязкости и пластичности, и выделение на их основе классов поверхностей на основе информации с датчиков силы, установленных на ногах и внутренних датчиков робота.
+\textbf{\underline{Четвертая глава}} раскрывает детали определения профиля опорной поверхности, на основе информации о точках её касания ногами робота и внутренних датчиков, характеризующих механическое состояние аппарата. Вторая часть главы показывает определение с помощью робота физико-механических свойств опорной поверхности:
+жесткости, упругости и пластичности.
 
-\textbf{Первая задача:} имеется поверхность, которой каждому набору координат $x,\ y$ соответствует одно и только одно значение координаты $z$. Необходимо с помощью ощупывания роботом данной поверхности получить плотное облако точек и полигональную сетку. 
+\textbf{Первая задача:} имеется поверхность. Каждому набору координат $x,\ y$ соответствует одно и только одно значение координаты $z$. Необходимо с помощью ощупывания роботом поверхности получить плотное облако точек и полигональную сетку. 
 
-Сделано предположение, что расстояние между ногами робота мало относительно размеров поверхности, , следовательно, поверхность между ногами считается плоскостью.
+Сделано предположение, что расстояние между ногами робота мало относительно размеров поверхности, следовательно, поверхность между ногами считается плоскостью.
 
-Для определения геометрических свойств поверхности необходимо получить облако точек касаний опорных поверхностей. То есть мы должны знать трансформацию систем координат от глобальной (к примеру начало движения робота), до конкретного сенсора на ноге. 
-
-Для этого необходимо решить прямую задачу кинематики \pic{fig:StriRus_10_legs_15_angle_v4.png}, \eqref{eq:forw_kin}, а также задачу локализации. Задача локализации в пещере может быть решена с помощью маяков и/или с помощью лидаров/камер. В натурном эксперименте применялись Aruco маркеры.
+Для получения облака точек касаний опорных поверхностей, относительно глобальной системы координат, необходима трансформация систем координат от глобальной, до конкретного сенсора на ноге. Поэтому была решена прямая задача кинематики \pic{fig:StriRus_10_legs_15_angle_v4.png}, \eqref{eq:forw_kin} и локализации.
 
 \begin{figure}[H]
     \centering
      \begin{tikzpicture}
         % Include the image in a node
         \node [above right, inner sep=0] (image) at (0,0) 
-        {\centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{StriRus_10_legs_15_angle_v4.png}};          
+        {\centering\includegraphics[height=5.5cm,width=1\textwidth,keepaspectratio]{StriRus_10_legs_15_angle_v4.png}};          
         % Create scope with normalized axes
         \begin{scope}[
             x={($ 0.1*(image.south east)$)},
@@ -134,7 +132,7 @@
         \underset{1 \times 3}{0} & \underset{1 \times 1}{1}
     \end{bmatrix}$, где $R_i$ --- матрица поворота, относительно одной из осей, $T_i$ --- вектор сдвига.
 
-Алгоритм получения плотного облака точек следующий. Вначале необходимо очистить оригинальное облако точек от шумов и усреднить близлежащие точки с помощью Voxel grid. Потом из него генерируется полигональная сетка с помощью 2D Триангуляции Делоне \pic{fig:delone_idea.png} (вогнутая оболочка \pic{fig:exp_concave_hull}). На ее основе получается необходимое плотное облако точек \pic{fig:sampled_pcd.png}. 
+Для получения плотного облака точек необходимо очистить оригинальное облако точек от шумов и усреднить близлежащие точки с помощью Voxel grid. Потом из него генерируется полигональная сетка с помощью 2D Триангуляции Делоне \pic{fig:delone_idea.png} (вогнутая оболочка \pic{fig:exp_concave_hull}). На ее основе получается необходимое плотное облако точек \pic{fig:sampled_pcd.png}. 
 
 \begin{figure}[ht!]
     \centering\includegraphics[height=2.5cm,width=1\textwidth,keepaspectratio]{delone_idea.png}
@@ -142,11 +140,11 @@
     \label{fig:delone_idea.png}
 \end{figure}
 
-На рисунке \ref{fig:exp_concave_hull} проиллюстрирована  важность модификации триангуляции Делоне. Как можно заметить \pic{fig:conv_convex.png} алгоритм построил карту местности там, где робот не ходил и стоит стена. При использовании вогнутой оболочки \pic{fig:conv_concave.png} данная проблема не наблюдается.
+Модификация триангуляции Делоне нужна, так как выпуклой оболочке \pic{fig:conv_convex.png} алгоритм построил карту местности там, где робот не ходил. При использовании вогнутой оболочки \pic{fig:conv_concave.png} данная проблема не наблюдается.
 
 \begin{figure}[H]
     \begin{subfigure}[t]{0.32\textwidth}
-        \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{convex_terr.png}
+        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{convex_terr.png}
         \caption{Пример поля}
         \label{fig:convex_terr.png}
     \end{subfigure}
@@ -185,7 +183,7 @@
     \label{fig:exp_concave_hull}
 \end{figure}
 
-Реализованный алгоритм проверялся, как в симуляции (Рис. \ref{fig:unsolvable_case}), так и на реальном роботе \pic{fig:real_exp_map_creation}.
+Проверка алгоритма в симуляции (Рис. \ref{fig:unsolvable_case}), натурно \pic{fig:real_exp_map_creation}.
 
 \begin{figure}[H]
     \begin{subfigure}[t]{0.49\textwidth}
@@ -202,7 +200,7 @@
     \label{fig:real_exp_map_creation}
 \end{figure}
 
-Ниже представлены полученные результаты \pic{fig:result_meshes_blah}. Для оценки точности полученных данных использовались метрики C2C \eqref{eqn:hauff} и C2M \pic{fig:metrics}.
+Для оценки точности полученных данных использовались метрики Cloud to Cloud (C2C) \eqref{eqn:hauff} и Cloud to Mesh (C2M) \pic{fig:metrics}.
 
 \begin{equation}
     \label{eqn:hauff}
@@ -211,40 +209,7 @@
 Где $X,\ Y$ непустые подмножества метрического пространства $M$; $\mathrm {dist} _{X}\colon M\to \mathbb {R}$ $\mathrm {dist} _{X}\colon M\to \mathbb {R}$ обозначает функцию расстояния до множества $X$.
 
 
-
-\begin{figure}[hp!]
-    \begin{center}
-    \begin{subfigure}[t]{0.4\textwidth}
-        \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{mesh_comp.png}
-        \caption{Наложенные полигональные сетки}
-    \end{subfigure}
-    \begin{subfigure}[t]{0.59\textwidth}
-            \centering
-             \begin{tikzpicture}
-                % Include the image in a node
-                \node [above right, inner sep=0] (image) at (0,0) 
-                {\centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{sampled_pcd.png}};          
-                % Create scope with normalized axes
-                \begin{scope}[
-                    x={($ 0.1*(image.south east)$)},
-                    y={($ 0.1*(image.north west)$)}]
-                    \draw[stealth-, very thick,green] (3,8) -- (2,8.5);
-                    \draw[stealth-, very thick,green] (1,5.5) -- (2,8.5)
-                    node[rounded corners=3pt,above,black,fill=white]{\tiny Ground Truth Point Cloud};
-         
-                    \draw[stealth-, very thick,green] (5.5,3) -- (5.5,8.5)
-                    node[rounded corners=3pt,above,black,fill=white]{\tiny Generated Point Cloud};
-                \end{scope}
-            \end{tikzpicture}
-            \caption{Наложенные облака точек}
-            \label{fig:sampled_pcd.png}
-    \end{subfigure}
-    \caption{Результат эксперимента}
-    \label{fig:result_meshes_blah}
-\end{center}
-\end{figure}
-
-\begin{figure}[ht]
+\begin{figure}[ht!]
     \begin{subfigure}[t]{0.49\textwidth}
         \centering\includegraphics[height=3.5cm,width=1\textwidth,keepaspectratio]{pcd_hist.png}
         \caption{Метрика C2C: гистограмма ошибок (абсолютное расстояние от точки до ближайшей реферальной точки)}
@@ -260,15 +225,13 @@
 \end{figure}
 
 
-Как итог, среднеквадратичная ошибка для C2C метрики была в среднем равна 5 см. А для C2M 1 см. В натурном эксперименте среднеквадратичная ошибка по метрике C2C получился 8 см.
+Как итог, среднеквадратичная ошибка для C2C метрики была в среднем равна 5 см. А для C2M 1 см. В натурном эксперименте по метрике C2C --- 8 см.
 
 \textbf{Вторая задача} это определение физико-механических свойств опорной поверхности. Дана опорная поверхность. Необходимо за минимальное время оценить процентное соотношение твердости, упругости и пластичности данной поверхности.
 
 Так как нет абсолютно твердых, упругих и пластичных тел, то было решено, что будут выбраны поверхности в которых каждое из свойств доминирует: камень, резина и земля соответственно.
 
-Задачу можно решить следующим образом. Робот идет по поверхности, и собирает данные с датчиков силы и с мотора. На основе предварительного обучения, данные обрабатываются и классифицируется.
-
-Метод опорных векторов (SVM) был выбран  для задачи классификации благодаря ее эффективности и устойчивости при работе с высоко размерными данными.
+Задачу можно решить следующим образом. Робот идет по поверхности, и собирает данные с датчиков силы и с мотора. На основе предварительного обучения с помощью метода опорных векторов (SVM), данные обрабатываются и классифицируется.
 
 Вектор с входными данными представлен следующим образом:
 \begin{itemize}
@@ -283,22 +246,26 @@
     \item (9) --- Средний крутящий момент двигателя
     \item (10) --- Ширина крутящего момента двигателя
     \item (11) --- Площадь под кривой крутящего момента двигателя
-    \item (12-16) --- Индивидуальная пиковая амплитуда силы такселя 
+    \item (12-16) --- Индивидуальная пиковая амплитуда силы датчика силы 
 \end{itemize}
 
-Такой выбор возник благодаря экспериментам и изучению чужих работ. Здесь представлена запись касания ногой на разных поверхностях \pic{fig:s_shape_leg/TaxelIndForce_full.png}. Видно различное поведение сенсоров в зависимости от типа поверхности. 
+Несколько причин выбора таких входных данных. Видно различное поведение сенсоров в зависимости от типа поверхности \pic{fig:s_shape_leg/TaxelIndForce_full.png}. Зависимость средней линейной скорости движения ноги на разных поверхностях при различных угловых скоростях \pic{fig:s_shape_leg/avg_lin_vel_rev_min.png}. 
 
-\begin{figure}[H]
-    \centering\includegraphics[height=4cm,width=1\textwidth,keepaspectratio]{s_shape_leg/TaxelIndForce.png}
-    \caption{Запись активных такселей на разных поверхностях}
-    \label{fig:s_shape_leg/TaxelIndForce_full.png}
-\end{figure}
 
-Здесь представлены замеры средней линейной скорости движения ноги на разных поверхностях при различных угловых скоростях \pic{fig:s_shape_leg/avg_lin_vel_rev_min.png}. Возможно заметить нелинейную зависимость, что так же может указывать косвенно на тип поверхности.
-\begin{figure}[H]
-    \centering\includegraphics[height=3.5cm,width=1\textwidth,keepaspectratio]{s_shape_leg/avg_lin_vel_rev_min.png}
-    \caption{Средняя линейная скорость робота}
-    \label{fig:s_shape_leg/avg_lin_vel_rev_min.png}
+\begin{figure}[ht!]
+    \begin{subfigure}{0.99\textwidth}
+        \centering\includegraphics[height=4.5cm,width=1\textwidth,keepaspectratio]{s_shape_leg/TaxelIndForce.png}
+        \caption{Запись активных датчиков силы на разных поверхностях}
+        \label{fig:s_shape_leg/TaxelIndForce_full.png}
+    \end{subfigure}
+
+    \begin{subfigure}{0.99\textwidth}
+        \centering\includegraphics[height=3.5cm,width=1\textwidth,keepaspectratio]{s_shape_leg/avg_lin_vel_rev_min.png}
+        \caption{Средняя линейная скорость робота}
+        \label{fig:s_shape_leg/avg_lin_vel_rev_min.png}
+    \end{subfigure}
+
+\caption{Причины использования конкретных входных данных}
 \end{figure}
 
 В процессе обучения собранные данные были разделены на обучающее (80\% данных) и тестовое множества (20\%). Модель была обучена с использованием ядра на основе функции Пирсона VII (PUK). 
@@ -385,3 +352,5 @@
 \end{table}
 
 Она интерпретируется следующим образом. В камне 84\% упругих свойств, 2.56\% упругих и 13.44\% пластичных.
+
+Итогом был разработан метод для определения геометрических свойств поверхности, с помощью ощупывания роботом пройденного пути.
