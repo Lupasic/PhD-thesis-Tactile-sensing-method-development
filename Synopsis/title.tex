@@ -22,7 +22,7 @@
 \thesisTitle}
 
 \vspace{0pt plus3fill} %число перед fill = кратность относительно некоторого расстояния fill, кусками которого заполнены пустые места
-{\large Специальность \thesisSpecialtyNumber\ "---\par <<\thesisSpecialtyTitle>>}
+{\large \thesisSpecialtyNumber\ "\par \thesisSpecialtyTitle}
 
 \ifdefined\thesisSpecialtyTwoNumber
 {\large Специальность \thesisSpecialtyTwoNumber\ "---\par <<\thesisSpecialtyTwoTitle>>}
@@ -45,7 +45,7 @@
 \noindent%
 \begin{tabularx}{\textwidth}{@{}lX@{}}
     \ifdefined\supervisorTwoFio
-    Научные руководители:   & \supervisorRegalia\par
+    Научные руководители   & \supervisorRegalia\par
                               \ifdefined\supervisorDead
                               \framebox{\textbf{\supervisorFio}}
                               \else
@@ -61,11 +61,11 @@
                               \fi
                               \vspace{0.013\paperheight}\\
     \else
-    Научный руководитель:   & \supervisorRegalia\par
+    Научный руководитель   & \supervisorRegalia\par
                               \ifdefined\supervisorDead
-                              \framebox{\textbf{\supervisorFio}}
+                              \framebox{\textbf{\supervisorFio}}.
                               \else
-                              \textbf{\supervisorFio}
+                              \textbf{\supervisorFio}.
                               \fi
                               \vspace{0.013\paperheight}\\
     \fi
@@ -91,26 +91,26 @@
     }%
     \vspace{0.013\paperheight} \\
     \ifdefined\leadingOrganizationTitle
-    Ведущая организация:    &
+    Ведущая организация    &
     \ifnumequal{\value{showopplead}}{0}{\vspace{6\onelineskip plus1fill}}{%
-        \leadingOrganizationTitle
+        \leadingOrganizationTitle.
     }%
     \fi
 \end{tabularx}
 \vspace{0.008\paperheight plus1fill}
 
-\noindent Защита состоится \defenseDate~на~заседании диссертационного совета \defenseCouncilNumber~при \defenseCouncilTitle~по адресу: \defenseCouncilAddress.
+\noindent Защита состоится \defenseDate~на~заседании диссертационного совета \defenseCouncilNumber~, созданного на базе \defenseCouncilTitle~по адресу: \defenseCouncilAddress.
 
 \vspace{0.008\paperheight plus1fill}
 \noindent С диссертацией можно ознакомиться в библиотеке \synopsisLibrary.
 
-\vspace{0.008\paperheight plus1fill}
-\noindent Отзывы на автореферат в двух экземплярах, заверенные печатью учреждения, просьба направлять по адресу: \defenseCouncilAddress, ученому секретарю диссертационного совета~\defenseCouncilNumber.
+%\vspace{0.008\paperheight plus1fill}
+%\noindent Отзывы на автореферат в двух экземплярах, заверенные печатью учреждения, просьба направлять по адресу: \defenseCouncilAddress, ученому секретарю диссертационного совета~\defenseCouncilNumber.
 
 \vspace{0.008\paperheight plus1fill}
 \noindent{Автореферат разослан \synopsisDate.}
 
-\noindent Телефон для справок: \defenseCouncilPhone.
+%\noindent Телефон для справок: \defenseCouncilPhone.
 
 \vspace{0.008\paperheight plus1fill}
 \noindent%
@@ -120,12 +120,10 @@
 r
 @{}}
     Ученый секретарь\par
-    диссертационного совета\par
-    \defenseCouncilNumber,\par
-    \defenseSecretaryRegalia
+    диссертационного совета
     &
     \ifnumequal{\value{showsecrsign}}{0}{}{%
-        % \includegraphics[width=2cm]{secretary-signature.png}%
+        \includegraphics[width=2cm]{secretary-signature.png}%
     }%
     &
     \defenseSecretaryFio
