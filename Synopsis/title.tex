@@ -22,7 +22,7 @@
 \thesisTitle}
 
 \vspace{0pt plus3fill} %число перед fill = кратность относительно некоторого расстояния fill, кусками которого заполнены пустые места
-{\large \thesisSpecialtyNumber\ "\par \thesisSpecialtyTitle}
+{\large \thesisSpecialtyNumber\ \thesisSpecialtyTitle}
 
 \ifdefined\thesisSpecialtyTwoNumber
 {\large Специальность \thesisSpecialtyTwoNumber\ "---\par <<\thesisSpecialtyTwoTitle>>}
@@ -72,14 +72,15 @@
     Официальные оппоненты:  &
     \ifnumequal{\value{showopplead}}{0}{\vspace{13\onelineskip plus1fill}}{%
         \textbf{\opponentOneFio,}\par
-        \opponentOneRegalia,\par
-        \opponentOneJobPlace,\par
-        \opponentOneJobPost\par
+        \opponentOneRegalia, 
+        \opponentOneJobPlace, 
+        \opponentOneJobPost;
+        
         \vspace{0.01\paperheight}
         \textbf{\opponentTwoFio,}\par
-        \opponentTwoRegalia,\par
-        \opponentTwoJobPlace,\par
-        \opponentTwoJobPost
+        \opponentTwoRegalia, 
+        \opponentTwoJobPlace, 
+        \opponentTwoJobPost.
     \ifdefined\opponentThreeFio
         \par
         \vspace{0.01\paperheight}

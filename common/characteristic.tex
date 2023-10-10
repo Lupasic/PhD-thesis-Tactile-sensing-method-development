@@ -249,7 +249,8 @@
     %
     %
     %
-    {\publications} Основные результаты по теме диссертации изложены в~\arabic{citeauthor}~печатных изданиях,
+    % ~\arabic{citeauthor} вместо 18
+    {\publications} Основные результаты по теме диссертации изложены в 18~печатных изданиях,
     \arabic{citeauthorvak} из которых изданы в журналах, рекомендованных ВАК\sloppy%
     \ifnum \value{citeauthorscopuswos}>0%
         , \arabic{citeauthorscopuswos} "--- в~периодических научных журналах, индексируемых Web of~Science и Scopus\sloppy%
@@ -257,7 +258,7 @@
     \ifnum \value{citeauthorconf}>0%
         , \arabic{citeauthorconf} "--- в~тезисах докладов.
     \else%
-        .
+    ,
     \fi%
     \ifnum \value{citeregistered}=1%
         \ifnum \value{citeauthorpatent}=1%
@@ -268,7 +269,7 @@
         \fi%
     \fi%
     \ifnum \value{citeregistered}>1%
-        , зарегистрированы\ %
+        зарегистрированы\ %
         \ifnum \value{citeauthorpatent}>0%
         \formbytotal{citeauthorpatent}{патент}{}{а}{}\sloppy%
         \ifnum \value{citeauthorprogram}=0 . \else \ и~\fi%
