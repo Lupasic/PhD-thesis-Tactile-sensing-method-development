@@ -247,9 +247,9 @@ sorting=none,% настройка сортировки списка литера
 \ifnumequal{\value{mediadisplay}}{1}{
 \DeclareSourcemap{
     \maps{%
-        \map{% использование media=text по умолчанию
-            \step[fieldset=media, fieldvalue=text]
-        }
+        % \map{% использование media=text по умолчанию
+        %     \step[fieldset=media, fieldvalue=text]
+        % }
     }
 }
 }{}
@@ -496,6 +496,11 @@ pages = {p\adddot} %заглавность буквы затем по месту
     {\setcounter{citeauthorconf}{0}\renewcommand{\blx@driver}[1]{}}
     {}
     {\stepcounter{citeauthorconf}}
+\newtotcounter{citeauthorprogram}
+\defbibenvironment{countauthorprogram}
+    {\setcounter{citeauthorprogram}{0}\renewcommand{\blx@driver}[1]{}}
+    {}
+    {\stepcounter{citeauthorprogram}}
 \newtotcounter{citeauthor}
 \defbibenvironment{countauthor}
     {\setcounter{citeauthor}{0}\renewcommand{\blx@driver}[1]{}}
@@ -521,11 +526,6 @@ pages = {p\adddot} %заглавность буквы затем по месту
     {\setcounter{citeauthorpatent}{0}\renewcommand{\blx@driver}[1]{}}
     {}
     {\stepcounter{citeauthorpatent}}
-\newtotcounter{citeauthorprogram}
-\defbibenvironment{countauthorprogram}
-    {\setcounter{citeauthorprogram}{0}\renewcommand{\blx@driver}[1]{}}
-    {}
-    {\stepcounter{citeauthorprogram}}
 \newtotcounter{citeexternal}
 \defbibenvironment{countexternal}
     {\setcounter{citeexternal}{0}\renewcommand{\blx@driver}[1]{}}
