@@ -1,7 +1,7 @@
-% \documentclass[aspectratio=169,notes]{beamer}
-\documentclass[aspectratio=169,xcolor=table,10pt]{beamer}
+\documentclass[aspectratio=169,xcolor=table,10pt,notes]{beamer}
 \usetheme[faculty=phil]{fibeamer}
 \usepackage{polyglossia}
+
 \setmainlanguage{russian} %% main locale instead of `english`, you
 %% can typeset the presentation in either Czech or Slovak,
 %% respectively.
@@ -11,7 +11,7 @@
 %%   \begin{otherlanguage}{slovak}  ... \end{otherlanguage}
 %%
 %% These macros specify information about the presentation
-\title[]{Разработка метода тактильного очувствления для мобильного шагающего робота} %% that will be typeset on the
+\title[]{Разработка метода тактильного очувствления \\ для мобильного шагающего робота} %% that will be typeset on the
 \subtitle{Соискатель: Олег Буличев \\ Руководитель: Александр Малолетов \\ \ } %% title page.
 \author{Олег Буличев}
 %% These additional packages are used within the document:
@@ -67,6 +67,13 @@
 \addtobeamertemplate{frametitle}{}{\vspace{-0.35cm}}
 
 
+% \setbeameroption{hide notes}
+% \setbeameroption{show notes}
+% \setbeameroption{show notes on second screen=bottom}
+% \setbeameroption{show only notes}
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{4 on 1}[a4paper,border shrink=2mm,landscape]
+
 \begin{document}
 \setlength{\abovedisplayskip}{0pt}
 \setlength{\belowdisplayskip}{0pt}
@@ -90,6 +97,8 @@
     \end{minipage}
     \vskip.25\baselineskip
 }
+
+\note{Вашему вниманию предлагается работа тема работы - Разработка метода тактильного очувствления для мобильного шагающего робота.}
 
 \fbckg{fibeamer/figs/common.png}
 
