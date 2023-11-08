@@ -1,17 +1,47 @@
 \section{Постановка задачи}
 
-\begin{frame}[t]{Проблематика}
-    \begin{block}{Проблема}
-        Исследование пещер
-    \end{block}
+\begin{frame}[t]{Исследование пещер}
+
+
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.59\textwidth}
-            Обзор, кто смотрел эту проблему
+            \small
+                \textbf{Цель} --- добыча природных минералов, поиск исторических и археологических находок.
+            \begin{exampleblock}{Непроходимые места для человека}
+                \begin{itemize}
+                    \item Узкие галереи, огромные пропасти, обвалы, сифоны
+                    \item Скопление угарного газа
+                    \item Потеря ориентации в пространстве
+                \end{itemize}
+            \end{exampleblock}
+            \vspace{-0.2cm}
+            \begin{alertblock}{Заинтересованные стороны}
+                \begin{enumerate}
+                    \item Военные --- \textit{Darpa Subterranean Challenge}
+                    \item Ученые --- "Горный институт Уральского отделения РАН", 
+                    \item Космические агентства --- ESTEC (DAEDALUS), Роскосмос (FEDOR), NASA (CADRE)
+                \end{enumerate}
+            \end{alertblock}
         \end{column}
         \begin{column}{0.39\textwidth}
             \begin{figure}[H]
-                \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{open_cave.jpg}
-                \caption*{DARPA Subterranean Challenge}
+                \begin{subfigure}{0.49\textwidth}
+                    \centering\includegraphics[height=2cm,width=1\textwidth,keepaspectratio]{../images/slides/rip.jpg}
+                    \caption{Могила в пещере}
+                \end{subfigure}
+                \begin{subfigure}{0.49\textwidth}
+                    \centering\includegraphics[height=2cm,width=1\textwidth,keepaspectratio]{../images/surface_types/siphon.png}
+                    \caption{Сифоны}
+                \end{subfigure}
+            
+                \begin{subfigure}{0.49\textwidth}
+                    \centering\includegraphics[height=2cm,width=1\textwidth,keepaspectratio]{../images/slides/daedalus.jpg}
+                    \caption{DAEDALUS для исследования пещер на луне}
+                \end{subfigure}
+                \begin{subfigure}{0.49\textwidth}
+                    \centering\includegraphics[height=2cm,width=1\textwidth,keepaspectratio]{../images/open_cave.jpg}
+                    \caption{DARPA Subterranean Challenge}
+                \end{subfigure}
             \end{figure}
         \end{column}
     \end{columns}
@@ -47,7 +77,7 @@
         \begin{subfigure}{0.49\textwidth}
             \begin{subfigure}{0.99\textwidth}
                 \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{../images/human_crawling.png}
-                \caption*{Габариты пещеры}
+                \caption*{Габариты пещеры (Свободная узость)}
             \end{subfigure}
 
             \begin{subfigure}{0.99\textwidth}
@@ -142,7 +172,7 @@
 
             \textit{Выходные данные}: процентное соотношение упругих, твердых и пластичных свойств пройденной поверхности.
 
-            \textit{Допустимая ошибка}: 20% 
+            \textit{Допустимая ошибка}: 20\% 
 
             \vspace{-0.35cm}
             \begin{figure}[H]
@@ -175,7 +205,9 @@
     \framesubtitle{}
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.54\textwidth}
-            \textbf{Класс многоногих шагающих роботов} с цельным или сочленённым корпусом, и цикловыми движителями с одной степенью свободы, управляемые зависимо или независимо друг от друга.
+            \textbf{Класс многоногих шагающих роботов} с 
+            а) Цельным или сочленённым корпусом
+            б) Цикловыми движителями с одной степенью свободы, управляемые зависимо или независимо друг от друга.
 
             \textit{Требования к данному классу}:
             \begin{itemize}
@@ -230,7 +262,7 @@
             \begin{figure}[H]
                 \begin{subfigure}{0.99\textwidth}
                     \centering\includegraphics[height=1.8cm,width=1\textwidth,keepaspectratio]{f1.png}
-                    \caption*{Кол-во ног $\uparrow$, детализация поверхности $\downarrow$}
+                    \caption*{Кол-во ног $\uparrow$, детализация поверхности $\uparrow$}
                 \end{subfigure}
 
                 \begin{subfigure}{0.99\textwidth}
@@ -262,7 +294,7 @@
 
             \textit{Выходные данные}: разница между нормализованным значением с датчика и реальной нагрузкой
 
-            \textit{Допустимая ошибка}: 10% 
+            \textit{Допустимая ошибка}: 10\% 
         \end{column}
         \begin{column}{0.49\textwidth}
             \begin{figure}[H]
