@@ -157,8 +157,8 @@
 
 Если же использовать модификацию алгоритма, то будет адекватный результат, как на рисунке справа *тык*}
 
-\begin{frame}[t]{Определение геометрических свойств поверхности}
-    \framesubtitle{Результат: Маршрут, полигональная сетка}
+\begin{frame}[t]{Симуляция: Пример опорной поверхности}
+    \framesubtitle{}
     \begin{figure}[H]
         \begin{subfigure}[t]{0.36\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{terrain_wo_water.png}
@@ -179,8 +179,8 @@
 
 На слайде представлен один из экспериментов. На рисунках показана поверхность по которой нужно пройти, начало и конец маршрута, а также полученная полигональная сетка *тык, тык и тык*}
 
-\begin{frame}[t]{Определение геометрических свойств поверхности}
-    \framesubtitle{Результаты Cloud2Cloud и Cloud2Mesh}
+\begin{frame}[t]{Симуляция: Результат C2C и C2M критериев}
+    \framesubtitle{}
     \begin{figure}[H]
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio,page=10]{./tikz_pictures.pdf}
@@ -192,11 +192,11 @@
         \end{subfigure}
 
         \begin{subfigure}[t]{0.49\textwidth}
-            \centering\includegraphics[height=2.6cm,width=1\textwidth,keepaspectratio]{pcd_hist.png}
+            \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{pcd_hist.png}
             \caption*{Гистограмма ошибок C2C}
         \end{subfigure}
         \begin{subfigure}[t]{0.49\textwidth}
-            \centering\includegraphics[height=2.6cm,width=1\textwidth,keepaspectratio]{mesh_hist.png}
+            \centering\includegraphics[height=3cm,width=1\textwidth,keepaspectratio]{mesh_hist.png}
             \caption*{Гистограмма ошибок C2M}
         \end{subfigure}
     \end{figure}
@@ -210,9 +210,8 @@
 
 Среднеквадратичная ошибка для C2C равна 0.053 метра, а для С2М --- 0.01 м}
 
-\begin{frame}[t]{Определение геометрических свойств поверхности}
-    \framesubtitle{Результат: Натурные испытания, Видео}
-    \vspace{-0.5cm}
+\begin{frame}[t]{Натурные испытания: Пример и результат}
+    \framesubtitle{}
     \begin{figure}[H]
         \begin{subfigure}[t]{0.49\textwidth}
             % \href{run:./videos/big_angle2.mp4}{
@@ -222,7 +221,7 @@
         \end{subfigure}
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio]{real_mesh.jpg}
-            \caption*{Полигональная сетка, полученная с помощью ног}
+            \caption*{Полигональная сетка, полученная с помощью ощупывания опорной поверхности}
         \end{subfigure}
     \end{figure}
 \end{frame}
