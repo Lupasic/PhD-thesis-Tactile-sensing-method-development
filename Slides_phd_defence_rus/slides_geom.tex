@@ -5,11 +5,11 @@
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.69\textwidth}
             \small
-            Необходимо с помощью ощупывания роботом поверхности получить плотное облако точек и полигональную сетку.
+            С помощью \textbf{ощупывания роботом поверхности} получить \underline{плотное облако точек} и \underline{полигональную сетку}.
 
             \textbf{Метод решения}: Триангуляция Делоне с использованием альфа формы
 
-            \textbf{Идея решения}: Решив задачу локализации, получить облако точек следовой дорожки. Очистить шумное облако точек и его усреднить с помощью Voxel Grid, применить триангуляцию Делоне для вогнутых оболочек, получив полигональную сетку. Сгенерировать новые точки из полигональной сетки с нужным разрешением.
+            \textbf{Алгоритм}: Решив задачу локализации, получить облако точек следовой дорожки. \textbf{Очистить шумное облако точек} и его \textbf{усреднить} с помощью Voxel Grid. Применить \underline{триангуляцию Делоне для вогнутых оболочек}, получив полигональную сетку. \underline{Сгенерировать новые точки} из полигональной сетки с нужным разрешением.
 
             \textbf{Входные данные}: следовая дорожка, в виде облака точек.
             
@@ -22,13 +22,13 @@
         \begin{column}{0.29\textwidth}
             \begin{figure}[H]
                 \begin{subfigure}{0.99\textwidth}
-                    \centering\includegraphics[height=2cm,width=1\textwidth,keepaspectratio]{../images/slides/delone_mag.png}
-                    \caption{Пример Делоне}
+                    \centering\includegraphics[height=2.5cm,width=1\textwidth,keepaspectratio]{../images/slides/delone_mag.png}
+                    \caption*{Триангуляция Делоне}
                 \end{subfigure}
 
                 \begin{subfigure}{0.99\textwidth}
-                    \centering\includegraphics[height=2cm,width=1\textwidth,keepaspectratio]{../images/slides/error.png}
-                    \caption{Когда $z\neq f(x,y)$}
+                    \centering\includegraphics[height=2.5cm,width=1\textwidth,keepaspectratio]{../images/slides/error.png}
+                    \caption*{Когда $z\neq f(x,y)$}
                 \end{subfigure}
             \end{figure}
         \end{column}
@@ -40,13 +40,13 @@
 \begin{frame}[t]{Оценки C2C и C2M}
 \framesubtitle{}
     \begin{figure}[H]
-        \begin{subfigure}{0.49\textwidth}
-            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{../images/slides/c2c.png}
-            \caption{Cloud to Cloud}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \centering\includegraphics[height=4.5cm,width=1\textwidth,keepaspectratio]{../images/slides/c2c.png}
+            \caption*{Cloud to Cloud: высчитывается абсолютное расстояние до ближайшей соседней точки}
         \end{subfigure}
-        \begin{subfigure}{0.49\textwidth}
-            \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{../images/slides/c2m.png}
-            \caption{Cloud to Mesh}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \centering\includegraphics[height=4.5cm,width=1\textwidth,keepaspectratio]{../images/slides/c2m.png}
+            \caption*{Cloud to Mesh: высчитывается расстояние с учетом знания о векторе нормали плоскости}
         \end{subfigure}
     \end{figure}
 \end{frame}
@@ -57,11 +57,11 @@
     \begin{figure}[H]
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{coppelia_sim.png}
-            \caption*{CoppeliaSim симулятор,\\ \textbf{4ое поколение} СтриРус}
+            \caption*{CoppeliaSim симулятор,\\ \textbf{4е поколение} СтриРус}
         \end{subfigure}
         \begin{subfigure}[t]{0.49\textwidth}
             \centering\includegraphics[height=5cm,width=1\textwidth,keepaspectratio]{rl_sim.JPG}
-            \caption*{Натурные испытания,\\ \textbf{3ье + поколение} СтриРус}
+            \caption*{Натурные испытания,\\ \textbf{3е+ поколение} СтриРус}
         \end{subfigure}
     \end{figure}
 \end{frame}

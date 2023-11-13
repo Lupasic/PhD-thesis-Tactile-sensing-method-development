@@ -5,12 +5,12 @@
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.69\textwidth}
     \small
-    Охарактеризовать материал для случаев, когда площадь приложения силы меньше, чем площадь активной части сенсора.
+    \underline{Измерить характеристики} материала для случаев, когда \textbf{площадь приложения силы меньше}, чем \textbf{площадь активной части} сенсора.
 
-    \textbf{Идея решения}: Разработка двух экспериментов: 
+    \textbf{Алгоритм}: 2 эксперимента: 
     
     1. Статический --- прикладывается статический груз с размером в сенсор для \underline{калибровки}.\\
-    2. Динамический --- чувствительная область представляется в виде сетки $4\times4$. Происходит касание каждой области с одинаковым давлением, но разной площадью контакта.
+    2. Динамический --- чувствительная область представляется в виде сетки $4\times4$. Происходит \textbf{касание} каждой \underline{области} \textbf{c одинаковым давлением}, но \underline{разной площадью контакта}.
 
     \textbf{Входные данные}: показания разработанного датчика и значение реально приложенной нагрузки.
 
@@ -51,23 +51,26 @@
 \begin{frame}[t]{Статический эксперимент}
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.52\textwidth}
-            \begin{eqnarray*}
+            \begin{eqnarray}
                 V_{out} = V_0 + p[k_p + k_e(1-e^\frac{-(t-t_0)}{\tau_{res}})](1-e^{-\frac{A}{p}}) \\
-                k_p = A_1e^{-A_2p}; \tau_{res} = B_0 + B_1e^{-\frac{p}{B_2}}
-            \end{eqnarray*}
+                k_p = A_1e^{-A_2p} \\ \tau_{res} = B_0 + B_1e^{-\frac{p}{B_2}}
+            \end{eqnarray}
             Где $V_0$ -- начальное напряжение, \\ $p$ -- приложенное давление, \\ $A_i,\ B_i,\ \tau_{res},\ k_i$ искомые параметры, \\  $t$ -- текущее время, $t_0$ -- время начала нажатия.
-            \\ \alert{Апробированна модель для калибровки датчика}
+            % \\ \alert{Апробированна модель для калибровки датчика}
         \end{column}
         \begin{column}{0.45\textwidth}
+            \vspace{-0.5cm}
             \begin{figure}[H]
                 \begin{subfigure}{0.99\textwidth}
                     \centering\includegraphics[height=2.8cm,width=1\textwidth,keepaspectratio]{least_square_model.png}
+                    \caption*{График регрессии}
                 \end{subfigure}
-                \vspace{-1cm}
 
+                \vspace{-0.3cm}
                 \begin{subfigure}{0.99\textwidth}
                     \centering
                     \centering\includegraphics[height=3.4cm,width=1\textwidth,keepaspectratio,page=6]{./tikz_pictures.pdf}
+                    \caption*{Экспериментальная установка}
                 \end{subfigure}
             \end{figure}
         \end{column}
@@ -78,21 +81,9 @@
 
 Как можно заметить по графику справа, эта формула подходит для калибровки.}
 
-\begin{frame}[t]{Динамический эксперимент: установка}
-    \begin{columns}[T,onlytextwidth]
-        \begin{column}{0.39\textwidth}
-            \begin{itemize}
-                \item Управление силой нажатия {\\ \alert{Импедансное управления}}
-                \item Повторяемость эксперимента по силе и позиции{\\ \alert{Добавив манипулятор и камеру}}
-                \item Возможность нажимать только на часть сенсора{\\ \alert{Насадки для манипулятора}}
-            \end{itemize}
-        \end{column}
-        \begin{column}{0.8\textwidth}
-            \scalebox{0.81}{
-                \centering\includegraphics[height=6cm,width=1\textwidth,keepaspectratio,page=7]{./tikz_pictures.pdf}
-            }
-        \end{column}
-    \end{columns}
+\begin{frame}[t]{Динамический эксперимент: Установка}
+    \vspace{0.2cm}
+    \centering\includegraphics[height=6.5cm,width=1\textwidth,keepaspectratio,page=7]{./tikz_pictures.pdf}
 \end{frame}
 
 \note{Так как динамический эксперимент требует многократное повторение действий, где важна точность силы нажатия, то было решено создать автоматизированную робототехническую установку. Управление силой нажатия было реализовано с помощью импедансного управления. Минимизация ошибки установки было реализовано с помощью технического зрения.
