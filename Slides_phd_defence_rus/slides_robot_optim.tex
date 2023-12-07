@@ -1,14 +1,59 @@
-\section{"3" Оптимизация кинематической схемы}
+\section{"1" Оптимизация кинематической схемы}
+
+\begin{frame}[t]{"1" Оптимизация кинематической схемы}
+    \framesubtitle{}
+    \begin{columns}[T,onlytextwidth]
+        \begin{column}{0.45\textwidth}
+            Решить задачу оптимизации $F=f(x) \rightarrow max$, где
+
+            $f(x)$ --- критерии: пройденная дистанция, длина корпуса\\
+            $(x)$ --- параметры: \textbf{количество ног}, сдвиг фазы между соседними ногами
+            \medskip
+
+            \textit{Количество ног имеет прямую зависимость с длиной корпуса робота.}
+        \end{column}
+        \begin{column}{0.54\textwidth}
+            \vspace{-0.5cm}
+            \begin{figure}[H]
+                \begin{subfigure}{0.99\textwidth}
+                    \centering\includegraphics[height=1.8cm,width=1\textwidth,keepaspectratio]{f1.png}
+                    \caption*{Кол-во ног $\uparrow$, детализация поверхности $\uparrow$}
+                \end{subfigure}
+
+                \begin{subfigure}{0.99\textwidth}
+                    \centering\includegraphics[height=1.8cm,width=1\textwidth,keepaspectratio]{f2.png}
+                    \caption*{Длина робота $\uparrow$, курсовая проходимость $\downarrow$}
+                \end{subfigure}
+
+                \begin{subfigure}{0.99\textwidth}
+                    \centering\includegraphics[height=1.8cm,width=1\textwidth,keepaspectratio]{f3_new.png}
+                    \caption*{Длина робота $\uparrow$, профильная проходимость $\uparrow$}
+                \end{subfigure}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\note{\small \setlength{\parindent}{20pt}
+
+У различных представителей этого класса, разное количество ног. Более того, количество ног также влияет и на построение карты, так как если у робота ног больше, то карта будет более детализированной *тык*, а следовательно - точнее. 
+
+Но с другой стороны, пещеры имеют много изгибов и при большой длине робот может застрять *тык*. То есть чем длинее робот, тем хуже курсовая проходимость. 
+
+Более длинный робот может преодолевать больше препятствий, как это показано на рисунке *тык*. Он не провалится в яму, а из-за своей длины сможет ее пересечь.
+
+Следовательно у нас возникает мультикритериальная задача оптимизации, где критерием является пройденная дистанция и длина корпуса. И задача - определить оптимальное количество ног.
+}
 
 \begin{frame}[t]{Определение количества ног}
     \framesubtitle{}
     \begin{columns}[T,onlytextwidth]
         \begin{column}{0.59\textwidth}
-            \small
-            Решить $F=f(x) \rightarrow max$, где
+            % \small
+            % Решить $F=f(x) \rightarrow max$, где
 
-            $f(x)$ --- \textbf{ Критерии}: пройденная дистанция, длина корпуса\\
-            $x$ --- \textbf{Параметры}: количество ног, сдвиг фазы между соседними ногами
+            % $f(x)$ --- \textbf{ Критерии}: пройденная дистанция, длина корпуса\\
+            % $x$ --- \textbf{Параметры}: количество ног, сдвиг фазы между соседними ногами
 
             \textbf{Метод решения}: Генетический алгоритм: Open AI-ES
 
