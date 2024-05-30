@@ -76,7 +76,7 @@
 Тела, входящие в систему соединены между собой цилиндрическими шарнирами, которые описываются следующими связями и динамическими ограничениями:
 \begin{align}
     \label{eq:kin_constr}
-    \phi(q_{j_1},\ u_{j_1},\ \cdots,\ q_{j_k},\ u_{j_k},\ t) \geqslant  0 \\
+    \phi(q_{j_1},\ \cdots,\ q_{j_k},\ u_{j_k},\ t) \geqslant  0 \\
     \vec{q_i}^{\ T} = \begin{bmatrix}
         \vec{x}_i^{\ T} & \vec{Q}_i^{\ T}
     \end{bmatrix} \\
@@ -95,7 +95,7 @@
 Контакт ног робота с опорной поверхностью \pic{fig:contact_interaction.png} описывается на базе модели сухого трения и выражается следующими уравнениями:
 
 \begin{figure}[H]
-    \centering\includegraphics[height=9cm,width=1\textwidth,keepaspectratio]{images/contact_interaction.png}
+    \centering\includegraphics[height=9cm,width=1\textwidth,keepaspectratio]{images/Strirus_leg.drawio.png}
     \caption{Отображение переменных для модели взаимодействия опорной поверхности и ноги робота}
     \label{fig:contact_interaction.png}
 \end{figure}
@@ -164,10 +164,11 @@
 
 \begin{align}
     \label{eq:second}
-    F \rightarrow max = \beta \left( {\omega}_{1} \cdot \overbrace{\delta}^{\text{Distance}} + {\omega}_{2} \cdot \overbrace{\frac{1}{(\gamma - 1) h_{\text{leg}}\sin(\alpha)}}^{\text{Simplified body length}}\right) + \\ \nonumber + (1 - \beta) {\delta}^{{\omega}_{1}} {\left( \frac{1}{(\gamma - 1)h_{\text{leg}}\sin(\alpha)}\right)}^{{\omega}_{2}}
+    F \rightarrow max = \beta \left( {\omega}_{1} \cdot \delta + {\omega}_{2} \cdot L\right) + (1 - \beta) {\delta}^{{\omega}_{1}} {\left( L\right)}^{{\omega}_{2}} \\
+    L = \frac{1}{(\gamma - 1) h_{\text{leg}}sin(\alpha)}
 \end{align}
-где \nom{$\delta$}{пройденная дистанция}, \nom{$\beta$}{адаптивный параметр}, \nom{${\omega}_{1,2} \in  [ 0..1 ] $}{весовые коэффициенты}.
 
+Где $\beta$ -- адаптивный параметр, ${\omega}_{1,2} \in  [ 0..1 ],\ \omega_1 + \omega_2 = 1 $ -- весовые коэффициенты, $\delta$ -- пройденный путь, $L$ -- упрощенная длина робота.
 
 Модель робота реализована в формате URDF. Это язык разметки формата XML для представления модели робота. Это старый формат, и когда модель загружается в Gazebo, URDF преобразуется в формат SDF. Это важно, потому что часть функций не реализованы в чистом URDF. В нашем случае это шарнир коробки передач. Но можно вставить код в формат SDF, и он будет работать правильно.
 
